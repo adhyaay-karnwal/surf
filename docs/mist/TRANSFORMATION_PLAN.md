@@ -33,7 +33,7 @@ Deliverables: architecture memo, ER diagram for graph & memory schema, design to
 
 ## 1. Mist Shell & Feature Flag
 
-1. Add a feature-flagged entrypoint in the renderer (`Core.svelte`) that swaps the legacy tabbed layout for a Mist shell when `process.env.MIST_ENABLED` (or a persisted setting) is true.
+1. Add a feature-flagged entrypoint in the renderer (`Core.svelte`) that swaps the legacy tabbed layout for a Mist shell when `R_VITE_ENABLE_MIST` (or a persisted setting) is true.
 2. Implement the chrome-free base layout: left edge strip (spaces/flows), center canvas, right sidecar, bottom command dock placeholder.
 3. Reuse the existing shortcut infrastructure (`ShortcutActions`) to wire the new omnibar focus (Cmd/Ctrl + L) and command palette (Cmd/Ctrl + K).
 4. Ensure the main process window is configured for borderless, full-screen-first presentation while preserving platform-specific window controls for accessibility.
