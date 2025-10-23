@@ -24,6 +24,12 @@ Most applications are focused on a single task, or a single media type: notes, w
 
 Surf is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://deta.surf/motivation).
 
+## Mist transformation roadmap
+
+We are charting a path to Mist—a spatial, AI-native browser experience that replaces Surf’s tab-centric chrome with scenes, intent graphs, and agent-guided workflows. The transformation is being staged to protect existing users while we build the new shell, scene engine, command system, and knowledge surfaces.
+
+- [Mist transformation plan](./docs/mist/TRANSFORMATION_PLAN.md): detailed phasing, deliverables, and open questions.
+
 ## Installation
 
 Checkout the [GitHub releases](https://github.com/deta/surf/releases) for the latest stable version of Surf for MacOS, Windows and Linux.
