@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly R_VITE_SHORTCUTS_PAGE_URL?: string
   readonly R_VITE_MAIN_ONBOARDING_VIDEO_URL?: string
   readonly R_VITE_CHANGELOG_URL?: string
+  readonly R_VITE_ENABLE_MIST?: string
 }
 
 interface ImportMeta {
