@@ -251,7 +251,7 @@ export const getResourceCtxItems = ({
               {
                 type: 'action',
                 icon: 'trash',
-                text: 'Delete from Surf',
+                text: 'Delete from Mist',
                 kind: 'danger',
                 action: () => onDeleteResource(resource.id)
               }
@@ -1072,7 +1072,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
   }
 
   async getResourcesFromSourceURL(url: string, tags?: SFFSResourceTag[]) {
-    const surfUrlMatch = url.match(/surf:\/\/resource\/([^\/]+)/)
+    const surfUrlMatch = url.match(/mist:\/\/resource\/([^\/]+)/)
     if (surfUrlMatch) {
       const resource = await this.getResource(surfUrlMatch[1])
       return resource ? [resource] : []

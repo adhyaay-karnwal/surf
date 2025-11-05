@@ -608,7 +608,7 @@ export const parseChatOutputToHtml = async (output: AIChatMessageParsed) => {
   return html
 }
 
-export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) => {
+export const parseChatOutputToMistletCode = async (output: AIChatMessageParsed) => {
   const content = output.content
 
   const completeCodeBlockRegex = /```(?:[\w]*\n)?([\s\S]*?)```/
@@ -623,18 +623,18 @@ export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) 
   } else if (openMatch) {
     match = openMatch[1]
   }
-  const surflet = document.createElement('surflet')
+  const mistlet = document.createElement('mistlet')
   const codeElement = document.createElement('code')
   codeElement.textContent = match // this properly escapes the content
 
-  surflet.appendChild(codeElement)
-  return surflet.outerHTML
+  mistlet.appendChild(codeElement)
+  return mistlet.outerHTML
 }
 
 const prepLoadingPhrases = [
   'Analysing your context…',
   'Getting to the essence…',
-  'Surfing the data…',
+  'Misting the data…',
   'Unpacking details…',
   'Summoning the goodies…',
   'Charging the knowledge battery…',

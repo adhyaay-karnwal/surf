@@ -281,7 +281,7 @@ export class TeletypeService {
 
     const tools = {
       websearch: this.isToolActive('websearch'),
-      surflet: this.isToolActive('surflet')
+      mistlet: this.isToolActive('mistlet')
     }
 
     const fullPayload = {

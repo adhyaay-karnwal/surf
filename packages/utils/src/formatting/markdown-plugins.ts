@@ -225,7 +225,7 @@ export function rehypeProcessCustomComponents() {
   return (tree: Root) => {
     visit(tree, 'element', (node: Element) => {
       // TODO: take this from the api
-      const componentNames = ['surflet', 'websearch']
+      const componentNames = ['mistlet', 'websearch']
       if (componentNames.includes(node.tagName)) {
         node.children = []
       }

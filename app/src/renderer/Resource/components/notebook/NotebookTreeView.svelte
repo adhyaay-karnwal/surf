@@ -79,7 +79,7 @@
       ]
     })
     if (!confirmed) return
-    notebookManager.deleteResourcesFromSurf(resource.id, true)
+    notebookManager.deleteResourcesFromMist(resource.id, true)
   }
 
   // Get context menu items for notebooks

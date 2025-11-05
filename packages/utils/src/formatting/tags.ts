@@ -74,8 +74,8 @@ export class ResourceTag {
     return { name: ResourceTagsBuiltInKeys.SILENT, value: `${value}` }
   }
 
-  static surfletProtocolVersion(version: string) {
-    return { name: ResourceTagsBuiltInKeys.SURFLET_PROTOCOL_VERSION, value: version }
+  static mistletProtocolVersion(version: string) {
+    return { name: ResourceTagsBuiltInKeys.MISTLET_PROTOCOL_VERSION, value: version }
   }
 
   static annotates(resourceID: string) {

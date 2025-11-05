@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug in Surf
+description: Report a bug in Mist
 type: 'bug'
 labels: 'bug :beetle:'
 body:
@@ -8,17 +8,17 @@ body:
       label: Preflight Checklist
       description: Please ensure you've completed all of the following.
       options:
-        - label: I have read the [Contributing Guidelines](https://github.com/deta/surf/blob/main/CONTRIBUTING.md) for this project.
+        - label: I have read the [Contributing Guidelines](https://github.com/deta/mist/blob/main/CONTRIBUTING.md) for this project.
           required: true
-        - label: I agree to follow the [Code of Conduct](https://github.com/deta/surf/blob/main/CODE_OF_CONDUCT.md) that this project adheres to.
+        - label: I agree to follow the [Code of Conduct](https://github.com/deta/mist/blob/main/CODE_OF_CONDUCT.md) that this project adheres to.
           required: true
-        - label: I have searched the [issue tracker](https://www.github.com/deta/surf/issues) for a bug report that matches the one I want to file, without success.
+        - label: I have searched the [issue tracker](https://www.github.com/deta/mist/issues) for a bug report that matches the one I want to file, without success.
           required: true
   - type: input
     attributes:
-      label: Surf Version
+      label: Mist Version
       description: |
-        What version of Surf are you using?
+        What version of Mist are you using?
       placeholder: 1.1.0-beta.0
     validations:
       required: true

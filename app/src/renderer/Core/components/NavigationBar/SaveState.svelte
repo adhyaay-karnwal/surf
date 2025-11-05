@@ -88,9 +88,9 @@
     }
   })
 
-  async function saveToSurf() {
+  async function saveToMist() {
     if (!$isSaved || !resource) {
-      log.debug('Bookmarking page to Surf')
+      log.debug('Bookmarking page to Mist')
       resource = await view.bookmarkPage()
     }
 
@@ -99,7 +99,7 @@
       return
     }
 
-    log.debug('Resource saved to Surf:', resource.id)
+    log.debug('Resource saved to Mist:', resource.id)
     // isMenuOpen = false
   }
 
@@ -145,7 +145,7 @@
   {/snippet}
 
   <div class="list">
-    <!-- Save to Surf option -->
+    <!-- Save to Mist option -->
     <div class="save-section">
       {#if $isSaved}
         {#if resource.url}
@@ -159,15 +159,15 @@
             interactive={false}
           />
         {:else if resource.type !== ResourceTypes.DOCUMENT_SPACE_NOTE}
-          <button class="list-item save-to-surf" disabled>
+          <button class="list-item save-to-mist" disabled>
             <Icon name="check" size="19px" color="rgb(6, 158, 54)" />
-            <div class="list-item-label">Added to Surf!</div>
+            <div class="list-item-label">Added to Mist!</div>
           </button>
         {/if}
       {:else}
-        <button class="list-item save-to-surf" onclick={saveToSurf}>
+        <button class="list-item save-to-mist" onclick={saveToMist}>
           <Icon name="save" />
-          <div class="list-item-label">Add to Surf</div>
+          <div class="list-item-label">Add to Mist</div>
         </button>
       {/if}
     </div>
@@ -260,7 +260,7 @@
         color: light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.6));
       }
 
-      &.save-to-surf {
+      &.save-to-mist {
         background: light-dark(
           color-mix(in srgb, var(--accent, #3b82f6) 10%, transparent),
           color-mix(in srgb, var(--accent-dark, #82a2ff) 20%, transparent)

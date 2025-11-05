@@ -9,7 +9,7 @@ export const AI_TOOLS = [
     disabled: false
   },
   {
-    id: 'surflet',
+    id: 'mistlet',
     name: 'App Generation',
     icon: 'code',
     active: true,

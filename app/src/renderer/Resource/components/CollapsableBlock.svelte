@@ -238,9 +238,9 @@
   const handleDragStart = async (drag: DragculaDragEvent<DragTypes>) => {
     if (resource) {
       const item = drag.item!
-      drag.dataTransfer?.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
-      item.data.setData(DragTypeNames.SURF_RESOURCE, resource)
-      item.data.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
+      drag.dataTransfer?.setData(DragTypeNames.MIST_RESOURCE_ID, resource.id)
+      item.data.setData(DragTypeNames.MIST_RESOURCE, resource)
+      item.data.setData(DragTypeNames.MIST_RESOURCE_ID, resource.id)
       drag.continue()
     } else {
       drag.abort()

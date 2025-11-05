@@ -3,17 +3,17 @@
 
   export const NOTIFICATION_CONTENTS: Record<string, { title: string; body: string }> = {
     default_browser: {
-      title: '🏄‍♂️ Having fun Surfing?',
-      body: `If you like Surf, try setting it as your
+      title: '🏄‍♂️ Having fun Misting?',
+      body: `If you like Mist, try setting it as your
 main browser so it follows you around throughout your daily workflows.`
     },
     deanonymize_prompt: {
-      title: '👍 Help use improve Surf!',
-      body: `It seems like you are using Surf quite a lot!`
+      title: '👍 Help use improve Mist!',
+      body: `It seems like you are using Mist quite a lot!`
     },
     book_call: {
       title: `✨ You're on a roll!`,
-      body: `We'd love to hear how you're using Surf, what your favorite features are, and where we should improve. <br>Would you be up for a short call?`
+      body: `We'd love to hear how you're using Mist, what your favorite features are, and where we should improve. <br>Would you be up for a short call?`
     }
   }
 

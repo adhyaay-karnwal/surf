@@ -35,7 +35,7 @@
     getFormattedDate,
     isMac,
     isModKeyPressed,
-    parseSurfProtocolURL,
+    parseMistProtocolURL,
     truncateURL,
     useDebounce,
     useLocalStorageStore,
@@ -233,15 +233,15 @@
 
       await wait(500)
 
-      // Add event listeners for surflet events
-      const handleCreateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received create-surflet event', e.detail)
-        handleCreateSurflet(e.detail?.code)
+      // Add event listeners for mistlet events
+      const handleCreateMistletEvent = (e: CustomEvent) => {
+        log.debug('Received create-mistlet event', e.detail)
+        handleCreateMistlet(e.detail?.code)
       }
 
-      const handleUpdateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received update-surflet event', e.detail)
-        updateSurfletContent(e.detail?.code)
+      const handleUpdateMistletEvent = (e: CustomEvent) => {
+        log.debug('Received update-mistlet event', e.detail)
+        updateMistletContent(e.detail?.code)
       }
 
       const handleOpenStuffEvent = () => {
@@ -257,14 +257,14 @@
         editorElement.addEventListener('scroll', handleScroll)
       }
 
-      document.addEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+      document.addEventListener('create-mistlet', handleCreateMistletEvent as EventListener)
       document.addEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-      document.addEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+      document.addEventListener('update-mistlet', handleUpdateMistletEvent as EventListener)
 
       return () => {
-        document.removeEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+        document.removeEventListener('create-mistlet', handleCreateMistletEvent as EventListener)
         document.removeEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-        document.removeEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+        document.removeEventListener('update-mistlet', handleUpdateMistletEvent as EventListener)
       }
     }
 
@@ -350,9 +350,9 @@
           return `Generating suggestions based on "${contextName}"${mentions.length > 0 ? ' and the mentioned contexts' : ''}…`
         } else if ($showPrompts) {
           if (!contextName) {
-            return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Surf continue writing…`
+            return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Mist continue writing…`
           }
-          return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Surf write based on ${contextName}`
+          return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Mist write based on ${contextName}`
         } else {
           return `Write or type / for commands…`
         }
@@ -938,7 +938,7 @@
 
     log.debug('Link clicked', href, target)
 
-    const resourceId = parseSurfProtocolURL(href)
+    const resourceId = parseMistProtocolURL(href)
     if (resourceId) {
       log.debug('Trying to open resource', resourceId)
       const resource = await resourceManager.getResource(resourceId)
@@ -1460,7 +1460,7 @@
     // chatInputEditor.commands.focus()
   }
 
-  export const handleCreateSurflet = (code?: string) => {
+  export const handleCreateMistlet = (code?: string) => {
     try {
       const editor = editorElem.getEditor()
 
@@ -1468,46 +1468,46 @@
       const currentPosition = editor.view.state.selection.from
 
       // Use the provided code or fall back to predefined code
-      const surfletCode = code // || predefinedSurfletCode
+      const mistletCode = code // || predefinedMistletCode
 
       // Remove markdown code block markers if present
-      // const cleanCode = surfletCode.replace(/```javascript|```/g, '')
+      // const cleanCode = mistletCode.replace(/```javascript|```/g, '')
 
-      // Create a surflet node with the code
-      const surfletNode = editor.view.state.schema.nodes.surflet?.create({ codeContent: '' }, null)
+      // Create a mistlet node with the code
+      const mistletNode = editor.view.state.schema.nodes.mistlet?.create({ codeContent: '' }, null)
 
-      if (!surfletNode) {
-        log.error('Surflet node type not found in schema')
+      if (!mistletNode) {
+        log.error('Mistlet node type not found in schema')
         return
       }
 
-      // Insert the surflet node at the current position
+      // Insert the mistlet node at the current position
       const tr = editor.view.state.tr
-      tr.insert(currentPosition, surfletNode)
+      tr.insert(currentPosition, mistletNode)
       editor.view.dispatch(tr)
 
       // Focus the editor after insertion
       editor.commands.focus()
 
-      log.debug('Surflet inserted successfully')
+      log.debug('Mistlet inserted successfully')
     } catch (err) {
-      log.error('Error inserting surflet', err)
+      log.error('Error inserting mistlet', err)
     }
   }
 
   /**
-   * Update the content of the most recently created surflet
-   * @param code The new code to set for the surflet
+   * Update the content of the most recently created mistlet
+   * @param code The new code to set for the mistlet
    */
-  const updateSurfletContent = (code?: string) => {
+  const updateMistletContent = (code?: string) => {
     if (!code) {
-      log.debug('No code provided to update surflet')
+      log.debug('No code provided to update mistlet')
       return
     }
 
     // Check if editorElem exists and is initialized
     if (!editorElem) {
-      log.debug('Editor element not available for surflet update')
+      log.debug('Editor element not available for mistlet update')
       return
     }
 
@@ -1515,47 +1515,47 @@
       // Get the editor and check if it's available
       const editor = editorElem.getEditor()
       if (!editor || !editor.state || !editor.view) {
-        log.debug('Editor not fully initialized for surflet update')
+        log.debug('Editor not fully initialized for mistlet update')
         return
       }
 
-      // Find the surflet node in the document
-      const surfletNodes: { pos: number; node: any }[] = []
+      // Find the mistlet node in the document
+      const mistletNodes: { pos: number; node: any }[] = []
       editor.state.doc.descendants((node, pos) => {
-        if (node.type.name === 'surflet') {
-          surfletNodes.push({ pos, node })
+        if (node.type.name === 'mistlet') {
+          mistletNodes.push({ pos, node })
         }
         return true
       })
 
-      // If no surflet nodes found, log debug and return
-      if (surfletNodes.length === 0) {
-        log.debug('No surflet node found to update')
+      // If no mistlet nodes found, log debug and return
+      if (mistletNodes.length === 0) {
+        log.debug('No mistlet node found to update')
         return
       }
 
-      // Get the last surflet node (most recently created)
-      const lastSurflet = surfletNodes[surfletNodes.length - 1]
+      // Get the last mistlet node (most recently created)
+      const lastMistlet = mistletNodes[mistletNodes.length - 1]
 
-      if (!lastSurflet) {
-        log.error('Last surflet node not found')
+      if (!lastMistlet) {
+        log.error('Last mistlet node not found')
         return
       }
 
       // Create a transaction to update the node's attributes
       const tr = editor.state.tr
-      tr.setNodeMarkup(lastSurflet.pos, undefined, {
-        ...lastSurflet.node.attrs,
+      tr.setNodeMarkup(lastMistlet.pos, undefined, {
+        ...lastMistlet.node.attrs,
         codeContent: code
       })
 
       // Dispatch the transaction to update the editor
       editor.view.dispatch(tr)
 
-      log.debug('Surflet content updated successfully')
+      log.debug('Mistlet content updated successfully')
     } catch (err) {
       // Use debug level instead of error to avoid spamming console
-      log.debug('Could not update surflet content', err)
+      log.debug('Could not update mistlet content', err)
     }
   }
 
@@ -1914,7 +1914,7 @@
           bind:editorElement
           placeholder={escapeFirstLineChat
             ? 'Start writing a note…'
-            : `Ask Surf or start writing a note (esc) …`}
+            : `Ask Mist or start writing a note (esc) …`}
           placeholderNewLine={$editorPlaceholder}
           autocomplete={!($isFirstLine && escapeFirstLineChat)}
           floatingMenu

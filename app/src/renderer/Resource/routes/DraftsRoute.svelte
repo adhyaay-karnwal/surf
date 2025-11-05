@@ -6,7 +6,7 @@
     openDialog,
     PageMention,
     ResourceLoader,
-    SurfLoader
+    MistLoader
   } from '@deta/ui'
   import { onMount } from 'svelte'
   import { MaskedScroll } from '@deta/ui'

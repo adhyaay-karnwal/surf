@@ -1,7 +1,7 @@
 import type { NotebookCustomization } from '@deta/types'
 
 export const onboardingNotebook = {
-  name: 'Intro to Surf',
+  name: 'Intro to Mist',
   customization: {
     coverColor: [
       ['#FFDFBA', '#FFDFBA'],
@@ -54,12 +54,12 @@ export const onboardingNotebook = {
     ]
   } as NotebookCustomization,
   urls: [
-    'https://deta.surf'
-    // 'https://www.xda-developers.com/deta-surf-promising-new-browser/',
+    'https://deta.mist'
+    // 'https://www.xda-developers.com/deta-mist-promising-new-browser/',
     // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
     // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://deta.surf/people/efe',
-    // 'https://deta.surf/people/reese',
-    // 'https://productidentity.co/p/surf-the-browser'
+    // 'https://deta.mist/people/efe',
+    // 'https://deta.mist/people/reese',
+    // 'https://productidentity.co/p/mist-the-browser'
   ]
 }

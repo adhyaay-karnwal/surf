@@ -13,16 +13,16 @@ import { setupAdblocker } from './adblocker'
 import { ipcSenders, setupIpc } from './ipcHandlers'
 import { getUserConfig, updateUserConfig } from './config'
 import { isAppSetup, isDefaultBrowser, markAppAsSetup } from './utils'
-import { SurfBackendServerManager } from './surfBackend'
+import { MistBackendServerManager } from './surfBackend'
 import { CrashHandler } from './crashHandler'
-import { surfProtocolExternalURLHandler } from './surfProtocolHandlers'
+import { mistProtocolExternalURLHandler } from './mistProtocolHandlers'
 import { useLogScope } from '@deta/utils'
 import { initializeSFFSMain } from './sffs'
 
 const log = useLogScope('Main')
 
 const CONFIG = {
-  appName: import.meta.env.M_VITE_PRODUCT_NAME || 'Surf',
+  appName: import.meta.env.M_VITE_PRODUCT_NAME || 'Mist',
   appVersion: import.meta.env.M_VITE_APP_VERSION,
   useTmpDataDir: import.meta.env.M_VITE_USE_TMP_DATA_DIR === 'true',
   disableAutoUpdate: import.meta.env.M_VITE_DISABLE_AUTO_UPDATE === 'true',
@@ -36,7 +36,7 @@ const CONFIG = {
 
 let isAppLaunched = false
 let appOpenedWithURL: string | null = null
-let surfBackendManager: SurfBackendServerManager | null = null
+let mistBackendManager: MistBackendServerManager | null = null
 
 async function cleanupTempFiles() {
   try {
@@ -67,10 +67,10 @@ const initializePaths = () => {
 }
 
 const registerProtocols = () => {
-  app.setAsDefaultProtocolClient('surf')
+  app.setAsDefaultProtocolClient('mist')
   protocol.registerSchemesAsPrivileged([
     {
-      scheme: 'surf',
+      scheme: 'mist',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -80,7 +80,7 @@ const registerProtocols = () => {
       }
     },
     {
-      scheme: 'surf-internal',
+      scheme: 'mist-internal',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -92,7 +92,7 @@ const registerProtocols = () => {
       }
     },
     {
-      scheme: 'surflet',
+      scheme: 'mistlet',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -138,18 +138,18 @@ const setupBackendServer = async (appPath: string, backendRootPath: string, user
     appPath,
     'resources',
     'bin',
-    // dev: surf-backend-dev, prod: surf-backend
-    // dev-windows: surf-backend-dev.exe, prod-windows: surf-backend.exe
-    `surf-backend${isDev ? '-dev' : ''}${isWindows() ? '.exe' : ''}`
+    // dev: mist-backend-dev, prod: mist-backend
+    // dev-windows: mist-backend-dev.exe, prod-windows: mist-backend.exe
+    `mist-backend${isDev ? '-dev' : ''}${isWindows() ? '.exe' : ''}`
   )
 
-  surfBackendManager = new SurfBackendServerManager(backendServerPath, [
+  mistBackendManager = new MistBackendServerManager(backendServerPath, [
     backendRootPath,
     'false',
     isDev ? CONFIG.embeddingModelMode : userConfig.settings?.embedding_model
   ])
 
-  surfBackendManager
+  mistBackendManager
     .on('stdout', (data) => log.info('[backend:stdout] ', data))
     .on('stderr', (data) => log.error('[backend:stderr]', data))
     .on('error', (error) => log.error('[backend:error ]', error))
@@ -158,29 +158,29 @@ const setupBackendServer = async (appPath: string, backendRootPath: string, user
     .on('exit', (code) => log.info('[backend:exit  ] code:', code))
     .on('signal', (signal) => log.info('[backend:signal] signal:', signal))
 
-  surfBackendManager
+  mistBackendManager
     ?.on('ready', () => {
       const webContents = getMainWindow()?.webContents
-      if (webContents) IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, true)
+      if (webContents) IPC_EVENTS_MAIN.setMistBackendHealth.sendToWebContents(webContents, true)
     })
     .on('close', () => {
       const webContents = getMainWindow()?.webContents
-      if (webContents) IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, false)
+      if (webContents) IPC_EVENTS_MAIN.setMistBackendHealth.sendToWebContents(webContents, false)
     })
 
   IPC_EVENTS_MAIN.appReady.on(() => {
-    if (surfBackendManager) {
+    if (mistBackendManager) {
       const webContents = getMainWindow()?.webContents
       if (webContents)
-        IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(
+        IPC_EVENTS_MAIN.setMistBackendHealth.sendToWebContents(
           webContents,
-          surfBackendManager.isHealthy
+          mistBackendManager.isHealthy
         )
     }
   })
 
-  surfBackendManager.start()
-  await surfBackendManager.waitForStart()
+  mistBackendManager.start()
+  await mistBackendManager.waitForStart()
 
   initializeSFFSMain()
 }
@@ -190,7 +190,7 @@ const initializeApp = async () => {
 
   isAppLaunched = true
   setInterval(cleanupTempFiles, 60 * 60 * 1000)
-  electronApp.setAppUserModelId('ea.browser.deta.surf')
+  electronApp.setAppUserModelId('ea.browser.deta.mist')
 
   const appPath = app.getAppPath() + (isDev ? '' : '.unpacked')
   const userDataPath = app.getPath('userData')
@@ -213,7 +213,7 @@ const initializeApp = async () => {
   try {
     await setupBackendServer(appPath, backendRootPath, userConfig)
   } catch (err) {
-    log.error(`failed to start the surf backend process: ${err}`)
+    log.error(`failed to start the mist backend process: ${err}`)
   }
 
   IPC_EVENTS_MAIN.appReady.once(async () => {
@@ -227,9 +227,9 @@ const initializeApp = async () => {
     }
 
     const webContents = getMainWindow()?.webContents
-    const isHealthy = surfBackendManager?.isHealthy
+    const isHealthy = mistBackendManager?.isHealthy
     if (webContents && isHealthy)
-      IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, isHealthy)
+      IPC_EVENTS_MAIN.setMistBackendHealth.sendToWebContents(webContents, isHealthy)
 
     if (userConfig.show_changelog) {
       ipcSenders.openChangelog()
@@ -278,7 +278,7 @@ const setupApplication = () => {
       }
     })
     .on('will-quit', async () => {
-      surfBackendManager?.stop()
+      mistBackendManager?.stop()
       await cleanupTempFiles()
     })
 

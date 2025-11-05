@@ -6,7 +6,7 @@
   const items = [
     {
       label: 'Website',
-      icon: 'favicon;;https://deta.surf'
+      icon: 'favicon;;https://deta.mist'
     },
     {
       label: 'Image',

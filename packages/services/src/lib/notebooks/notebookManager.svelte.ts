@@ -638,7 +638,7 @@ export class NotebookManager extends EventEmitterBase<NotebookManagerEventHandle
   }
 
   /** Deletes the provided resources from Oasis and gets rid of all references in any notebook */
-  async deleteResourcesFromSurf(resourceIds: string | string[], isUserAction = false) {
+  async deleteResourcesFromMist(resourceIds: string | string[], isUserAction = false) {
     resourceIds = Array.isArray(resourceIds) ? resourceIds : [resourceIds]
     this.log.debug('removing resources', resourceIds)
 
@@ -752,7 +752,7 @@ export class NotebookManager extends EventEmitterBase<NotebookManagerEventHandle
     this.log.debug('removing resources from', notebookId ?? 'oasis', resourceIds)
 
     if (!notebookId) {
-      return this.deleteResourcesFromSurf(resourceIds, isUserAction)
+      return this.deleteResourcesFromMist(resourceIds, isUserAction)
     }
     return this.removeResourcesFromNotebook(notebookId, resourceIds, isUserAction)
   }

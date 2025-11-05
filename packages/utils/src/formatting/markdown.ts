@@ -14,7 +14,7 @@ import { remarkParseCustomComponents, rehypeProcessCustomComponents } from './ma
 import {
   handleCitations,
   handleWebsearch,
-  handleSurflet,
+  handleMistlet,
   handleSpan,
   handleDIV
 } from './html-parsers'
@@ -30,7 +30,7 @@ export const htmlToMarkdown = async (html: string, parseCustomNodes = false) => 
             handlers: {
               citation: handleCitations,
               websearch: handleWebsearch,
-              surflet: handleSurflet,
+              mistlet: handleMistlet,
               span: handleSpan,
               div: handleDIV
             }
@@ -60,8 +60,8 @@ export const markdownToHtml = async (markdown: string) => {
         code: [['className', /^language-./, 'math-inline', 'math-display']],
         div: [...(defaultSchema.attributes?.div ?? []), ['className', 'math', 'math-display']],
         span: [['className', 'math', 'math-inline']],
-        // Allow all data attributes on surflet tags
-        surflet: ['data*'],
+        // Allow all data attributes on mistlet tags
+        mistlet: ['data*'],
         websearch: ['data*']
       },
       tagNames: [
@@ -69,7 +69,7 @@ export const markdownToHtml = async (markdown: string) => {
         // allow custom citation tags so we can render them
         'citation',
         'think',
-        'surflet',
+        'mistlet',
         'websearch'
       ]
     })

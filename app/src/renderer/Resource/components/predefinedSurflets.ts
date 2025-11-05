@@ -1,11 +1,11 @@
 /**
- * Predefined Surflet code examples for onboarding and demonstrations
+ * Predefined Mistlet code examples for onboarding and demonstrations
  */
 
 /**
- * Moon Landing Timeline Surflet code
+ * Moon Landing Timeline Mistlet code
  */
-export const predefinedSurfletCode = `\`\`\`javascript
+export const predefinedMistletCode = `\`\`\`javascript
 
 <!DOCTYPE html>
 <html lang="en">

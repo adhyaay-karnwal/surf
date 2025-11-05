@@ -754,7 +754,7 @@ pub fn handle_misc_message(
                 general: general || app_creation, // general is true for app creation
                 note_resource_id: None,
                 websearch: false,
-                surflet: false,
+                mistlet: false,
             };
             let result = worker.send_chat_query(Some(session_id), callback, search_only, input);
 
@@ -770,7 +770,7 @@ pub fn handle_misc_message(
             resource_ids,
             inline_images,
             general,
-            surflet,
+            mistlet,
             websearch,
         } => {
             let input = ChatInput {
@@ -783,7 +783,7 @@ pub fn handle_misc_message(
                 general,
                 note_resource_id: Some(note_resource_id),
                 websearch,
-                surflet,
+                mistlet,
             };
 
             let result = worker.send_chat_query(None, callback, false, input);
@@ -849,10 +849,10 @@ pub fn handle_misc_message(
             // TODO: implement migration handling
         }
         MiscMessage::SendEventBusMessage(message) => worker.send_event_bus_message(message),
-        MiscMessage::SetSurfBackendHealth(state) => {
+        MiscMessage::SetMistBackendHealth(state) => {
             worker.surf_backend_health.set_health(state);
             send_worker_response(&mut worker.channel, oneshot, Ok(()));
-            tracing::debug!("surf backend health: {state:?}");
+            tracing::debug!("mist backend health: {state:?}");
         }
         MiscMessage::SearchChatResources {
             query,
