@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getAllContexts, mount, onMount, onDestroy, unmount } from 'svelte'
-  import { useOverlayManager, type Overlay } from '@deta/services/views'
-  import type { Fn } from '@deta/types'
-  import { copyStyles } from '@deta/utils/src/dom/copy-styles.svelte'
+  import { useOverlayManager, type Overlay } from '@mist/services/views'
+  import type { Fn } from '@mist/types'
+  import { copyStyles } from '@mist/utils/src/dom/copy-styles.svelte'
 
   import OverlayConsumer from './OverlayConsumer.svelte'
   import type { OverlayProps } from './types.js'

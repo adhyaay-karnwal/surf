@@ -3,7 +3,7 @@ import { writable } from 'svelte/store'
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'
 import { ContextItemTypes } from './types'
-import { SearchResourceTags } from '@deta/utils/formatting'
+import { SearchResourceTags } from '@mist/utils/formatting'
 import { TabItem } from '../../tabs'
 
 export class ContextItemInbox extends ContextItemBase {

@@ -1,4 +1,4 @@
-import { makeAbsoluteURL } from '@deta/utils'
+import { makeAbsoluteURL } from '@mist/utils'
 import type { DetectedResource, DetectedWebApp, WebService, WebServiceAction } from '../types'
 
 export abstract class WebAppExtractor {

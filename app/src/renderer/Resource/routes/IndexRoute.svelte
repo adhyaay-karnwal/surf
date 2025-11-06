@@ -1,41 +1,41 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager, type Notebook } from '@deta/services/notebooks'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { useJournalManager, type Journal } from '@mist/services/journals'
+  import { Button } from '@mist/ui'
   import { onMount } from 'svelte'
-  import { MaskedScroll, openDialog, contextMenu, NotebookCover } from '@deta/ui'
-  import { conditionalArrayItem, truncate, useDebounce, useLogScope } from '@deta/utils'
+  import { MaskedScroll, openDialog, contextMenu, JournalCover } from '@mist/ui'
+  import { conditionalArrayItem, truncate, useDebounce, useLogScope } from '@mist/utils'
   import TeletypeEntry from '../../Core/components/Teletype/TeletypeEntry.svelte'
-  import { openNotebook, openResource } from '../handlers/notebookOpenHandlers'
-  import { type ChatPrompt, type Fn, ViewLocation } from '@deta/types'
-  import { useResourceManager } from '@deta/services/resources'
-  import { provideAI } from '@deta/services/ai'
-  import { useMessagePortClient } from '@deta/services/messagePort'
-  import { BUILT_IN_PAGE_PROMPTS, type ExamplePrompt } from '@deta/services/constants'
-  import { useConfig } from '@deta/services'
-  import NotebookLayout from '../layouts/NotebookLayout.svelte'
-  import NotebookEditor from '../components/notebook/NotebookEditor/NotebookEditor.svelte'
+  import { openJournal, openResource } from '../handlers/journalOpenHandlers'
+  import { type ChatPrompt, type Fn, ViewLocation } from '@mist/types'
+  import { useResourceManager } from '@mist/services/resources'
+  import { provideAI } from '@mist/services/ai'
+  import { useMessagePortClient } from '@mist/services/messagePort'
+  import { BUILT_IN_PAGE_PROMPTS, type ExamplePrompt } from '@mist/services/constants'
+  import { useConfig } from '@mist/services'
+  import JournalLayout from '../layouts/JournalLayout.svelte'
+  import JournalEditor from '../components/journal/JournalEditor/JournalEditor.svelte'
   import { useTeletypeService } from '../../../../../packages/services/src/lib'
-  import NotebookContents from '../components/notebook/NotebookContents.svelte'
+  import JournalContents from '../components/journal/JournalContents.svelte'
   import PromptPills from '../components/PromptPills.svelte'
-  import { MentionItemType } from '@deta/editor'
-  import NotebookSidecarExample from '../components/notebook/NotebookSidecarExample.svelte'
+  import { MentionItemType } from '@mist/editor'
+  import JournalSidecarExample from '../components/journal/JournalSidecarExample.svelte'
 
   let {
     onopensidebar,
     resourcesPanelOpen = false
   }: { onopensidebar: Fn; resourcesPanelOpen?: boolean } = $props()
 
-  let isCreatingNotebook = $state(false)
-  let isRenamingNotebook: string | undefined = $state(undefined)
-  let newNotebookName: string | undefined = $state(undefined)
-  let isCustomizingNotebook = $state(null)
+  let isCreatingJournal = $state(false)
+  let isRenamingJournal: string | undefined = $state(undefined)
+  let newJournalName: string | undefined = $state(undefined)
+  let isCustomizingJournal = $state(null)
   let viewLocation = $state<ViewLocation | null>(null)
   let isTtyInitializing = $state(true)
 
   const log = useLogScope('IndexRoute')
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
   const config = useConfig()
   const ai = provideAI(resourceManager, config, false)
   const teletype = useTeletypeService()
@@ -84,31 +84,31 @@
     return urlParams.get('mention_active_tab') === 'true'
   }
 
-  const handleCreateNotebook = async () => {
-    //if (newNotebookName === undefined || newNotebookName.length < 1) {
-    //  isCreatingNotebook = false
-    //  newNotebookName = undefined
+  const handleCreateJournal = async () => {
+    //if (newJournalName === undefined || newJournalName.length < 1) {
+    //  isCreatingJournal = false
+    //  newJournalName = undefined
     //  return
     //}
 
-    const nb = await notebookManager.createNotebook(
+    const nb = await journalManager.createJournal(
       {
-        name: 'Untitled Notebook',
+        name: 'Untitled Journal',
         pinned: true
       },
       true
     )
 
-    isCreatingNotebook = false
-    newNotebookName = undefined
-    // Note: loadNotebooks() is already called by createNotebook()
+    isCreatingJournal = false
+    newJournalName = undefined
+    // Note: loadJournals() is already called by createJournal()
 
     onopensidebar?.()
   }
 
-  const handleDeleteNotebook = async (notebook: Notebook) => {
+  const handleDeleteJournal = async (journal: Journal) => {
     const { closeType: confirmed } = await openDialog({
-      title: `Delete <i>${truncate(notebook.nameValue, 26)}</i>`,
+      title: `Delete <i>${truncate(journal.nameValue, 26)}</i>`,
       message: `This can't be undone. <br>Your resources won't be deleted.`,
       actions: [
         { title: 'Cancel', type: 'reset' },
@@ -116,15 +116,15 @@
       ]
     })
     if (!confirmed) return
-    notebookManager.deleteNotebook(notebook.id, true)
+    journalManager.deleteJournal(journal.id, true)
   }
 
-  const handleRenameNotebook = useDebounce((notebookId: string, value: string) => {
-    notebookManager.updateNotebookData(notebookId, { name: value })
+  const handleRenameJournal = useDebounce((journalId: string, value: string) => {
+    journalManager.updateJournalData(journalId, { name: value })
   }, 175)
 
-  const handleCancelRenameNotebook = () => {
-    isRenamingNotebook = undefined
+  const handleCancelRenameJournal = () => {
+    isRenamingJournal = undefined
   }
 
   const handleCreateNote = async () => {
@@ -139,11 +139,11 @@
     openResource(note.id, { target: 'active_tab' })
   }
 
-  const handlePinNotebook = (notebookId: string) => {
-    notebookManager.updateNotebookData(notebookId, { pinned: true })
+  const handlePinJournal = (journalId: string) => {
+    journalManager.updateJournalData(journalId, { pinned: true })
   }
-  const handleUnPinNotebook = (notebookId: string) => {
-    notebookManager.updateNotebookData(notebookId, { pinned: false })
+  const handleUnPinJournal = (journalId: string) => {
+    journalManager.updateJournalData(journalId, { pinned: false })
   }
 
   const handleRunPrompt = (e: CustomEvent<ChatPrompt>) => {
@@ -178,8 +178,8 @@
   })
 
   onMount(() => {
-    document.title = 'Surf'
-    // notebookManager.loadNotebooks()
+    document.title = 'Mist'
+    // journalManager.loadJournals()
 
     if (shouldMentionActiveTab()) {
       // NOTE: we still need a timeout here to let the tty component init
@@ -222,18 +222,18 @@
     }
   })
 
-  const pinnedNotebooks = $derived(notebookManager.sortedNotebooks.filter((e) => e.data.pinned))
+  const pinnedJournals = $derived(journalManager.sortedJournals.filter((e) => e.data.pinned))
 </script>
 
 <svelte:head>
-  <title>Surf</title>
+  <title>Mist</title>
 </svelte:head>
 
-{#if isCustomizingNotebook}
-  <NotebookEditor bind:notebook={isCustomizingNotebook} />
+{#if isCustomizingJournal}
+  <JournalEditor bind:journal={isCustomizingJournal} />
 {/if}
 
-<NotebookLayout>
+<JournalLayout>
   <main>
     {#if $generatingPrompts || (suggestedPrompts.length > 0 && (viewLocation === ViewLocation.Sidebar || hasMentions))}
       <div class="prompts-wrapper">
@@ -254,17 +254,17 @@
 
     {#if $ttyQuery.length <= 0}
       <section class="contents-wrapper">
-        <NotebookContents />
+        <JournalContents />
       </section>
     {/if}
 
     {#if viewLocation === ViewLocation.Tab && $ttyQuery.length <= 0}
-      <NotebookSidecarExample onselect={handleRunExample} />
+      <JournalSidecarExample onselect={handleRunExample} />
     {/if}
   </main>
 
-  <!-- <NotebookSidebar title="Surf" bind:open={resourcesPanelOpen} /> -->
-</NotebookLayout>
+  <!-- <JournalSidebar title="Mist" bind:open={resourcesPanelOpen} /> -->
+</JournalLayout>
 
 <style lang="scss">
   main {
@@ -322,7 +322,7 @@
       }
     }
 
-    .notebook-grid {
+    .journal-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.75rem;
@@ -332,7 +332,7 @@
       //justify-content: space-between;
       justify-items: center;
     }
-    .notebook-wrapper {
+    .journal-wrapper {
       opacity: 1;
 
       transform: translateY(0px);
@@ -348,7 +348,7 @@
     }
   }
 
-  .notebook-grid {
+  .journal-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0.75rem;

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { useTabs, TabItem } from '@deta/services/tabs'
-  import { spawnBoxSmoke } from '@deta/ui/src/lib/components/Effects/index'
-  import { Favicon, Button } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { HTMLDragItem, DragData } from '@deta/dragcula'
-  import { DragTypeNames } from '@deta/types'
+  import { useTabs, TabItem } from '@mist/services/tabs'
+  import { spawnBoxSmoke } from '@mist/ui/src/lib/components/Effects/index'
+  import { Favicon, Button } from '@mist/ui'
+  import { Icon } from '@mist/icons'
+  import { HTMLDragItem, DragData } from '@mist/dragcula'
+  import { DragTypeNames } from '@mist/types'
 
   let {
     tab,
@@ -74,7 +74,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.MIST_TAB, tab)
       return dragData
     })()
   }}

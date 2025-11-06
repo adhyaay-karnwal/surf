@@ -1,24 +1,24 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte'
   import { writable } from 'svelte/store'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
 
   import appIcon from '../assets/icon_512.png'
 
-  import { isMac, useDebounce } from '@deta/utils'
+  import { isMac, useDebounce } from '@mist/utils'
   import {
     type EditablePrompt,
     type SettingsWindowTab,
     type UserConfig,
     type UserSettings
-  } from '@deta/types'
+  } from '@mist/types'
   import SettingsOption from './components/SettingsOption.svelte'
   import DefaultSearchEnginePicker from './components/DefaultSearchEnginePicker.svelte'
   import TeletypeDefaultActionPicker from './components/TeletypeDefaultActionPicker.svelte'
   import AppStylePicker from './components/AppStylePicker.svelte'
   import ModelSettings, { type ModelUpdate } from './components/ModelSettings.svelte'
-  import { BUILT_IN_MODELS, DEFAULT_AI_MODEL, Provider, type Model } from '@deta/types/src/ai.types'
-  import { openDialog, prepareContextMenu } from '@deta/ui'
+  import { BUILT_IN_MODELS, DEFAULT_AI_MODEL, Provider, type Model } from '@mist/types/src/ai.types'
+  import { openDialog, prepareContextMenu } from '@mist/ui'
   import SmartNotesOptions from './components/SmartNotesOptions.svelte'
   import LayoutPicker from '../components/LayoutPicker.svelte'
 
@@ -148,13 +148,13 @@
     handleSettingsUpdate()
   }
 
-  const helpUsImproveSurf = async () => {
+  const helpUsImproveMist = async () => {
     window.api.deanonymizeUser()
 
     const { closeType: confirmed } = await openDialog({
       title: 'Share your email with us',
       message:
-        'Accepting will share your email with us, and allow us to contact you based on your Surf usage. No spam, we promise.<br><br> (Surf will restart after accepting)',
+        'Accepting will share your email with us, and allow us to contact you based on your Mist usage. No spam, we promise.<br><br> (Mist will restart after accepting)',
       actions: [
         { title: 'Cancel', type: 'reset' },
         { title: 'Accept', type: 'submit' }
@@ -285,7 +285,7 @@
       <article class="general">
         <img src={appIcon} alt="App Icon" />
         <div class="app-id">
-          <h1>Surf</h1>
+          <h1>Mist</h1>
 
           <span class="version-pill">{version}</span>
         </div>
@@ -427,7 +427,7 @@
           <SettingsOption
             icon="download"
             title="Save Downloads to System Downloads Folder"
-            description="If enabled, a copy of the files you download with Surf will be saved to your system's default downloads folder in addition to your stuff in Surf."
+            description="If enabled, a copy of the files you download with Mist will be saved to your system's default downloads folder in addition to your stuff in Mist."
             bind:value={userConfigSettings.save_to_user_downloads}
             on:update={handleSettingsUpdate}
           />
@@ -453,7 +453,7 @@
           <SettingsOption
             icon="message"
             title="Auto Generate Chat Prompts"
-            description="Let Surf generate chat prompts for you based on the page content and metadata. The prompts will be shown directly in the chat sidebar."
+            description="Let Mist generate chat prompts for you based on the page content and metadata. The prompts will be shown directly in the chat sidebar."
             bind:value={userConfigSettings.automatic_chat_prompt_generation}
             on:update={handleSettingsUpdate}
           />

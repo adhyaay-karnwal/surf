@@ -1,4 +1,4 @@
-import { SpaceBasicData } from '@deta/services/ipc'
+import { SpaceBasicData } from '@mist/services/ipc'
 
 let cachedSpaces: SpaceBasicData[] = []
 

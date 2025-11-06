@@ -1,5 +1,5 @@
-import { isDev, useLogScope, generateID, optimisticParseJSON, type ScopedLogger } from '@deta/utils'
-import type { Optional } from '@deta/types'
+import { isDev, useLogScope, generateID, optimisticParseJSON, type ScopedLogger } from '@mist/utils'
+import type { Optional } from '@mist/types'
 
 export type BaseKVItem = {
   id: string

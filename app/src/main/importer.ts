@@ -1,9 +1,9 @@
 import { dialog } from 'electron'
 
-import { BrowserType } from '@deta/types'
+import { BrowserType } from '@mist/types'
 
 import { ipcSenders } from './ipcHandlers'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 
 const log = useLogScope('Importer')
 

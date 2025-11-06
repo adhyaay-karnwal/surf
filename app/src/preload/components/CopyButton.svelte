@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { useClipboard } from '@deta/utils/browser'
-  import { Icon } from '@deta/icons'
+  import { useClipboard } from '@mist/utils/browser'
+  import { Icon } from '@mist/icons'
 
   import Button, { type ButtonKind } from './Button.svelte'
 

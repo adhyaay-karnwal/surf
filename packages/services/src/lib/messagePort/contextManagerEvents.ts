@@ -1,5 +1,5 @@
-import type { MentionItem } from '@deta/editor'
-import type { ChatPrompt, SearchResultLink } from '@deta/types'
+import type { MentionItem } from '@mist/editor'
+import type { ChatPrompt, SearchResultLink } from '@mist/types'
 
 export type GeneratePromptsPayload = {
   mentions?: MentionItem[]
@@ -13,7 +13,7 @@ export enum WebContentsViewContextManagerActionType {
   ADD_TAB_CONTEXT = 'add-tab-context',
   ADD_ACTIVE_TAB_CONTEXT = 'add-active-tab-context',
   ADD_RESOURCE_CONTEXT = 'add-resource-context',
-  ADD_NOTEBOOK_CONTEXT = 'add-notebook-context',
+  ADD_NOTEBOOK_CONTEXT = 'add-journal-context',
   REMOVE_CONTEXT_ITEM = 'remove-context-item',
   CLEAR_ALL_CONTEXT = 'clear-all-context',
   GENERATE_PROMPTS = 'generate-prompts'

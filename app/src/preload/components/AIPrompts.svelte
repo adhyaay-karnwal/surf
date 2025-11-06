@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  import { Icon } from '@deta/icons'
-  import { tooltip } from '@deta/utils/dom'
-  import type { WebViewEventTransform } from '@deta/types'
+  import { Icon } from '@mist/icons'
+  import { tooltip } from '@mist/utils/dom'
+  import type { WebViewEventTransform } from '@mist/types'
 
   const dispatch = createEventDispatcher<{ click: WebViewEventTransform['type'] }>()
 

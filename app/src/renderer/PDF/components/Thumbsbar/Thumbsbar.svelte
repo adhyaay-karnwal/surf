@@ -3,7 +3,7 @@
   import { clsx } from 'clsx'
   import { select } from 'd3-selection'
   import { drag } from 'd3-drag'
-  import { Button } from '@deta/ui'
+  import { Button } from '@mist/ui'
   import ButtonsBar from './ButtonsBar.svelte'
   import Outline from './Outline.svelte'
   import Thumbnails from './Thumbnails.svelte'

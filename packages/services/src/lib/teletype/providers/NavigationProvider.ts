@@ -1,11 +1,11 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@mist/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
 import {
   normalizeURL,
   generateUUID,
   useLogScope,
   parseStringIntoBrowserLocation
-} from '@deta/utils'
+} from '@mist/utils'
 import { type TeletypeService } from '../teletypeService'
 
 export class NavigationProvider implements ActionProvider {

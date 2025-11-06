@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-  import { Icon } from '@deta/icons'
-  import { isMac } from '@deta/utils/system'
+  import { Icon } from '@mist/icons'
+  import { isMac } from '@mist/utils/system'
 
   const dispatch = createEventDispatcher()
 
@@ -159,7 +159,7 @@
           </div>
 
           <div bind:this={pillElement} class="pill" class:visible={isHovering}>
-            <span>Ask Surf {isMac() ? '⌘' : 'ctrl'} ↵</span>
+            <span>Ask Mist {isMac() ? '⌘' : 'ctrl'} ↵</span>
           </div>
         </div>
       </div>

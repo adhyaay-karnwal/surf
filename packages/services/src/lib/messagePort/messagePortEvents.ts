@@ -1,13 +1,13 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@mist/editor'
 import { createMessagePortService, type MessagePortEvent } from './messagePortService'
 import type {
   CitationClickEvent,
   NavigateURLOptions,
-  OpenNotebookOptions,
+  OpenJournalOptions,
   OpenResourceOptions,
   OpenTarget,
   ViewLocation
-} from '@deta/types'
+} from '@mist/types'
 
 import type {
   WebContentsViewContextManagerActionOutputs,
@@ -35,7 +35,7 @@ export type AIQueryPayload = {
   mentions: MentionItem[]
   tools?: {
     websearch?: boolean
-    surflet?: boolean
+    mistlet?: boolean
   }
 }
 
@@ -76,7 +76,7 @@ export interface MPNoteCreate extends MessagePortEvent {
     name?: string
     content?: string
     target?: OpenTarget
-    notebookId?: string
+    journalId?: string
     isNewTabPage?: boolean
   }
 }
@@ -110,16 +110,16 @@ export interface MPOpenResource extends MessagePortEvent {
   payload: OpenResourceOptions
 }
 
-export interface MPOpenNotebook extends MessagePortEvent {
-  payload: OpenNotebookOptions
+export interface MPOpenJournal extends MessagePortEvent {
+  payload: OpenJournalOptions
 }
 
 export interface MPCitationClick extends MessagePortEvent {
   payload: CitationClickEvent
 }
 
-export interface MPExternStateNotebookChanged extends MessagePortEvent {
-  payload: { resourceIds: string[]; notebookId: string }
+export interface MPExternStateJournalChanged extends MessagePortEvent {
+  payload: { resourceIds: string[]; journalId: string }
 }
 export interface MPExternStateResourceChanged extends MessagePortEvent {
   payload: { resourceIds: string[] }
@@ -134,8 +134,8 @@ export interface MPExternStateResourceUpdated extends MessagePortEvent {
   payload: { resourceId: string }
 }
 
-export interface MPExternStateNotebooksChanged extends MessagePortEvent {
-  payload: { notebookIds: string[] }
+export interface MPExternStateJournalsChanged extends MessagePortEvent {
+  payload: { journalIds: string[] }
 }
 
 export interface MPViewMounted extends MessagePortEvent {
@@ -173,9 +173,9 @@ type MessagePortEventRegistry = {
   extern_state_resourceCreated: MPExternStateResourceCreated
   extern_state_resourceDeleted: MPExternStateResourceDeleted
   extern_state_resourceUpdated: MPExternStateResourceUpdated
-  extern_state_notebookAddResources: MPExternStateNotebookChanged
-  extern_state_notebookRemoveResources: MPExternStateNotebookChanged
-  extern_state_notebooksChanged: MPExternStateNotebooksChanged
+  extern_state_journalAddResources: MPExternStateJournalChanged
+  extern_state_journalRemoveResources: MPExternStateJournalChanged
+  extern_state_journalsChanged: MPExternStateJournalsChanged
 
   teletypeSetQuery: MPTeletypeSetQuery
   teletypeSearch: MPTeletypeSearchRequest
@@ -189,7 +189,7 @@ type MessagePortEventRegistry = {
   noteRefreshContent: MPNoteRefreshContent
   changePageQuery: MPChangePageQuery
   openResource: MPOpenResource
-  openNotebook: MPOpenNotebook
+  openJournal: MPOpenJournal
   citationClick: MPCitationClick
   activeTabChanged: MPActiveTabChanged
   viewMounted: MPViewMounted
@@ -218,14 +218,14 @@ const createMessagePortEvents = <IsPrimary extends boolean>(
     extern_state_resourceUpdated: messagePortService.addEvent<MPExternStateResourceUpdated>(
       'extern-state-resource-updated'
     ),
-    extern_state_notebookAddResources: messagePortService.addEvent<MPExternStateNotebookChanged>(
-      'extern-state-notebook-add-resources'
+    extern_state_journalAddResources: messagePortService.addEvent<MPExternStateJournalChanged>(
+      'extern-state-journal-add-resources'
     ),
-    extern_state_notebookRemoveResources: messagePortService.addEvent<MPExternStateNotebookChanged>(
-      'extern-state-notebook-remove-resources'
+    extern_state_journalRemoveResources: messagePortService.addEvent<MPExternStateJournalChanged>(
+      'extern-state-journal-remove-resources'
     ),
-    extern_state_notebooksChanged: messagePortService.addEvent<MPExternStateNotebooksChanged>(
-      'extern-state-notebooks-changed'
+    extern_state_journalsChanged: messagePortService.addEvent<MPExternStateJournalsChanged>(
+      'extern-state-journals-changed'
     ),
 
     teletypeSetQuery: messagePortService.addEvent<MPTeletypeSetQuery>('teletype-set-query'),
@@ -244,7 +244,7 @@ const createMessagePortEvents = <IsPrimary extends boolean>(
     noteRefreshContent: messagePortService.addEvent<MPNoteRefreshContent>('note-refresh-content'),
     changePageQuery: messagePortService.addEvent<MPChangePageQuery>('change-page-query'),
     openResource: messagePortService.addEvent<MPOpenResource>('open-resource'),
-    openNotebook: messagePortService.addEvent<MPOpenNotebook>('open-notebook'),
+    openJournal: messagePortService.addEvent<MPOpenJournal>('open-journal'),
     citationClick: messagePortService.addEvent<MPCitationClick>('citation-click'),
     activeTabChanged: messagePortService.addEvent<MPActiveTabChanged>('active-tab-changed'),
     viewMounted: messagePortService.addEvent<MPViewMounted>('view-mounted'),

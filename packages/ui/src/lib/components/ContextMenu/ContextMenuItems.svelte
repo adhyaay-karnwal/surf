@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DynamicIcon, Icon } from '@deta/icons'
+  import { DynamicIcon, Icon } from '@mist/icons'
   import { closeContextMenu, type CtxItem } from './ContextMenu.svelte'
   import { onMount, tick, getContext, setContext } from 'svelte'
   import { writable, get } from 'svelte/store'

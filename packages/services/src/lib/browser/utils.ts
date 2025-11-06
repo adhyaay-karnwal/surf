@@ -1,4 +1,4 @@
-import { getFormattedDate } from '@deta/utils/data'
+import { getFormattedDate } from '@mist/utils/data'
 
 /**
  * Turns the query into a usable note title

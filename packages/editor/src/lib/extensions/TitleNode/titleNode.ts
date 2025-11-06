@@ -1,13 +1,13 @@
 import { mergeAttributes, Node } from '@tiptap/core'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import { Selection, TextSelection } from '@tiptap/pm/state'
-import { NotebookDefaults } from '@deta/types'
+import { JournalDefaults } from '@mist/types'
 
 const isValidInitialTitle = (title?: string): title is string => {
   return Boolean(
     title &&
       title !== 'Untitled' &&
-      title !== NotebookDefaults.NOTE_DEFAULT_NAME &&
+      title !== JournalDefaults.NOTE_DEFAULT_NAME &&
       title.trim() !== ''
   )
 }

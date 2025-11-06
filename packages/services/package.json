@@ -1,5 +1,5 @@
 {
-  "name": "@deta/services",
+  "name": "@mist/services",
   "private": true,
   "version": "0.0.0",
   "svelte": "src/lib/index.ts",
@@ -41,11 +41,11 @@
       "import": "./dist/resources/index.js",
       "default": "./dist/resources/index.js"
     },
-    "./notebooks": {
-      "types": "./dist/notebooks/index.d.ts",
-      "svelte": "./src/lib/notebooks/index.ts",
-      "import": "./dist/notebooks/index.js",
-      "default": "./dist/notebooks/index.js"
+    "./journals": {
+      "types": "./dist/journals/index.d.ts",
+      "svelte": "./src/lib/journals/index.ts",
+      "import": "./dist/journals/index.js",
+      "default": "./dist/journals/index.js"
     },
     "./mentions": {
       "types": "./dist/mentions/index.d.ts",
@@ -112,15 +112,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@deta/editor": "*",
-    "@deta/teletype": "*",
-    "@deta/utils": "*",
-    "@deta/web-parser": "*",
+    "@mist/editor": "*",
+    "@mist/teletype": "*",
+    "@mist/utils": "*",
+    "@mist/web-parser": "*",
     "fuse.js": "^7.0.0"
   },
   "devDependencies": {
-    "@deta/backend": "*",
-    "@deta/types": "*",
+    "@mist/backend": "*",
+    "@mist/types": "*",
     "@horizon/eslint-config": "*",
     "@horizon/typescript-config": "*",
     "@sveltejs/kit": "^2.31.1",

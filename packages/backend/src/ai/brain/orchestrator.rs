@@ -3,7 +3,7 @@ use std::sync::Arc;
 use crate::ai::brain::agents::context::ContextManager;
 use crate::ai::brain::agents::context_manager::context_manager::create_context_manager_agent;
 use crate::ai::brain::agents::io::AgentIO;
-use crate::ai::brain::agents::surflet::surflet::create_surflet_agent;
+use crate::ai::brain::agents::mistlet::mistlet::create_mistlet_agent;
 use crate::ai::brain::agents::websearch::tools::SearchEngineCaller;
 use crate::ai::brain::agents::AgentResult;
 use crate::ai::brain::agents::{Agent, AgentConfig, ExecuteConfig};
@@ -13,7 +13,7 @@ use crate::ai::brain::tools::ContextManagementTool;
 use crate::ai::llm::client::{CancellationToken, LLMClient, Model};
 use crate::{BackendError, BackendResult};
 
-use super::tools::SurfletAgentTool;
+use super::tools::MistletAgentTool;
 
 #[allow(dead_code)]
 pub struct Orchestrator {
@@ -59,7 +59,7 @@ impl Orchestrator {
             js_tool_registry,
         };
         orc.init_web_search_agent()?;
-        orc.init_surflet_agent()?;
+        orc.init_mistlet_agent()?;
         orc.init_context_manager_agent()?;
         Ok(orc)
     }
@@ -88,14 +88,14 @@ impl Orchestrator {
         Ok(())
     }
 
-    pub fn init_surflet_agent(&mut self) -> BackendResult<()> {
-        let surflet_agent = create_surflet_agent(
+    pub fn init_mistlet_agent(&mut self) -> BackendResult<()> {
+        let mistlet_agent = create_mistlet_agent(
             Arc::clone(&self.llm_client),
             Arc::clone(&self.js_tool_registry),
         );
-        let surflet_tool = Box::new(SurfletAgentTool::new(surflet_agent));
+        let mistlet_tool = Box::new(MistletAgentTool::new(mistlet_agent));
         if let Some(ref mut lead_agent) = self.lead_agent {
-            lead_agent.add_tool(surflet_tool);
+            lead_agent.add_tool(mistlet_tool);
         }
         Ok(())
     }

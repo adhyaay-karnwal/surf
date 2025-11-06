@@ -2,14 +2,14 @@
   import './index.css'
 
   import { createEventDispatcher } from 'svelte'
-  import { Icon, IconConfirmation } from '@deta/icons'
+  import { Icon, IconConfirmation } from '@mist/icons'
 
   import Wrapper from './Wrapper.svelte'
   import Button from './Button.svelte'
   import CopyButton from './CopyButton.svelte'
-  import Editor from '@deta/editor/src/lib/components/Editor.svelte'
-  import { useDebounce } from '@deta/utils/system'
-  import { getEditorContentText } from '@deta/editor'
+  import Editor from '@mist/editor/src/lib/components/Editor.svelte'
+  import { useDebounce } from '@mist/utils/system'
+  import { getEditorContentText } from '@mist/editor'
   import { slide } from 'svelte/transition'
 
   export let text = ''

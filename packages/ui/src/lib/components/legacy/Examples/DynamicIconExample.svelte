@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@mist/icons'
 
   export let space: any
 
   const items = [
     {
       label: 'Website',
-      icon: 'favicon;;https://deta.surf'
+      icon: 'favicon;;https://deta.mist'
     },
     {
       label: 'Image',

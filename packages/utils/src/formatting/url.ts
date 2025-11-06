@@ -1,6 +1,6 @@
 import { isIP } from 'is-ip'
 import { isWindows, isDev } from '../system/system'
-import { ViewType } from '@deta/types'
+import { ViewType } from '@mist/types'
 
 export const prependProtocol = (url: string, secure = true) => {
   try {
@@ -385,9 +385,9 @@ export interface ResourceViewerParams {
   resourceId?: string
 }
 
-export interface NotebookViewerParams {
+export interface JournalViewerParams {
   path: string
-  notebookId?: string
+  journalId?: string
 }
 
 export const parsePDFViewerParams = (url: string | URL): PDFViewerParams => {
@@ -423,19 +423,19 @@ export const appendURLPath = (url: string, path: string) => {
 }
 
 /**
- * Try to parse a surf protocol URL and return the resourceId
- * Surf protocol URL format: surf://surf/resource/<id>
- * @deprecated This is no longer valid with having other surf paths not only resource
+ * Try to parse a mist protocol URL and return the resourceId
+ * Mist protocol URL format: mist://mist/resource/<id>
+ * @deprecated This is no longer valid with having other mist paths not only resource
  * @param rawUrl The URL to parse
- * @returns resourceId or null if the URL is not a surf protocol URL
+ * @returns resourceId or null if the URL is not a mist protocol URL
  */
-export const parseSurfProtocolURL = (rawUrl: URL | string) => {
+export const parseMistProtocolURL = (rawUrl: URL | string) => {
   const url = typeof rawUrl === 'string' ? parseURL(rawUrl) : rawUrl
   if (!url) {
     return null
   }
 
-  if (url.protocol === 'surf:') {
+  if (url.protocol === 'mist:') {
     const resourceId = url.pathname.split('/')[2]
     if (!resourceId) {
       return null
@@ -450,13 +450,13 @@ export const parseSurfProtocolURL = (rawUrl: URL | string) => {
 /**
  * Returns whether a given URL if it is part of the internal "renderer" i.e:
  *  in DEV: http://localhost:XXXX/...html
- *  in PROD: file:///Users/max/Programming/Deta/surf/app/dist/mac-arm64/Surf.app/Contents/Resources/app.asar/out/renderer/Notebook/notebook.html?path=surf%3A%2F%2Fnotebook%2Fb75c4bc4-fbf9-46a0-ab35-2eca431f38e4&notebookId=b75c4bc4-fbf9-46a0-ab35-2eca431f38e4
+ *  in PROD: file:///Users/max/Programming/Deta/mist/app/dist/mac-arm64/Mist.app/Contents/Resources/app.asar/out/renderer/Journal/journal.html?path=mist%3A%2F%2Fjournal%2Fb75c4bc4-fbf9-46a0-ab35-2eca431f38e4&journalId=b75c4bc4-fbf9-46a0-ab35-2eca431f38e4
  *
  */
 export function isInternalRendererURL(url: string | URL): URL | null {
   try {
     const _url = url instanceof URL ? url : new URL(url)
-    if (_url.protocol === 'surf:') return _url
+    if (_url.protocol === 'mist:') return _url
 
     const devPartialPaths = [
       '/Resource/resource.html',
@@ -506,13 +506,13 @@ export const getViewTypeData = (url: string) => {
 
   if (!internalUrl) return { type: ViewType.Page, id: canonicalUrl }
 
-  if (internalUrl.pathname === '/notebook') {
-    return { type: ViewType.NotebookHome, id: null }
+  if (internalUrl.pathname === '/journal') {
+    return { type: ViewType.JournalHome, id: null }
   }
 
-  if (internalUrl.pathname.startsWith('/notebook/')) {
-    const notebookId = internalUrl.pathname.split('/')[2]
-    return { type: ViewType.Notebook, id: notebookId }
+  if (internalUrl.pathname.startsWith('/journal/')) {
+    const journalId = internalUrl.pathname.split('/')[2]
+    return { type: ViewType.Journal, id: journalId }
   }
 
   if (internalUrl.pathname.startsWith('/resource/')) {
@@ -534,10 +534,10 @@ export const getCleanHostname = (url: string) => {
     const viewType = getViewType(url)
     if (viewType === ViewType.Resource) {
       return 'Resource'
-    } else if (viewType === ViewType.Notebook) {
-      return 'Notebook'
-    } else if (viewType === ViewType.NotebookHome) {
-      return 'Surf'
+    } else if (viewType === ViewType.Journal) {
+      return 'Journal'
+    } else if (viewType === ViewType.JournalHome) {
+      return 'Mist'
     } else {
       return getHostname(url) || url
     }
@@ -548,17 +548,17 @@ export const getCleanHostname = (url: string) => {
 
 export const cleanupPageTitle = (title: string) => {
   try {
-    if (!title.startsWith('surf://')) {
+    if (!title.startsWith('mist://')) {
       return title
     }
 
     const viewType = getViewType(title)
     if (viewType === ViewType.Resource) {
       return 'Resource'
-    } else if (viewType === ViewType.Notebook) {
-      return 'Notebook'
-    } else if (viewType === ViewType.NotebookHome) {
-      return 'Surf'
+    } else if (viewType === ViewType.Journal) {
+      return 'Journal'
+    } else if (viewType === ViewType.JournalHome) {
+      return 'Mist'
     } else {
       return title
     }

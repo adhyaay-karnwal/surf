@@ -1,21 +1,21 @@
 <script lang="ts">
   import { writable } from 'svelte/store'
-  import { Icon } from '@deta/icons'
-  import { useBrowser } from '@deta/services/browser'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { useResourceManager, type Resource } from '@deta/services/resources'
-  import type { TabItem } from '@deta/services/tabs'
+  import { Icon } from '@mist/icons'
+  import { useBrowser } from '@mist/services/browser'
+  import { useJournalManager } from '@mist/services/journals'
+  import { useResourceManager, type Resource } from '@mist/services/resources'
+  import type { TabItem } from '@mist/services/tabs'
   import { constructBreadcrumbs } from './breadcrumbs'
-  import { isWebResourceType, ResourceTypes, ViewType, type Option } from '@deta/types'
+  import { isWebResourceType, ResourceTypes, ViewType, type Option } from '@mist/types'
   import {
     Button,
     closeContextMenu,
     CONTEXT_MENU_KEY,
     openContextMenu,
     type CtxItem
-  } from '@deta/ui'
-  import { conditionalArrayItem, isMac, useLogScope } from '@deta/utils'
-  import type { WebContentsView } from '@deta/services/views'
+  } from '@mist/ui'
+  import { conditionalArrayItem, isMac, useLogScope } from '@mist/utils'
+  import type { WebContentsView } from '@mist/services/views'
 
   let {
     resource,
@@ -26,7 +26,7 @@
   const log = useLogScope('NoteMenu')
   const browser = useBrowser()
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
   const activeLocation = $derived(view.url ?? writable(''))
   const viewType = $derived(view.type)
 
@@ -40,7 +40,7 @@
   $effect(
     async () =>
       (breadcrumbs = await constructBreadcrumbs(
-        notebookManager,
+        journalManager,
         [...$activeHistory, { title: 'active', url: $activeLocation }],
         $activeHistoryIndex,
         view
@@ -69,7 +69,7 @@
       if (targetBreadcrumb) {
         view.webContents.loadURL(targetBreadcrumb.url)
       } else {
-        view.webContents.loadURL('surf://surf/notebook')
+        view.webContents.loadURL('mist://mist/journal')
       }
     } catch (err) {
       log.error('Failed to delete resource', err)
@@ -170,7 +170,7 @@
       {
         type: 'action',
         kind: 'danger',
-        text: 'Delete from Surf',
+        text: 'Delete from Mist',
         icon: 'trash',
         action: onDeleteResource
       }

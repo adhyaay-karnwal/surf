@@ -1,6 +1,6 @@
 import { Readability } from '@mozilla/readability'
 import { type WebMetadata } from '../types'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@mist/utils'
 import { sanitizeHTML } from '../utils'
 
 export class MetadataExtractor {

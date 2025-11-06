@@ -1,9 +1,9 @@
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
-import { type UserConfig } from '@deta/types'
-import { BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@deta/types/src/ai.types'
-import { useLogScope } from '@deta/utils'
+import { type UserConfig } from '@mist/types'
+import { BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@mist/types/src/ai.types'
+import { useLogScope } from '@mist/utils'
 
 const log = useLogScope('Config')
 
@@ -96,7 +96,7 @@ export const getUserConfig = (path?: string) => {
         completed_welcome_v2: false,
         completed_chat: false,
         completed_stuff: false,
-        seen_demo_notebook: false
+        seen_demo_journal: false
       },
       selected_model: DEFAULT_AI_MODEL,
       model_settings: [],
@@ -144,7 +144,7 @@ export const getUserConfig = (path?: string) => {
       completed_welcome_v2: false,
       completed_chat: false,
       completed_stuff: false,
-      seen_demo_notebook: false
+      seen_demo_journal: false
     }
     changedConfig = true
   }

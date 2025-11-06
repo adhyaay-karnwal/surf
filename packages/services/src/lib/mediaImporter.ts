@@ -5,17 +5,17 @@ import {
   ResourceTag,
   truncate,
   getFileKind
-} from '@deta/utils'
+} from '@mist/utils'
 import {
   ResourceTagsBuiltInKeys,
   type SFFSResourceMetadata,
   type SFFSResourceTag
-} from '@deta/types'
-import { WebParser } from '@deta/web-parser'
+} from '@mist/types'
+import { WebParser } from '@mist/web-parser'
 
 import { Resource, type ResourceManager } from './resources/resources.svelte'
-import { type MentionItem, MentionItemType } from '@deta/editor'
-import { useNotebookManager } from './notebooks'
+import { type MentionItem, MentionItemType } from '@mist/editor'
+import { useJournalManager } from './journals'
 
 const log = useLogScope('mediaImporter')
 
@@ -608,11 +608,11 @@ export const promptUserToSelectFiles = async (
 
 export const promptForFilesAndTurnIntoResources = async (
   resourceManager: ResourceManager,
-  notebookId?: string
+  journalId?: string
 ) => {
   const files = await promptUserToSelectFiles({
     title: 'Select File to Use as Context',
-    buttonLabel: 'Import to Surf',
+    buttonLabel: 'Import to Mist',
     filters: [
       {
         name: 'Files',
@@ -644,11 +644,11 @@ export const promptForFilesAndTurnIntoResources = async (
 
   log.debug('Resources created:', resources)
 
-  if (notebookId && notebookId !== 'drafts') {
-    log.debug(`Adding resources to notebook ${notebookId}`)
-    const notebookManager = useNotebookManager()
-    await notebookManager.addResourcesToNotebook(
-      notebookId,
+  if (journalId && journalId !== 'drafts') {
+    log.debug(`Adding resources to journal ${journalId}`)
+    const journalManager = useJournalManager()
+    await journalManager.addResourcesToJournal(
+      journalId,
       resources.map((r) => r.id)
     )
   }

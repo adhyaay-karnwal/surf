@@ -8,9 +8,9 @@ import {
   type DetectedResource,
   type WebViewEventSendNames,
   type WebViewSendEvents
-} from '@deta/types'
-import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@deta/utils'
-import { WebParser } from '@deta/web-parser'
+} from '@mist/types'
+import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@mist/utils'
+import { WebParser } from '@mist/web-parser'
 import { PromptIDs, getPrompt } from './prompts'
 import type { AIService } from './aiClean'
 import {
@@ -18,10 +18,10 @@ import {
   BadRequestError,
   TooManyRequestsError,
   UnauthorizedError
-} from '@deta/backend/types'
-import { type ChatError } from '@deta/types/src/ai.types'
-import { ResourceManager } from '@deta/services/resources'
-import { ResourceTag } from '@deta/utils/formatting'
+} from '@mist/backend/types'
+import { type ChatError } from '@mist/types/src/ai.types'
+import { ResourceManager } from '@mist/services/resources'
+import { ResourceTag } from '@mist/utils/formatting'
 
 const log = useLogScope('AI')
 
@@ -608,7 +608,7 @@ export const parseChatOutputToHtml = async (output: AIChatMessageParsed) => {
   return html
 }
 
-export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) => {
+export const parseChatOutputToMistletCode = async (output: AIChatMessageParsed) => {
   const content = output.content
 
   const completeCodeBlockRegex = /```(?:[\w]*\n)?([\s\S]*?)```/
@@ -623,18 +623,18 @@ export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) 
   } else if (openMatch) {
     match = openMatch[1]
   }
-  const surflet = document.createElement('surflet')
+  const mistlet = document.createElement('mistlet')
   const codeElement = document.createElement('code')
   codeElement.textContent = match // this properly escapes the content
 
-  surflet.appendChild(codeElement)
-  return surflet.outerHTML
+  mistlet.appendChild(codeElement)
+  return mistlet.outerHTML
 }
 
 const prepLoadingPhrases = [
   'Analysing your context…',
   'Getting to the essence…',
-  'Surfing the data…',
+  'Misting the data…',
   'Unpacking details…',
   'Summoning the goodies…',
   'Charging the knowledge battery…',

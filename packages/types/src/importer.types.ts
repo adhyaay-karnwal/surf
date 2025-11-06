@@ -31,7 +31,7 @@ export type BrowserTypeItem = {
   }
 }
 
-// @ts-ignore - can't import @deta/utils package in @deta/types so using import.meta.env directly
+// @ts-ignore - can't import @mist/utils package in @mist/types so using import.meta.env directly
 export const PLATFORM = import.meta.env.PLATFORM as 'darwin' | 'linux' | 'win32'
 
 export const BROWSER_TYPE_DATA: BrowserTypeItem[] = [

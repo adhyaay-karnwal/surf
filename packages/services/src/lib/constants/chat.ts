@@ -1,4 +1,4 @@
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@mist/editor'
 
 export enum ContextItemTypes {
   RESOURCE = 'resource',
@@ -25,9 +25,9 @@ export const NO_CONTEXT_MENTION = {
 
 export const EVERYTHING_MENTION = {
   id: ContextItemTypes.EVERYTHING,
-  label: 'Surf',
+  label: 'Mist',
   suggestionLabel: 'All my Stuff',
-  aliases: ['everything', 'all my stuff', 'all your stuff', 'surf'],
+  aliases: ['everything', 'all my stuff', 'all your stuff', 'mist'],
   icon: 'icon;;save',
   type: MentionItemType.BUILT_IN
 } as MentionItem
@@ -36,7 +36,7 @@ export const INBOX_MENTION = {
   id: ContextItemTypes.INBOX,
   label: 'Inbox',
   suggestionLabel: 'Inbox',
-  aliases: ['inbox', 'home', 'stuff', 'surf', 'recent'],
+  aliases: ['inbox', 'home', 'stuff', 'mist', 'recent'],
   icon: 'icon;;circle-dot',
   type: MentionItemType.BUILT_IN
 } as MentionItem

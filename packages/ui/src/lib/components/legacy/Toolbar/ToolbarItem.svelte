@@ -1,9 +1,9 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte'
   import { writable } from 'svelte/store'
-  import { generateRootDomain } from '@deta/utils'
+  import { generateRootDomain } from '@mist/utils'
 
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
 
   export let active: boolean
   export let name: string

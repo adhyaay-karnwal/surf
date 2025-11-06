@@ -1,7 +1,7 @@
 import { Extension } from '@tiptap/core'
 import { Plugin, PluginKey } from 'prosemirror-state'
 import { Editor } from '@tiptap/core'
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
 export interface CaretPosition {
   left: number

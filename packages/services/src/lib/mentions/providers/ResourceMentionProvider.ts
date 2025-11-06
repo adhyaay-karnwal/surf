@@ -1,8 +1,8 @@
 import type { MentionProvider, MentionItem, MentionType } from '../mention.types'
 import { MentionTypes } from '../mention.types'
-import { getFileKind, SearchResourceTags, truncate, useLogScope } from '@deta/utils'
+import { getFileKind, SearchResourceTags, truncate, useLogScope } from '@mist/utils'
 import { Resource, ResourceJSON, useResourceManager } from '../../resources'
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+import { ResourceTagsBuiltInKeys } from '@mist/types'
 
 export class ResourceMentionProvider implements MentionProvider {
   readonly name = 'resources'

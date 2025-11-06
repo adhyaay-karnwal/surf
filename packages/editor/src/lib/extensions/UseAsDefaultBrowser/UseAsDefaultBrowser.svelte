@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import { onMount } from 'svelte'
   import Button from '../Button/Button.svelte'
   import { writable } from 'svelte/store'
@@ -40,9 +40,9 @@
     <div class="span flex flex-col">
       <span class="headline">
         {#if $isDefault}
-          Thanks for using Surf as your default browser!
+          Thanks for using Mist as your default browser!
         {:else}
-          Surf gets even better the more you use it.
+          Mist gets even better the more you use it.
         {/if}
       </span>
       <span class="message">
@@ -62,7 +62,7 @@
 </div>
 
 <style lang="scss">
-  // @use '@deta/ui/styles/utils' as utils;
+  // @use '@mist/ui/styles/utils' as utils;
   .shadow-wrapper {
     filter: drop-shadow(0px 8px 10px rgba(6, 5, 53, 0.04))
       drop-shadow(0px 4px 6px rgba(6, 5, 53, 0.06)) drop-shadow(0px 2px 4px rgba(6, 5, 53, 0.07))

@@ -5,14 +5,14 @@ import {
   type WebContentsViewData,
   WebContentsViewManagerActionType,
   type Fn
-} from '@deta/types'
+} from '@mist/types'
 import {
   useLogScope,
   EventEmitterBase,
   generateID,
   isDev,
   parseUrlIntoCanonical
-} from '@deta/utils'
+} from '@mist/utils'
 import { ConfigService, useConfig } from '../config'
 import { KVStore, useKVTable } from '../kv'
 import { WebContentsView, type WebContents } from './webContentsView.svelte'
@@ -63,7 +63,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   private unsubs: Fn[] = []
   private newHomepageView: WebContentsView | null = null
   private viewPoolWebPages: WebContentsView[] = [] // Pool of pre-created views for http(s)://
-  private viewPoolSurfProtocol: WebContentsView[] = [] // Pool of pre-created views for surf://
+  private viewPoolMistProtocol: WebContentsView[] = [] // Pool of pre-created views for mist://
   private readonly poolSize = 1 // Number of views to pre-create
 
   static self: ViewManager
@@ -172,15 +172,15 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     // })
   }
 
-  private async refillPool(type?: 'web' | 'surf') {
+  private async refillPool(type?: 'web' | 'mist') {
     if (!type) {
-      await Promise.all([this.refillPool('web'), this.refillPool('surf')])
+      await Promise.all([this.refillPool('web'), this.refillPool('mist')])
 
       return
     }
 
     this.log.debug('Refilling view pool', type)
-    const viewPool = type === 'surf' ? this.viewPoolSurfProtocol : this.viewPoolWebPages
+    const viewPool = type === 'mist' ? this.viewPoolMistProtocol : this.viewPoolWebPages
     const needed = this.poolSize - viewPool.length
 
     if (needed <= 0) return
@@ -189,7 +189,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
       const fullData = {
         id: generateID(),
         partition: 'persist:horizon',
-        url: type === 'surf' ? 'surf://surf/resource/blank' : 'about:blank',
+        url: type === 'mist' ? 'mist://mist/resource/blank' : 'about:blank',
         title: 'New Tab',
         faviconUrl: '',
         navigationHistoryIndex: -1,
@@ -209,7 +209,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   }
 
   private reusePooledViewIfPossible(data: WebContentsViewData) {
-    if (this.viewPoolWebPages.length === 0 && this.viewPoolSurfProtocol.length === 0) {
+    if (this.viewPoolWebPages.length === 0 && this.viewPoolMistProtocol.length === 0) {
       return null
     }
 
@@ -218,8 +218,8 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     let view: WebContentsView | undefined
     if (url.protocol === 'http:' || url.protocol === 'https:') {
       view = this.viewPoolWebPages.pop()
-    } else if (url.protocol === 'surf:') {
-      view = this.viewPoolSurfProtocol.pop()
+    } else if (url.protocol === 'mist:') {
+      view = this.viewPoolMistProtocol.pop()
     }
 
     // Use any available pooled view for web pages
@@ -507,7 +507,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   }
 
   openResourceInSidebar(resourceId: string) {
-    return this.openURLInSidebar(`surf://surf/resource/${resourceId}`)
+    return this.openURLInSidebar(`mist://mist/resource/${resourceId}`)
   }
 
   openURLInSidebar(url: string) {
@@ -530,7 +530,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   private async prepareNewHomepage() {
     try {
       this.log.debug('Preparing new homepage')
-      this.newHomepageView = await this.create({ url: 'surf://surf/notebook' }, true)
+      this.newHomepageView = await this.create({ url: 'mist://mist/journal' }, true)
       await this.newHomepageView.preloadWebContents({ activate: false })
     } catch (error) {
       this.log.error('Error preparing new homepage:', error)
@@ -540,7 +540,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   async openNewHomepage() {
     try {
       if (!this.newHomepageView) {
-        return this.openURLInSidebar('surf://surf/notebook')
+        return this.openURLInSidebar('mist://mist/journal')
       }
 
       const view = await this.openViewInSidebar(this.newHomepageView)
@@ -561,8 +561,8 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     this.unsubs.forEach((unsub) => unsub())
     this.newHomepageView?.onDestroy()
 
-    this.viewPoolSurfProtocol.forEach((view) => view.onDestroy())
-    this.viewPoolSurfProtocol = []
+    this.viewPoolMistProtocol.forEach((view) => view.onDestroy())
+    this.viewPoolMistProtocol = []
 
     this.viewPoolWebPages.forEach((view) => view.onDestroy())
     this.viewPoolWebPages = []

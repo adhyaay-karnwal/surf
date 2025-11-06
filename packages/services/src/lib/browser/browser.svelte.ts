@@ -1,23 +1,23 @@
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
 import { Resource, ResourceNote, useResourceManager } from '../resources'
 import { useViewManager, WebContentsView } from '../views'
 import { type CreateTabOptions, type TabItem, TabsServiceEmitterNames, useTabs } from '../tabs'
 import { formatAIQueryToTitle } from './utils'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@mist/editor'
 import {
   type AIChatMessageSource,
   type CitationClickEvent,
   type Fn,
   isWebResourceType,
   type NavigateURLOptions,
-  NotebookDefaults,
+  JournalDefaults,
   type OpenResourceOptions,
   type OpenTarget,
   ResourceTagsBuiltInKeys,
   ResourceTypes
-} from '@deta/types'
-import { useNotebookManager } from '../notebooks'
+} from '@mist/types'
+import { useJournalManager } from '../journals'
 import { ViewManagerEmitterNames, ViewType } from '../views/types'
 import { type AIQueryPayload, useMessagePortPrimary } from '../messagePort'
 import {
@@ -31,7 +31,7 @@ import {
   SEARCH_ENGINES,
   SearchResourceTags,
   wait
-} from '@deta/utils'
+} from '@mist/utils'
 import { useConfig } from '../config'
 import type { NewWindowRequest, OpenURL } from '../ipc/events'
 import { useAI } from '../ai'
@@ -41,7 +41,7 @@ export class BrowserService {
   private readonly resourceManager = useResourceManager()
   private readonly viewManager = useViewManager()
   private readonly tabsManager = useTabs()
-  private readonly notebookManager = useNotebookManager()
+  private readonly journalManager = useJournalManager()
   private readonly config = useConfig()
   private readonly ai = useAI()
   private readonly messagePort = useMessagePortPrimary()
@@ -77,24 +77,24 @@ export class BrowserService {
       }),
 
       this.messagePort.openResource.on(
-        async ({ resourceId, target, offline, from_notebook_tree_sidebar }, viewId) => {
+        async ({ resourceId, target, offline, from_journal_tree_sidebar }, viewId) => {
           if (target === 'auto') {
             target = await this.getViewOpenTarget(viewId, {
               rerouteOnboarding: true,
-              from_notebook_tree_sidebar
+              from_journal_tree_sidebar
             })
           }
           this.openResource(resourceId, { target, offline })
         }
       ),
 
-      this.messagePort.openNotebook.on(
-        async ({ notebookId, target, from_notebook_tree_sidebar }, viewId) => {
+      this.messagePort.openJournal.on(
+        async ({ journalId, target, from_journal_tree_sidebar }, viewId) => {
           if (target === 'auto') {
-            target = await this.getViewOpenTarget(viewId, { from_notebook_tree_sidebar })
+            target = await this.getViewOpenTarget(viewId, { from_journal_tree_sidebar })
           }
 
-          this.navigateToUrl(`surf://surf/notebook/${notebookId}`, { target })
+          this.navigateToUrl(`mist://mist/journal/${journalId}`, { target })
         }
       ),
 
@@ -107,7 +107,7 @@ export class BrowserService {
       }),
 
       this.messagePort.createNote.on(
-        async ({ name, content, target, notebookId, isNewTabPage }, viewId) => {
+        async ({ name, content, target, journalId, isNewTabPage }, viewId) => {
           if (!target) {
             target = this.getViewLocation(viewId) ?? 'tab'
           }
@@ -122,7 +122,7 @@ export class BrowserService {
             { name, content },
             {
               target: target,
-              notebookId: notebookId ?? 'auto'
+              journalId: journalId ?? 'auto'
             }
           )
 
@@ -172,7 +172,7 @@ export class BrowserService {
     if (
       this.viewManager.sidebarViewOpen &&
       this.viewManager.activeSidebarView?.typeValue &&
-      [ViewType.Resource, ViewType.NotebookHome, ViewType.Notebook].includes(
+      [ViewType.Resource, ViewType.JournalHome, ViewType.Journal].includes(
         this.viewManager.activeSidebarView?.typeValue
       )
     ) {
@@ -210,7 +210,7 @@ export class BrowserService {
       if (resourceId) {
         const resource = await this.resourceManager.getResource(resourceId)
         if (resource?.type === ResourceTypes.PDF) {
-          const pdfUrl = `surf://surf/resource/${resource.id}?raw`
+          const pdfUrl = `mist://mist/resource/${resource.id}?raw`
           if (resource.url) {
             const tab = this.tabsManager.findTabByURL(resource.url)
             if (tab) {
@@ -224,7 +224,7 @@ export class BrowserService {
         } else if (resource?.url) {
           url = resource.url
         } else if (resource) {
-          url = `surf://surf/resource/${resource.id}`
+          url = `mist://mist/resource/${resource.id}`
         } else {
           this.log.error('Citation click event has invalid resourceId:', resourceId)
         }
@@ -285,14 +285,14 @@ export class BrowserService {
         return
       }
 
-      let notebookId: string | null = null
+      let journalId: string | null = null
 
       const { type, id } = view.typeDataValue
-      if (type === ViewType.Notebook && id) {
-        notebookId = id
+      if (type === ViewType.Journal && id) {
+        journalId = id
       }
 
-      this.log.debug(`Asking question from ${viewId} in ${target}:`, payload, notebookId)
+      this.log.debug(`Asking question from ${viewId} in ${target}:`, payload, journalId)
 
       if (payload.openTabUrl) {
         this.log.debug('Ask action has openTabUrl, opening URL first:', payload.openTabUrl)
@@ -328,12 +328,12 @@ export class BrowserService {
       //   })
       // }
 
-      if (notebookId) {
-        const notebook = await this.notebookManager.getNotebook(notebookId)
-        if (notebook) {
+      if (journalId) {
+        const journal = await this.journalManager.getJournal(journalId)
+        if (journal) {
           payload.mentions.push({
-            id: notebookId,
-            label: notebook.nameValue,
+            id: journalId,
+            label: journal.nameValue,
             type: MentionItemType.NOTEBOOK,
             data: {
               insertIntoEditor: true
@@ -345,7 +345,7 @@ export class BrowserService {
 
       await this.createNoteAndRunAIQuery(payload, {
         target: payload.openTabUrl ? 'sidebar' : target === 'tab' ? 'active_tab' : target,
-        notebookId: notebookId ?? 'auto'
+        journalId: journalId ?? 'auto'
       })
 
       this.closeNewTab()
@@ -438,7 +438,7 @@ export class BrowserService {
 
       this.newNoteView = await this.viewManager.create(
         {
-          url: `surf://surf/resource/${resource.id}`,
+          url: `mist://mist/resource/${resource.id}`,
           permanentlyActive: true
         },
         true
@@ -456,7 +456,7 @@ export class BrowserService {
     },
     opts?: {
       target?: OpenTarget
-      notebookId?: string | 'auto'
+      journalId?: string | 'auto'
     }
   ) {
     try {
@@ -505,9 +505,9 @@ export class BrowserService {
         }
       }
 
-      if (opts?.notebookId && opts.notebookId !== 'drafts') {
-        this.log.debug(`Adding note to notebook ${opts.notebookId}`)
-        await this.notebookManager.addResourcesToNotebook(opts.notebookId, [resource.id])
+      if (opts?.journalId && opts.journalId !== 'drafts') {
+        this.log.debug(`Adding note to journal ${opts.journalId}`)
+        await this.journalManager.addResourcesToJournal(opts.journalId, [resource.id])
       }
 
       if (opts?.target !== 'sidebar') {
@@ -534,7 +534,7 @@ export class BrowserService {
     },
     opts?: {
       target?: OpenTarget
-      notebookId?: string | 'auto'
+      journalId?: string | 'auto'
     }
   ) {
     try {
@@ -542,21 +542,21 @@ export class BrowserService {
       let { content, name } = data || {}
 
       if (!name) {
-        name = NotebookDefaults.NOTE_DEFAULT_NAME
+        name = JournalDefaults.NOTE_DEFAULT_NAME
       }
 
       this.log.debug(`Creating note in ${target} with content: "${content}"`)
 
-      if (opts?.notebookId === 'auto') {
-        if (this.tabsManager.activeTabValue?.view.typeValue === ViewType.Notebook) {
+      if (opts?.journalId === 'auto') {
+        if (this.tabsManager.activeTabValue?.view.typeValue === ViewType.Journal) {
           const viewData = this.tabsManager.activeTabValue.view.typeDataValue
           if (viewData.id) {
-            opts.notebookId = viewData.id
+            opts.journalId = viewData.id
           } else {
-            opts.notebookId = undefined
+            opts.journalId = undefined
           }
         } else {
-          opts.notebookId = undefined
+          opts.journalId = undefined
         }
       }
 
@@ -575,9 +575,9 @@ export class BrowserService {
         true
       )
 
-      if (opts?.notebookId && opts.notebookId !== 'drafts') {
-        this.log.debug(`Adding created note to notebook ${opts.notebookId}`)
-        await this.notebookManager.addResourcesToNotebook(opts.notebookId, [note.id])
+      if (opts?.journalId && opts.journalId !== 'drafts') {
+        this.log.debug(`Adding created note to journal ${opts.journalId}`)
+        await this.journalManager.addResourcesToJournal(opts.journalId, [note.id])
       }
 
       const view = await this.openResource(note.id, {
@@ -601,7 +601,7 @@ export class BrowserService {
     payload: AIQueryPayload,
     opts?: {
       target?: OpenTarget
-      notebookId?: string | 'auto'
+      journalId?: string | 'auto'
     }
   ) {
     try {
@@ -637,7 +637,7 @@ export class BrowserService {
 
   async closeNewTab() {
     if (
-      this.tabsManager.activeTabValue?.view.typeValue === ViewType.NotebookHome &&
+      this.tabsManager.activeTabValue?.view.typeValue === ViewType.JournalHome &&
       this.tabsManager.activeTabIdValue
     ) {
       this.tabsManager.delete(this.tabsManager.activeTabIdValue)
@@ -688,12 +688,12 @@ export class BrowserService {
     if (url) {
       return this.tabsManager.changeActiveTabURL(url)
     } else {
-      return this.tabsManager.changeActiveTabURL(`surf://surf/resource/${resource.id}`)
+      return this.tabsManager.changeActiveTabURL(`mist://mist/resource/${resource.id}`)
     }
   }
 
-  async openNotebookInCurrentTab(notebookId: string) {
-    return this.tabsManager.changeActiveTabURL(`surf://surf/notebook/${notebookId}`)
+  async openJournalInCurrentTab(journalId: string) {
+    return this.tabsManager.changeActiveTabURL(`mist://mist/journal/${journalId}`)
   }
 
   async openResource(
@@ -715,7 +715,7 @@ export class BrowserService {
 
     if (offline || !resource.url || !isWebResourceType(resource.type)) {
       url =
-        `surf://surf/resource/${resource.id}` + (resource.type === ResourceTypes.PDF ? '?raw' : '')
+        `mist://mist/resource/${resource.id}` + (resource.type === ResourceTypes.PDF ? '?raw' : '')
     } else {
       url = resource.url
     }
@@ -853,7 +853,7 @@ export class BrowserService {
   }
 
   async openAskInSidebar() {
-    this.navigateToUrl(`surf://surf/notebook?mention_active_tab=true`, { target: 'sidebar' })
+    this.navigateToUrl(`mist://mist/journal?mention_active_tab=true`, { target: 'sidebar' })
   }
 
   /**
@@ -872,9 +872,9 @@ export class BrowserService {
 
   async getViewOpenTarget(
     viewId: string,
-    opts: { rerouteOnboarding: boolean; from_notebook_tree_sidebar: boolean } = {
+    opts: { rerouteOnboarding: boolean; from_journal_tree_sidebar: boolean } = {
       rerouteOnboarding: false,
-      from_notebook_tree_sidebar: false
+      from_journal_tree_sidebar: false
     }
   ) {
     const view = this.viewManager.getViewById(viewId)
@@ -885,12 +885,12 @@ export class BrowserService {
 
     if (viewTypeData?.type === ViewType.Resource) {
       if (viewLocation === 'sidebar') {
-        if (opts.from_notebook_tree_sidebar) {
+        if (opts.from_journal_tree_sidebar) {
           return 'sidebar'
         }
         return 'tab'
       } else if (viewLocation === 'tab') {
-        if (opts.from_notebook_tree_sidebar) {
+        if (opts.from_journal_tree_sidebar) {
           return 'active_tab'
         }
 
@@ -907,8 +907,8 @@ export class BrowserService {
         return 'sidebar'
       }
     } else if (
-      viewTypeData?.type === ViewType.NotebookHome ||
-      viewTypeData?.type === ViewType.Notebook
+      viewTypeData?.type === ViewType.JournalHome ||
+      viewTypeData?.type === ViewType.Journal
     ) {
       if (viewLocation === 'sidebar') {
         return 'sidebar'
@@ -955,7 +955,7 @@ export class BrowserService {
     return this.openView(newView, opts)
   }
 
-  async saveLink(rawUrl: string, notebookId?: string) {
+  async saveLink(rawUrl: string, journalId?: string) {
     try {
       const url = parseStringIntoUrl(rawUrl)
       if (!url) {
@@ -970,8 +970,8 @@ export class BrowserService {
         [ResourceTag.rightClickSave()]
       )
 
-      if (notebookId) {
-        await this.notebookManager.addResourcesToNotebook(notebookId, [resource.id])
+      if (journalId) {
+        await this.journalManager.addResourcesToJournal(journalId, [resource.id])
       }
     } catch (err) {
       this.log.error('Failed to save link', err)

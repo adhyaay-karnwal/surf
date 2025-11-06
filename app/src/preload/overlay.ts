@@ -4,10 +4,10 @@ import { electronAPI } from '@electron-toolkit/preload'
 import path from 'path'
 import { mkdirSync } from 'fs'
 
-import { type UserSettings } from '@deta/types'
+import { type UserSettings } from '@mist/types'
 
 import { getUserConfig } from '../main/config'
-import { IPC_EVENTS_RENDERER } from '@deta/services/ipc'
+import { IPC_EVENTS_RENDERER } from '@mist/services/ipc'
 
 const USER_DATA_PATH =
   process.argv.find((arg) => arg.startsWith('--userDataPath='))?.split('=')[1] ?? ''

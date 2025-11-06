@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon, type Icons } from '@deta/icons'
+  import { Icon, type Icons } from '@mist/icons'
 
   export let label: string
   export let icon: Icons

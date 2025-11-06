@@ -4,40 +4,40 @@
   "globalPassThroughEnv": ["*"],
   "ui": "tui",
   "tasks": {
-    "@deta/utils#build": {
-      "dependsOn": ["@deta/types#build"],
+    "@mist/utils#build": {
+      "dependsOn": ["@mist/types#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/services#build": {
-      "dependsOn": ["@deta/types#build", "@deta/utils#build"],
+    "@mist/services#build": {
+      "dependsOn": ["@mist/types#build", "@mist/utils#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/ui#build": {
-      "dependsOn": ["@deta/utils#build", "@deta/icons#build", "@deta/services#build"],
+    "@mist/ui#build": {
+      "dependsOn": ["@mist/utils#build", "@mist/icons#build", "@mist/services#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/icons#build": {
+    "@mist/icons#build": {
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/editor#build": {
-      "dependsOn": ["@deta/icons#build", "@deta/utils#build", "@deta/types#build"],
+    "@mist/editor#build": {
+      "dependsOn": ["@mist/icons#build", "@mist/utils#build", "@mist/types#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/backend#build": {
+    "@mist/backend#build": {
       "cache": false
     },
-    "@deta/backend#dev": {
+    "@mist/backend#dev": {
       "cache": false
     },
-    "@deta/backend-server#build": {
+    "@mist/backend-server#build": {
       "cache": false
     },
-    "@deta/backend-server#dev": {
+    "@mist/backend-server#dev": {
       "cache": false
     },
     "desktop#build": {
@@ -74,37 +74,37 @@
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/dragcula#build": {
+    "@mist/dragcula#build": {
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/types#build": {
-      "dependsOn": ["@deta/icons#build"],
+    "@mist/types#build": {
+      "dependsOn": ["@mist/icons#build"],
       "outputs": ["build/**"],
       "outputLogs": "new-only"
     },
-    "@deta/ui#dev:tailwind": {
+    "@mist/ui#dev:tailwind": {
       "outputs": ["src/output.css"],
       "outputLogs": "new-only",
       "persistent": true
     },
-    "@deta/ui#build:tailwind": {
+    "@mist/ui#build:tailwind": {
       "outputs": ["src/output.css"],
       "outputLogs": "new-only"
     },
     "build:app:frontend": {
       "dependsOn": [
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build",
-        "@deta/utils#build",
-        "@deta/services#build",
-        "@deta/ui#build",
-        "@deta/icons#build",
-        "@deta/editor#build"
+        "@mist/ui#build:tailwind",
+        "@mist/dragcula#build",
+        "@mist/utils#build",
+        "@mist/services#build",
+        "@mist/ui#build",
+        "@mist/icons#build",
+        "@mist/editor#build"
       ]
     },
     "build:app:backend": {
-      "dependsOn": ["@deta/backend#build", "@deta/backend-server#build"]
+      "dependsOn": ["@mist/backend#build", "@mist/backend-server#build"]
     },
     "build:app": {
       "dependsOn": ["build:app:frontend", "build:app:backend"],
@@ -119,37 +119,81 @@
     },
     "desktop#dev": {
       "dependsOn": [
-        "@deta/backend#build",
-        "@deta/backend-server#dev",
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build"
+        "@mist/backend#build",
+        "@mist/backend-server#dev",
+        "@mist/ui#build:tailwind",
+        "@mist/dragcula#build"
       ],
       "with": [
-        "@deta/utils#dev",
-        "@deta/services#dev",
-        "@deta/ui#dev",
-        "@deta/icons#dev",
-        "@deta/editor#dev"
+        "@mist/utils#dev",
+        "@mist/services#dev",
+        "@mist/ui#dev",
+        "@mist/icons#dev",
+        "@mist/editor#dev"
       ],
       "persistent": true,
       "cache": false
     },
     "dev": {
       "dependsOn": [
-        "@deta/backend#build",
-        "@deta/backend-server#dev",
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build"
+        "@mist/backend#build",
+        "@mist/backend-server#dev",
+        "@mist/ui#build:tailwind",
+        "@mist/dragcula#build"
       ],
       "with": [
-        "@deta/utils#dev",
-        "@deta/services#dev",
-        "@deta/ui#dev",
-        "@deta/icons#dev",
-        "@deta/editor#dev"
+        "@mist/utils#dev",
+        "@mist/services#dev",
+        "@mist/ui#dev",
+        "@mist/icons#dev",
+        "@mist/editor#dev"
       ],
       "persistent": true,
       "cache": false
+    },
+    "@deta/backend#build": {
+      "dependsOn": ["@mist/backend#build"],
+      "outputs": []
+    },
+    "@deta/backend-server#build": {
+      "dependsOn": ["@mist/backend-server#build"],
+      "outputs": []
+    },
+    "@deta/dragcula#build": {
+      "dependsOn": ["@mist/dragcula#build"],
+      "outputs": []
+    },
+    "@deta/editor#build": {
+      "dependsOn": ["@mist/editor#build"],
+      "outputs": []
+    },
+    "@deta/icons#build": {
+      "dependsOn": ["@mist/icons#build"],
+      "outputs": []
+    },
+    "@deta/services#build": {
+      "dependsOn": ["@mist/services#build"],
+      "outputs": []
+    },
+    "@deta/teletype#build": {
+      "dependsOn": ["@mist/teletype#build"],
+      "outputs": []
+    },
+    "@deta/types#build": {
+      "dependsOn": ["@mist/types#build"],
+      "outputs": []
+    },
+    "@deta/ui#build": {
+      "dependsOn": ["@mist/ui#build"],
+      "outputs": []
+    },
+    "@deta/utils#build": {
+      "dependsOn": ["@mist/utils#build"],
+      "outputs": []
+    },
+    "@deta/web-parser#build": {
+      "dependsOn": ["@mist/web-parser#build"],
+      "outputs": []
     }
   }
 }

@@ -1,4 +1,4 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@mist/editor'
 
 export type TeletypeActionPayload = {
   query: string

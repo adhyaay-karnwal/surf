@@ -9,7 +9,7 @@ import { NodeSelection, Plugin } from 'prosemirror-state'
 import { __serializeForClipboard, EditorView } from 'prosemirror-view'
 import tippy from 'tippy.js'
 import { DragHandleDebugTools, type DebugData } from './DragHandleDebug'
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
 const log = useLogScope('Drag Handle')
 

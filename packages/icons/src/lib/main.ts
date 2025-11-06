@@ -141,9 +141,9 @@ import ChartBarOff from './Icons/ChartBarOff.svelte'
 import PlaneLoader from './Icons/PlaneLoader.svelte'
 import Note from './Icons/Note.svelte'
 import FolderOpen from './Icons/FolderOpen.svelte'
-import Notebook from './Icons/Notebook.svelte'
-import NotebookUnsaved from './Icons/NotebookUnsaved.svelte'
-import NotebookSaved from './Icons/NotebookSaved.svelte'
+import Journal from './Icons/Journal.svelte'
+import JournalUnsaved from './Icons/JournalUnsaved.svelte'
+import JournalSaved from './Icons/JournalSaved.svelte'
 import Heart from './Icons/Heart.svelte'
 import HeartOff from './Icons/HeartOff.svelte'
 import Book from './Icons/Book.svelte'
@@ -301,9 +301,9 @@ export const icons = {
   'plane.loader': PlaneLoader,
   note: Note,
   'folder.open': FolderOpen,
-  notebook: Notebook,
-  'notebook.unsaved': NotebookUnsaved,
-  'notebook.saved': NotebookSaved,
+  journal: Journal,
+  'journal.unsaved': JournalUnsaved,
+  'journal.saved': JournalSaved,
   heart: Heart,
   'heart.off': HeartOff,
   book: Book,
@@ -461,9 +461,9 @@ export {
   PlaneLoader,
   Note,
   FolderOpen,
-  Notebook,
-  NotebookUnsaved,
-  NotebookSaved,
+  Journal,
+  JournalUnsaved,
+  JournalSaved,
   Heart,
   HeartOff,
   Book,

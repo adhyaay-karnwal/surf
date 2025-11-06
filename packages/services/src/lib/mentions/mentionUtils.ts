@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { generateUUID } from '@deta/utils'
+import { generateUUID } from '@mist/utils'
 import type { MentionItem, MentionType } from './mention.types'
 
 /**

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte'
-  import { type Resource } from '@deta/services/resources'
-  import { useNotebookManager, type Notebook } from '@deta/services/notebooks'
-  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@deta/types'
-  import { type ResourceSearchResult, useResourceManager} from '@deta/services/resources'
-  import { SearchResourceTags, useCancelableDebounce, useThrottle } from '@deta/utils'
-  import { NotebookManagerEvents } from '@deta/services/notebooks'
+  import { type Resource } from '@mist/services/resources'
+  import { useJournalManager, type Journal } from '@mist/services/journals'
+  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@mist/types'
+  import { type ResourceSearchResult, useResourceManager} from '@mist/services/resources'
+  import { SearchResourceTags, useCancelableDebounce, useThrottle } from '@mist/utils'
+  import { JournalManagerEvents } from '@mist/services/journals'
 
   interface Search {
     query: string
@@ -25,40 +25,40 @@
     tags: SFFSResourceTag[]
     excludeWithinSpaces?: boolean
     search?: Search
-    children: Snippet<[Notebook]>
+    children: Snippet<[Journal]>
     loading?: Snippet
     error?: Snippet<[unknown]>
   } = $props()
 
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
   // TODO: Reuse or dispose
-  //const getNotebook = (id: string) => {
-  //  return new Promise<[Notebook, Option<ResourceSearchResult>]>((res, _) => {
-  //    notebookManager.getNotebook(notebookId)
-  //      .then((notebook: Notebook) => {
-  //        if (fetchContents) notebook.fetchContents()
-  //        res([notebook, undefined])
+  //const getJournal = (id: string) => {
+  //  return new Promise<[Journal, Option<ResourceSearchResult>]>((res, _) => {
+  //    journalManager.getJournal(journalId)
+  //      .then((journal: Journal) => {
+  //        if (fetchContents) journal.fetchContents()
+  //        res([journal, undefined])
   //      })
   //  })
   //}
-  //const getNotebookSearch = (search: Search) => {
-  //  return new Promise<[Notebook, Option<ResourceSearchResult>]>((res, _) => {
+  //const getJournalSearch = (search: Search) => {
+  //  return new Promise<[Journal, Option<ResourceSearchResult>]>((res, _) => {
   //    Promise.all([
-  //      getNotebook(notebookId),
+  //      getJournal(journalId),
   //      useResourceManager().searchResources(search.query, search.tags ?? [], {
   //        ...search.parameters,
-  //        spaceId: notebookId
+  //        spaceId: journalId
   //      })
-  //    ]).then(([notebook, searchResults]) => res([notebook, searchResults]))
+  //    ]).then(([journal, searchResults]) => res([journal, searchResults]))
   //  })
   //}
-  //const notebookLoader = $derived(search && search.query ? getNotebookSearch(search) : getNotebook(notebookId))
+  //const journalLoader = $derived(search && search.query ? getJournalSearch(search) : getJournal(journalId))
 
   // NOTE: This makes them reactive, so that in the children snippets, it doesn't
   // re-render the entire snippet but only the items further down the chain if the
-  // notebook or the search results change!
+  // journal or the search results change!
   let resources: Resource[] = $state([])
   let searchResults: Option<ResourceSearchResult> = $state([])
   let searching: boolean = $state(false)
@@ -121,7 +121,7 @@
 
       resources = result.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     } catch (error) {
-      console.error('Error loading notebook', error)
+      console.error('Error loading journal', error)
     } finally {
       isLoading = false
     }
@@ -141,29 +141,29 @@
 
   onMount(() => {
     const unsubs =  [
-      //notebookManager.on(NotebookManagerEvents.CreatedResource, () => load()),
-      notebookManager.on(NotebookManagerEvents.DeletedResource, (resourceId: string) => {
+      //journalManager.on(JournalManagerEvents.CreatedResource, () => load()),
+      journalManager.on(JournalManagerEvents.DeletedResource, (resourceId: string) => {
         resources = resources.filter(e => resourceId != e.id)
         if (searchResults) searchResults = searchResults.filter(e => resourceId != e.id)
       }),
-      notebookManager.on(NotebookManagerEvents.RemovedResources, (_, resourceIds: string[]) => {
+      journalManager.on(JournalManagerEvents.RemovedResources, (_, resourceIds: string[]) => {
         resources = resources.filter(e => !resourceIds.includes(e.id))
         if (searchResults) searchResults = searchResults.filter(e => !resourceIds.includes(e.id))
       })
     ]
     if (excludeWithinSpaces) {
       unsubs.push(
-        notebookManager.on(NotebookManagerEvents.AddedResources, () => load()),
+        journalManager.on(JournalManagerEvents.AddedResources, () => load()),
       )
     }
     return () => unsubs.forEach(f => f())
   })
 </script>
 
-<!--{#await notebookLoader}
+<!--{#await journalLoader}
   {@render loading?.()}
-{:then notebook}
-  {@render children?.([notebook, searchResults])}
+{:then journal}
+  {@render children?.([journal, searchResults])}
 {:catch error}
   {@render error?.(error)}
 {/await}

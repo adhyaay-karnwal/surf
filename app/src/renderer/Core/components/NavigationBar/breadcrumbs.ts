@@ -1,9 +1,9 @@
-import type { Fn } from '@deta/types'
-import { getViewType, getViewTypeData } from '@deta/utils/formatting'
-import { type NotebookManager } from '@deta/services/notebooks'
-import { type WebContentsView, ViewType } from '@deta/services/views'
-import { useLogScope } from '@deta/utils/io'
-import { wait } from '@deta/utils'
+import type { Fn } from '@mist/types'
+import { getViewType, getViewTypeData } from '@mist/utils/formatting'
+import { type JournalManager } from '@mist/services/journals'
+import { type WebContentsView, ViewType } from '@mist/services/views'
+import { useLogScope } from '@mist/utils/io'
+import { wait } from '@mist/utils'
 
 const log = useLogScope('Breadcrumbs')
 
@@ -14,16 +14,16 @@ interface BreadcrumbData {
   onclick?: Fn
 }
 
-async function getNotebookDisplayName(
-  notebookManager: NotebookManager,
-  notebookId: string
+async function getJournalDisplayName(
+  journalManager: JournalManager,
+  journalId: string
 ): Promise<string> {
-  const notebook = await notebookManager.getNotebook(notebookId)
-  return notebook.nameValue
+  const journal = await journalManager.getJournal(journalId)
+  return journal.nameValue
 }
 
 export async function constructBreadcrumbs(
-  notebookManager: NotebookManager,
+  journalManager: JournalManager,
   history: { url: string; title: string }[],
   currHistoryIndex: number,
   view: WebContentsView,
@@ -42,16 +42,16 @@ export async function constructBreadcrumbs(
 
     log.debug('Constructing breadcrumbs for view type:', viewData, currentHistory)
 
-    if (viewType === ViewType.NotebookHome) {
+    if (viewType === ViewType.JournalHome) {
       log.debug('Final breadcrumbs:', breadcrumbs)
       return breadcrumbs
     } else {
-      // Always start with Surf root
+      // Always start with Mist root
       breadcrumbs.push({
-        title: 'Surf',
-        url: new URL('surf://surf/notebook').toString(),
+        title: 'Mist',
+        url: new URL('mist://mist/journal').toString(),
         navigationIdx: currentHistory.findIndex(
-          (entry) => getViewType(entry.url) === ViewType.NotebookHome
+          (entry) => getViewType(entry.url) === ViewType.JournalHome
         )
       })
     }
@@ -60,25 +60,25 @@ export async function constructBreadcrumbs(
     if (viewType === ViewType.Resource) {
       const resourceId = viewData?.id
       if (resourceId) {
-        const resource = await notebookManager.resourceManager.getResource(resourceId)
+        const resource = await journalManager.resourceManager.getResource(resourceId)
         if (resource) {
-          // Add notebook/drafts breadcrumb
+          // Add journal/drafts breadcrumb
           if (resource.spaceIdsValue.length === 0) {
             breadcrumbs.push({
               title: 'Drafts',
-              url: new URL('surf://surf/notebook/drafts').toString(),
+              url: new URL('mist://mist/journal/drafts').toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
-                entry.url.includes('/notebook/drafts')
+                entry.url.includes('/journal/drafts')
               )
             })
           } else {
-            const notebookId = resource.spaceIdsValue[0]
-            const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
+            const journalId = resource.spaceIdsValue[0]
+            const journalName = await getJournalDisplayName(journalManager, journalId)
             breadcrumbs.push({
-              title: notebookName,
-              url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+              title: journalName,
+              url: new URL(`mist://mist/journal/${journalId}`).toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
-                entry.url.includes(`/notebook/${notebookId}`)
+                entry.url.includes(`/journal/${journalId}`)
               )
             })
           }
@@ -90,39 +90,39 @@ export async function constructBreadcrumbs(
         // HACK: we need a small delay to ensure the resource spaceIds list is updated
         await wait(200)
 
-        const resource = await notebookManager.resourceManager.getResource(extractedResourceId)
+        const resource = await journalManager.resourceManager.getResource(extractedResourceId)
 
         const spaceIds = resource?.spaceIdsValue || []
 
-        const lastNotebookEntry = currentHistory.findLast((entry) => {
+        const lastJournalEntry = currentHistory.findLast((entry) => {
           const type = getViewType(entry.url)
-          return type === ViewType.Notebook
+          return type === ViewType.Journal
         })
 
-        const viewTypeData = lastNotebookEntry && getViewTypeData(lastNotebookEntry.url)
-        if (lastNotebookEntry && spaceIds.length > 0 && spaceIds.includes(viewTypeData?.id)) {
-          const notebookName = await getNotebookDisplayName(notebookManager, viewTypeData.id)
+        const viewTypeData = lastJournalEntry && getViewTypeData(lastJournalEntry.url)
+        if (lastJournalEntry && spaceIds.length > 0 && spaceIds.includes(viewTypeData?.id)) {
+          const journalName = await getJournalDisplayName(journalManager, viewTypeData.id)
           breadcrumbs.push({
-            title: notebookName,
-            url: lastNotebookEntry.url,
-            navigationIdx: currentHistory.findIndex((entry) => entry.url === lastNotebookEntry.url)
+            title: journalName,
+            url: lastJournalEntry.url,
+            navigationIdx: currentHistory.findIndex((entry) => entry.url === lastJournalEntry.url)
           })
         } else if (spaceIds.length === 1) {
-          const notebookId = spaceIds[0]
-          const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
+          const journalId = spaceIds[0]
+          const journalName = await getJournalDisplayName(journalManager, journalId)
           breadcrumbs.push({
-            title: notebookName,
-            url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+            title: journalName,
+            url: new URL(`mist://mist/journal/${journalId}`).toString(),
             navigationIdx: currentHistory.findIndex((entry) =>
-              entry.url.includes(`/notebook/${notebookId}`)
+              entry.url.includes(`/journal/${journalId}`)
             )
           })
         } else if (spaceIds.length === 0) {
           breadcrumbs.push({
             title: 'Drafts',
-            url: 'surf://surf/notebook/drafts',
+            url: 'mist://mist/journal/drafts',
             navigationIdx: currentHistory.findIndex(
-              (entry) => entry.url === 'surf://surf/notebook/drafts'
+              (entry) => entry.url === 'mist://mist/journal/drafts'
             )
           })
         }

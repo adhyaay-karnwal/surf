@@ -3,7 +3,7 @@
   import type { Notification } from './types'
   import type { TeletypeSystem } from '.'
   import type { SvelteComponent } from 'svelte'
-  import type { Fn } from '@deta/types'
+  import type { Fn } from '@mist/types'
 
   type NotificationComponentProps = {
     notification: Notification

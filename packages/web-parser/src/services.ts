@@ -1,4 +1,4 @@
-import { ResourceTypes } from '@deta/types'
+import { ResourceTypes } from '@mist/types'
 import type { WebService } from './types'
 
 export const SERVICES: WebService[] = [

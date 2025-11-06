@@ -1,6 +1,6 @@
 <script>
-  import { Icon } from '@deta/icons'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { Button } from '@mist/ui'
 
   const handleMinimize = () => {
     window.api.controlWindow('minimize')

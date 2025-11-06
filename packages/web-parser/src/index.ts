@@ -8,7 +8,7 @@ import {
   type ResourceDataTable,
   type ResourceDataTableColumn,
   ResourceTypes
-} from '@deta/types'
+} from '@mist/types'
 export { SERVICES } from './services'
 
 import {

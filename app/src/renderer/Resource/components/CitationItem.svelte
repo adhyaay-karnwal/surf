@@ -24,17 +24,17 @@
     useLogScope,
     normalizeURL,
     hover
-  } from '@deta/utils'
+  } from '@mist/utils'
   import {
     DragTypeNames,
     ResourceTagsBuiltInKeys,
     type AIChatMessageSource,
     type CitationClickData,
     type CitationInfo
-  } from '@deta/types'
-  import { Icon, DynamicIcon } from '@deta/icons'
-  import { ResourceJSON, type Resource, useResourceManager } from '@deta/services/resources'
-  import { useToasts, ResourceSmallImagePreview } from '@deta/ui'
+  } from '@mist/types'
+  import { Icon, DynamicIcon } from '@mist/icons'
+  import { ResourceJSON, type Resource, useResourceManager } from '@mist/services/resources'
+  import { useToasts, ResourceSmallImagePreview } from '@mist/ui'
 
   export let className: string = ''
   export let id: string = ''

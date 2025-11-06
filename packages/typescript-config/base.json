@@ -17,7 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "paths": {
-      "@deta/*": ["./packages/*"],
+      "@mist/*": ["./packages/*"],
       "~/*": ["./*"]
     },
     "noErrorTruncation": true

@@ -1,6 +1,6 @@
 <!-- TableAddButtons.svelte -->
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import { createEventDispatcher } from 'svelte'
 
   export let visible: boolean = false

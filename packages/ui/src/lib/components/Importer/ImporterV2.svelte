@@ -4,17 +4,17 @@
 </script>
 
 <script lang="ts">
-  import { useResourceManager } from '@deta/services/resources'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { Importer } from '@deta/services'
-  import { Icon } from '@deta/icons'
+  import { useResourceManager } from '@mist/services/resources'
+  import { useJournalManager } from '@mist/services/journals'
+  import { Importer } from '@mist/services'
+  import { Icon } from '@mist/icons'
   import {
     BROWSER_TYPE_DATA,
     BrowserType,
     PRIMARY_BROWSRS,
     type BrowserTypeItem
-  } from '@deta/types'
-  import { isMac, useLogScope, wait } from '@deta/utils'
+  } from '@mist/types'
+  import { isMac, useLogScope, wait } from '@mist/utils'
 
   import { createEventDispatcher } from 'svelte'
   import ImportDataItem from './ImportDataItem.svelte'
@@ -29,7 +29,7 @@
 
   const log = useLogScope('Importer')
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
   const dispatch = createEventDispatcher<{
     done: void
@@ -37,7 +37,7 @@
 
   const importer = Importer.create({
     resourceManager,
-    notebookManager
+    journalManager
   })
 
   const majorBrowsers = BROWSER_TYPE_DATA.filter((browser) =>

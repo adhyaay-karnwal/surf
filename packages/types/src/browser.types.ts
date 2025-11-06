@@ -1,5 +1,5 @@
-import type { CreateTabEventTrigger, EventContext } from '@deta/types'
-import type { AIChatMessageSource } from '@deta/types/src/ai.types'
+import type { CreateTabEventTrigger, EventContext } from '@mist/types'
+import type { AIChatMessageSource } from '@mist/types/src/ai.types'
 
 export enum RendererType {
   Main = 'main',
@@ -22,7 +22,7 @@ export type DroppedTabLocation = { dropZoneID: 'pinned-tabs' | 'tabs'; index: nu
 export type DroppedTab = { from: DroppedTabLocation; to: DroppedTabLocation }
 
 /**
- * @deprecated Use `CreateTabOptions` from @deta/services instead
+ * @deprecated Use `CreateTabOptions` from @mist/services instead
  */
 export type CreateTabOptions = {
   active?: boolean
@@ -93,13 +93,13 @@ export type OpenResourceOptions = {
   resourceId: string
   target?: OpenTarget
   offline?: boolean
-  from_notebook_tree_sidebar?: boolean
+  from_journal_tree_sidebar?: boolean
 }
 
-export type OpenNotebookOptions = {
-  notebookId: string
+export type OpenJournalOptions = {
+  journalId: string
   target?: OpenTarget
-  from_notebook_tree_sidebar?: boolean
+  from_journal_tree_sidebar?: boolean
 }
 
 export type NavigateURLOptions = {
@@ -114,18 +114,18 @@ export enum ViewType {
    */
   Page = 'page',
   /**
-   * A specific notebook
-   * @example surf://surf/notebook/:id
+   * A specific journal
+   * @example mist://mist/journal/:id
    */
-  Notebook = 'notebook',
+  Journal = 'journal',
   /**
-   * The notebooks home/root view
-   * @example surf://surf/notebook
+   * The journals home/root view
+   * @example mist://mist/journal
    */
-  NotebookHome = 'notebook_home',
+  JournalHome = 'journal_home',
   /**
    * A specific resource (most likely note)
-   * @example surf://surf/resource/:id
+   * @example mist://mist/resource/:id
    */
   Resource = 'resource',
   /**
@@ -140,7 +140,7 @@ export type ViewTypeData = {
    */
   type: ViewType
   /**
-   * Unique identifier for the resource or notebook displayed in the view
+   * Unique identifier for the resource or journal displayed in the view
    */
   id: string | null
   /**

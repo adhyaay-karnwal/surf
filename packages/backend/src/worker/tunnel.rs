@@ -26,12 +26,12 @@ pub struct WorkerTunnel {
     pub tqueue_rx: crossbeam::Receiver<ProcessorMessage>,
     pub aiqueue_rx: crossbeam::Receiver<AIMessage>,
     pub event_bus_rx_callback: Arc<Root<JsFunction>>,
-    pub surf_backend_health: SurfBackendHealth,
+    pub surf_backend_health: MistBackendHealth,
 }
 
-pub struct SurfBackendHealth(Arc<(Mutex<bool>, Condvar)>);
+pub struct MistBackendHealth(Arc<(Mutex<bool>, Condvar)>);
 
-impl SurfBackendHealth {
+impl MistBackendHealth {
     pub fn new(initial_state: Option<bool>) -> Self {
         Self(Arc::new((
             Mutex::new(initial_state.unwrap_or_default()),
@@ -46,10 +46,10 @@ impl SurfBackendHealth {
             return;
         }
         while !*healthy {
-            tracing::warn!("surf-backend server isn't healthy, sleeping the processor thread");
+            tracing::warn!("mist-backend server isn't healthy, sleeping the processor thread");
             healthy = cvar.wait(healthy).unwrap();
         }
-        tracing::info!("surf-backend server is healthy again, resuming processor thread");
+        tracing::info!("mist-backend server is healthy again, resuming processor thread");
     }
 
     pub fn set_health(&self, healthy: bool) {
@@ -62,7 +62,7 @@ impl SurfBackendHealth {
     }
 }
 
-impl Clone for SurfBackendHealth {
+impl Clone for MistBackendHealth {
     fn clone(&self) -> Self {
         Self(self.0.clone())
     }
@@ -92,7 +92,7 @@ impl WorkerTunnel {
         let (worker_tx, worker_rx) = crossbeam::unbounded();
         let (tqueue_tx, tqueue_rx) = crossbeam::unbounded();
         let (aiqueue_tx, aiqueue_rx) = crossbeam::unbounded();
-        let surf_backend_health = SurfBackendHealth::new(Some(false));
+        let surf_backend_health = MistBackendHealth::new(Some(false));
         let event_bus_rx_callback = Arc::new(event_bus_rx_callback);
         let tunnel = Self {
             worker_tx,
@@ -137,7 +137,7 @@ impl WorkerTunnel {
         tqueue_tx: crossbeam::Sender<ProcessorMessage>,
         aiqueue_tx: crossbeam::Sender<AIMessage>,
         event_bus_rx_callback: Arc<Root<JsFunction>>,
-        surf_backend_health: SurfBackendHealth,
+        surf_backend_health: MistBackendHealth,
     ) where
         C: Context<'a>,
     {

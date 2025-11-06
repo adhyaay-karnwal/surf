@@ -8,7 +8,7 @@ use crate::ai::llm::client::{CancellationToken, Model};
 use crate::{BackendError, BackendResult};
 
 pub const WEBSEARCH_AGENT_TOOL_NAME: &str = "websearch_agent_tool";
-pub const SURFLET_AGENT_TOOL_NAME: &str = "surflet_agent_tool";
+pub const MISTLET_AGENT_TOOL_NAME: &str = "mistlet_agent_tool";
 pub const CONTEXT_MANAGEMENT_TOOL_NAME: &str = "context_management_tool";
 
 // WebSearch Agent Tool
@@ -93,31 +93,31 @@ impl Tool for WebSearchAgentTool {
     }
 }
 
-// Surflet Agent Tool
-pub struct SurfletAgentTool {
+// Mistlet Agent Tool
+pub struct MistletAgentTool {
     agent: Agent,
 }
 
-impl SurfletAgentTool {
+impl MistletAgentTool {
     pub fn new(agent: Agent) -> Self {
         Self { agent }
     }
 }
 
 #[derive(serde::Deserialize)]
-pub struct SurfletArgs {
+pub struct MistletArgs {
     name: String,
     prompt: String,
     resource_id: Option<String>,
 }
 
-impl Tool for SurfletAgentTool {
+impl Tool for MistletAgentTool {
     fn name(&self) -> &str {
-        SURFLET_AGENT_TOOL_NAME
+        MISTLET_AGENT_TOOL_NAME
     }
 
     fn description(&self) -> &str {
-        "Calls the Surflet Agent to create interactive apps, games, visualizations, and tools"
+        "Calls the Mistlet Agent to create interactive apps, games, visualizations, and tools"
     }
 
     fn execution_message(&self) -> Option<&str> {
@@ -130,11 +130,11 @@ impl Tool for SurfletAgentTool {
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "User-friendly name for the app/surflet"
+                    "description": "User-friendly name for the app/mistlet"
                 },
                 "prompt": {
                     "type": "string",
-                    "description": "User request for the surflet"
+                    "description": "User request for the mistlet"
                 },
                 "resource_id": {
                     "type": "string",
@@ -155,16 +155,16 @@ impl Tool for SurfletAgentTool {
         context_manager: &mut dyn ContextManager,
         cancellation_token: CancellationToken,
     ) -> BackendResult<()> {
-        let args: SurfletArgs = serde_json::from_value(parameters)?;
+        let args: MistletArgs = serde_json::from_value(parameters)?;
 
-        // Format the message for the surflet agent
+        // Format the message for the mistlet agent
         let message = if let Some(resource_id) = args.resource_id {
             format!(
-                "Update surflet '{}' (ID: {}) with: {}",
+                "Update mistlet '{}' (ID: {}) with: {}",
                 args.name, resource_id, args.prompt
             )
         } else {
-            format!("Create surflet '{}': {}", args.name, args.prompt)
+            format!("Create mistlet '{}': {}", args.name, args.prompt)
         };
 
         let config = ExecuteConfig {
@@ -181,11 +181,11 @@ impl Tool for SurfletAgentTool {
         match result {
             AgentResult::Success(_response) => Ok(()),
             AgentResult::MaxIterationsReached(response) => Err(BackendError::GenericError(
-                format!("Surflet agent max iterations reached: {}", response),
+                format!("Mistlet agent max iterations reached: {}", response),
             )),
             AgentResult::Cancelled => Err(BackendError::CancelledError),
             AgentResult::Error(error) => Err(BackendError::GenericError(format!(
-                "Surflet agent error: {}",
+                "Mistlet agent error: {}",
                 error
             ))),
         }

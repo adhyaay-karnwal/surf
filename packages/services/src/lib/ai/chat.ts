@@ -1,7 +1,7 @@
 import { ResourceManager } from '../resources'
 import type { SFFS } from '../sffs'
 import { derived, get, writable, type Readable, type Writable } from 'svelte/store'
-import { generateID, useLogScope } from '@deta/utils'
+import { generateID, useLogScope } from '@mist/utils'
 import {
   CHAT_TITLE_GENERATOR_PROMPT,
   CLASSIFY_CHAT_MODE,
@@ -13,8 +13,8 @@ import {
   type AIChatMessageParsed,
   type AIChatMessageRole,
   type AIChatMessageSource
-} from '@deta/types'
-import { ChatMode, ModelTiers, Provider, type Model } from '@deta/types/src/ai.types'
+} from '@mist/types'
+import { ChatMode, ModelTiers, Provider, type Model } from '@mist/types/src/ai.types'
 import { parseAIError, parseChatResponseSources } from './helpers'
 import {
   PageChatMessageSentEventError,
@@ -22,7 +22,7 @@ import {
   ResourceTagDataStateValue,
   ResourceTagsBuiltInKeys,
   type PageChatMessageSentData
-} from '@deta/types'
+} from '@mist/types'
 import type { AIService } from './ai'
 import {
   ContextItemActiveTab,
@@ -58,7 +58,7 @@ export type ChatMessageOptions = {
   onboarding?: boolean
   noteResourceId?: string
   websearch?: boolean
-  surflet?: boolean
+  mistlet?: boolean
 }
 
 export type ChatCompletionResponse = {
@@ -371,7 +371,7 @@ export class AIChat {
       inlineImages?: string[]
       general?: boolean
       websearch?: boolean
-      surflet?: boolean
+      mistlet?: boolean
       appCreation?: boolean
       noteResourceId?: string
     }
@@ -391,7 +391,7 @@ export class AIChat {
         inlineImages: opts?.inlineImages,
         general: opts?.general,
         websearch: opts?.websearch,
-        surflet: opts?.surflet
+        mistlet: opts?.mistlet
       })
     } else {
       await this.sffs.sendAIChatMessage(callback, this.id, query, backendModel, {
@@ -476,13 +476,13 @@ export class AIChat {
   async getChatModeForPromptAndTab(
     prompts: string[],
     activeTab: TabPage | null,
-    hasSurfletInContext: boolean = false,
+    hasMistletInContext: boolean = false,
     tier?: ModelTiers
   ): Promise<ChatMode> {
     try {
       const payload = {
         prompts,
-        has_app_in_context: hasSurfletInContext,
+        has_app_in_context: hasMistletInContext,
         ...(activeTab && {
           title: activeTab.title,
           url:
@@ -660,7 +660,7 @@ export class AIChat {
       limit: 30,
       ragOnly: false,
       websearch: true,
-      surflet: true,
+      mistlet: true,
       ...opts
     } as Required<ChatMessageOptions>
 
@@ -809,7 +809,7 @@ export class AIChat {
         appCreation: false,
         noteResourceId: options.noteResourceId,
         websearch: options.websearch,
-        surflet: options.surflet
+        mistlet: options.mistlet
       })
 
       // Wait for either the generation to complete or be stopped

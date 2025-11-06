@@ -1,6 +1,6 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@mist/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
-import { generateUUID, useLogScope, parseStringIntoBrowserLocation } from '@deta/utils'
+import { generateUUID, useLogScope, parseStringIntoBrowserLocation } from '@mist/utils'
 import { type TeletypeService } from '../teletypeService'
 
 export class CurrentQueryProvider implements ActionProvider {

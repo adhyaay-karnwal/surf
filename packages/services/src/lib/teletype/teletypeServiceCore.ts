@@ -1,14 +1,14 @@
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 import type { ActionProvider, TeletypeAction, TeletypeServiceOptions } from './types'
 import { SearchProvider } from './providers/SearchProvider'
 import { AskProvider } from './providers/AskProvider'
 import { type TeletypeActionSerialized, useMessagePortPrimary } from '../messagePort'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@mist/editor'
 import { ResourcesProvider } from './providers/ResourcesProvider'
 import { useBrowser } from '../browser'
 import { HostnameProvider } from './providers/HostnameProvider'
-import type { Fn } from '@deta/types'
-import { NotebooksProvider } from './providers/NotebooksProvider'
+import type { Fn } from '@mist/types'
+import { JournalsProvider } from './providers/JournalsProvider'
 
 export class TeletypeServiceCore {
   private providers = new Map<string, ActionProvider>()
@@ -73,7 +73,7 @@ export class TeletypeServiceCore {
     this.registerProvider(new HostnameProvider()) // Async Hostname suggestions
     this.registerProvider(new SearchProvider()) // Async Google suggestions
     this.registerProvider(new ResourcesProvider()) // SFFS Resources search
-    this.registerProvider(new NotebooksProvider()) // Notebooks search
+    this.registerProvider(new JournalsProvider()) // Journals search
   }
 
   /**

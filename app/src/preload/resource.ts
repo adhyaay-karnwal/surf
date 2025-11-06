@@ -16,13 +16,13 @@ import {
   WebContentsViewEvent,
   RendererType,
   type SettingsWindowTab
-} from '@deta/types'
+} from '@mist/types'
 import {
   IPC_EVENTS_RENDERER,
   setupMessagePortClient,
   type ShowOpenDialog
-} from '@deta/services/ipc'
-import type { MessagePortCallbackClient } from '@deta/services/messagePort'
+} from '@mist/services/ipc'
+import type { MessagePortCallbackClient } from '@mist/services/messagePort'
 
 import { getUserConfig } from '../main/config'
 import { initBackend } from './helpers/backend'
@@ -75,8 +75,8 @@ const eventHandlers = {
     })
   },
 
-  onToggleNotebookSidebar: (callback: (data: { open: boolean }) => void) => {
-    return IPC_EVENTS_RENDERER.toggleNotebookSidebar.on((_, data) => {
+  onToggleJournalSidebar: (callback: (data: { open: boolean }) => void) => {
+    return IPC_EVENTS_RENDERER.toggleJournalSidebar.on((_, data) => {
       try {
         callback(data)
       } catch (error) {
@@ -183,7 +183,7 @@ const api = {
 
 const { sffs, resources } = initBackend({ num_worker_threads: 4, num_processor_threads: 4 })
 
-IPC_EVENTS_RENDERER.setSurfBackendHealth.on((_, state) => {
+IPC_EVENTS_RENDERER.setMistBackendHealth.on((_, state) => {
   // @ts-ignore
   sffs.js__backend_set_surf_backend_health(state)
 })

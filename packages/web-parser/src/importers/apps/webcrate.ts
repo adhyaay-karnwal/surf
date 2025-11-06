@@ -17,7 +17,7 @@ SAMPLE LINK:
 }
 */
 
-import { type ResourceDataLink, ResourceTypes } from '@deta/types'
+import { type ResourceDataLink, ResourceTypes } from '@mist/types'
 import { BatchFetcher } from '../batcher'
 import { AppImporter } from './index'
 import { type DetectedResource } from '../../types'

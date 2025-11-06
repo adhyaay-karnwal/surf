@@ -1,6 +1,6 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@mist/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
-import { generateUUID, useLogScope } from '@deta/utils'
+import { generateUUID, useLogScope } from '@mist/utils'
 import { useBrowser } from '../../browser'
 
 export class SearchProvider implements ActionProvider {

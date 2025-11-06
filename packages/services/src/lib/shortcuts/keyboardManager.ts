@@ -1,4 +1,4 @@
-import { isMac } from '@deta/utils'
+import { isMac } from '@mist/utils'
 import { ShortcutPriority } from './shortcutsManager'
 
 interface KeyboardShortcut {

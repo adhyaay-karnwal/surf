@@ -1,5 +1,5 @@
-import { ResourceTypes, type SFFSResourceTag } from '@deta/types'
-import { SearchResourceTags } from '@deta/utils'
+import { ResourceTypes, type SFFSResourceTag } from '@mist/types'
+import { SearchResourceTags } from '@mist/utils'
 
 export type FilterItem = {
   id: string
@@ -59,8 +59,8 @@ export const RESOURCE_FILTERS: FilterItem[] = [
   //   tags: [...filterDocumentTags('prefix')]
   // },
   {
-    id: 'surflets',
-    label: 'Surflets',
+    id: 'mistlets',
+    label: 'Mistlets',
     tags: [...filterGeneratedArtifactsTags()]
   },
   // {

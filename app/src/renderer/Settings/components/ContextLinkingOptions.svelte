@@ -1,6 +1,6 @@
 <script lang="ts">
   import SettingsOption from './SettingsOption.svelte'
-  import type { UserSettings } from '@deta/types'
+  import type { UserSettings } from '@mist/types'
 
   export let userConfigSettings: UserSettings
 

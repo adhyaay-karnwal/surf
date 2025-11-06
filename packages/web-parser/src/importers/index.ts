@@ -1,4 +1,4 @@
-import { type ResourceDataLink, ResourceTypes } from '@deta/types'
+import { type ResourceDataLink, ResourceTypes } from '@mist/types'
 import { type DetectedResource, WebParser } from '..'
 import { WebCrateImporter } from './apps/webcrate'
 import { AppImporter } from './apps'

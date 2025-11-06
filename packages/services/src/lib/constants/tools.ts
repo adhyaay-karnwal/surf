@@ -1,4 +1,4 @@
-import type { AITool } from '@deta/types'
+import type { AITool } from '@mist/types'
 
 export const AI_TOOLS = [
   {
@@ -9,7 +9,7 @@ export const AI_TOOLS = [
     disabled: false
   },
   {
-    id: 'surflet',
+    id: 'mistlet',
     name: 'App Generation',
     icon: 'code',
     active: true,

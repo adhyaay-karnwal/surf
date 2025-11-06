@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { clickOutside } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { clickOutside } from '@mist/utils'
   import { onMount, tick } from 'svelte'
 
   let {

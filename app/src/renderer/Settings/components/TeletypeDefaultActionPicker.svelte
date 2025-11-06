@@ -8,8 +8,8 @@
     { key: 'auto', label: 'Auto (Smart)', description: 'Automatically select based on query type' },
     {
       key: 'always_ask',
-      label: 'Always Ask Surf',
-      description: 'Always default to Ask Surf action'
+      label: 'Always Ask Mist',
+      description: 'Always default to Ask Mist action'
     },
     {
       key: 'always_search',

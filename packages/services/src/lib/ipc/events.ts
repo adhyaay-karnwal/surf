@@ -14,7 +14,7 @@ import type {
   WebContentsViewManagerActionEvent,
   WebContentsViewActionEvent,
   ControlWindow
-} from '@deta/types'
+} from '@mist/types'
 import { createIPCService, type IPCEvent } from './ipc'
 
 export const ipcService = createIPCService()
@@ -145,7 +145,7 @@ const IPC_EVENTS = ipcService.registerEvents({
   browserFocusChange: ipcService.addEvent<BrowserFocusChange>('browser-focus-change'),
   adBlockerStateChange: ipcService.addEvent<AdblockerStateChange>('adblocker-state-change'),
   toggleSidebar: ipcService.addEvent<boolean | undefined>('toggle-sidebar'),
-  toggleNotebookSidebar: ipcService.addEvent<{ open: boolean }>('toggle-notebook-sidebar'),
+  toggleJournalSidebar: ipcService.addEvent<{ open: boolean }>('toggle-journal-sidebar'),
   toggleTabsPosition: ipcService.addEvent<void>('toggle-tabs-position'),
   toggleTheme: ipcService.addEvent<void>('toggle-theme'),
   copyActiveTabUrl: ipcService.addEvent<void>('copy-active-tab-url'),
@@ -171,7 +171,7 @@ const IPC_EVENTS = ipcService.registerEvents({
   importedFiles: ipcService.addEvent<string[]>('imported-files'),
   importBrowserHistory: ipcService.addEvent<BrowserType>('import-browser-history'),
   importBrowserBookmarks: ipcService.addEvent<BrowserType>('import-browser-bookmarks'),
-  setSurfBackendHealth: ipcService.addEvent<boolean>('set-surf-backend-health'),
+  setMistBackendHealth: ipcService.addEvent<boolean>('set-mist-backend-health'),
   setActiveTabWebContentsId: ipcService.addEvent<number>('set-active-tab-webcontents-id'),
   closeTabWebContentsId: ipcService.addEvent<number>('close-tab-webcontents-id'),
   saveLink: ipcService.addEvent<{ url: string; spaceId?: string }>('save-link'),

@@ -1,7 +1,7 @@
-import { generateID } from '@deta/utils'
+import { generateID } from '@mist/utils'
 import { type Writable, writable } from 'svelte/store'
 
-import { blobToDataUrl } from '@deta/utils/browser'
+import { blobToDataUrl } from '@mist/utils/browser'
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'
 import { ContextItemTypes, type ContextItemIcon, ContextItemIconTypes } from './types'

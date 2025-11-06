@@ -12,7 +12,7 @@ export interface MentionItem {
 export const MentionTypes = {
   TAB: 'tab',
   RESOURCE: 'resource',
-  NOTEBOOK: 'notebook',
+  NOTEBOOK: 'journal',
   ALL_TABS: 'all-tabs',
   ACTIVE_TAB: 'active-tab'
 } as const

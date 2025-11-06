@@ -1,6 +1,6 @@
 import type { Editor } from '@tiptap/core'
 import type { CaretPosition } from './CaretIndicatorExtension'
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
 // Idle timeout in milliseconds
 const IDLE_TIMEOUT = 300

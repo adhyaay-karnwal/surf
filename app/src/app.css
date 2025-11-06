@@ -1,4 +1,4 @@
-@import '@deta/ui/styles/tokens.css';
+@import '@mist/ui/styles/tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

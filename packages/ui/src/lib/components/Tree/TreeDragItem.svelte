@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { HTMLDragItem, type DragculaDragEvent } from '@deta/dragcula'
+  import { HTMLDragItem, type DragculaDragEvent } from '@mist/dragcula'
   import type { BaseTreeNode, TreeDragConfig } from './tree.types'
   import { createTreeDragData, createTreeDragOperation, extractTreeDragData } from './tree.dnd'
   import type { Snippet } from 'svelte'

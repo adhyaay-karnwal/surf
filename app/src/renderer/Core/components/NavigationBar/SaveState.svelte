@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { ViewType, type WebContentsView } from '@deta/services/views'
-  import { Button, SearchableList, type SearchableItem, SourceCard } from '@deta/ui'
-  import { truncate, useLogScope } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { ViewType, type WebContentsView } from '@mist/services/views'
+  import { Button, SearchableList, type SearchableItem, SourceCard } from '@mist/ui'
+  import { truncate, useLogScope } from '@mist/utils'
   import OverlayPopover from '../Overlays/OverlayPopover.svelte'
-  import { Notebook, NotebookManagerEvents, useNotebookManager } from '@deta/services/notebooks'
-  import { useResourceManager, type Resource } from '@deta/services/resources'
+  import { Journal, JournalManagerEvents, useJournalManager } from '@mist/services/journals'
+  import { useResourceManager, type Resource } from '@mist/services/resources'
   import { writable } from 'svelte/store'
-  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@deta/types'
+  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@mist/types'
 
   let {
     view
@@ -17,9 +17,9 @@
 
   const log = useLogScope('SaveState')
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
-  const notebooks = notebookManager.sortedNotebooks
+  const journals = journalManager.sortedJournals
 
   let searchableList: SearchableList
   let unsubResourceDeleted: Fn | null = null
@@ -41,10 +41,10 @@
   )
   let spaceIds = $derived(resource?.spaceIds ?? writable([]))
 
-  let notebookItems = $derived(
-    notebooks
+  let journalItems = $derived(
+    journals
       .sort((a, b) => {
-        // Sort notebooks in spaceIds to the top
+        // Sort journals in spaceIds to the top
         const aInSpace = $spaceIds.includes(a.id)
         const bInSpace = $spaceIds.includes(b.id)
         if (aInSpace && !bInSpace) return -1
@@ -52,13 +52,13 @@
         return 0
       })
       .map(
-        (notebook) =>
+        (journal) =>
           ({
-            id: notebook.id,
-            label: truncate(notebook.nameValue, 28),
-            icon: $spaceIds.includes(notebook.id) ? 'check' : 'circle',
-            data: notebook
-          }) as SearchableItem<Notebook>
+            id: journal.id,
+            label: truncate(journal.nameValue, 28),
+            icon: $spaceIds.includes(journal.id) ? 'check' : 'circle',
+            data: journal
+          }) as SearchableItem<Journal>
       )
   )
 
@@ -69,8 +69,8 @@
         resource = res
       })
 
-      unsubResourceDeleted = notebookManager.on(
-        NotebookManagerEvents.DeletedResource,
+      unsubResourceDeleted = journalManager.on(
+        JournalManagerEvents.DeletedResource,
         (deletedResourceId) => {
           if (deletedResourceId === $extractedResourceId) {
             view.setExtractedResourceId(null, false)
@@ -88,9 +88,9 @@
     }
   })
 
-  async function saveToSurf() {
+  async function saveToMist() {
     if (!$isSaved || !resource) {
-      log.debug('Bookmarking page to Surf')
+      log.debug('Bookmarking page to Mist')
       resource = await view.bookmarkPage()
     }
 
@@ -99,11 +99,11 @@
       return
     }
 
-    log.debug('Resource saved to Surf:', resource.id)
+    log.debug('Resource saved to Mist:', resource.id)
     // isMenuOpen = false
   }
 
-  async function selectNotebook(notebookId: string) {
+  async function selectJournal(journalId: string) {
     if (!$isSaved || !resource) {
       log.debug('Bookmarking page')
       resource = await view.bookmarkPage()
@@ -114,11 +114,11 @@
       return
     }
 
-    if ($spaceIds.includes(notebookId)) {
-      await notebookManager.removeResourcesFromNotebook(notebookId, [resource.id], true)
+    if ($spaceIds.includes(journalId)) {
+      await journalManager.removeResourcesFromJournal(journalId, [resource.id], true)
     } else {
-      await notebookManager.addResourcesToNotebook(
-        notebookId,
+      await journalManager.addResourcesToJournal(
+        journalId,
         [resource.id],
         SpaceEntryOrigin.ManuallyAdded,
         true
@@ -136,16 +136,16 @@
     <div class="wrapper">
       <Button size="fill" square>
         {#if $isSaved}
-          <Icon name="notebook.saved" size="22px" />
+          <Icon name="journal.saved" size="22px" />
         {:else}
-          <Icon name="notebook.unsaved" size="22px" />
+          <Icon name="journal.unsaved" size="22px" />
         {/if}
       </Button>
     </div>
   {/snippet}
 
   <div class="list">
-    <!-- Save to Surf option -->
+    <!-- Save to Mist option -->
     <div class="save-section">
       {#if $isSaved}
         {#if resource.url}
@@ -159,15 +159,15 @@
             interactive={false}
           />
         {:else if resource.type !== ResourceTypes.DOCUMENT_SPACE_NOTE}
-          <button class="list-item save-to-surf" disabled>
+          <button class="list-item save-to-mist" disabled>
             <Icon name="check" size="19px" color="rgb(6, 158, 54)" />
-            <div class="list-item-label">Added to Surf!</div>
+            <div class="list-item-label">Added to Mist!</div>
           </button>
         {/if}
       {:else}
-        <button class="list-item save-to-surf" onclick={saveToSurf}>
+        <button class="list-item save-to-mist" onclick={saveToMist}>
           <Icon name="save" />
-          <div class="list-item-label">Add to Surf</div>
+          <div class="list-item-label">Add to Mist</div>
         </button>
       {/if}
     </div>
@@ -176,17 +176,17 @@
       <hr class="divider" />
     {/if}
 
-    <!-- Notebooks section -->
-    <div class="notebooks-section">
+    <!-- Journals section -->
+    <div class="journals-section">
       <SearchableList
         bind:this={searchableList}
         bind:value={searchValue}
-        items={notebookItems}
-        searchPlaceholder="Search notebooks to add to..."
+        items={journalItems}
+        searchPlaceholder="Search journals to add to..."
         autofocus={true}
       >
         {#snippet itemRenderer(item)}
-          <button class="list-item" onclick={() => selectNotebook(item.id)}>
+          <button class="list-item" onclick={() => selectJournal(item.id)}>
             {#if $spaceIds.includes(item.id)}
               <Icon name="check" />
             {:else}
@@ -260,7 +260,7 @@
         color: light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.6));
       }
 
-      &.save-to-surf {
+      &.save-to-mist {
         background: light-dark(
           color-mix(in srgb, var(--accent, #3b82f6) 10%, transparent),
           color-mix(in srgb, var(--accent-dark, #82a2ff) 20%, transparent)
@@ -311,7 +311,7 @@
     margin: 0.5rem 0;
   }
 
-  .notebooks-section {
+  .journals-section {
     flex: 1;
     min-height: 0;
     overflow: hidden;

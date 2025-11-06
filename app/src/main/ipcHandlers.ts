@@ -1,4 +1,4 @@
-import { isMac } from '@deta/utils/system'
+import { isMac } from '@mist/utils/system'
 import { app, BrowserWindow, dialog, session } from 'electron'
 import path from 'path'
 import { setAdblockerState, getAdblockerState } from './adblocker'
@@ -11,19 +11,19 @@ import {
   RightSidebarTab,
   SFFSResource,
   UserSettings
-} from '@deta/types'
+} from '@mist/types'
 import { getPlatform, isPathSafe, isDefaultBrowser } from './utils'
 import { updateTabOrientationMenuItem } from './appMenu'
 import { createSettingsWindow, getSettingsWindow } from './settingsWindow'
 
-import { IPC_EVENTS_MAIN, NewWindowRequest } from '@deta/services/ipc'
+import { IPC_EVENTS_MAIN, NewWindowRequest } from '@mist/services/ipc'
 import { exportResource, openResourceAsFile } from './downloadManager'
 import { getAppMenu } from './appMenu'
 
 import fs from 'fs/promises'
 import tokenManager from './token'
 import { updateCachedSpaces } from './spaces'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 
 const log = useLogScope('IpcHandlers')
 
@@ -52,8 +52,8 @@ export const validateIPCSender = (event: Electron.IpcMainEvent | Electron.IpcMai
   }
 
   if (
-    event.senderFrame?.url.startsWith('surf://surf/resource/') ||
-    event.senderFrame?.url.startsWith('surf://surf/notebook')
+    event.senderFrame?.url.startsWith('mist://mist/resource/') ||
+    event.senderFrame?.url.startsWith('mist://mist/journal')
   ) {
     validIDs.push(event.sender.id)
   }

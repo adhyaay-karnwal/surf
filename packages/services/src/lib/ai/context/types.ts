@@ -10,7 +10,7 @@ export enum ContextItemTypes {
   RESOURCE = 'resource',
   SCREENSHOT = 'screenshot',
   SPACE = 'space',
-  NOTEBOOK = 'notebook',
+  NOTEBOOK = 'journal',
   PAGE_TAB = 'page-tab',
   ACTIVE_TAB = 'active-tab',
   ACTIVE_SPACE = 'active-context',

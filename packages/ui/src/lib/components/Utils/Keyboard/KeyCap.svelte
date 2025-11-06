@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { isMac } from '@deta/utils/system'
-  import { lighten, darken, getContrastColor } from '@deta/utils/dom'
+  import { isMac } from '@mist/utils/system'
+  import { lighten, darken, getContrastColor } from '@mist/utils/dom'
   export let keySymbol: string
   export let size: 'tiny' | 'small' | 'medium' | 'large' = 'medium'
   export let isModifier = false
@@ -69,7 +69,7 @@
 </div>
 
 <style lang="scss">
-  @use '@deta/ui/styles/utils' as utils;
+  @use '@mist/ui/styles/utils' as utils;
   .key-wrapper {
     display: inline-flex;
     position: relative;

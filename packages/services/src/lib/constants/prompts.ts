@@ -48,7 +48,7 @@ export const EXAMPLE_PROMPTS = [
     icon: 'search',
     label: "Why hasn't the computer revolution happened yet?",
     description:
-      "Ask about a topic that's interesting to you, and let Surf help you find relevant information.",
+      "Ask about a topic that's interesting to you, and let Mist help you find relevant information.",
     prompt: 'Search the web on why the computer revolution has not happened yet'
   },
   {
@@ -71,14 +71,14 @@ export const EXAMPLE_PROMPTS = [
     icon: 'mention',
     label: 'Mentioning Sources',
     description:
-      '@mention any of your notebooks, notes, tabs and/or other media to pinpoint various contexts.',
+      '@mention any of your journals, notes, tabs and/or other media to pinpoint various contexts.',
     prompt: ''
   },
   {
     id: 'note',
     icon: 'note',
     label: 'Note Taking',
-    description: 'Compose a note directly in Surf.',
+    description: 'Compose a note directly in Mist.',
     prompt: ''
   }
 ]

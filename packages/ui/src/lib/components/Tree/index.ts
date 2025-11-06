@@ -11,7 +11,7 @@ export * as treeUtils from './tree.utils'
 export * as treeDnd from './tree.dnd'
 export {
   createTabSelection,
-  createNotebookTabSelectionConfig,
+  createJournalTabSelectionConfig,
   type TabSelectionConfig,
   type TabSelection
 } from './tree.select.svelte'

@@ -2,8 +2,8 @@ import contextMenu from 'electron-context-menu'
 import { ipcSenders } from './ipcHandlers'
 import { getCachedSpaces } from './spaces'
 import { type MenuItemConstructorOptions } from 'electron'
-import { SpaceBasicData } from '@deta/services/ipc'
-import { conditionalArrayItem } from '@deta/utils/data'
+import { SpaceBasicData } from '@mist/services/ipc'
+import { conditionalArrayItem } from '@mist/utils/data'
 
 const createSpaceAction = (space: SpaceBasicData, handler: () => void) => {
   return {
@@ -89,7 +89,7 @@ export function setupContextMenu(window: Electron.WebContents, options: contextM
           }
         },
         {
-          label: 'Save Link to Notebook',
+          label: 'Save Link to Journal',
           visible: parameters.linkURL.length > 0,
           submenu: saveToSpaceItems
         },

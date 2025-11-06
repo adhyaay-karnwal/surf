@@ -42,10 +42,10 @@ import type { MentionItem } from './types'
 import Button from './extensions/Button'
 import Resource from './extensions/Resource'
 import type { ComponentType, SvelteComponent } from 'svelte'
-import { conditionalArrayItem } from '@deta/utils'
+import { conditionalArrayItem } from '@mist/utils'
 import type { SlashItemsFetcher } from './extensions/Slash/suggestion'
 import { Citation } from './extensions/Citation/citation'
-import { Surflet } from './extensions/Surflet/surflet'
+import { Mistlet } from './extensions/Mistlet/mistlet'
 import { WebSearch } from './extensions/WebSearch/websearch'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import Link from './extensions/Link'
@@ -79,7 +79,7 @@ export type ExtensionOptions = {
   onFloatyInputStateChange?: (state: 'inline' | 'floaty' | 'bottom') => void
   onFirstLineStateChanged?: (isFirstLine: boolean) => void
   onLastLineVisibilityChanged?: (visible: boolean) => void
-  surfletComponent?: ComponentType<SvelteComponent>
+  mistletComponent?: ComponentType<SvelteComponent>
   webSearchComponent?: ComponentType<SvelteComponent>
   onWebSearchCompleted?: (results: any, query: string) => void
   onLinkClick?: LinkClickHandler
@@ -126,7 +126,7 @@ export const createEditorExtensions = (opts?: ExtensionOptions) => [
   Underline,
   Link.configure({
     onClick: opts?.onLinkClick,
-    protocols: ['surf'],
+    protocols: ['mist'],
     HTMLAttributes: {
       target: '_blank'
     }
@@ -225,9 +225,9 @@ export const createEditorExtensions = (opts?: ExtensionOptions) => [
     })
   ),
   ...conditionalArrayItem(
-    !!opts?.surfletComponent,
-    Surflet.configure({
-      component: opts?.surfletComponent
+    !!opts?.mistletComponent,
+    Mistlet.configure({
+      component: opts?.mistletComponent
     })
   ),
   ...conditionalArrayItem(

@@ -8,7 +8,7 @@ describe('Intent Classifier', () => {
       expect(quickGuess('www.example.com')).toBe('search')
       expect(quickGuess('github.com')).toBe('search')
       expect(quickGuess('github.')).toBe('search')
-      expect(quickGuess('github.com/deta/surf')).toBe('search')
+      expect(quickGuess('github.com/deta/mist')).toBe('search')
     })
 
     it('should classify questions with ? as question', () => {

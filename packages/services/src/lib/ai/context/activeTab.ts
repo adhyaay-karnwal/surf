@@ -4,11 +4,11 @@ import { type Writable, type Readable, writable, derived, get } from 'svelte/sto
 import type { TabItem } from '../../tabs'
 
 import { ContextItemBase } from './base'
-import { ContextItemNotebook, type ContextService } from '../contextManager'
+import { ContextItemJournal, type ContextService } from '../contextManager'
 import { ContextItemResource } from './resource'
 import { ContextItemSpace } from './space'
 import { ContextItemTypes, ContextItemIconTypes, type ContextItemIcon } from './types'
-import { useDebounce, wait } from '@deta/utils'
+import { useDebounce, wait } from '@mist/utils'
 import { ViewType } from '../../views'
 
 export class ContextItemActiveTab extends ContextItemBase {
@@ -76,7 +76,7 @@ export class ContextItemActiveTab extends ContextItemBase {
         viewManager &&
         viewManager.sidebarViewOpen &&
         viewManager.activeSidebarView &&
-        [ViewType.NotebookHome, ViewType.Notebook, ViewType.Resource].includes(
+        [ViewType.JournalHome, ViewType.Journal, ViewType.Resource].includes(
           viewManager.activeSidebarView.typeValue
         )
       ) {
@@ -84,7 +84,7 @@ export class ContextItemActiveTab extends ContextItemBase {
         this.currentTabUrl.set(activeTab.view.urlValue)
         this.debounceUpdateItem()
       } else {
-        this.log.debug('Sidebar is not open to a notebook or resource, skipping update')
+        this.log.debug('Sidebar is not open to a journal or resource, skipping update')
         this.item.set(null)
       }
     })
@@ -165,24 +165,24 @@ export class ContextItemActiveTab extends ContextItemBase {
         this.item.set(newItem)
 
         return newItem
-      } else if (tab.view.typeValue === ViewType.Notebook) {
-        this.log.debug('Preparing notebook tab', tab)
-        const notebookId = tab.view.typeDataValue.id
-        if (!notebookId) {
-          this.log.error('Notebook tab has no notebook id', tab.id)
+      } else if (tab.view.typeValue === ViewType.Journal) {
+        this.log.debug('Preparing journal tab', tab)
+        const journalId = tab.view.typeDataValue.id
+        if (!journalId) {
+          this.log.error('Journal tab has no journal id', tab.id)
           this.item.set(null)
           return null
         }
 
-        const notebook = await this.service.notebookManager.getNotebook(notebookId)
-        if (!notebook) {
-          this.log.error('Failed to load notebook for notebook tab', tab.id, notebookId)
+        const journal = await this.service.journalManager.getJournal(journalId)
+        if (!journal) {
+          this.log.error('Failed to load journal for journal tab', tab.id, journalId)
           this.item.set(null)
           return null
         }
 
-        this.log.debug('Prepared notebook tab', tab.id, notebook)
-        const newItem = new ContextItemNotebook(this.service, notebook, tab)
+        this.log.debug('Prepared journal tab', tab.id, journal)
+        const newItem = new ContextItemJournal(this.service, journal, tab)
         this.item.set(newItem)
 
         return newItem

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import type { Snippet } from 'svelte'
   import type { BaseTreeNode, TreeNodeAction, TreeConfig } from './tree.types'
 

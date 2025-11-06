@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useDownloadsManager } from '@deta/services'
-  import type { DownloadState } from '@deta/types'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { useDownloadsManager } from '@mist/services'
+  import type { DownloadState } from '@mist/types'
+  import { Button } from '@mist/ui'
 
   const downloadsManager = useDownloadsManager()
 

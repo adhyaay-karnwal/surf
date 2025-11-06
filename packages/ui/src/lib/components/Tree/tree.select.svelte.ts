@@ -1,6 +1,6 @@
 import type { TreeStore } from './tree.store.svelte'
 import type { BaseTreeNode } from './tree.types'
-import { ViewType } from '@deta/types'
+import { ViewType } from '@mist/types'
 
 /**
  * Return type for createTabSelection
@@ -45,8 +45,8 @@ export function createTabSelection<T extends BaseTreeNode>(
 
     if (window.location.pathname.startsWith("/resource/")) {
       return window.location.pathname.split("/resource/").at(1) || null
-    } else if (window.location.pathname.startsWith("/notebook/")) {
-      return window.location.pathname.split("/notebook/").at(1) || null
+    } else if (window.location.pathname.startsWith("/journal/")) {
+      return window.location.pathname.split("/journal/").at(1) || null
     }
     return null;
 
@@ -113,10 +113,10 @@ export function createTabSelection<T extends BaseTreeNode>(
 }
 
 /**
- * Default notebook/resource tab selection configuration
- * Handles ViewType.Resource and ViewType.Notebook selection
+ * Default journal/resource tab selection configuration
+ * Handles ViewType.Resource and ViewType.Journal selection
  */
-export function createNotebookTabSelectionConfig(tabsManager: any): TabSelectionConfig {
+export function createJournalTabSelectionConfig(tabsManager: any): TabSelectionConfig {
   return {
     getActiveTab: () => tabsManager.activeTabValue,
 
@@ -132,13 +132,13 @@ export function createNotebookTabSelectionConfig(tabsManager: any): TabSelection
           }
           break
 
-        case ViewType.Notebook:
+        case ViewType.Journal:
           if (viewTypeData?.id) {
             return viewTypeData.id
           }
           break
 
-        case ViewType.NotebookHome:
+        case ViewType.JournalHome:
           return null
 
         case ViewType.Page:
@@ -152,10 +152,10 @@ export function createNotebookTabSelectionConfig(tabsManager: any): TabSelection
 
     shouldSelectForTab: (url: URL) => {
       const viewType = tab.view.typeValue
-      // Only sync selection for notebook-related view types
+      // Only sync selection for journal-related view types
       return viewType === ViewType.Resource ||
-        viewType === ViewType.Notebook ||
-        viewType === ViewType.NotebookHome
+        viewType === ViewType.Journal ||
+        viewType === ViewType.JournalHome
     }
   }
 }

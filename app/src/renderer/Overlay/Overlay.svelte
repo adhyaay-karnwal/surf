@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { wait } from '@deta/utils'
+  import { wait } from '@mist/utils'
 
   const searchParams = new URLSearchParams(window.location.search)
   let overlayId: string = searchParams.get('overlayId') || 'default'

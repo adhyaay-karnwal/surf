@@ -1,5 +1,5 @@
-import { type MentionItem } from '@deta/editor'
-import { generateUUID, useLogScope } from '@deta/utils'
+import { type MentionItem } from '@mist/editor'
+import { generateUUID, useLogScope } from '@mist/utils'
 
 import { useBrowser } from '../../browser'
 import type { ActionProvider, TeletypeAction } from '../types'
@@ -30,11 +30,11 @@ export class AskProvider implements ActionProvider {
       id: 'ask-action',
       name: `${trimmedQuery}`,
       icon: 'face',
-      section: 'Ask Surf',
+      section: 'Ask Mist',
       priority: 95,
       keywords: ['ask', 'question', 'ai', 'chat', 'help'],
       // description: `Create a new Note about "${trimmedQuery}"`,
-      buttonText: 'Ask Surf',
+      buttonText: 'Ask Mist',
       handler: async () => {
         await this.triggerAskAction(trimmedQuery, mentions)
       }

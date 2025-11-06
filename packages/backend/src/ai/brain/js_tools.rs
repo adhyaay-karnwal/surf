@@ -18,7 +18,7 @@ use crate::{BackendError, BackendResult};
 pub enum ToolName {
     SearchAPI,
     SearchDoneCallback,
-    SurfletDoneCallback,
+    MistletDoneCallback,
     ScrapeURL,
 }
 
@@ -29,7 +29,7 @@ impl FromStr for ToolName {
             "web_search_api" => Ok(ToolName::SearchAPI),
             "web_search_done_callback" => Ok(ToolName::SearchDoneCallback),
             "scrape_url" => Ok(ToolName::ScrapeURL),
-            "surflet_done_callback" => Ok(ToolName::SurfletDoneCallback),
+            "mistlet_done_callback" => Ok(ToolName::MistletDoneCallback),
             _ => Err(BackendError::GenericError(format!(
                 "Unexpected tool name: {}",
                 s

@@ -1,8 +1,8 @@
 import { getContext, setContext } from 'svelte'
 import { get, writable, type Writable } from 'svelte/store'
 
-import { useLogScope } from '@deta/utils/io'
-import type { UserConfig, UserSettings } from '@deta/types'
+import { useLogScope } from '@mist/utils/io'
+import type { UserConfig, UserSettings } from '@mist/types'
 
 export class ConfigService {
   config: Writable<UserConfig>

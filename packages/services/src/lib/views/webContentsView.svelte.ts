@@ -32,7 +32,7 @@ import {
   type ResourceDataPDF,
   type Download,
   ViewLocation
-} from '@deta/types'
+} from '@mist/types'
 import {
   useLogScope,
   EventEmitterBase,
@@ -42,8 +42,8 @@ import {
   isInternalViewerURL,
   copyToClipboard,
   useTimeout
-} from '@deta/utils'
-import { getTextElementsFromHtml } from '@deta/utils/dom'
+} from '@mist/utils'
+import { getTextElementsFromHtml } from '@mist/utils/dom'
 import {
   compareURLs,
   getHostname,
@@ -52,7 +52,7 @@ import {
   parseUrlIntoCanonical,
   ResourceTag,
   cleanupPageTitle
-} from '@deta/utils/formatting'
+} from '@mist/utils/formatting'
 import { HistoryEntriesManager } from '../history'
 import { ConfigService } from '../config'
 import { KeyboardManager, useKeyboardManager } from '../shortcuts/index'
@@ -69,8 +69,8 @@ import {
   ViewManagerEmitterNames
 } from './types'
 import { Resource, ResourceManager } from '../resources'
-import { WebParser } from '@deta/web-parser'
-import { type MentionItem } from '@deta/editor'
+import { WebParser } from '@mist/web-parser'
+import { type MentionItem } from '@mist/editor'
 import { type DownloadsManager, useDownloadsManager } from '../downloads.svelte'
 import { type AIQueryPayload } from '../messagePort'
 
@@ -755,7 +755,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
     if (!uiLocation) return
 
     if (
-      ![ViewType.Resource, ViewType.Notebook, ViewType.NotebookHome].includes(this.view.typeValue)
+      ![ViewType.Resource, ViewType.Journal, ViewType.JournalHome].includes(this.view.typeValue)
     ) {
       return
     }
@@ -778,13 +778,13 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
   }
 
   async loadURL(url: string, force = false) {
-    const validNotebookTypes = [ViewType.Notebook, ViewType.NotebookHome, ViewType.Resource]
+    const validJournalTypes = [ViewType.Journal, ViewType.JournalHome, ViewType.Resource]
 
     const oldViewTypeData = this.view.typeDataValue
     const newViewTypeData = getViewTypeData(url)
 
-    const currentIsValid = validNotebookTypes.includes(oldViewTypeData.type)
-    const newIsValid = validNotebookTypes.includes(newViewTypeData.type)
+    const currentIsValid = validJournalTypes.includes(oldViewTypeData.type)
+    const newIsValid = validJournalTypes.includes(newViewTypeData.type)
 
     const oldIsRawResource = oldViewTypeData.type === ViewType.Resource && oldViewTypeData.raw
     const newIsRawResource = newViewTypeData.type === ViewType.Resource && newViewTypeData.raw
@@ -792,7 +792,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
     // const currentIsResource = this.view.typeValue === ViewType.Resource
     // const newIsResource = getViewType(url) === ViewType.Resource
 
-    // const canNavigateBetweenNotebooks = currentIsNotebook && newIsNotebook
+    // const canNavigateBetweenJournals = currentIsJournal && newIsJournal
     // const canNavigateBetweenResources = currentIsResource && newIsResource
 
     this.log.debug('Loading URL', url, { currentIsValid, newIsValid, newIsRawResource, force })
@@ -815,7 +815,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
       entry &&
       entry.url === this.view.urlValue &&
       entry.title &&
-      !entry.title.startsWith('surf://')
+      !entry.title.startsWith('mist://')
     ) {
       this.log.debug('URL matches current history entry', entry)
       this.view.title.set(entry.title)
@@ -2054,7 +2054,7 @@ export class WebContentsView extends EventEmitterBase<WebContentsViewEmitterEven
 
     let url = parseUrlIntoCanonical(rawUrl) ?? rawUrl
 
-    const surfResourceId = url.match(/^surf:\/\/resource\/([^\/]+)/)?.[1]
+    const surfResourceId = url.match(/^mist:\/\/resource\/([^\/]+)/)?.[1]
     if (surfResourceId) {
       return await this.resourceManager.getResource(surfResourceId)
     }

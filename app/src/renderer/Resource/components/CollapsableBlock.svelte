@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { generateID, useDebounce, useLogScope, optimisticParseJSON } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { generateID, useDebounce, useLogScope, optimisticParseJSON } from '@mist/utils'
 
   import { createEventDispatcher, onMount } from 'svelte'
-  import { useResourceManager } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
-  import { DragTypeNames } from '@deta/types'
+  import { useResourceManager } from '@mist/services/resources'
+  import { ResourceTagsBuiltInKeys } from '@mist/types'
+  import type { Resource } from '@mist/services/resources'
+  import { DragTypeNames } from '@mist/types'
   import type {
     DragTypes,
     ResourceTagsBuiltIn,
     SFFSResourceTag,
     UserViewPrefsTagValue
-  } from '@deta/types'
+  } from '@mist/types'
   import ImageBlock from './ImageBlock.svelte'
 
   // New
@@ -238,9 +238,9 @@
   const handleDragStart = async (drag: DragculaDragEvent<DragTypes>) => {
     if (resource) {
       const item = drag.item!
-      drag.dataTransfer?.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
-      item.data.setData(DragTypeNames.SURF_RESOURCE, resource)
-      item.data.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
+      drag.dataTransfer?.setData(DragTypeNames.MIST_RESOURCE_ID, resource.id)
+      item.data.setData(DragTypeNames.MIST_RESOURCE, resource)
+      item.data.setData(DragTypeNames.MIST_RESOURCE_ID, resource.id)
       drag.continue()
     } else {
       drag.abort()
@@ -511,7 +511,7 @@
 {/if}
 
 <style lang="scss">
-  @use '@deta/ui/src/lib/styles/utils' as utils;
+  @use '@mist/ui/src/lib/styles/utils' as utils;
 
   :global(.code-wrapper code.hljs) {
     overflow: unset;

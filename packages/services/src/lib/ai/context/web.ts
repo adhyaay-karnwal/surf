@@ -3,9 +3,9 @@ import { writable } from 'svelte/store'
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'
 import { ContextItemTypes } from './types'
-import { ResourceTag } from '@deta/utils/formatting'
+import { ResourceTag } from '@mist/utils/formatting'
 import { extractAndCreateWebResource } from '../../mediaImporter'
-import type { SearchResultLink } from '@deta/web-parser'
+import type { SearchResultLink } from '@mist/web-parser'
 
 export class ContextItemWebSearch extends ContextItemBase {
   type = ContextItemTypes.WEB_SEARCH

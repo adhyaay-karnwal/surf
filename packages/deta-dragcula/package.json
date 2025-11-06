@@ -1,0 +1,12 @@
+{
+  "name": "@deta/dragcula",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "echo \"alias build\"",
+    "dev": "echo \"alias dev\""
+  },
+  "dependencies": {
+    "@mist/dragcula": "workspace:*"
+  }
+}

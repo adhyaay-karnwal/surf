@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
-  import { provideConfig } from '@deta/services'
-  import { createResourceManager, type Resource } from '@deta/services/resources'
-  import { provideAI } from '@deta/services/ai'
-  import { isWebResourceType, ResourceTypes, type CitationClickEvent } from '@deta/types'
+  import { provideConfig } from '@mist/services'
+  import { createResourceManager, type Resource } from '@mist/services/resources'
+  import { provideAI } from '@mist/services/ai'
+  import { isWebResourceType, ResourceTypes, type CitationClickEvent } from '@mist/types'
 
   import TextResource from '../components/TextResource.svelte'
-  import { useMessagePortClient } from '@deta/services/messagePort'
-  import { useLogScope, wait } from '@deta/utils'
+  import { useMessagePortClient } from '@mist/services/messagePort'
+  import { useLogScope, wait } from '@mist/utils'
   import { type RouteResult } from '@mateothegreat/svelte5-router'
 
   let {
@@ -77,7 +77,7 @@
         onCitationClick={handleCitationClick}
       />
     {:else if isImageResource}
-      <img src={`surf://surf/resource/${resource.id}?raw`} />
+      <img src={`mist://mist/resource/${resource.id}?raw`} />
     {:else}
       <div>
         <p><strong>Name:</strong> {resource.metadata.name}</p>

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { derived } from 'svelte/store'
-  import type { TeletypeService } from '@deta/services'
-  import { Dropdown, type DropdownItem } from '@deta/ui'
-  import { useLogScope } from '@deta/utils'
+  import type { TeletypeService } from '@mist/services'
+  import { Dropdown, type DropdownItem } from '@mist/ui'
+  import { useLogScope } from '@mist/utils'
 
   let {
     teletype,

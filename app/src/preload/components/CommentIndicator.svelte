@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
 
   const dispatch = createEventDispatcher<{ click: void }>()
 

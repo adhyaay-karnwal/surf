@@ -1,6 +1,6 @@
 // Re-export from services
-export { TabOrientation } from '@deta/services/tabs'
-import type { TabOrientation } from '@deta/services/tabs'
+export { TabOrientation } from '@mist/services/tabs'
+import type { TabOrientation } from '@mist/services/tabs'
 
 export interface TabLayoutConfig {
   orientation: TabOrientation

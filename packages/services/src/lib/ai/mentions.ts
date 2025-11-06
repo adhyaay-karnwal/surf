@@ -1,13 +1,13 @@
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+import { ResourceTagsBuiltInKeys } from '@mist/types'
 import {
   conditionalArrayItem,
   getFileKind,
   getFileType,
   truncateURL,
   useLogScope
-} from '@deta/utils'
+} from '@mist/utils'
 import type { AIService } from './ai'
-import { Provider } from '@deta/types/src/ai.types'
+import { Provider } from '@mist/types/src/ai.types'
 import {
   BROWSER_HISTORY_MENTION,
   BUILT_IN_MENTIONS_BASE,
@@ -15,10 +15,10 @@ import {
   NOTE_MENTION,
   WIKIPEDIA_SEARCH_MENTION
 } from '../constants/chat'
-import { MentionItemType, type MentionItem as MentionItemEditor } from '@deta/editor'
-import { type ResourceManager } from '@deta/services/resources'
-import type { MentionItemsFetcher } from '@deta/editor/extensions/Mention'
-import { SearchResourceTags } from '@deta/utils/formatting'
+import { MentionItemType, type MentionItem as MentionItemEditor } from '@mist/editor'
+import { type ResourceManager } from '@mist/services/resources'
+import type { MentionItemsFetcher } from '@mist/editor/extensions/Mention'
+import { SearchResourceTags } from '@mist/utils/formatting'
 import { MentionTypes } from '../mentions/mention.types'
 import { useMessagePortClient } from '../messagePort'
 

@@ -1,5 +1,5 @@
 export const CHEAT_SHEET_URL =
-  import.meta.env.R_VITE_CHEAT_SHEET_URL || 'https://deta.notion.site/surf-alpha'
+  import.meta.env.R_VITE_CHEAT_SHEET_URL || 'https://deta.notion.site/mist-alpha'
 export const SHORTCUTS_PAGE_URL =
   import.meta.env.R_VITE_SHORTCUTS_PAGE_URL || 'https://deta.notion.site/keyboard-shortcuts'
 export const CHANGELOG_URL =

@@ -1,5 +1,5 @@
 import { writable, derived, get, type Writable, type Readable } from 'svelte/store'
-import { useDebounce, useLogScope, useThrottle } from '@deta/utils'
+import { useDebounce, useLogScope, useThrottle } from '@mist/utils'
 import type {
   MentionProvider,
   MentionItem,
@@ -12,12 +12,12 @@ import { useMessagePortPrimary } from '../messagePort'
 
 import { TabsMentionProvider } from './providers/TabsMentionProvider'
 import { ResourceMentionProvider } from './providers/ResourceMentionProvider'
-import { NotebookMentionProvider } from './providers/NotebookMentionProvider'
+import { JournalMentionProvider } from './providers/JournalMentionProvider'
 import type { TabsService } from '../tabs/tabs.svelte'
 
 import { MentionTypes } from './mention.types'
 import { tick } from 'svelte'
-import type { Fn } from '@deta/types'
+import type { Fn } from '@mist/types'
 import { useBrowser } from '../browser'
 
 export class MentionService {
@@ -82,8 +82,8 @@ export class MentionService {
     const resourceProvider = new ResourceMentionProvider()
     this.registerProvider(resourceProvider)
 
-    const notebookProvider = new NotebookMentionProvider()
-    this.registerProvider(notebookProvider)
+    const journalProvider = new JournalMentionProvider()
+    this.registerProvider(journalProvider)
 
     this.attachListeners()
   }

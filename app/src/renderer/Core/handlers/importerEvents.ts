@@ -1,8 +1,8 @@
-import { createResourcesFromFiles } from '@deta/services'
-import { useResourceManager } from '@deta/services/resources'
+import { createResourcesFromFiles } from '@mist/services'
+import { useResourceManager } from '@mist/services/resources'
 
 import type { PreloadEvents } from './preloadEvents'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 
 export const setupImportEvents = (events: PreloadEvents) => {
   const log = useLogScope('ImportEvents')
