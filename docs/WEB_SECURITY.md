@@ -12,4 +12,4 @@ Because Mist is at an early stage, we have not yet implemented certain measures 
 - Mist does not yet automatically detect and block potentially malicious downloads → please only download files from trusted sources.
 - For the technically minded: certificate transparency is not supported.
 
-If you find a vulnerability, report it here: [https://github.com/deta/mist/security/policy](https://github.com/deta/mist/security/policy)
+If you find a vulnerability, report it here: [https://github.com/mistbrowser/browser/security/policy](https://github.com/mistbrowser/browser/security/policy)

@@ -8,7 +8,7 @@ const params = {
 
 function electronBuilderConfig() {
   return {
-    appId: 'mist.deta',
+    appId: 'com.mistbrowser.desktop',
     productName: params.buildName,
     directories: {
       buildResources: params.buildResourcesDir || 'build/resources/prod'
@@ -74,7 +74,7 @@ function electronBuilderConfig() {
     },
     linux: {
       target: ['AppImage'],
-      maintainer: 'deta.mist',
+      maintainer: 'Mist Browser Team <hello@mistbrowser.com>',
       artifactName: `${params.buildName}-${params.appVersion}.\${arch}.\${ext}`,
       category: 'WebBrowser'
     },

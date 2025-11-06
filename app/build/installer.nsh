@@ -1,4 +1,4 @@
-!define APP_PROGID "mist.deta"
+!define APP_PROGID "com.mistbrowser.desktop"
 !define VS_REDIST_EXE "vc_redist.x64.exe"
 !define VS_REDIST_URL "https://aka.ms/vs/17/release/vc_redist.x64.exe"
 !define VS_REDIST_VERSION "14.40.33816.00"

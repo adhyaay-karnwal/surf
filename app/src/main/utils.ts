@@ -22,7 +22,7 @@ const isDefaultBrowserWindows = async () => {
       { encoding: 'utf-8' }
     ).toString()
 
-    const appProgId = 'ea.browser.deta.mist'
+    const appProgId = 'com.mistbrowser.desktop'
 
     const isHttpDefault = httpProgId.includes(appProgId)
     const isHttpsDefault = httpsProgId.includes(appProgId)
@@ -80,7 +80,7 @@ export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: bo
   // For Google sign-in pages, we keep the Mist version at the end of the User-Agent
   // to avoid "secure browser" warnings. For everything else, we strip out both
   // Electron and Mist versions.
-  const surfVersion =
+  const mistVersion =
     current
       .split(' ')
       .find((part) => part.startsWith('Mist/'))
@@ -100,8 +100,8 @@ export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: bo
         : ''
     )
 
-  if (isGoogleAccounts && surfVersion) {
-    result += ` Mist/${surfVersion}`
+  if (isGoogleAccounts && mistVersion) {
+    result += ` Mist/${mistVersion}`
   }
 
   return result

@@ -54,12 +54,12 @@ export const onboardingNotebook = {
     ]
   } as NotebookCustomization,
   urls: [
-    'https://deta.mist'
-    // 'https://www.xda-developers.com/deta-mist-promising-new-browser/',
+    'https://mistbrowser.com/students'
+    // 'https://mistbrowser.com/blog/midnight-study-browser',
     // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
     // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://deta.mist/people/efe',
-    // 'https://deta.mist/people/reese',
+    // 'https://mistbrowser.com/people/efe',
+    // 'https://mistbrowser.com/people/reese',
     // 'https://productidentity.co/p/mist-the-browser'
   ]
 }

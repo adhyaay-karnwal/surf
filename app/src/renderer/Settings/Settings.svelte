@@ -400,7 +400,7 @@
             <p>
               Some of the following features are still under development and may not work as
               expected. Feel free to try them out and give us feedback. <a
-                href="https://deta.notion.site/Experimental-Mode-152a5244a717801587dfcb374536b73d"
+                href="https://guide.mistbrowser.com/experimental-features"
                 target="_blank">More info in our docs ↗</a
               >
             </p>

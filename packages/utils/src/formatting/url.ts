@@ -174,11 +174,11 @@ export const generateRootDomain = (urlInput: string | URL) => {
   }
 }
 
-export const checkIfSpaceApp = (url: URL) => {
+export const checkIfMistApp = (url: URL) => {
   return (
-    url.hostname.endsWith('deta.app') ||
-    url.hostname.endsWith('deta.pizza') ||
-    url.hostname.endsWith('deta.dev')
+    url.hostname.endsWith('mistbrowser.com') ||
+    url.hostname.endsWith('mistbrowser.dev') ||
+    url.hostname.endsWith('mistbrowser.app')
   )
 }
 

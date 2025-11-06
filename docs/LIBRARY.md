@@ -4,11 +4,11 @@ Mist’s foundation is a multi-media library that lives on your computer. You ca
 
 ![notebooks](./assets/readme/notebook-grid.png)
 
-Each resource lives on your device in [local and open data formats] through a Rust storage engine called SFFS. Resources can be organized into [Notebooks](/docs/LIBRARY.md#notebooks), their text content is accessible [offline](/docs/LIBRARY.md#offline) and can be used alone or together to power Mist’s generative notes.
+Each resource lives on your device in [local and open data formats] through a Rust storage engine called SFFS. Resources can be organized into [Journals](/docs/LIBRARY.md#journals), their text content is accessible [offline](/docs/LIBRARY.md#offline) and can be used alone or together to power Mist’s generative notes.
 
 ## Your Library
 
-Whether a website, YouTube video, or file — you can save most kinds of digital “stuff” in Mist. In most cases it is as easy as clicking a single button and Mist will figure out what it is and save it. Once saved in Mist you can **search** for it, organize it into **Notebooks** and use it to generate **Smart Notes.** All the data is stored locally on your machine.
+Whether a website, YouTube video, or file — you can save most kinds of digital “stuff” in Mist. In most cases it is as easy as clicking a single button and Mist will figure out what it is and save it. Once saved in Mist you can **search** for it, organize it into **Journals** and use it to generate **Smart Notes.** All the data is stored locally on your machine.
 
 ### Adding resources to your Library
 
@@ -37,21 +37,21 @@ You can add any file or web page into Mist. There is special support for the fol
 
 ### Finding & organizing resources
 
-From any new tab or notebook, you can navigate by notes & media. Right clicking any resource gives you options to manage the resource. You can search from any new tab for resources in your library. You can organize groups of resources in Notebooks.
+From any new tab or journal, you can navigate by notes & media. Right clicking any resource gives you options to manage the resource. You can search from any new tab for resources in your library. You can organize groups of resources in Journals.
 
-## Notebooks
+## Journals
 
-**Notebooks** are containers for digital media. They can help you organize your digital life — but can also power Mist's AI features!
+**Journals** are containers for digital media. They help you keep course material, research, and brainstorming in one place—and power Mist's AI features.
 
 ![notebooks](/docs/assets/readme/notebook-grid.png)
 
-### Adding & Removing Items from Notebooks
+### Adding & Removing Items from Journals
 
-When adding something to Mist via the “Mist” button, you can also select an individual notebook to add it to. You can right click any item from any notebook, and remove it from the said notebook.
+When adding something to Mist via the “Mist” button, you can also select an individual journal to add it to. You can right click any item from any journal and remove it instantly.
 
 ### Tips
 
-You can right click any notebook and scribble to customize its cover.
+You can right click any journal to customize its cover art and accent.
 
 ## Data Ownership
 

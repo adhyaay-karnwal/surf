@@ -12,7 +12,7 @@ The Deta team takes the security of Mist seriously. If you discover a security v
 2. Click **Report a vulnerability**
 3. Fill out the vulnerability report form with as much detail as possible
 
-Alternatively, if you cannot use GitHub's reporting feature, please email us at: **security@deta.mist**
+Alternatively, if you cannot use GitHub's reporting feature, please email us at: **security@mistbrowser.com**
 
 ### What to Include
 
@@ -56,7 +56,7 @@ We follow a **coordinated disclosure** approach:
 
 ## Contact
 
-- **Security Email**: security@deta.mist
+- **Security Email**: security@mistbrowser.com
 - **Security Team**: @security (GitHub team mention)
 
 ---

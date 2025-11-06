@@ -1,8 +1,8 @@
 import { getWebRequestManager } from './webRequestManager'
 
 const CSP_API_ENDPOINTS = [
-  import.meta.env.P_VITE_API_BASE ?? 'https://deta.space',
-  'https://telemetry.deta.mist'
+  import.meta.env.P_VITE_API_BASE ?? 'https://api.mistbrowser.com',
+  'https://telemetry.mistbrowser.com'
 ]
 
 const CSP_DIRECTIVES = [

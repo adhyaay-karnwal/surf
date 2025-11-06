@@ -48,7 +48,7 @@
   <p slot="description">
     Access context-aware Mist AI features like auto completion, citation generation, and more from
     within your Mist notes. <a
-      href="https://deta.notion.site/Smart-Notes-17da5244a717805c8525eec0d42f7598"
+      href="https://guide.mistbrowser.com/smart-notes"
       target="_blank">More information</a
     >
   </p>

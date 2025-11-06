@@ -60,8 +60,8 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
 
   settingsWindow.webContents.setWindowOpenHandler((details) => {
     const ALLOWED_DOMAINS = [
-      'https://deta.mist',
-      'https://deta.notion.site',
+      'https://mistbrowser.com',
+      'https://guide.mistbrowser.com',
       'https://github.com',
       'https://ollama.com',
       'https://openrouter.ai',
