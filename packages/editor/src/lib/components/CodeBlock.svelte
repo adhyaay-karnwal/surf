@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon, IconConfirmation } from '@deta/icons'
-  import { copyToClipboard, formatCodeLanguage, tooltip, useLogScope, wait } from '@deta/utils'
+  import { Icon, IconConfirmation } from '@mist/icons'
+  import { copyToClipboard, formatCodeLanguage, tooltip, useLogScope, wait } from '@mist/utils'
   import { afterUpdate, onMount } from 'svelte'
   import type { WebviewTag } from 'electron'
   import { writable } from 'svelte/store'

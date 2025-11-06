@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { DynamicIcon, Icon } from '@deta/icons'
-  import { Notebook, useNotebookManager } from '@deta/services/notebooks'
+  import { DynamicIcon, Icon } from '@mist/icons'
+  import { Notebook, useNotebookManager } from '@mist/services/notebooks'
   import {
     Button,
     contextMenu,
@@ -11,8 +11,8 @@
     SearchInput,
     SimpleTabs,
     SourceCard,
-    SurfLoader
-  } from '@deta/ui'
+    MistLoader
+  } from '@mist/ui'
   import {
     handleNotebookClick,
     handleResourceClick,
@@ -20,12 +20,12 @@
     openResource
   } from '../../handlers/notebookOpenHandlers'
   import NotebookEditor from './NotebookEditor/NotebookEditor.svelte'
-  import { conditionalArrayItem, SearchResourceTags, truncate, useThrottle } from '@deta/utils'
-  import { type OpenTarget, ResourceTypes, SpaceEntryOrigin } from '@deta/types'
+  import { conditionalArrayItem, SearchResourceTags, truncate, useThrottle } from '@mist/utils'
+  import { type OpenTarget, ResourceTypes, SpaceEntryOrigin } from '@mist/types'
   import NotebookSidebarNoteName from './NotebookSidebarNoteName.svelte'
-  import { useResourceManager, Resource, getResourceCtxItems } from '@deta/services/resources'
-  import { useMessagePortClient } from '@deta/services/messagePort'
-  import { promptForFilesAndTurnIntoResources, useTeletypeService } from '@deta/services'
+  import { useResourceManager, Resource, getResourceCtxItems } from '@mist/services/resources'
+  import { useMessagePortClient } from '@mist/services/messagePort'
+  import { promptForFilesAndTurnIntoResources, useTeletypeService } from '@mist/services'
   import { tick } from 'svelte'
 
   let { notebookId }: { notebookId?: string } = $props()
@@ -102,7 +102,7 @@
       ]
     })
     if (!confirmed) return
-    notebookManager.deleteResourcesFromSurf(resource.id, true)
+    notebookManager.deleteResourcesFromMist(resource.id, true)
   }
 
   const handleAddToNotebook = (notebookId: string, resourceId: string) => {
@@ -185,15 +185,15 @@
     {:else}
       <div class="px py">
         <section class="empty">
-          <h1>What are Surf Notes?</h1>
+          <h1>What are Mist Notes?</h1>
 
           <p style="max-width: 50ch;">
-            Surf notes are rich text documents that you can create manually or generate using Surf's
+            Mist notes are rich text documents that you can create manually or generate using Mist's
             AI from your personal media.<br />
           </p>
 
           <p style="max-width: 48ch;">
-            Jump start a new note by asking Surf's AI something in the input box above or create a
+            Jump start a new note by asking Mist's AI something in the input box above or create a
             blank note using the button.
           </p>
 
@@ -229,11 +229,11 @@
     {:else}
       <div class="px py">
         <div class="empty">
-          <h1>Surf Media</h1>
+          <h1>Mist Media</h1>
 
           <p style="max-width: 55ch;">
             Add media from across the web or your system to your notebook and to use it together
-            with Surf Notes to turn them into something great.
+            with Mist Notes to turn them into something great.
           </p>
 
           <p style="max-width: 57ch;">
@@ -470,7 +470,7 @@
     {/if} -->
 
     {#if !notebookId}
-      <SurfLoader
+      <MistLoader
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
           query: searchQuery,
@@ -493,9 +493,9 @@
             <p class="typo-title-sm">Loading…</p>
           </div>
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
     {:else if notebookId === 'drafts'}
-      <SurfLoader
+      <MistLoader
         excludeWithinSpaces
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
@@ -519,7 +519,7 @@
             <p class="typo-title-sm">Loading…</p>
           </div>
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
     {:else}
       <NotebookLoader
         {notebookId}
@@ -553,7 +553,7 @@
   {/if} -->
 
   {#if !notebookId}
-    <SurfLoader
+    <MistLoader
       tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
       search={{
         query: searchQuery,
@@ -579,9 +579,9 @@
           <p class="typo-title-sm">Loading…</p>
         </div>
       {/snippet}
-    </SurfLoader>
+    </MistLoader>
   {:else if notebookId === 'drafts'}
-    <SurfLoader
+    <MistLoader
       excludeWithinSpaces
       tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
       search={{
@@ -608,7 +608,7 @@
           <p class="typo-title-sm">Loading…</p>
         </div>
       {/snippet}
-    </SurfLoader>
+    </MistLoader>
   {:else}
     <NotebookLoader
       {notebookId}

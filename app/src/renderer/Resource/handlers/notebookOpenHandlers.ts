@@ -1,6 +1,6 @@
-import { useMessagePortClient } from '@deta/services/messagePort'
-import { isModKeyPressed } from '@deta/utils/io'
-import type { OpenNotebookOptions, OpenResourceOptions, OpenTarget } from '@deta/types'
+import { useMessagePortClient } from '@mist/services/messagePort'
+import { isModKeyPressed } from '@mist/utils/io'
+import type { OpenNotebookOptions, OpenResourceOptions, OpenTarget } from '@mist/types'
 
 export const openResource = (resourceId: string, opts?: Partial<OpenResourceOptions>) => {
   const messagePort = useMessagePortClient()

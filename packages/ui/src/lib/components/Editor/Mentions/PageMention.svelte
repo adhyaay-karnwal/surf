@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { useResourceManager, getResourceCtxItems, type Resource } from '@deta/services/resources'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { DynamicIcon } from '@deta/icons'
-  import { contextMenu, openDialog, type CtxItem} from "@deta/ui"
-  import { SpaceEntryOrigin, type Fn } from '@deta/types';
-  import { clickOutside, truncate } from '@deta/utils'
+  import { useResourceManager, getResourceCtxItems, type Resource } from '@mist/services/resources'
+  import { useNotebookManager } from '@mist/services/notebooks'
+  import { DynamicIcon } from '@mist/icons'
+  import { contextMenu, openDialog, type CtxItem} from "@mist/ui"
+  import { SpaceEntryOrigin, type Fn } from '@mist/types';
+  import { clickOutside, truncate } from '@mist/utils'
   import { onMount } from 'svelte'
 
   let {
@@ -70,7 +70,7 @@
     })
     if (!confirmed) return
 
-    await notebookManager.deleteResourcesFromSurf(resource.id, true)
+    await notebookManager.deleteResourcesFromMist(resource.id, true)
   }
 
   const handleAddToNotebook = (notebookId: string) => {

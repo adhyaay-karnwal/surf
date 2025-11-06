@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TabItem } from '@deta/services/tabs'
+  import { TabItem } from '@mist/services/tabs'
   import BaseTabItem from './BaseTabItem.svelte'
 
   let {

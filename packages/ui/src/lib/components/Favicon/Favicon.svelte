@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useLogScope } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { useLogScope } from '@mist/utils'
 
   export let url: string
   export let title: string = ''

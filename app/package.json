@@ -1,6 +1,6 @@
 {
   "name": "desktop",
-  "productName": "Surf",
+  "productName": "Mist",
   "version": "0.0.1",
   "main": "./out/main/index.js",
   "author": "Deta GmbH",
@@ -23,8 +23,8 @@
     "build:win:x64": "npm run build && electron-builder --win --config build/electron-builder-config.js --x64 --publish always"
   },
   "dependencies": {
-    "@deta/backend": "*",
-    "@deta/dragcula": "*",
+    "@mist/backend": "*",
+    "@mist/dragcula": "*",
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^2.0.0",
     "@ghostery/adblocker-electron": "2.1.1",
@@ -44,12 +44,12 @@
   "devDependencies": {
     "7zip-min": "^1.4.4",
     "@babel/plugin-transform-arrow-functions": "^7.25.9",
-    "@deta/editor": "*",
-    "@deta/services": "*",
-    "@deta/types": "*",
-    "@deta/ui": "*",
-    "@deta/utils": "*",
-    "@deta/web-parser": "*",
+    "@mist/editor": "*",
+    "@mist/services": "*",
+    "@mist/types": "*",
+    "@mist/ui": "*",
+    "@mist/utils": "*",
+    "@mist/web-parser": "*",
     "@electron-toolkit/eslint-config-prettier": "^1.0.1",
     "@electron-toolkit/eslint-config-ts": "^1.0.0",
     "@electron-toolkit/tsconfig": "^1.0.1",

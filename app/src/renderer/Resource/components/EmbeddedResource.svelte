@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import { isWebResourceType, ResourceTagsBuiltInKeys } from '@deta/types'
-  import { mimeTypeToCodeLanguage, useLogScope } from '@deta/utils'
-  import { Icon } from '@deta/icons'
+  import { isWebResourceType, ResourceTagsBuiltInKeys } from '@mist/types'
+  import { mimeTypeToCodeLanguage, useLogScope } from '@mist/utils'
+  import { Icon } from '@mist/icons'
 
-  import { useResourceManager, type Resource } from '@deta/services/resources'
+  import { useResourceManager, type Resource } from '@mist/services/resources'
 
-  import SurfletRenderer from './SurfletRenderer.svelte'
+  import MistletRenderer from './MistletRenderer.svelte'
   import CollapsableResourceEmbed from './CollapsableResourceEmbed.svelte'
 
   export let id: string
@@ -48,7 +48,7 @@
 
 {#if resource}
   {#if generatedResource}
-    <SurfletRenderer
+    <MistletRenderer
       {resource}
       {isEditable}
       expandable={!hidePreview}

@@ -2,12 +2,12 @@
   import { writable } from 'svelte/store'
   import { onDestroy, onMount } from 'svelte'
 
-  import { ViewLocation, type Fn } from '@deta/types'
+  import { ViewLocation, type Fn } from '@mist/types'
 
-  import { useLogScope } from '@deta/utils/io'
-  import { wait } from '@deta/utils/data'
-  import { type WebContentsView } from '@deta/services/views'
-  import { useConfig } from '@deta/services'
+  import { useLogScope } from '@mist/utils/io'
+  import { wait } from '@mist/utils/data'
+  import { type WebContentsView } from '@mist/services/views'
+  import { useConfig } from '@mist/services'
   import ErrorPage from './ErrorPage.svelte'
 
   let {

@@ -7,7 +7,7 @@ import {
   useDebounce,
   useLogScope,
   useThrottle
-} from '@deta/utils'
+} from '@mist/utils'
 import { decideIntent } from '../ai/intentClassifier'
 import type { ClassificationResultWithRoute } from '../ai/intentClassifier.types'
 import { useConfig, type ConfigService } from '../config'
@@ -23,9 +23,9 @@ import { NavigationProvider } from './providers/NavigationProvider'
 import { AskProvider } from './providers/AskProvider'
 import { CurrentQueryProvider } from './providers/CurrentQueryProvider'
 import { type AIQueryPayload, useMessagePortClient } from '../messagePort'
-import { MentionItemType, type MentionItem } from '@deta/editor'
-import type { TeletypeSystem } from '@deta/teletype'
-import type { Fn, Optional } from '@deta/types'
+import { MentionItemType, type MentionItem } from '@mist/editor'
+import type { TeletypeSystem } from '@mist/teletype'
+import type { Fn, Optional } from '@mist/types'
 import { promptForFilesAndTurnIntoResourceMentions } from '../mediaImporter'
 import { useResourceManager } from '../resources'
 import { AI_TOOLS } from '../constants'
@@ -281,7 +281,7 @@ export class TeletypeService {
 
     const tools = {
       websearch: this.isToolActive('websearch'),
-      surflet: this.isToolActive('surflet')
+      mistlet: this.isToolActive('mistlet')
     }
 
     const fullPayload = {

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { type Resource } from '@deta/services/resources'
-  import { blobToSmallImageUrl } from '@deta/utils/browser'
+  import { Icon } from '@mist/icons'
+  import { type Resource } from '@mist/services/resources'
+  import { blobToSmallImageUrl } from '@mist/utils/browser'
 
   export let resource: Resource
 

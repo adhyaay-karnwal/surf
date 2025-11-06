@@ -7,16 +7,16 @@
   import { useTeletype } from './index'
   import Breadcrumb from './Breadcrumb.svelte'
   import ActionList from './ActionList.svelte'
-  import { DynamicIcon, Icon } from '@deta/icons'
+  import { DynamicIcon, Icon } from '@mist/icons'
   import ActionPanel from './ActionPanel.svelte'
   import { onMount, tick, createEventDispatcher, type Snippet } from 'svelte'
-  import { isDev, isMac } from '@deta/utils/system'
-  import { Editor, type MentionItem } from '@deta/editor'
-  import { createRemoteMentionsFetcher } from '@deta/services/ai'
-  import { Button } from '@deta/ui'
-  import { ShortcutVisualizer } from '@deta/ui'
-  import '@deta/editor/src/editor.scss'
-  import { parseStringIntoBrowserLocation } from '@deta/utils/formatting'
+  import { isDev, isMac } from '@mist/utils/system'
+  import { Editor, type MentionItem } from '@mist/editor'
+  import { createRemoteMentionsFetcher } from '@mist/services/ai'
+  import { Button } from '@mist/ui'
+  import { ShortcutVisualizer } from '@mist/ui'
+  import '@mist/editor/src/editor.scss'
+  import { parseStringIntoBrowserLocation } from '@mist/utils/formatting'
 
   const dispatch = createEventDispatcher<{
     clear: void
@@ -637,7 +637,7 @@
               disabled={$inputValueWithoutMentions.length === 0}
             >
               {#if ttyActions.secondary === 'ask'}
-                Ask Surf
+                Ask Mist
               {:else if ttyActions.secondary === 'create-note'}
                 Create Note
               {:else if ttyActions.secondary === 'search-web'}
@@ -661,7 +661,7 @@
             disabled={$inputValueWithoutMentions.length === 0}
           >
             {#if ttyActions.primary === 'ask'}
-              Ask Surf
+              Ask Mist
             {:else if ttyActions.primary === 'create-note'}
               Create Note
             {:else if ttyActions.primary === 'search-web'}

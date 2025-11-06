@@ -3,21 +3,21 @@
   import * as router from '@mateothegreat/svelte5-router'
   import { Router, type RouteConfig } from '@mateothegreat/svelte5-router'
 
-  import { prepareContextMenu } from '@deta/ui'
-  import { provideConfig } from '@deta/services'
-  import { createNotebookManager } from '@deta/services/notebooks'
-  import { createResourceManager } from '@deta/services/resources'
-  import { createTeletypeService } from '@deta/services/teletype'
-  import { useMessagePortClient } from '@deta/services/messagePort'
+  import { prepareContextMenu } from '@mist/ui'
+  import { provideConfig } from '@mist/services'
+  import { createNotebookManager } from '@mist/services/notebooks'
+  import { createResourceManager } from '@mist/services/resources'
+  import { createTeletypeService } from '@mist/services/teletype'
+  import { useMessagePortClient } from '@mist/services/messagePort'
 
   import IndexRoute from './routes/IndexRoute.svelte'
   import NotebookDetailRoute from './routes/NotebookDetailRoute.svelte'
   import DraftsRoute from './routes/DraftsRoute.svelte'
   import Resource from './routes/ResourceRoute.svelte'
   import NotebookTreeView from './components/notebook/NotebookTreeView.svelte'
-  import { ViewLocation } from '@deta/types'
+  import { ViewLocation } from '@mist/types'
   import NotebookEditor from './components/notebook/NotebookEditor/NotebookEditor.svelte'
-  import { Notebook } from '@deta/services/notebooks'
+  import { Notebook } from '@mist/services/notebooks'
 
   const notebookId = window.location.pathname.slice(1) || null
 
@@ -113,7 +113,7 @@
       : notebookId === 'history'
         ? 'History'
         : !notebookId
-          ? 'Surf'
+          ? 'Mist'
           : 'Notebook'
   )
 

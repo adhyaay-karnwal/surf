@@ -1,17 +1,17 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
-  import type { Resource } from '@deta/services/resources'
-  import SurfletRenderer from './SurfletRenderer.svelte'
-  import { ResourceTag } from '@deta/utils/formatting'
-  import { AddResourceToSpaceEventTrigger, ResourceTagsBuiltInKeys } from '@deta/types'
-  import { SpaceEntryOrigin } from '@deta/types'
+  import type { Resource } from '@mist/services/resources'
+  import MistletRenderer from './MistletRenderer.svelte'
+  import { ResourceTag } from '@mist/utils/formatting'
+  import { AddResourceToSpaceEventTrigger, ResourceTagsBuiltInKeys } from '@mist/types'
+  import { SpaceEntryOrigin } from '@mist/types'
 
-  import { useResourceManager } from '@deta/services/resources'
-  import { useLogScope, parseUrlIntoCanonical } from '@deta/utils'
-  import { useAI } from '@deta/services/ai'
+  import { useResourceManager } from '@mist/services/resources'
+  import { useLogScope, parseUrlIntoCanonical } from '@mist/utils'
+  import { useAI } from '@mist/services/ai'
   import { writable, type Writable } from 'svelte/store'
 
-  import { startAIGeneration, endAIGeneration } from '@deta/services/ai'
+  import { startAIGeneration, endAIGeneration } from '@mist/services/ai'
 
   // NOTE: created by tiptap but not needed
   export const node: any = undefined
@@ -19,12 +19,12 @@
   export const uuid: string = ''
 
   export let updateAttributes: (attrs: Record<string, any>) => void
-  export let name: string = 'New Surflet'
+  export let name: string = 'New Mistlet'
   export let prompt: string = ''
   export let resourceId: string = ''
   export let done: string = 'false'
 
-  const log = useLogScope('Surflet Component')
+  const log = useLogScope('Mistlet Component')
   const resourceManager = useResourceManager()
   const aiService = useAI()
 
@@ -57,7 +57,7 @@
   const setAIProcessingState = (processing: boolean) => {
     isProcessingAI = processing
     if (processing) {
-      startAIGeneration('surflet')
+      startAIGeneration('mistlet')
     } else {
       endAIGeneration()
     }
@@ -95,7 +95,7 @@
     }
   }
 
-  const removeSurfletSilentTag = async () => {
+  const removeMistletSilentTag = async () => {
     if (!$resource) {
       log.warn('No resource to remove silent tag from')
       return
@@ -108,7 +108,7 @@
     }
   }
 
-  const addSurfletToSpace = async (spaceId: string) => {
+  const addMistletToSpace = async (spaceId: string) => {
     if (!$resource) {
       log.warn('No resource to add to space')
       return
@@ -142,7 +142,7 @@
     }
   }
 
-  const updateSurfletName = async (newName: string, updateNodeAttrs: boolean = false) => {
+  const updateMistletName = async (newName: string, updateNodeAttrs: boolean = false) => {
     if (!$resource) {
       log.warn('No resource to update name for')
       return
@@ -157,12 +157,12 @@
         })
       }
     } catch (error) {
-      log.error('Error updating surflet name', error)
+      log.error('Error updating mistlet name', error)
       // Non-critical error, continue operation
     }
   }
 
-  const saveSurflet = async () => {
+  const saveMistlet = async () => {
     try {
       if (!$resource) {
         // const tab = tabsManager?.activeTabValue
@@ -177,8 +177,8 @@
             url: ''
           },
           undefined,
-          // TODO: get surflet protocol version from somewhere else?
-          [ResourceTag.silent(), ResourceTag.surfletProtocolVersion('v2')]
+          // TODO: get mistlet protocol version from somewhere else?
+          [ResourceTag.silent(), ResourceTag.mistletProtocolVersion('v2')]
         )
         if (!res) {
           throw new Error('Failed to create resource - no response from server')
@@ -191,23 +191,23 @@
     }
   }
 
-  const handleUpdateSurfletName = async (event: any) => {
+  const handleUpdateMistletName = async (event: any) => {
     const newName = event.detail
-    log.debug('Handle update surflet name called', newName)
+    log.debug('Handle update mistlet name called', newName)
     if (newName && newName.trim()) {
       try {
-        await updateSurfletName(newName, true)
+        await updateMistletName(newName, true)
       } catch (error) {
         // Name update failure is not critical, log but don't show error to user
-        log.error('Failed to update surflet name', error)
+        log.error('Failed to update mistlet name', error)
       }
     } else {
-      log.warn('Invalid surflet name provided')
+      log.warn('Invalid mistlet name provided')
     }
   }
 
-  const handleSaveSurflet = async (event: CustomEvent<{ spaceId?: string }>) => {
-    log.debug('Handle save surflet called', event.detail)
+  const handleSaveMistlet = async (event: CustomEvent<{ spaceId?: string }>) => {
+    log.debug('Handle save mistlet called', event.detail)
     const { spaceId } = event.detail
 
     if (!$resource) {
@@ -222,9 +222,9 @@
 
     try {
       if (spaceId) {
-        await addSurfletToSpace(spaceId)
+        await addMistletToSpace(spaceId)
       }
-      await removeSurfletSilentTag()
+      await removeMistletSilentTag()
     } catch (error: any) {
       setError(
         'resource_saving',
@@ -281,10 +281,10 @@
     log.debug('Done handler called')
     try {
       doneGenerating.set(true)
-      await saveSurflet()
+      await saveMistlet()
 
       if ($resource) {
-        await updateSurfletName($title, false)
+        await updateMistletName($title, false)
 
         // prevent race condition
         if (!isUpdatingAttributes && updateAttributes) {
@@ -499,18 +499,18 @@
 </script>
 
 {#if $error}
-  <div class="surflet-error-container">
-    <div class="surflet-error-content">
-      <div class="surflet-error-icon">⚠️</div>
-      <h3 class="surflet-error-title">Oops! Something went wrong</h3>
-      <p class="surflet-error-message">{$error.userMessage}</p>
+  <div class="mistlet-error-container">
+    <div class="mistlet-error-content">
+      <div class="mistlet-error-icon">⚠️</div>
+      <h3 class="mistlet-error-title">Oops! Something went wrong</h3>
+      <p class="mistlet-error-message">{$error.userMessage}</p>
       {#if $error.canRetry}
-        <button class="surflet-retry-button" on:click={retryOperation}> Try Again </button>
+        <button class="mistlet-retry-button" on:click={retryOperation}> Try Again </button>
       {/if}
     </div>
   </div>
 {:else}
-  <SurfletRenderer
+  <MistletRenderer
     {resource}
     {title}
     {codeContent}
@@ -521,14 +521,14 @@
     minHeight="150px"
     maxHeight="800px"
     initialHeight="550px"
-    on:save-surflet={handleSaveSurflet}
+    on:save-mistlet={handleSaveMistlet}
     on:set-preview-image={handleSetPreviewImage}
-    on:set-surflet-name={handleUpdateSurfletName}
+    on:set-mistlet-name={handleUpdateMistletName}
   />
 {/if}
 
 <style>
-  .surflet-error-container {
+  .mistlet-error-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -539,30 +539,30 @@
     border-radius: 8px;
   }
 
-  .surflet-error-content {
+  .mistlet-error-content {
     text-align: center;
     max-width: 400px;
   }
 
-  .surflet-error-icon {
+  .mistlet-error-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
   }
 
-  .surflet-error-title {
+  .mistlet-error-title {
     color: #333;
     margin: 0 0 0.5rem 0;
     font-size: 1.25rem;
     font-weight: 600;
   }
 
-  .surflet-error-message {
+  .mistlet-error-message {
     color: #666;
     margin: 0 0 1.5rem 0;
     line-height: 1.5;
   }
 
-  .surflet-retry-button {
+  .mistlet-retry-button {
     background: #007acc;
     color: white;
     border: none;
@@ -574,11 +574,11 @@
     transition: background-color 0.2s;
   }
 
-  .surflet-retry-button:hover {
+  .mistlet-retry-button:hover {
     background: #005999;
   }
 
-  .surflet-loading-container {
+  .mistlet-loading-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -589,12 +589,12 @@
     border-radius: 8px;
   }
 
-  .surflet-loading-content {
+  .mistlet-loading-content {
     text-align: center;
     max-width: 400px;
   }
 
-  .surflet-loading-spinner {
+  .mistlet-loading-spinner {
     width: 40px;
     height: 40px;
     margin: 0 auto 1.5rem;
@@ -613,7 +613,7 @@
     }
   }
 
-  .surflet-loading-title {
+  .mistlet-loading-title {
     color: #333;
     margin: 0 0 0.5rem 0;
     font-size: 1.25rem;

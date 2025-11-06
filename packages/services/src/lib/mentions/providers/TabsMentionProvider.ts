@@ -2,7 +2,7 @@ import type { MentionProvider, MentionItem, MentionType } from '../mention.types
 import { MentionTypes } from '../mention.types'
 import { filterAndSortMentions } from '../mentionUtils'
 import type { TabsService, TabItem } from '../../tabs/tabs.svelte'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 
 export class TabsMentionProvider implements MentionProvider {
   readonly name = 'tabs'

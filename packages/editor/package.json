@@ -1,5 +1,5 @@
 {
-  "name": "@deta/editor",
+  "name": "@mist/editor",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -56,9 +56,9 @@
     "sync": "svelte-kit sync"
   },
   "devDependencies": {
-    "@deta/icons": "*",
-    "@deta/types": "*",
-    "@deta/utils": "*",
+    "@mist/icons": "*",
+    "@mist/types": "*",
+    "@mist/utils": "*",
     "@horizon/eslint-config": "*",
     "@horizon/typescript-config": "*",
     "@skilitics-public/two-fingers": "^2.1.0",

@@ -1,34 +1,34 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import {
     Button,
     NotebookCover,
     openDialog,
     PageMention,
     ResourceLoader,
-    SurfLoader
-  } from '@deta/ui'
+    MistLoader
+  } from '@mist/ui'
   import { onMount } from 'svelte'
-  import { MaskedScroll } from '@deta/ui'
-  import { contextMenu, type CtxItem } from '@deta/ui'
+  import { MaskedScroll } from '@mist/ui'
+  import { contextMenu, type CtxItem } from '@mist/ui'
   import TeletypeEntry from '../../Core/components/Teletype/TeletypeEntry.svelte'
-  import { SearchResourceTags, truncate, useDebounce, useLogScope } from '@deta/utils'
+  import { SearchResourceTags, truncate, useDebounce, useLogScope } from '@mist/utils'
   import {
     useResourceManager,
     type Resource,
     type ResourceNote,
     ResourceManagerEvents
-  } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys, ResourceTypes, type ViewLocation } from '@deta/types'
-  import { type MessagePortClient } from '@deta/services/messagePort'
+  } from '@mist/services/resources'
+  import { ResourceTagsBuiltInKeys, ResourceTypes, type ViewLocation } from '@mist/types'
+  import { type MessagePortClient } from '@mist/services/messagePort'
   import { handleResourceClick } from '../handlers/notebookOpenHandlers'
   import NotebookSidebar from '../components/notebook/NotebookSidebar.svelte'
   import NotebookLayout from '../layouts/NotebookLayout.svelte'
   import NotebookContents from '../components/notebook/NotebookContents.svelte'
-  import { MentionItemType } from '@deta/editor'
-  import { useConfig, useTeletypeService } from '@deta/services'
-  import { provideAI } from '@deta/services/ai'
-  import { BUILT_IN_PAGE_PROMPTS } from '@deta/services/constants'
+  import { MentionItemType } from '@mist/editor'
+  import { useConfig, useTeletypeService } from '@mist/services'
+  import { provideAI } from '@mist/services/ai'
+  import { BUILT_IN_PAGE_PROMPTS } from '@mist/services/constants'
   import PromptPills from '../components/PromptPills.svelte'
 
   let {

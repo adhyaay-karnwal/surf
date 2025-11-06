@@ -1,5 +1,5 @@
 import { app, Menu, shell } from 'electron'
-import { isMac, isWindows, isLinux } from '@deta/utils/system'
+import { isMac, isWindows, isLinux } from '@mist/utils/system'
 import { ipcSenders } from './ipcHandlers'
 import { toggleAdblocker } from './adblocker'
 import { join } from 'path'
@@ -8,7 +8,7 @@ import { updateUserConfig, getUserConfig } from './config'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
 import { importFiles } from './importer'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@mist/utils'
 
 const log = useLogScope('Main App Menu')
 const execFileAsync = promisify(execFile)
@@ -36,7 +36,7 @@ class AppMenu {
 
   private initializeTemplate(): void {
     this.template = [
-      this.getSurfMenu(),
+      this.getMistMenu(),
       this.getFileMenu(),
       this.getEditMenu(),
       this.getViewMenu(),
@@ -107,7 +107,7 @@ class AppMenu {
   private createDataLocationMenuItem(): MenuConfig {
     const userDataPath = app.getPath('userData')
     const surfDataPath = join(userDataPath, 'sffs_backend')
-    const label = isMac() ? 'Show Surf Data in Finder' : 'Show Surf Data in File Manager'
+    const label = isMac() ? 'Show Mist Data in Finder' : 'Show Mist Data in File Manager'
 
     return {
       label,
@@ -115,10 +115,10 @@ class AppMenu {
     }
   }
 
-  private getSurfMenu(isMacApp = isMac()): MenuConfig {
+  private getMistMenu(isMacApp = isMac()): MenuConfig {
     const surfItems = [
       ...(isMacApp
-        ? ([{ label: 'About Surf', role: 'about' }, { type: 'separator' }] as MenuConfig[])
+        ? ([{ label: 'About Mist', role: 'about' }, { type: 'separator' }] as MenuConfig[])
         : []),
       {
         label: 'Preferences',
@@ -137,7 +137,7 @@ class AppMenu {
             { role: 'services', label: 'Services' },
             { type: 'separator' },
             {
-              label: 'Hide Surf',
+              label: 'Hide Mist',
               accelerator: 'CmdOrCtrl+H',
               role: 'hide'
             },
@@ -150,11 +150,11 @@ class AppMenu {
           ]
         : []),
       { type: 'separator' },
-      { label: 'Quit Surf', role: 'quit' }
+      { label: 'Quit Mist', role: 'quit' }
     ]
 
     return {
-      label: isMacApp ? app.name : 'Surf',
+      label: isMacApp ? app.name : 'Mist',
       submenu: surfItems as MenuConfig[]
     }
   }
@@ -290,7 +290,7 @@ class AppMenu {
           accelerator: 'CmdOrCtrl+Alt+Shift+R'
         },
         {
-          label: 'Toggle Developer Tools for Surf',
+          label: 'Toggle Developer Tools for Mist',
           accelerator: isMac() ? 'Cmd+Shift+I' : 'Option+Shift+I',
           role: 'toggleDevTools'
         }

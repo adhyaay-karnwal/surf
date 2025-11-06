@@ -10,15 +10,15 @@ import {
   useLocalStorage,
   useLogScope,
   wait
-} from '@deta/utils'
+} from '@mist/utils'
 
 import {
   type Fn,
   PageChatUpdateContextEventAction,
   PageChatUpdateContextItemType,
   type PageChatUpdateContextEventTrigger
-} from '@deta/types'
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+} from '@mist/types'
+import { ResourceTagsBuiltInKeys } from '@mist/types'
 
 import { ResourceJSON, type Resource, type ResourceManager } from '../resources'
 import { TabsServiceEmitterNames, type TabItem, type TabsService } from '../tabs'
@@ -48,9 +48,9 @@ import {
   TABS_MENTION,
   WIKIPEDIA_SEARCH_MENTION
 } from '../constants/chat'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@mist/editor'
 import { ContextItemBrowsingHistory } from './context/history'
-import { WebParser, type SearchResultLink } from '@deta/web-parser'
+import { WebParser, type SearchResultLink } from '@mist/web-parser'
 import { ContextItemWebSearch } from './context/web'
 import { ContextManagerWCV } from './contextManagerWCV'
 import { Notebook, NotebookManager, useNotebookManager } from '../notebooks'

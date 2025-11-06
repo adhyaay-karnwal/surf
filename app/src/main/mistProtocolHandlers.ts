@@ -3,11 +3,11 @@ import { isPathSafe, getContentType } from './utils'
 import path, { join } from 'path'
 import { stat, mkdir, rename } from 'fs/promises'
 import { Worker } from 'worker_threads'
-import { IPC_EVENTS_MAIN } from '@deta/services/ipc'
+import { IPC_EVENTS_MAIN } from '@mist/services/ipc'
 import { pathToFileURL } from 'url'
-import { getResourceFileExtension, getResourceFileName, useLogScope } from '@deta/utils'
+import { getResourceFileExtension, getResourceFileName, useLogScope } from '@mist/utils'
 import { SFFSMain, useSFFSMain } from './sffs'
-import { SFFSRawResource, SFFSResource } from '@deta/types'
+import { SFFSRawResource, SFFSResource } from '@mist/types'
 
 interface ImageProcessingParams {
   requestURL: string
@@ -28,7 +28,7 @@ const imageProcessorHandles = new Map<
 let imageProcessor: Worker | null = null
 let imageProcessorDeinitTimeout: NodeJS.Timeout | null = null
 
-let log = useLogScope('surfProtocolHandlers')
+let log = useLogScope('mistProtocolHandlers')
 
 const imageProcessorOnMessage = (result: {
   messageID: string
@@ -177,7 +177,7 @@ const createCacheDirIfNotExists = async (cacheDir: string) => {
   }
 }
 
-const surfProtocolHandleImages = async ({
+const mistProtocolHandleImages = async ({
   requestURL,
   resourceId,
   imgPath,
@@ -238,12 +238,12 @@ const surfProtocolHandleImages = async ({
   }
 }
 
-const ALLOWED_HOSTNAMES = ['core', 'overlay', 'surf']
+const ALLOWED_HOSTNAMES = ['core', 'overlay', 'mist']
 
 const HOSTNAME_TO_ROOT = {
   core: '/Core/core.html',
   overlay: '/Overlay/overlay.html',
-  surf: '/Resource/resource.html'
+  mist: '/Resource/resource.html'
 }
 
 export const serveFile = async (req: Request, targetPath: string) => {
@@ -295,18 +295,18 @@ export const serveFile = async (req: Request, targetPath: string) => {
   }
 }
 
-export const handleSurfFileRequest = async (req: GlobalRequest) => {
+export const handleMistFileRequest = async (req: GlobalRequest) => {
   try {
     const url = new URL(req.url)
 
-    if (url.protocol !== 'surf-internal:' && url.protocol !== 'surf:') {
+    if (url.protocol !== 'mist-internal:' && url.protocol !== 'mist:') {
       log.error('Invalid protocol:', url.protocol)
-      return new Response('Invalid Surf protocol URL', { status: 400 })
+      return new Response('Invalid Mist protocol URL', { status: 400 })
     }
 
     if (!ALLOWED_HOSTNAMES.includes(url.hostname.toLowerCase())) {
       log.error('Invalid hostname:', url.hostname)
-      return new Response('Invalid Surf internal protocol hostname', { status: 400 })
+      return new Response('Invalid Mist internal protocol hostname', { status: 400 })
     }
 
     let targetPath = url.pathname
@@ -314,12 +314,12 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
       const rootPath = HOSTNAME_TO_ROOT[url.hostname as keyof typeof HOSTNAME_TO_ROOT]
       if (!rootPath) {
         log.error('Invalid hostname for root path:', url.hostname)
-        return new Response('Invalid Surf internal protocol hostname', { status: 400 })
+        return new Response('Invalid Mist internal protocol hostname', { status: 400 })
       }
 
       targetPath = rootPath
     } else if (url.hostname === 'surf') {
-      // Handle root requests (surf://surf/notebook/:id) and root assets
+      // Handle root requests (mist://surf/notebook/:id) and root assets
       const match = url.pathname.match(/^\/(notebook|resource)(?:\/([^\/]+))?\/?$/)
 
       if (match) {
@@ -331,7 +331,7 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
             const rootPath = HOSTNAME_TO_ROOT['surf']
             if (!rootPath) {
               log.error('Invalid hostname for root path:', url.hostname)
-              return new Response('Invalid Surf internal protocol hostname', { status: 400 })
+              return new Response('Invalid Mist internal protocol hostname', { status: 400 })
             }
 
             targetPath = rootPath
@@ -339,24 +339,24 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
             const rootPath = HOSTNAME_TO_ROOT['surf']
             if (!rootPath) {
               log.error('Invalid hostname for root path:', url.hostname)
-              return new Response('Invalid Surf internal protocol hostname', { status: 400 })
+              return new Response('Invalid Mist internal protocol hostname', { status: 400 })
             }
 
             targetPath = rootPath
           } else {
-            // For asset requests (surf://surf/notebook/:id/some/file.js), remove the type and ID prefix
-            targetPath = url.href.replace(`surf://surf/${type}/${id}/`, '')
+            // For asset requests (mist://surf/notebook/:id/some/file.js), remove the type and ID prefix
+            targetPath = url.href.replace(`mist://surf/${type}/${id}/`, '')
           }
         } else if (url.pathname === `/${type}`) {
           const rootPath = HOSTNAME_TO_ROOT['surf']
           if (!rootPath) {
             log.error('Invalid hostname for root path:', url.hostname)
-            return new Response('Invalid Surf internal protocol hostname', { status: 400 })
+            return new Response('Invalid Mist internal protocol hostname', { status: 400 })
           }
 
           targetPath = rootPath
         } else {
-          // For root assets (surf://surf/notebook/assets/style.css)
+          // For root assets (mist://surf/notebook/assets/style.css)
           targetPath = `${url.pathname.substring(type.length + 1)}`
         }
       } else {
@@ -462,7 +462,7 @@ const fetchResourceFile = async (resourceId: string, resource?: SFFSResource) =>
   }
 }
 
-const handleSurfResourceDataRequest = async (req: GlobalRequest, resourceId: string) => {
+const handleMistResourceDataRequest = async (req: GlobalRequest, resourceId: string) => {
   const sffs = useSFFSMain()
   const resource = await sffs?.readResource(resourceId).catch(() => null)
 
@@ -471,7 +471,7 @@ const handleSurfResourceDataRequest = async (req: GlobalRequest, resourceId: str
     response.headers.get('content-type')?.startsWith('image/') &&
     !response.headers.get('content-type')?.startsWith('image/gif')
   ) {
-    return surfProtocolHandleImages({
+    return mistProtocolHandleImages({
       requestURL: req.url,
       resourceId: resourceId,
       imgPath: filePath,
@@ -482,35 +482,35 @@ const handleSurfResourceDataRequest = async (req: GlobalRequest, resourceId: str
   return response
 }
 
-export const surfInternalProtocolHandler = async (req: GlobalRequest) => {
-  return handleSurfFileRequest(req)
+export const mistInternalProtocolHandler = async (req: GlobalRequest) => {
+  return handleMistFileRequest(req)
 }
 
-export const surfProtocolHandler = async (req: GlobalRequest) => {
+export const mistProtocolHandler = async (req: GlobalRequest) => {
   try {
-    const id = req.url.match(/^surf:\/\/surf\/resource\/([^\/\?]+)/)?.[1]
+    const id = req.url.match(/^mist:\/\/mist\/resource\/([^\/\?]+)/)?.[1]
     if (id) {
       const searchParams = new URL(req.url).searchParams
       if (searchParams.has('raw') && searchParams.get('raw') !== 'false') {
-        return handleSurfResourceDataRequest(req, id)
+        return handleMistResourceDataRequest(req, id)
       }
     }
 
-    return handleSurfFileRequest(req)
+    return handleMistFileRequest(req)
   } catch (err) {
-    log.error('surf protocol error:', err, req.url)
+    log.error('mist protocol error:', err, req.url)
     return new Response('Internal Server Error', { status: 500 })
   }
 }
 
-export const surfletProtocolHandler = async (req: GlobalRequest) => {
+export const mistletProtocolHandler = async (req: GlobalRequest) => {
   try {
     const cspPolicy =
       "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://picsum.photos https://via.placeholder.com https://images.unsplash.com; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';"
 
     const url = new URL(req.url)
     if (!url.hostname.endsWith('.app.local')) {
-      return new Response('Invalid Surflet protocol URL', { status: 400 })
+      return new Response('Invalid Mistlet protocol URL', { status: 400 })
     }
     const isV2Protocol = url.hostname.endsWith('.v2.app.local')
     const suffix = isV2Protocol ? '.v2.app.local' : '.app.local'
@@ -529,7 +529,7 @@ export const surfletProtocolHandler = async (req: GlobalRequest) => {
       'Content-Type': 'text/html'
     }
     // NOTE: only add CSP header for v2 protocol
-    // this is to not break existing surflets that do not expect CSP
+    // this is to not break existing mistlets that do not expect CSP
     if (isV2Protocol) {
       headers['Content-Security-Policy'] = cspPolicy
     }
@@ -537,15 +537,15 @@ export const surfletProtocolHandler = async (req: GlobalRequest) => {
       headers: headers
     })
   } catch (err) {
-    log.error('surflet protocol error:', err, req.url)
+    log.error('mistlet protocol error:', err, req.url)
     return new Response('Internal Server Error', { status: 500 })
   }
 }
 
-export const checkSurfProtocolRequest = (url: string) => {
+export const checkMistProtocolRequest = (url: string) => {
   try {
     const parsed = new URL(url)
-    return parsed.protocol === 'surf:' && ALLOWED_HOSTNAMES.includes(parsed.hostname.toLowerCase())
+    return parsed.protocol === 'mist:' && ALLOWED_HOSTNAMES.includes(parsed.hostname.toLowerCase())
   } catch {
     return false
   }

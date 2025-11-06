@@ -1,11 +1,11 @@
 import { type Writable, type Readable, writable, get, derived } from 'svelte/store'
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
-import { blobToSmallImageUrl } from '@deta/utils/browser'
+import { blobToSmallImageUrl } from '@mist/utils/browser'
 
 import type { ContextService } from '../contextManager'
 import { ContextItemTypes, type ContextItemIcon, ContextItemIconTypes } from './types'
-import { type ChatPrompt } from '@deta/types'
+import { type ChatPrompt } from '@mist/types'
 
 export abstract class ContextItemBase {
   abstract type: ContextItemTypes

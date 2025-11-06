@@ -32,7 +32,7 @@ import {
   type ResourceDataPDF,
   type Download,
   ViewLocation
-} from '@deta/types'
+} from '@mist/types'
 import {
   useLogScope,
   EventEmitterBase,
@@ -42,8 +42,8 @@ import {
   isInternalViewerURL,
   copyToClipboard,
   useTimeout
-} from '@deta/utils'
-import { getTextElementsFromHtml } from '@deta/utils/dom'
+} from '@mist/utils'
+import { getTextElementsFromHtml } from '@mist/utils/dom'
 import {
   compareURLs,
   getHostname,
@@ -52,7 +52,7 @@ import {
   parseUrlIntoCanonical,
   ResourceTag,
   cleanupPageTitle
-} from '@deta/utils/formatting'
+} from '@mist/utils/formatting'
 import { HistoryEntriesManager } from '../history'
 import { ConfigService } from '../config'
 import { KeyboardManager, useKeyboardManager } from '../shortcuts/index'
@@ -69,8 +69,8 @@ import {
   ViewManagerEmitterNames
 } from './types'
 import { Resource, ResourceManager } from '../resources'
-import { WebParser } from '@deta/web-parser'
-import { type MentionItem } from '@deta/editor'
+import { WebParser } from '@mist/web-parser'
+import { type MentionItem } from '@mist/editor'
 import { type DownloadsManager, useDownloadsManager } from '../downloads.svelte'
 import { type AIQueryPayload } from '../messagePort'
 
@@ -815,7 +815,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
       entry &&
       entry.url === this.view.urlValue &&
       entry.title &&
-      !entry.title.startsWith('surf://')
+      !entry.title.startsWith('mist://')
     ) {
       this.log.debug('URL matches current history entry', entry)
       this.view.title.set(entry.title)

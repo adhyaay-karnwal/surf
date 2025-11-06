@@ -1,4 +1,4 @@
-import type { ResourceProcessingState } from '@deta/types'
+import type { ResourceProcessingState } from '@mist/types'
 import { type SpaceEntry } from './spaces.types'
 import { type Optional } from './utils.types'
 import type { AIChatMessageRole, AIChatMessageSource } from './ai.types'

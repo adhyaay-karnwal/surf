@@ -1,7 +1,7 @@
 import { mergeAttributes, Node, nodePasteRule } from '@tiptap/core'
 
 import { getEmbedUrlFromYoutubeUrl, isValidYoutubeUrl, YOUTUBE_REGEX_GLOBAL } from './utils'
-import { parseURL } from '@deta/utils'
+import { parseURL } from '@mist/utils'
 
 export interface YoutubeOptions {
   /**

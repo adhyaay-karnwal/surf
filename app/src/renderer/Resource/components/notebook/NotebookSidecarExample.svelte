@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { EXAMPLE_PROMPTS, type ExamplePrompt } from '@deta/services/constants'
-  import { Button } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { useConfig } from '@deta/services'
+  import { EXAMPLE_PROMPTS, type ExamplePrompt } from '@mist/services/constants'
+  import { Button } from '@mist/ui'
+  import { Icon } from '@mist/icons'
+  import { useConfig } from '@mist/services'
 
   import NotebookSidecar from './NotebookSidecar.svelte'
 

@@ -1,8 +1,8 @@
 import { writable, type Writable } from 'svelte/store'
 
-import { useLogScope, wait } from '@deta/utils'
+import { useLogScope, wait } from '@mist/utils'
 
-import { PageChatUpdateContextItemType, type PageChatUpdateContextEventTrigger } from '@deta/types'
+import { PageChatUpdateContextItemType, type PageChatUpdateContextEventTrigger } from '@mist/types'
 
 import type { Resource, ResourceManager } from '../resources'
 import type { TabItem } from '../tabs'
@@ -15,8 +15,8 @@ import {
   ContextItemSpace
 } from './context/index'
 import type { AIService, ChatPrompt } from './ai'
-import { MentionItemType, type MentionItem } from '@deta/editor'
-import type { SearchResultLink } from '@deta/web-parser'
+import { MentionItemType, type MentionItem } from '@mist/editor'
+import type { SearchResultLink } from '@mist/web-parser'
 import {
   ACTIVE_TAB_MENTION,
   BROWSER_HISTORY_MENTION,

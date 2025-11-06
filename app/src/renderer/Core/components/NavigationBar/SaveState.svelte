@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { ViewType, type WebContentsView } from '@deta/services/views'
-  import { Button, SearchableList, type SearchableItem, SourceCard } from '@deta/ui'
-  import { truncate, useLogScope } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { ViewType, type WebContentsView } from '@mist/services/views'
+  import { Button, SearchableList, type SearchableItem, SourceCard } from '@mist/ui'
+  import { truncate, useLogScope } from '@mist/utils'
   import OverlayPopover from '../Overlays/OverlayPopover.svelte'
-  import { Notebook, NotebookManagerEvents, useNotebookManager } from '@deta/services/notebooks'
-  import { useResourceManager, type Resource } from '@deta/services/resources'
+  import { Notebook, NotebookManagerEvents, useNotebookManager } from '@mist/services/notebooks'
+  import { useResourceManager, type Resource } from '@mist/services/resources'
   import { writable } from 'svelte/store'
-  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@deta/types'
+  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@mist/types'
 
   let {
     view
@@ -88,9 +88,9 @@
     }
   })
 
-  async function saveToSurf() {
+  async function saveToMist() {
     if (!$isSaved || !resource) {
-      log.debug('Bookmarking page to Surf')
+      log.debug('Bookmarking page to Mist')
       resource = await view.bookmarkPage()
     }
 
@@ -99,7 +99,7 @@
       return
     }
 
-    log.debug('Resource saved to Surf:', resource.id)
+    log.debug('Resource saved to Mist:', resource.id)
     // isMenuOpen = false
   }
 
@@ -145,7 +145,7 @@
   {/snippet}
 
   <div class="list">
-    <!-- Save to Surf option -->
+    <!-- Save to Mist option -->
     <div class="save-section">
       {#if $isSaved}
         {#if resource.url}
@@ -161,13 +161,13 @@
         {:else if resource.type !== ResourceTypes.DOCUMENT_SPACE_NOTE}
           <button class="list-item save-to-surf" disabled>
             <Icon name="check" size="19px" color="rgb(6, 158, 54)" />
-            <div class="list-item-label">Added to Surf!</div>
+            <div class="list-item-label">Added to Mist!</div>
           </button>
         {/if}
       {:else}
-        <button class="list-item save-to-surf" onclick={saveToSurf}>
+        <button class="list-item save-to-surf" onclick={saveToMist}>
           <Icon name="save" />
-          <div class="list-item-label">Add to Surf</div>
+          <div class="list-item-label">Add to Mist</div>
         </button>
       {/if}
     </div>

@@ -2,7 +2,7 @@
 import debug from 'debug'
 import { isDev } from '../system/system'
 
-const GLOBAL_SCOPE = 'SurfLogger'
+const GLOBAL_SCOPE = 'MistLogger'
 
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 const levelMap = ['verbose', 'debug', 'info', 'warn', 'error']

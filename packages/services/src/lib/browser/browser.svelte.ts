@@ -1,10 +1,10 @@
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 
 import { Resource, ResourceNote, useResourceManager } from '../resources'
 import { useViewManager, WebContentsView } from '../views'
 import { type CreateTabOptions, type TabItem, TabsServiceEmitterNames, useTabs } from '../tabs'
 import { formatAIQueryToTitle } from './utils'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@mist/editor'
 import {
   type AIChatMessageSource,
   type CitationClickEvent,
@@ -16,7 +16,7 @@ import {
   type OpenTarget,
   ResourceTagsBuiltInKeys,
   ResourceTypes
-} from '@deta/types'
+} from '@mist/types'
 import { useNotebookManager } from '../notebooks'
 import { ViewManagerEmitterNames, ViewType } from '../views/types'
 import { type AIQueryPayload, useMessagePortPrimary } from '../messagePort'
@@ -31,7 +31,7 @@ import {
   SEARCH_ENGINES,
   SearchResourceTags,
   wait
-} from '@deta/utils'
+} from '@mist/utils'
 import { useConfig } from '../config'
 import type { NewWindowRequest, OpenURL } from '../ipc/events'
 import { useAI } from '../ai'
@@ -94,7 +94,7 @@ export class BrowserService {
             target = await this.getViewOpenTarget(viewId, { from_notebook_tree_sidebar })
           }
 
-          this.navigateToUrl(`surf://surf/notebook/${notebookId}`, { target })
+          this.navigateToUrl(`mist://surf/notebook/${notebookId}`, { target })
         }
       ),
 
@@ -210,7 +210,7 @@ export class BrowserService {
       if (resourceId) {
         const resource = await this.resourceManager.getResource(resourceId)
         if (resource?.type === ResourceTypes.PDF) {
-          const pdfUrl = `surf://surf/resource/${resource.id}?raw`
+          const pdfUrl = `mist://surf/resource/${resource.id}?raw`
           if (resource.url) {
             const tab = this.tabsManager.findTabByURL(resource.url)
             if (tab) {
@@ -224,7 +224,7 @@ export class BrowserService {
         } else if (resource?.url) {
           url = resource.url
         } else if (resource) {
-          url = `surf://surf/resource/${resource.id}`
+          url = `mist://surf/resource/${resource.id}`
         } else {
           this.log.error('Citation click event has invalid resourceId:', resourceId)
         }
@@ -438,7 +438,7 @@ export class BrowserService {
 
       this.newNoteView = await this.viewManager.create(
         {
-          url: `surf://surf/resource/${resource.id}`,
+          url: `mist://surf/resource/${resource.id}`,
           permanentlyActive: true
         },
         true
@@ -688,12 +688,12 @@ export class BrowserService {
     if (url) {
       return this.tabsManager.changeActiveTabURL(url)
     } else {
-      return this.tabsManager.changeActiveTabURL(`surf://surf/resource/${resource.id}`)
+      return this.tabsManager.changeActiveTabURL(`mist://surf/resource/${resource.id}`)
     }
   }
 
   async openNotebookInCurrentTab(notebookId: string) {
-    return this.tabsManager.changeActiveTabURL(`surf://surf/notebook/${notebookId}`)
+    return this.tabsManager.changeActiveTabURL(`mist://surf/notebook/${notebookId}`)
   }
 
   async openResource(
@@ -715,7 +715,7 @@ export class BrowserService {
 
     if (offline || !resource.url || !isWebResourceType(resource.type)) {
       url =
-        `surf://surf/resource/${resource.id}` + (resource.type === ResourceTypes.PDF ? '?raw' : '')
+        `mist://surf/resource/${resource.id}` + (resource.type === ResourceTypes.PDF ? '?raw' : '')
     } else {
       url = resource.url
     }
@@ -853,7 +853,7 @@ export class BrowserService {
   }
 
   async openAskInSidebar() {
-    this.navigateToUrl(`surf://surf/notebook?mention_active_tab=true`, { target: 'sidebar' })
+    this.navigateToUrl(`mist://surf/notebook?mention_active_tab=true`, { target: 'sidebar' })
   }
 
   /**

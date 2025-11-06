@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useTabs } from '@deta/services/tabs'
+  import { useTabs } from '@mist/services/tabs'
   import TabItem from '../TabItem.svelte'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import {
     calculateTabLayout,
     measureContainerWidth,
@@ -9,9 +9,9 @@
   } from './tabsLayout.svelte'
   import { onMount, tick } from 'svelte'
 
-  import { useDebounce } from '@deta/utils'
-  import { Button } from '@deta/ui'
-  import { HTMLAxisDragZone } from '@deta/dragcula'
+  import { useDebounce } from '@mist/utils'
+  import { Button } from '@mist/ui'
+  import { HTMLAxisDragZone } from '@mist/dragcula'
   import { createTabsDragAndDrop } from './dnd.svelte'
 
   const tabsService = useTabs()

@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount, tick, setContext } from 'svelte'
   import { writable, type Writable } from 'svelte/store'
-  import { useLogScope } from '@deta/utils/io'
-  import { getHostname } from '@deta/utils'
-  import { DuckDuckGoAPI } from '@deta/web-parser'
+  import { useLogScope } from '@mist/utils/io'
+  import { getHostname } from '@mist/utils'
+  import { DuckDuckGoAPI } from '@mist/web-parser'
   import HeadlessCitationItem from './HeadlessCitationItem.svelte'
-  import { Icon } from '@deta/icons'
-  import type { LinkClickHandler } from '@deta/editor/src/lib/extensions/Link/helpers/clickHandler'
+  import { Icon } from '@mist/icons'
+  import type { LinkClickHandler } from '@mist/editor/src/lib/extensions/Link/helpers/clickHandler'
 
   // NOTE: created by tiptap but not needed
   export const node: any = undefined

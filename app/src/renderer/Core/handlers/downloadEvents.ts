@@ -1,4 +1,4 @@
-import { useDownloadsManager } from '@deta/services'
+import { useDownloadsManager } from '@mist/services'
 import type { PreloadEvents } from './preloadEvents'
 
 export const setupDownloadEvents = (events: PreloadEvents) => {

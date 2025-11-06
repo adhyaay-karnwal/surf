@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { Button, NotebookCover } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { Button, NotebookCover } from '@mist/ui'
   import ColorPicker from './ColorPicker.svelte'
-  import { Notebook, type NotebookCoverColor } from '@deta/services/notebooks'
+  import { Notebook, type NotebookCoverColor } from '@mist/services/notebooks'
 
   let {
     notebook = $bindable(),

@@ -6,7 +6,7 @@ import { mount, unmount } from 'svelte'
 
 import MentionComp from './Mention.svelte'
 import type { MentionItem } from '../../types'
-import type { MentionAction } from '@deta/types'
+import type { MentionAction } from '@mist/types'
 import { createClassComponent } from 'svelte/legacy'
 
 // See `addAttributes` below

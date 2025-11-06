@@ -10,21 +10,21 @@
     contextMenu,
     type CtxItem,
     openDialog
-  } from '@deta/ui'
-  import { ResourceLoader, NotebookCover } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { ResourceTypes, SpaceEntryOrigin, type OpenTarget } from '@deta/types'
-  import { useResourceManager, type Resource, getResourceCtxItems } from '@deta/services/resources'
-  import { NotebookManagerEvents } from '@deta/services/notebooks'
+  } from '@mist/ui'
+  import { ResourceLoader, NotebookCover } from '@mist/ui'
+  import { Icon } from '@mist/icons'
+  import { useNotebookManager } from '@mist/services/notebooks'
+  import { ResourceTypes, SpaceEntryOrigin, type OpenTarget } from '@mist/types'
+  import { useResourceManager, type Resource, getResourceCtxItems } from '@mist/services/resources'
+  import { NotebookManagerEvents } from '@mist/services/notebooks'
   import {
     openResource,
     openNotebook,
     determineClickOpenTarget
   } from '../../handlers/notebookOpenHandlers'
-  import { isModKeyPressed, truncate, conditionalArrayItem, useDebounce } from '@deta/utils'
+  import { isModKeyPressed, truncate, conditionalArrayItem, useDebounce } from '@mist/utils'
 
-  import { createTreeStore } from '@deta/ui'
+  import { createTreeStore } from '@mist/ui'
   import { createNotebookTreeDragAndDrop, type NotebookTreeNode } from './notebookTreeDnd.svelte'
 
   // Props
@@ -79,7 +79,7 @@
       ]
     })
     if (!confirmed) return
-    notebookManager.deleteResourcesFromSurf(resource.id, true)
+    notebookManager.deleteResourcesFromMist(resource.id, true)
   }
 
   // Get context menu items for notebooks

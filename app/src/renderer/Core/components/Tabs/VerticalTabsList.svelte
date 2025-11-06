@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { useTabs } from '@deta/services/tabs'
+  import { useTabs } from '@mist/services/tabs'
   import VerticalPinnedTab from './VerticalPinnedTab.svelte'
   import VerticalUnpinnedTab from './VerticalUnpinnedTab.svelte'
-  import { Icon } from '@deta/icons'
-  import { isMac } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { isMac } from '@mist/utils'
   import {
     calculateVerticalTabLayout,
     measureContainerHeight,
@@ -11,9 +11,9 @@
   } from './TabsList/verticalTabsLayout.svelte'
   import type { VerticalLayoutCalculation } from './types'
   import { onMount, tick } from 'svelte'
-  import { useDebounce } from '@deta/utils'
-  import { Button } from '@deta/ui'
-  import { HTMLAxisDragZone } from '@deta/dragcula'
+  import { useDebounce } from '@mist/utils'
+  import { Button } from '@mist/ui'
+  import { HTMLAxisDragZone } from '@mist/dragcula'
   import { createTabsDragAndDrop, cleanupDropIndicators } from './TabsList/dnd.svelte'
   import { onDestroy } from 'svelte'
 

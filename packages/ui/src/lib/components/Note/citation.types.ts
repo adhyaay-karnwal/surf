@@ -1,5 +1,5 @@
 import type { Writable } from "svelte/store"
-import type { CitationClickData, CitationInfo } from "@deta/types"
+import type { CitationClickData, CitationInfo } from "@mist/types"
 
 export type MarkdownComponentEventCitationClick = {
     type: 'citation-click'

@@ -1,9 +1,9 @@
-import { ResourceTypes, type ResourceDataPost } from '@deta/types'
+import { ResourceTypes, type ResourceDataPost } from '@mist/types'
 import type { DetectedWebApp, WebService } from '../types'
 
 import { APIExtractor, WebAppExtractor } from '../extractors'
 import { sanitizeHTML } from '../utils'
-import { parseStringIntoUrl } from '@deta/utils'
+import { parseStringIntoUrl } from '@mist/utils'
 
 export const RedditRegexPatterns = {
   subreddit: /^\/r\/[a-zA-Z0-9_-]+\/?$/,

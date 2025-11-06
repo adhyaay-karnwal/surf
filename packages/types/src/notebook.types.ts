@@ -1,4 +1,4 @@
-import type { IconData } from '@deta/icons'
+import type { IconData } from '@mist/icons'
 
 // NOTE: Use p3 as main colors and something like rgb as fallbacks.
 // [[bg1, bg1-fallback], [bg2, bg2-fallback], [text, text-fallback]]

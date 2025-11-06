@@ -1,11 +1,11 @@
 <script lang="ts">
   import { derived } from 'svelte/store'
 
-  import { useLogScope } from '@deta/utils/io'
-  import { ProviderIcons, ProviderLabels, RECOMMENDED_AI_MODELS } from '@deta/types/src/ai.types'
+  import { useLogScope } from '@mist/utils/io'
+  import { ProviderIcons, ProviderLabels, RECOMMENDED_AI_MODELS } from '@mist/types/src/ai.types'
 
-  import { Dropdown, type DropdownItem } from '@deta/ui'
-  import { useAI } from '@deta/services/ai'
+  import { Dropdown, type DropdownItem } from '@mist/ui'
+  import { useAI } from '@mist/services/ai'
 
   let {
     disabled = false,

@@ -4,10 +4,10 @@ import type {
   DetectedResource,
   WebAppExtractorActions,
   WebServiceActionInputs
-} from '@deta/web-parser'
-import { WebParser } from '@deta/web-parser'
-import type { DetectedWebApp, ResourceDataPDF } from '@deta/types'
-import { DragTypeNames } from '@deta/types'
+} from '@mist/web-parser'
+import { WebParser } from '@mist/web-parser'
+import type { DetectedWebApp, ResourceDataPDF } from '@mist/types'
+import { DragTypeNames } from '@mist/types'
 import {
   WebViewReceiveEvents,
   WebViewSendEvents,
@@ -15,12 +15,12 @@ import {
   WebViewEventSendNames,
   ResourceTypes,
   WebViewGestureRequiredEventNames
-} from '@deta/types'
+} from '@mist/types'
 
 // import CommentIndicator from './components/CommentIndicator.svelte'
-import { type ResourceArticle, type Resource } from '@deta/services/resources'
-import { isInternalViewerURL, normalizeURL } from '@deta/utils/formatting'
-import { htmlToMarkdown } from '@deta/utils/formatting'
+import { type ResourceArticle, type Resource } from '@mist/services/resources'
+import { isInternalViewerURL, normalizeURL } from '@mist/utils/formatting'
+import { htmlToMarkdown } from '@mist/utils/formatting'
 import { setupChromeWebStoreApi } from './helpers/chrome-web-store'
 
 const PDFViewerEntryPoint =
@@ -472,7 +472,7 @@ async function handleDrop(e: DragEvent) {
       dataTransfer: e.dataTransfer
     })
 
-    const resourceId = e.dataTransfer?.getData(DragTypeNames.SURF_RESOURCE_ID)
+    const resourceId = e.dataTransfer?.getData(DragTypeNames.MIST_RESOURCE_ID)
     if (resourceId) {
       const metadata = await getDragMetadata(resourceId)
       if (!metadata) return

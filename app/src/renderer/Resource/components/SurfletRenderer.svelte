@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon, IconConfirmation } from '@deta/icons'
+  import { Icon, IconConfirmation } from '@mist/icons'
   import {
     copyToClipboard,
     generateID,
@@ -11,27 +11,27 @@
     getFormattedDate,
     cropImageToContent,
     optimisticParseJSON
-  } from '@deta/utils'
+  } from '@mist/utils'
 
-  import { dataUrltoBlob } from '@deta/utils/browser'
+  import { dataUrltoBlob } from '@mist/utils/browser'
 
   import { createEventDispatcher, onMount, onDestroy, tick } from 'svelte'
   import type { WebviewTag } from 'electron'
   import { all, createLowlight } from 'lowlight'
   import { toHtml } from 'hast-util-to-html'
   import { writable, readable, type Readable } from 'svelte/store'
-  import { useResourceManager } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
-  import { DragTypeNames, type BookmarkTabState } from '@deta/types'
+  import { useResourceManager } from '@mist/services/resources'
+  import { ResourceTagsBuiltInKeys } from '@mist/types'
+  import type { Resource } from '@mist/services/resources'
+  import { DragTypeNames, type BookmarkTabState } from '@mist/types'
   import type {
     DragTypes,
     ResourceTagsBuiltIn,
     SFFSResourceTag,
     TabResource,
     UserViewPrefsTagValue
-  } from '@deta/types'
-  import { ResourceTag } from '@deta/utils/formatting'
+  } from '@mist/types'
+  import { ResourceTag } from '@mist/utils/formatting'
 
   export let doneGenerating: Readable<boolean> = readable(true)
   export let resource: Readable<Resource | undefined> = readable(undefined)
@@ -59,14 +59,14 @@
   let startHeight = 0
   let localTitle = $title
 
-  const log = useLogScope('SurfletRenderer')
+  const log = useLogScope('MistletRenderer')
   const resourceManager = useResourceManager()
 
   const dispatch = createEventDispatcher<{
     'link-removed': void
     'set-preview-image': string
-    'set-surflet-name': string
-    'save-surflet': {
+    'set-mistlet-name': string
+    'save-mistlet': {
       spaceId?: string
     }
   }>()
@@ -104,7 +104,7 @@
   }
 
   $: if (tab && tab.title !== localTitle) {
-    dispatch('set-surflet-name', localTitle)
+    dispatch('set-mistlet-name', localTitle)
   }
 
   $: if ($resource && !silentResource && $saveState === 'idle') {
@@ -255,7 +255,7 @@
   }
 
   const changeResourceName = useDebounce(async (name: string) => {
-    dispatch('set-surflet-name', name)
+    dispatch('set-mistlet-name', name)
   }, 500)
 
   const captureWebviewScreenshot = async (): Promise<string | null> => {
@@ -361,8 +361,8 @@
     }
   }
 
-  const saveSurfletAsNonSilent = async (spaceId?: string) => {
-    dispatch('save-surflet', { spaceId })
+  const saveMistletAsNonSilent = async (spaceId?: string) => {
+    dispatch('save-mistlet', { spaceId })
     saveState.set('saved')
     await saveScreenshot()
   }
@@ -436,11 +436,11 @@
     appContainer.appendChild(webview)
 
     const protocolVersion = $resource?.tags?.find(
-      (tag) => tag.name === ResourceTagsBuiltInKeys.SURFLET_PROTOCOL_VERSION
+      (tag) => tag.name === ResourceTagsBuiltInKeys.MISTLET_PROTOCOL_VERSION
     )?.value
     const suffix = protocolVersion ? `${protocolVersion}.app.local` : 'app.local'
     // @ts-ignore
-    webview.src = `surflet://${$resource?.id}.${suffix}`
+    webview.src = `mistlet://${$resource?.id}.${suffix}`
   }
 
   export const reloadApp = async () => {
@@ -533,9 +533,9 @@
 
     if (resource) {
       const item = drag.item!
-      drag.dataTransfer?.setData(DragTypeNames.SURF_RESOURCE_ID, $resource.id)
-      item.data.setData(DragTypeNames.SURF_RESOURCE, $resource)
-      item.data.setData(DragTypeNames.SURF_RESOURCE_ID, $resource.id)
+      drag.dataTransfer?.setData(DragTypeNames.MIST_RESOURCE_ID, $resource.id)
+      item.data.setData(DragTypeNames.MIST_RESOURCE, $resource)
+      item.data.setData(DragTypeNames.MIST_RESOURCE_ID, $resource.id)
       drag.continue()
     } else {
       drag.abort()
@@ -712,7 +712,7 @@
                   resource={$resource}
                   side="left"
                   className="flex items-center  p-1 rounded-md  transition-colors"
-                  on:save={async (e) => await saveSurfletAsNonSilent(e.detail)}
+                  on:save={async (e) => await saveMistletAsNonSilent(e.detail)}
                 />
               {/if} -->
 
@@ -785,7 +785,7 @@
 </code-block>
 
 <style lang="scss">
-  @use '@deta/ui/src/lib/styles/utils' as utils;
+  @use '@mist/ui/src/lib/styles/utils' as utils;
 
   :global(.code-wrapper code.hljs) {
     overflow: unset;

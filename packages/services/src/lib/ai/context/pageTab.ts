@@ -7,7 +7,7 @@ import { ContextItemIconTypes, ContextItemTypes, type ContextItemIcon } from './
 import { ContextItemBase } from './base'
 import { TabItem } from '../../tabs'
 import { tick } from 'svelte'
-import { wait } from '@deta/utils'
+import { wait } from '@mist/utils'
 
 export class ContextItemPageTab extends ContextItemBase {
   type = ContextItemTypes.PAGE_TAB

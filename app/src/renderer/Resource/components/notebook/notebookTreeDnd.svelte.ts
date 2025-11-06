@@ -1,6 +1,6 @@
-import type { TreeDragDropOperation, TreeNodeStore } from '@deta/ui'
-import type { Notebook, NotebookManager } from '@deta/services/notebooks'
-import { ResourceTypes, SpaceEntryOrigin } from '@deta/types'
+import type { TreeDragDropOperation, TreeNodeStore } from '@mist/ui'
+import type { Notebook, NotebookManager } from '@mist/services/notebooks'
+import { ResourceTypes, SpaceEntryOrigin } from '@mist/types'
 
 // Enhanced tree node type for notebooks and notes
 export type NotebookTreeNode = {

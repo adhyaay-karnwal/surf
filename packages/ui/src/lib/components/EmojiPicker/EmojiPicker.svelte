@@ -4,7 +4,7 @@
   import type { EmojiClickEvent } from 'emoji-picker-element/shared'
   import data from 'emoji-picker-element-data/en/emojibase/data.json?url'
 
-  import { useLogScope, wait } from '@deta/utils'
+  import { useLogScope, wait } from '@mist/utils'
 
   export let theme: 'light' | 'dark' = 'light'
 

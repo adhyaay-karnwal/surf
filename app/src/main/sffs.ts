@@ -1,14 +1,14 @@
 import { app } from 'electron'
 import { initBackend } from '../preload/helpers/backend'
-import { isDev } from '@deta/utils/system'
+import { isDev } from '@mist/utils/system'
 import type {
   SFFSRawCompositeResource,
   SFFSRawResource,
   SFFSRawResourceTag,
   SFFSResource,
   SFFSResourceTag
-} from '@deta/types'
-import { optimisticParseJSON } from '@deta/utils'
+} from '@mist/types'
+import { optimisticParseJSON } from '@mist/utils'
 
 export class SFFSMain {
   sffs: any

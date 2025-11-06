@@ -1,4 +1,4 @@
-export type { DetectedWebApp, DetectedResource } from '@deta/types'
+export type { DetectedWebApp, DetectedResource } from '@mist/types'
 
 export type WebServiceActionInput = {
   type: string

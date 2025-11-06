@@ -1,5 +1,5 @@
-import type { MentionItem } from '@deta/editor'
-import type { ChatPrompt, SearchResultLink } from '@deta/types'
+import type { MentionItem } from '@mist/editor'
+import type { ChatPrompt, SearchResultLink } from '@mist/types'
 
 export type GeneratePromptsPayload = {
   mentions?: MentionItem[]

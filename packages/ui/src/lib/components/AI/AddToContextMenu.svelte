@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Dropdown, type DropdownItem } from '@deta/ui'
+  import { Dropdown, type DropdownItem } from '@mist/ui'
 
   let {
     disabled = false,

@@ -7,10 +7,10 @@ import {
   type NotebookEntry,
   type NotebookSpace,
   type SpaceEntrySearchOptions
-} from '@deta/types'
+} from '@mist/types'
 
-import { useLogScope, blobToSmallImageUrl, isMainRenderer } from '@deta/utils'
-import { getIconString, IconTypes } from '@deta/icons'
+import { useLogScope, blobToSmallImageUrl, isMainRenderer } from '@mist/utils'
+import { getIconString, IconTypes } from '@mist/icons'
 
 import { type ResourceManager } from '../resources'
 

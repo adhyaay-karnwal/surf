@@ -1,4 +1,4 @@
-import { WEBVIEW_MOUSE_CLICK_WINDOW_EVENT, type Fn } from '@deta/types'
+import { WEBVIEW_MOUSE_CLICK_WINDOW_EVENT, type Fn } from '@mist/types'
 import type { Attachment } from 'svelte/attachments'
 import type { Writable } from 'svelte/store'
 import { hasClassOrParentWithClass } from './css'

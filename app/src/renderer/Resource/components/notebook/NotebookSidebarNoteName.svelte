@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { useResourceManager, type Resource, getResourceCtxItems } from '@deta/services/resources'
-  import { contextMenu, openDialog, type CtxItem } from '@deta/ui'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { truncate } from '@deta/utils'
-  import { type Fn, type OpenTarget, SpaceEntryOrigin } from '@deta/types'
+  import { useResourceManager, type Resource, getResourceCtxItems } from '@mist/services/resources'
+  import { contextMenu, openDialog, type CtxItem } from '@mist/ui'
+  import { useNotebookManager } from '@mist/services/notebooks'
+  import { truncate } from '@mist/utils'
+  import { type Fn, type OpenTarget, SpaceEntryOrigin } from '@mist/types'
   import { handleResourceClick, openResource } from '../../handlers/notebookOpenHandlers'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
 
   let {
     resource,
@@ -68,7 +68,7 @@
             })
             if (!confirmed) return
 
-            notebookManager.deleteResourcesFromSurf(resourceId, true)
+            notebookManager.deleteResourcesFromMist(resourceId, true)
           },
           onRemove:
             !sourceNotebookId || sourceNotebookId === 'drafts'

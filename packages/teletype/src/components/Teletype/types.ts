@@ -1,6 +1,6 @@
 import type { SvelteComponent } from 'svelte'
 import type { TeletypeSystem } from '.'
-import type { TeletypeAction } from '@deta/services/teletype'
+import type { TeletypeAction } from '@mist/services/teletype'
 
 export type HandlerReturn = {
   preventClose?: boolean

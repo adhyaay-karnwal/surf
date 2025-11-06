@@ -1,7 +1,7 @@
-import { useLogScope } from '@deta/utils/io'
-import { isMac, wait } from '@deta/utils'
-import { ResourceTag, SearchResourceTags } from '@deta/utils/formatting'
-import { ResourceTypes } from '@deta/types'
+import { useLogScope } from '@mist/utils/io'
+import { isMac, wait } from '@mist/utils'
+import { ResourceTag, SearchResourceTags } from '@mist/utils/formatting'
+import { ResourceTypes } from '@mist/types'
 
 import { ResourceNote, useResourceManager } from './resources'
 import { extractAndCreateWebResource } from './mediaImporter'
@@ -161,7 +161,7 @@ export async function createDemoNotes(notebook: Notebook) {
     {
       id: OnboardingNoteWelcome.attributes.id as string,
       title: OnboardingNoteWelcome.attributes.title as string,
-      content: parseNoteContent(OnboardingNoteWelcome, `surf://surf/resource/${manualResource.id}`)
+      content: parseNoteContent(OnboardingNoteWelcome, `mist://surf/resource/${manualResource.id}`)
     },
     notebook
   )

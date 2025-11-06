@@ -59,7 +59,7 @@ export default defineConfig({
     envPrefix: 'P_VITE_',
     plugins: [
       svelte(svelteOptions),
-      externalizeDepsPlugin({ exclude: ['@deta/backend'] }),
+      externalizeDepsPlugin({ exclude: ['@mist/backend'] }),
       esbuildConsolidatePreloads('out/preload'),
       cssInjectedByJsPlugin({
         jsAssetsFilterFunction: (asset) => asset.fileName.endsWith('webcontents.js'),

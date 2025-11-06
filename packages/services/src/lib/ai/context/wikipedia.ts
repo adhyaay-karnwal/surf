@@ -1,14 +1,14 @@
 import { writable } from 'svelte/store'
 
-import { createWikipediaAPI, WikipediaAPI } from '@deta/web-parser'
-import { optimisticParseJSON } from '@deta/utils'
-import { ModelTiers } from '@deta/types/src/ai.types'
+import { createWikipediaAPI, WikipediaAPI } from '@mist/web-parser'
+import { optimisticParseJSON } from '@mist/utils'
+import { ModelTiers } from '@mist/types/src/ai.types'
 
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'
 import { ContextItemIconTypes, ContextItemTypes } from './types'
 import { WIKIPEDIA_TITLE_EXTRACTOR_PROMPT } from '../../constants/prompts'
-import { ResourceTag } from '@deta/utils/formatting'
+import { ResourceTag } from '@mist/utils/formatting'
 
 export class ContextItemWikipedia extends ContextItemBase {
   type = ContextItemTypes.WIKIPEDIA

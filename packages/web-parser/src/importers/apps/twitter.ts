@@ -17,12 +17,12 @@ SAMPLE LINK:
 }
 */
 
-import { type ResourceDataPost, ResourceTypes } from '@deta/types'
+import { type ResourceDataPost, ResourceTypes } from '@mist/types'
 import { BatchFetcher } from '../batcher'
 import { AppImporter } from './index'
 import { type DetectedResource } from '../../types'
 import { WebParser, WebViewExtractor } from '../..'
-import { wait } from '@deta/utils'
+import { wait } from '@mist/utils'
 
 export type TwitterAuthData = {
   uid: string

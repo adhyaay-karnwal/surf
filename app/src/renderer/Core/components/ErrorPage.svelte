@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import { createEventDispatcher } from 'svelte'
 
   import {
     WEB_CONTENTS_ERRORS,
     type WebContentsError,
     type WebContentsErrorParsed
-  } from '@deta/types'
+  } from '@mist/types'
 
   export let error: WebContentsError
 

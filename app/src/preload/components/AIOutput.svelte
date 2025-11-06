@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  import { useClipboard } from '@deta/utils/browser'
-  import { Icon, IconConfirmation } from '@deta/icons'
+  import { useClipboard } from '@mist/utils/browser'
+  import { Icon, IconConfirmation } from '@mist/icons'
   import Button from './Button.svelte'
 
   export let output = ''

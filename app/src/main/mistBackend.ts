@@ -1,10 +1,10 @@
-import { isWindows } from '@deta/utils'
+import { isWindows } from '@mist/utils'
 import { spawn, type ChildProcess, execSync } from 'child_process'
 
 import EventEmitter from 'events'
 import { basename } from 'path'
 
-export class SurfBackendServerManager extends EventEmitter {
+export class MistBackendServerManager extends EventEmitter {
   private process: ChildProcess | null = null
   private isShuttingDown = false
   private lastKnownHealth = false

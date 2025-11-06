@@ -9,7 +9,7 @@ A comprehensive, accessible, and customizable tree UI component built with Svelt
 - **Action registration** - Support for both node and parent element actions
 - **Renderless by default, skinnable** - CSS variables and slot-based customization
 - **Generic tree support** - Works with any hierarchical data structure
-- **Renamable nodes** - Integration with existing `@deta/services/Renamable.svelte`
+- **Renamable nodes** - Integration with existing `@mist/services/Renamable.svelte`
 - **Animated transitions** - Svelte transitions (slide/scale) with `prefers-reduced-motion` support
 - **View state persistence** - KV store integration for preserving tree state
 - **Loading states** - Async expand support with loading spinners
@@ -77,9 +77,9 @@ See `Tree.example.md` for comprehensive usage examples.
 
 ## Integration
 
-The component is fully integrated into the `@deta/ui` package and follows all established patterns:
+The component is fully integrated into the `@mist/ui` package and follows all established patterns:
 - Svelte 5 runes syntax
-- `@deta/` import namespace
+- `@mist/` import namespace
 - Existing component conventions
 - TypeScript support
 - Accessibility standards

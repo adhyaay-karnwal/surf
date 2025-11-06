@@ -1,4 +1,4 @@
-import type { TabItem } from '@deta/services'
+import type { TabItem } from '@mist/services'
 
 export interface TabDimensions {
   width: number

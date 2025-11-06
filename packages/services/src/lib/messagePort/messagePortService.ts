@@ -1,4 +1,4 @@
-import { useLogScope } from '@deta/utils/io'
+import { useLogScope } from '@mist/utils/io'
 import type { MessagePortEventPrimary } from './types'
 
 export type MessagePortEvent = {

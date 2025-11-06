@@ -1,9 +1,9 @@
 import { get, type Writable } from 'svelte/store'
 import PQueue from 'p-queue'
 
-import { Toast, useToasts } from '@deta/ui'
-import { useLocalStorageStore, useLogScope, ResourceTag } from '@deta/utils'
-import { ResourceTypes } from '@deta/types'
+import { Toast, useToasts } from '@mist/ui'
+import { useLocalStorageStore, useLogScope, ResourceTag } from '@mist/utils'
+import { ResourceTypes } from '@mist/types'
 
 import { type ResourceManager } from './resources/resources.svelte'
 import { extractAndCreateWebResource } from './mediaImporter'

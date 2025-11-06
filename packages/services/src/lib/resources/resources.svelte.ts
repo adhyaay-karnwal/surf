@@ -17,11 +17,11 @@ import {
   copyToClipboard,
   htmlToMarkdown,
   optimisticParseJSON
-} from '@deta/utils'
+} from '@mist/utils'
 import {
   generateMarkdownWithFrontmatter,
   parseMarkdownWithFrontmatter
-} from '@deta/utils/src/formatting/markdown-extended'
+} from '@mist/utils/src/formatting/markdown-extended'
 import { SFFS } from '../sffs'
 import {
   type AiSFFSQueryResponse,
@@ -49,7 +49,7 @@ import {
   MARKDOWN_RESOURCE_TYPES,
   isMarkdownResourceType,
   isWebResourceType
-} from '@deta/types'
+} from '@mist/types'
 import {
   EventBusMessageType,
   EventContext,
@@ -63,13 +63,13 @@ import {
   type ResourceDataHistoryEntry,
   type ResourceState,
   type ResourceStateCombined
-} from '@deta/types'
+} from '@mist/types'
 import { getContext, onDestroy, setContext, tick } from 'svelte'
-import type { Model } from '@deta/backend/types'
-import { WebParser } from '@deta/web-parser'
+import type { Model } from '@mist/backend/types'
+import { WebParser } from '@mist/web-parser'
 import type { ConfigService } from '../config'
-import { EventEmitterBase, ResourceTag, SearchResourceTags } from '@deta/utils'
-import { type CtxItem } from '@deta/ui'
+import { EventEmitterBase, ResourceTag, SearchResourceTags } from '@mist/utils'
+import { type CtxItem } from '@mist/ui'
 import { Notebook } from '../notebooks'
 import { SvelteMap } from 'svelte/reactivity'
 
@@ -251,7 +251,7 @@ export const getResourceCtxItems = ({
               {
                 type: 'action',
                 icon: 'trash',
-                text: 'Delete from Surf',
+                text: 'Delete from Mist',
                 kind: 'danger',
                 action: () => onDeleteResource(resource.id)
               }

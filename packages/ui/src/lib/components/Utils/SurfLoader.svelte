@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte'
-  import { type Resource } from '@deta/services/resources'
-  import { useNotebookManager, type Notebook } from '@deta/services/notebooks'
-  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@deta/types'
-  import { type ResourceSearchResult, useResourceManager} from '@deta/services/resources'
-  import { SearchResourceTags, useCancelableDebounce, useThrottle } from '@deta/utils'
-  import { NotebookManagerEvents } from '@deta/services/notebooks'
+  import { type Resource } from '@mist/services/resources'
+  import { useNotebookManager, type Notebook } from '@mist/services/notebooks'
+  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@mist/types'
+  import { type ResourceSearchResult, useResourceManager} from '@mist/services/resources'
+  import { SearchResourceTags, useCancelableDebounce, useThrottle } from '@mist/utils'
+  import { NotebookManagerEvents } from '@mist/services/notebooks'
 
   interface Search {
     query: string

@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug in Surf
+description: Report a bug in Mist
 type: 'bug'
 labels: 'bug :beetle:'
 body:
@@ -16,9 +16,9 @@ body:
           required: true
   - type: input
     attributes:
-      label: Surf Version
+      label: Mist Version
       description: |
-        What version of Surf are you using?
+        What version of Mist are you using?
       placeholder: 1.1.0-beta.0
     validations:
       required: true

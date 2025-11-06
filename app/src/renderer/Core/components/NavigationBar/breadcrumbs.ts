@@ -1,9 +1,9 @@
-import type { Fn } from '@deta/types'
-import { getViewType, getViewTypeData } from '@deta/utils/formatting'
-import { type NotebookManager } from '@deta/services/notebooks'
-import { type WebContentsView, ViewType } from '@deta/services/views'
-import { useLogScope } from '@deta/utils/io'
-import { wait } from '@deta/utils'
+import type { Fn } from '@mist/types'
+import { getViewType, getViewTypeData } from '@mist/utils/formatting'
+import { type NotebookManager } from '@mist/services/notebooks'
+import { type WebContentsView, ViewType } from '@mist/services/views'
+import { useLogScope } from '@mist/utils/io'
+import { wait } from '@mist/utils'
 
 const log = useLogScope('Breadcrumbs')
 
@@ -46,10 +46,10 @@ export async function constructBreadcrumbs(
       log.debug('Final breadcrumbs:', breadcrumbs)
       return breadcrumbs
     } else {
-      // Always start with Surf root
+      // Always start with Mist root
       breadcrumbs.push({
-        title: 'Surf',
-        url: new URL('surf://surf/notebook').toString(),
+        title: 'Mist',
+        url: new URL('mist://surf/notebook').toString(),
         navigationIdx: currentHistory.findIndex(
           (entry) => getViewType(entry.url) === ViewType.NotebookHome
         )
@@ -66,7 +66,7 @@ export async function constructBreadcrumbs(
           if (resource.spaceIdsValue.length === 0) {
             breadcrumbs.push({
               title: 'Drafts',
-              url: new URL('surf://surf/notebook/drafts').toString(),
+              url: new URL('mist://surf/notebook/drafts').toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes('/notebook/drafts')
               )
@@ -76,7 +76,7 @@ export async function constructBreadcrumbs(
             const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
             breadcrumbs.push({
               title: notebookName,
-              url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+              url: new URL(`mist://surf/notebook/${notebookId}`).toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes(`/notebook/${notebookId}`)
               )
@@ -112,7 +112,7 @@ export async function constructBreadcrumbs(
           const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
           breadcrumbs.push({
             title: notebookName,
-            url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+            url: new URL(`mist://surf/notebook/${notebookId}`).toString(),
             navigationIdx: currentHistory.findIndex((entry) =>
               entry.url.includes(`/notebook/${notebookId}`)
             )
@@ -120,9 +120,9 @@ export async function constructBreadcrumbs(
         } else if (spaceIds.length === 0) {
           breadcrumbs.push({
             title: 'Drafts',
-            url: 'surf://surf/notebook/drafts',
+            url: 'mist://surf/notebook/drafts',
             navigationIdx: currentHistory.findIndex(
-              (entry) => entry.url === 'surf://surf/notebook/drafts'
+              (entry) => entry.url === 'mist://surf/notebook/drafts'
             )
           })
         }

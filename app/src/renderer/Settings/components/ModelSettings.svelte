@@ -25,18 +25,18 @@
     ProviderLabels,
     ProviderIcons,
     type Model
-  } from '@deta/types/src/ai.types'
+  } from '@mist/types/src/ai.types'
   import {
     FormField,
     Expandable,
     SelectDropdown,
     SelectDropdownItem,
     type SelectItem
-  } from '@deta/ui/legacy'
-  import { Icon } from '@deta/icons'
-  import { generateID, truncate } from '@deta/utils'
+  } from '@mist/ui/legacy'
+  import { Icon } from '@mist/icons'
+  import { generateID, truncate } from '@mist/utils'
   import { createEventDispatcher, onMount } from 'svelte'
-  import { Button, Dropdown, type DropdownItem, openDialog } from '@deta/ui'
+  import { Button, Dropdown, type DropdownItem, openDialog } from '@mist/ui'
 
   export let selectedModelId: Writable<string>
   export let models: Writable<Model[]>
@@ -274,7 +274,7 @@
 
       <div class="details-text">
         <p>
-          Your selected model will be used across all Surf features. Surf may switch to more
+          Your selected model will be used across all Mist features. Mist may switch to more
           efficient models from the same provider for certain features.
         </p>
       </div>
@@ -458,7 +458,7 @@
                 <FormField
                   label="Model Label"
                   placeholder="My Custom Model"
-                  infoText="Give your custom model a name so you can identify it within Surf's UI"
+                  infoText="Give your custom model a name so you can identify it within Mist's UI"
                   value={model.label}
                   on:save={(e) => updateModel(model.id, { label: e.detail })}
                 />

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DynamicIcon, Icon } from '@deta/icons'
+  import { DynamicIcon, Icon } from '@mist/icons'
   import type { SelectItem } from '.'
 
   export let item: SelectItem

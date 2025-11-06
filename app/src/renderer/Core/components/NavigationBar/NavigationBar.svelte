@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { Button, ResourceLoader } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { Button, ResourceLoader } from '@mist/ui'
   import BreadcrumbItems from './BreadcrumbItems.svelte'
   import { writable } from 'svelte/store'
   import LocationBar from './LocationBar.svelte'
   import { type Snippet } from 'svelte'
   import NavigationBarGroup from './NavigationBarGroup.svelte'
   import SaveState from './SaveState.svelte'
-  import { isInternalRendererURL, isModKeyPressed } from '@deta/utils'
-  import { Resource, useResourceManager } from '@deta/services/resources'
-  import { useViewManager, ViewType, type WebContentsView } from '@deta/services/views'
+  import { isInternalRendererURL, isModKeyPressed } from '@mist/utils'
+  import { Resource, useResourceManager } from '@mist/services/resources'
+  import { useViewManager, ViewType, type WebContentsView } from '@mist/services/views'
   import DownloadsIndicator from './DownloadsIndicator.svelte'
-  import { useBrowser } from '@deta/services/browser'
+  import { useBrowser } from '@mist/services/browser'
   import ResourceMenu from './ResourceMenu.svelte'
-  import { ResourceTypes } from '@deta/types'
-  import type { TabItem } from '@deta/services/tabs'
+  import { ResourceTypes } from '@mist/types'
+  import type { TabItem } from '@mist/services/tabs'
 
   let {
     view,

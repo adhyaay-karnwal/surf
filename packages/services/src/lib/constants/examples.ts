@@ -1,7 +1,7 @@
-import type { NotebookCustomization } from '@deta/types'
+import type { NotebookCustomization } from '@mist/types'
 
 export const onboardingNotebook = {
-  name: 'Intro to Surf',
+  name: 'Intro to Mist',
   customization: {
     coverColor: [
       ['#FFDFBA', '#FFDFBA'],

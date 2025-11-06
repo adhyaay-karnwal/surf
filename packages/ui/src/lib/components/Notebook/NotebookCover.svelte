@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Notebook, type NotebookCoverColor } from "@deta/services/notebooks"
-  import { clickOutside, generateID } from '@deta/utils'
-  import { type Fn } from '@deta/types'
+  import { Notebook, type NotebookCoverColor } from "@mist/services/notebooks"
+  import { clickOutside, generateID } from '@mist/utils'
+  import { type Fn } from '@mist/types'
   import NotebookCoverSticker from "./NotebookCoverSticker.svelte"
   import LeatherOverlay from "./leather_overlay.jpg?url"
-  import { signature } from '@deta/ui'
+  import { signature } from '@mist/ui'
 
   let {
     readonly = true,

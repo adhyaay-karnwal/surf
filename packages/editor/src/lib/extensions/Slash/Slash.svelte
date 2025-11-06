@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import type { Editor } from '@tiptap/core'
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@mist/icons'
   import type { SlashMenuItem, SlashCommandPayload } from './types'
 
   export let editor: Editor

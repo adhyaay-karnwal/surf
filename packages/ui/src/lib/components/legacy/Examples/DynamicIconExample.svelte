@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@mist/icons'
 
   export let space: any
 

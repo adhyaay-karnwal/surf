@@ -1,9 +1,9 @@
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
-import { type UserConfig } from '@deta/types'
-import { BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@deta/types/src/ai.types'
-import { useLogScope } from '@deta/utils'
+import { type UserConfig } from '@mist/types'
+import { BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@mist/types/src/ai.types'
+import { useLogScope } from '@mist/utils'
 
 const log = useLogScope('Config')
 

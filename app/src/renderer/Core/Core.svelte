@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
 
-  import { useLogScope, setLogLevel } from '@deta/utils/io'
-  import { ViewLocation, ViewType, type Fn } from '@deta/types'
+  import { useLogScope, setLogLevel } from '@mist/utils/io'
+  import { ViewLocation, ViewType, type Fn } from '@mist/types'
 
-  import { ShortcutActions } from '@deta/services/shortcuts'
-  import { initServices } from '@deta/services/helpers'
+  import { ShortcutActions } from '@mist/services/shortcuts'
+  import { initServices } from '@mist/services/helpers'
   import { handlePreloadEvents } from './handlers/preloadEvents'
 
   import WebContentsView from './components/WebContentsView.svelte'
@@ -15,16 +15,16 @@
     toggleTabOrientation,
     TabOrientation,
     initializeTabOrientation
-  } from '@deta/services/tabs'
+  } from '@mist/services/tabs'
   import NavigationBar from './components/NavigationBar/NavigationBar.svelte'
   import NavigationBarGroup from './components/NavigationBar/NavigationBarGroup.svelte'
   import AppSidebar from './components/Layout/AppSidebar.svelte'
-  import { isLinux, isMac, isWindows, ResourceTag, useDebounce, wait } from '@deta/utils'
-  import { Button, prepareContextMenu } from '@deta/ui'
+  import { isLinux, isMac, isWindows, ResourceTag, useDebounce, wait } from '@mist/utils'
+  import { Button, prepareContextMenu } from '@mist/ui'
   import { debugMode } from './stores/debug'
   import AltWindowControls from './components/AltWindowControls.svelte'
-  import { Icon } from '@deta/icons'
-  import { checkAndCreateDemoItems } from '@deta/services'
+  import { Icon } from '@mist/icons'
+  import { checkAndCreateDemoItems } from '@mist/services'
 
   const log = useLogScope('Core')
 
@@ -338,16 +338,16 @@
     right: 0;
     bottom: 0;
     background: radial-gradient(
-      300% 7% at 50.04% 0%,
-      light-dark(#deedfe, #1a2438) 0%,
-      light-dark(#b3d4fe, #0f141f) 69.23%,
-      light-dark(#c9dcfd, #0f141f) 93.37%
+      260% 90% at 50% -10%,
+      light-dark(#f0ecff, #140f26) 0%,
+      light-dark(#ded4ff, #0f0b1d) 52%,
+      light-dark(#e8e1ff, #090613) 100%
     );
     background: radial-gradient(
-      300% 7% at 50.04% 0%,
-      light-dark(color(display-p3 0.8807 0.9291 0.9921), color(display-p3 0.102 0.1412 0.2196)) 0%,
-      light-dark(color(display-p3 0.7031 0.8325 0.9963), color(display-p3 0.06 0.08 0.12)) 69.23%,
-      light-dark(color(display-p3 0.7938 0.8654 0.9912), color(display-p3 0.06 0.08 0.12)) 93.37%
+      260% 90% at 50% -10%,
+      light-dark(color(display-p3 0.94 0.92 1), color(display-p3 0.078 0.058 0.145)) 0%,
+      light-dark(color(display-p3 0.86 0.82 0.99), color(display-p3 0.055 0.043 0.109)) 52%,
+      light-dark(color(display-p3 0.91 0.88 1), color(display-p3 0.035 0.027 0.082)) 100%
     );
     display: flex;
     flex-direction: column;
@@ -355,16 +355,16 @@
     &.vertical-layout {
       flex-direction: column;
       background: radial-gradient(
-        50% 300% at 0% 50%,
-        light-dark(#deedfe, #1a2438) 0%,
-        light-dark(#b3d4fe, #0f141f) 69.23%,
-        light-dark(#c9dcfd, #0f141f) 93.37%
+        90% 260% at -10% 50%,
+        light-dark(#f0ecff, #140f26) 0%,
+        light-dark(#dcd1ff, #0f0b1d) 58%,
+        light-dark(#ebe4ff, #090613) 100%
       );
       background: radial-gradient(
-        50% 300% at 0% 50%,
-        light-dark(color(display-p3 0.8807 0.9291 0.9921), color(display-p3 0.102 0.1412 0.2196)) 0%,
-        light-dark(color(display-p3 0.7031 0.8325 0.9963), color(display-p3 0.06 0.08 0.12)) 69.23%,
-        light-dark(color(display-p3 0.7938 0.8654 0.9912), color(display-p3 0.06 0.08 0.12)) 93.37%
+        90% 260% at -10% 50%,
+        light-dark(color(display-p3 0.94 0.92 1), color(display-p3 0.078 0.058 0.145)) 0%,
+        light-dark(color(display-p3 0.85 0.80 0.99), color(display-p3 0.055 0.043 0.109)) 58%,
+        light-dark(color(display-p3 0.92 0.89 1), color(display-p3 0.035 0.027 0.082)) 100%
       );
     }
   }

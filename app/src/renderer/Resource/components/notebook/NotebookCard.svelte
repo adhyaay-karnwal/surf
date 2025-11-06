@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { type Notebook } from '@deta/services/notebook'
-  import { type Fn } from '@deta/types'
-  import { clickOutside } from '@deta/utils'
+  import { type Notebook } from '@mist/services/notebook'
+  import { type Fn } from '@mist/types'
+  import { clickOutside } from '@mist/utils'
 
   let {
     notebook,

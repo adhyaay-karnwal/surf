@@ -1,5 +1,5 @@
 {
-  "name": "@deta/ui",
+  "name": "@mist/ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -44,7 +44,7 @@
     "sync": "svelte-kit sync"
   },
   "devDependencies": {
-    "@deta/types": "*",
+    "@mist/types": "*",
     "@horizon/eslint-config": "*",
     "@horizon/typescript-config": "*",
     "@internationalized/date": "^3.10.0",
@@ -76,9 +76,9 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.4.0",
-    "@deta/icons": "*",
-    "@deta/services": "*",
-    "@deta/utils": "*",
+    "@mist/icons": "*",
+    "@mist/services": "*",
+    "@mist/utils": "*",
     "bits-ui": "^2.9.3",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",

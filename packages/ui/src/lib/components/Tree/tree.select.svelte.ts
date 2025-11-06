@@ -1,6 +1,6 @@
 import type { TreeStore } from './tree.store.svelte'
 import type { BaseTreeNode } from './tree.types'
-import { ViewType } from '@deta/types'
+import { ViewType } from '@mist/types'
 
 /**
  * Return type for createTabSelection

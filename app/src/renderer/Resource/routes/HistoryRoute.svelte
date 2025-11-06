@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { Button, PageMention } from '@deta/ui'
+  import { Icon } from '@mist/icons'
+  import { useNotebookManager } from '@mist/services/notebooks'
+  import { Button, PageMention } from '@mist/ui'
   import { onMount } from 'svelte'
 
   let editorEl = $state() as HTMLElement
@@ -28,7 +28,7 @@
           <PageMention
             text={`${container.data.emoji ? container.data.emoji + " " : ""}${container.data.folderName}`}
             onclick={async () => {
-              await navigation.navigate(`surf://notebook/${container.id}`)
+              await navigation.navigate(`mist://notebook/${container.id}`)
                 .finished;
             }}
             --delay={50 + i * 50 + "ms"}

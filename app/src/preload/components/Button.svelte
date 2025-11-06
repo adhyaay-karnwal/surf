@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import { Icon, type Icons } from '@deta/icons'
+  import { Icon, type Icons } from '@mist/icons'
 
   export let icon: Icons | undefined = undefined
   export let tooltip: string = ''

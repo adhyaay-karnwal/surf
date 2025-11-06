@@ -26,10 +26,10 @@
     type EditorRewriteEvent,
     type MentionItem,
     type Range
-  } from '@deta/editor'
-  import '@deta/editor/src/editor.scss'
+  } from '@mist/editor'
+  import '@mist/editor/src/editor.scss'
 
-  import { Resource, useResourceManager } from '@deta/services/resources'
+  import { Resource, useResourceManager } from '@mist/services/resources'
   import {
     generateID,
     getFileKind,
@@ -37,7 +37,7 @@
     getFormattedDate,
     isMac,
     isModKeyPressed,
-    parseSurfProtocolURL,
+    parseMistProtocolURL,
     truncateURL,
     useDebounce,
     useLocalStorageStore,
@@ -48,15 +48,15 @@
     isDev,
     conditionalArrayItem,
     markdownToHtml
-  } from '@deta/utils'
+  } from '@mist/utils'
   import CitationItem from './CitationItem.svelte'
-  import { generateContentHash, mapCitationsToText, parseChatOutputToHtml } from '@deta/services/ai'
+  import { generateContentHash, mapCitationsToText, parseChatOutputToHtml } from '@mist/services/ai'
   import {
     startAIGeneration,
     endAIGeneration,
     updateAIGenerationProgress,
     isGeneratingAI as globalIsGeneratingAI
-  } from '@deta/services/ai'
+  } from '@mist/services/ai'
   import {
     EventContext,
     GeneratePromptsEventTrigger,
@@ -73,26 +73,26 @@
     ViewLocation,
     type CitationClickData,
     type CitationInfo
-  } from '@deta/types'
+  } from '@mist/types'
   import {
     DragTypeNames,
     type AIChatMessageParsed,
     type AIChatMessageSource,
     type DragTypes,
     type CitationClickEvent
-  } from '@deta/types'
-  import { AIChat, useAI, type ChatPrompt } from '@deta/services/ai'
-  import { type ContextManager } from '@deta/services/ai'
+  } from '@mist/types'
+  import { AIChat, useAI, type ChatPrompt } from '@mist/services/ai'
+  import { type ContextManager } from '@mist/services/ai'
   import {
     INLINE_TRANSFORM,
     SMART_NOTES_SUGGESTIONS_GENERATOR_PROMPT
-  } from '@deta/services/constants'
-  import type { MentionAction } from '@deta/editor/src/lib/extensions/Mention'
-  import { type AITool, ModelTiers, Provider } from '@deta/types/src/ai.types'
-  import { useConfig } from '@deta/services'
-  import { createWikipediaAPI, WebParser } from '@deta/web-parser'
+  } from '@mist/services/constants'
+  import type { MentionAction } from '@mist/editor/src/lib/extensions/Mention'
+  import { type AITool, ModelTiers, Provider } from '@mist/types/src/ai.types'
+  import { useConfig } from '@mist/services'
+  import { createWikipediaAPI, WebParser } from '@mist/web-parser'
   import EmbeddedResource from './EmbeddedResource.svelte'
-  import { isGeneratedResource } from '@deta/services/resources'
+  import { isGeneratedResource } from '@mist/services/resources'
   import {
     MODEL_CLAUDE_MENTION,
     MODEL_GPT_MENTION,
@@ -100,26 +100,26 @@
     NOTE_MENTION,
     EVERYTHING_MENTION,
     INBOX_MENTION
-  } from '@deta/services/constants'
+  } from '@mist/services/constants'
   import type {
     SlashCommandPayload,
     SlashMenuItem
-  } from '@deta/editor/src/lib/extensions/Slash/index'
-  import type { SlashItemsFetcher } from '@deta/editor/src/lib/extensions/Slash/suggestion'
-  import { BUILT_IN_SLASH_COMMANDS } from '@deta/editor/src/lib/extensions/Slash/actions'
-  import Surflet from './Surflet.svelte'
+  } from '@mist/editor/src/lib/extensions/Slash/index'
+  import type { SlashItemsFetcher } from '@mist/editor/src/lib/extensions/Slash/suggestion'
+  import { BUILT_IN_SLASH_COMMANDS } from '@mist/editor/src/lib/extensions/Slash/actions'
+  import Mistlet from './Mistlet.svelte'
   import WebSearch from './WebSearch.svelte'
-  import { createResourcesFromMediaItems, processPaste } from '@deta/services'
-  import { predefinedSurfletCode } from './predefinedSurflets'
-  import { createRemoteMentionsFetcher, createResourcesMentionsFetcher } from '@deta/services/ai'
-  import type { LinkClickHandler } from '@deta/editor/src/lib/extensions/Link/helpers/clickHandler'
-  import { EditorAIGeneration, NoteEditor } from '@deta/services/ai'
-  import { CHAT_TITLE_GENERATOR_PROMPT, AI_TOOLS } from '@deta/services/constants'
+  import { createResourcesFromMediaItems, processPaste } from '@mist/services'
+  import { predefinedMistletCode } from './predefinedMistlets'
+  import { createRemoteMentionsFetcher, createResourcesMentionsFetcher } from '@mist/services/ai'
+  import type { LinkClickHandler } from '@mist/editor/src/lib/extensions/Link/helpers/clickHandler'
+  import { EditorAIGeneration, NoteEditor } from '@mist/services/ai'
+  import { CHAT_TITLE_GENERATOR_PROMPT, AI_TOOLS } from '@mist/services/constants'
   import ChatInput from './ChatInput.svelte'
-  import { SearchResourceTags, ResourceTag } from '@deta/utils/formatting'
-  import type { ResourceNote, ResourceJSON } from '@deta/services/resources'
-  import { type MessagePortClient, type AIQueryPayload } from '@deta/services/messagePort'
-  import { promptForFilesAndTurnIntoResourceMentions } from '@deta/services'
+  import { SearchResourceTags, ResourceTag } from '@mist/utils/formatting'
+  import type { ResourceNote, ResourceJSON } from '@mist/services/resources'
+  import { type MessagePortClient, type AIQueryPayload } from '@mist/services/messagePort'
+  import { promptForFilesAndTurnIntoResourceMentions } from '@mist/services'
 
   export let resourceId: string
   export let autofocus: boolean = true
@@ -428,15 +428,15 @@
       // Scroll to top after DOM has updated and Editor is mounted
       await tick()
 
-      // Add event listeners for surflet events
-      const handleCreateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received create-surflet event', e.detail)
-        handleCreateSurflet(e.detail?.code)
+      // Add event listeners for mistlet events
+      const handleCreateMistletEvent = (e: CustomEvent) => {
+        log.debug('Received create-mistlet event', e.detail)
+        handleCreateMistlet(e.detail?.code)
       }
 
-      const handleUpdateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received update-surflet event', e.detail)
-        updateSurfletContent(e.detail?.code)
+      const handleUpdateMistletEvent = (e: CustomEvent) => {
+        log.debug('Received update-mistlet event', e.detail)
+        updateMistletContent(e.detail?.code)
       }
 
       const handleOpenStuffEvent = () => {
@@ -457,17 +457,17 @@
         const noteEditor = NoteEditor.create(editor, editorElem, editorElement)
       }
 
-      document.addEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+      document.addEventListener('create-mistlet', handleCreateMistletEvent as EventListener)
       document.addEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-      document.addEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+      document.addEventListener('update-mistlet', handleUpdateMistletEvent as EventListener)
 
       log.debug('Text resource setup complete')
       messagePort.noteReady.send()
 
       return () => {
-        document.removeEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+        document.removeEventListener('create-mistlet', handleCreateMistletEvent as EventListener)
         document.removeEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-        document.removeEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+        document.removeEventListener('update-mistlet', handleUpdateMistletEvent as EventListener)
       }
     }
 
@@ -945,8 +945,8 @@
           drag.continue()
           return
         }
-        // } else if (drag.item!.data.hasData(DragTypeNames.SURF_TAB)) {
-        //   const tabId = drag.item!.data.getData(DragTypeNames.SURF_TAB).id
+        // } else if (drag.item!.data.hasData(DragTypeNames.MIST_TAB)) {
+        //   const tabId = drag.item!.data.getData(DragTypeNames.MIST_TAB).id
         //   const tab = await tabsManager.get(tabId)
         //   if (!tab) {
         //     log.error('Tab not found', tabId)
@@ -1002,20 +1002,20 @@
 
         //   log.warn('Dropped tab but no resource found! Aborting drop!')
         //   drag.abort()
-      } else if (drag.item!.data.hasData(DragTypeNames.SURF_SPACE)) {
-        const space = drag.item!.data.getData(DragTypeNames.SURF_SPACE)
+      } else if (drag.item!.data.hasData(DragTypeNames.MIST_SPACE)) {
+        const space = drag.item!.data.getData(DragTypeNames.MIST_SPACE)
 
         log.debug('dropped space', space)
         processDropSpace(position, space)
       } else if (
-        drag.item!.data.hasData(DragTypeNames.SURF_RESOURCE) ||
-        drag.item!.data.hasData(DragTypeNames.ASYNC_SURF_RESOURCE)
+        drag.item!.data.hasData(DragTypeNames.MIST_RESOURCE) ||
+        drag.item!.data.hasData(DragTypeNames.ASYNC_MIST_RESOURCE)
       ) {
         let resource: Resource | null = null
-        if (drag.item!.data.hasData(DragTypeNames.SURF_RESOURCE)) {
-          resource = drag.item!.data.getData(DragTypeNames.SURF_RESOURCE)
-        } else if (drag.item!.data.hasData(DragTypeNames.ASYNC_SURF_RESOURCE)) {
-          const resourceFetcher = drag.item!.data.getData(DragTypeNames.ASYNC_SURF_RESOURCE)
+        if (drag.item!.data.hasData(DragTypeNames.MIST_RESOURCE)) {
+          resource = drag.item!.data.getData(DragTypeNames.MIST_RESOURCE)
+        } else if (drag.item!.data.hasData(DragTypeNames.ASYNC_MIST_RESOURCE)) {
+          const resourceFetcher = drag.item!.data.getData(DragTypeNames.ASYNC_MIST_RESOURCE)
           resource = await resourceFetcher()
         }
 
@@ -1225,7 +1225,7 @@
     const enabledTools = get(tools).filter((tool) => tool.active)
     const toolsConfiguration = {
       websearch: enabledTools.some((tool) => tool.id === 'websearch'),
-      surflet: enabledTools.some((tool) => tool.id === 'surflet')
+      mistlet: enabledTools.some((tool) => tool.id === 'mistlet')
     }
 
     // Update both local and global AI generation state
@@ -1330,7 +1330,7 @@
           onboarding: showOnboarding,
           noteResourceId: resourceId,
           websearch: toolsConfiguration.websearch,
-          surflet: toolsConfiguration.surflet
+          mistlet: toolsConfiguration.mistlet
         },
         renderFunction
       )
@@ -1446,7 +1446,7 @@
         return
       } else if (type === MentionItemType.NOTEBOOK) {
         messagePort.navigateURL.send({
-          url: `surf://surf/notebook/${id}`,
+          url: `mist://surf/notebook/${id}`,
           target
         })
         return
@@ -1552,7 +1552,7 @@
 
     log.debug('Link clicked', href, target)
 
-    const resourceId = parseSurfProtocolURL(href)
+    const resourceId = parseMistProtocolURL(href)
     if (resourceId) {
       log.debug('Opening resource', resourceId)
 
@@ -2031,7 +2031,7 @@
     chatInputEditor.commands.focus()
   }
 
-  export const handleCreateSurflet = (code?: string) => {
+  export const handleCreateMistlet = (code?: string) => {
     try {
       const editor = editorElem.getEditor()
 
@@ -2039,44 +2039,44 @@
       const currentPosition = editor.view.state.selection.from
 
       // Use the provided code or fall back to predefined code
-      const surfletCode = code || predefinedSurfletCode
+      const mistletCode = code || predefinedMistletCode
 
       // Remove markdown code block markers if present
-      const cleanCode = surfletCode.replace(/```javascript|```/g, '')
+      const cleanCode = mistletCode.replace(/```javascript|```/g, '')
 
-      // Create a surflet node with the code
-      const surfletNode = editor.view.state.schema.nodes.surflet.create(
+      // Create a mistlet node with the code
+      const mistletNode = editor.view.state.schema.nodes.mistlet.create(
         { codeContent: cleanCode },
         null
       )
 
-      // Insert the surflet node at the current position
+      // Insert the mistlet node at the current position
       const tr = editor.view.state.tr
-      tr.insert(currentPosition, surfletNode)
+      tr.insert(currentPosition, mistletNode)
       editor.view.dispatch(tr)
 
       // Focus the editor after insertion
       editor.commands.focus()
 
-      log.debug('Surflet inserted successfully')
+      log.debug('Mistlet inserted successfully')
     } catch (err) {
-      log.error('Error inserting surflet', err)
+      log.error('Error inserting mistlet', err)
     }
   }
 
   /**
-   * Update the content of the most recently created surflet
-   * @param code The new code to set for the surflet
+   * Update the content of the most recently created mistlet
+   * @param code The new code to set for the mistlet
    */
-  const updateSurfletContent = (code?: string) => {
+  const updateMistletContent = (code?: string) => {
     if (!code) {
-      log.debug('No code provided to update surflet')
+      log.debug('No code provided to update mistlet')
       return
     }
 
     // Check if editorElem exists and is initialized
     if (!editorElem) {
-      log.debug('Editor element not available for surflet update')
+      log.debug('Editor element not available for mistlet update')
       return
     }
 
@@ -2084,42 +2084,42 @@
       // Get the editor and check if it's available
       const editor = editorElem.getEditor()
       if (!editor || !editor.state || !editor.view) {
-        log.debug('Editor not fully initialized for surflet update')
+        log.debug('Editor not fully initialized for mistlet update')
         return
       }
 
-      // Find the surflet node in the document
-      const surfletNodes: { pos: number; node: any }[] = []
+      // Find the mistlet node in the document
+      const mistletNodes: { pos: number; node: any }[] = []
       editor.state.doc.descendants((node, pos) => {
-        if (node.type.name === 'surflet') {
-          surfletNodes.push({ pos, node })
+        if (node.type.name === 'mistlet') {
+          mistletNodes.push({ pos, node })
         }
         return true
       })
 
-      // If no surflet nodes found, log debug and return
-      if (surfletNodes.length === 0) {
-        log.debug('No surflet node found to update')
+      // If no mistlet nodes found, log debug and return
+      if (mistletNodes.length === 0) {
+        log.debug('No mistlet node found to update')
         return
       }
 
-      // Get the last surflet node (most recently created)
-      const lastSurflet = surfletNodes[surfletNodes.length - 1]
+      // Get the last mistlet node (most recently created)
+      const lastMistlet = mistletNodes[mistletNodes.length - 1]
 
       // Create a transaction to update the node's attributes
       const tr = editor.state.tr
-      tr.setNodeMarkup(lastSurflet.pos, undefined, {
-        ...lastSurflet.node.attrs,
+      tr.setNodeMarkup(lastMistlet.pos, undefined, {
+        ...lastMistlet.node.attrs,
         codeContent: code
       })
 
       // Dispatch the transaction to update the editor
       editor.view.dispatch(tr)
 
-      log.debug('Surflet content updated successfully')
+      log.debug('Mistlet content updated successfully')
     } catch (err) {
       // Use debug level instead of error to avoid spamming console
-      log.debug('Could not update surflet content', err)
+      log.debug('Could not update mistlet content', err)
     }
   }
 
@@ -2558,7 +2558,7 @@
             bind:editorElement
             placeholderNewLine={$editorPlaceholder}
             citationComponent={CitationItem}
-            surfletComponent={Surflet}
+            mistletComponent={Mistlet}
             webSearchComponent={WebSearch}
             resourceComponent={EmbeddedResource}
             floatingMenu

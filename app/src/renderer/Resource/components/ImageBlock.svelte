@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { useDebounce, useLogScope } from '@deta/utils'
-  import { useResourceManager } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
+  import { useDebounce, useLogScope } from '@mist/utils'
+  import { useResourceManager } from '@mist/services/resources'
+  import { ResourceTagsBuiltInKeys } from '@mist/types'
+  import type { Resource } from '@mist/services/resources'
 
   export let resource: Resource
   export let isEditable: boolean = true

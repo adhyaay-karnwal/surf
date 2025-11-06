@@ -3,9 +3,9 @@ import {
   ResourceTagDataStateValue,
   SpaceEntryOrigin,
   type BrowserType
-} from '@deta/types'
-import { useLogScope } from '@deta/utils/io'
-import { ResourceTag } from '@deta/utils/formatting'
+} from '@mist/types'
+import { useLogScope } from '@mist/utils/io'
+import { ResourceTag } from '@mist/utils/formatting'
 
 import { type Resource, type ResourceManager } from './resources'
 import { NotebookManager } from './notebooks'

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { useTabs, TabItem } from '@deta/services/tabs'
-  import { Favicon, Button, type CtxItem, contextMenu } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { HTMLDragItem, DragData } from '@deta/dragcula'
-  import { DragTypeNames } from '@deta/types'
-  import { getCleanHostname } from '@deta/utils'
-  import { useBrowser } from '@deta/services/browser'
-  import { ViewType } from '@deta/services/views'
+  import { useTabs, TabItem } from '@mist/services/tabs'
+  import { Favicon, Button, type CtxItem, contextMenu } from '@mist/ui'
+  import { Icon } from '@mist/icons'
+  import { HTMLDragItem, DragData } from '@mist/dragcula'
+  import { DragTypeNames } from '@mist/types'
+  import { getCleanHostname } from '@mist/utils'
+  import { useBrowser } from '@mist/services/browser'
+  import { ViewType } from '@mist/services/views'
 
   let {
     tab,
@@ -127,7 +127,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.MIST_TAB, tab)
       return dragData
     })()
   }}

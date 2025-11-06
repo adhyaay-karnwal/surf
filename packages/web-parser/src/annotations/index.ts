@@ -1,4 +1,4 @@
-import { type AnnotationRangeData, type AnnotationType } from '@deta/types'
+import { type AnnotationRangeData, type AnnotationType } from '@mist/types'
 
 import { getXPath } from './xpath'
 

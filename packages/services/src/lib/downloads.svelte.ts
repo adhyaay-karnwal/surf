@@ -7,14 +7,14 @@ import type {
   DownloadRequestMessage,
   DownloadState,
   DownloadUpdatedMessage
-} from '@deta/types'
-import { ResourceTypes } from '@deta/types'
+} from '@mist/types'
+import { ResourceTypes } from '@mist/types'
 
-import { shortenFilename, useLogScope } from '@deta/utils/io'
-import { ResourceTag } from '@deta/utils/formatting'
+import { shortenFilename, useLogScope } from '@mist/utils/io'
+import { ResourceTag } from '@mist/utils/formatting'
 
 import { useResourceManager } from './resources'
-import { isDev } from '@deta/utils'
+import { isDev } from '@mist/utils'
 
 export class DownloadsManager {
   private downloadCompleteTimeoutMs = 5000 // keep completed downloads in the UI for 5 seconds

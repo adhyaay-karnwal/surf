@@ -1,5 +1,5 @@
-import { ResourceDataPost } from '@deta/types'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { ResourceDataPost } from '@mist/types'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@mist/utils'
 import Parser from 'rss-parser'
 import { sanitizeHTML } from '../utils'
 

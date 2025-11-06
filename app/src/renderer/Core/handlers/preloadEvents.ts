@@ -1,5 +1,5 @@
-import { type Fn } from '@deta/types'
-import { toggleTabOrientation } from '@deta/services/tabs'
+import { type Fn } from '@mist/types'
+import { toggleTabOrientation } from '@mist/services/tabs'
 
 import { setupDownloadEvents } from './downloadEvents'
 import { setupTabViewEvents } from './tabViewEvents'

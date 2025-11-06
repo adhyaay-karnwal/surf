@@ -1,6 +1,6 @@
-import type { ContextViewDensity, ContextViewType } from '@deta/types'
+import type { ContextViewDensity, ContextViewType } from '@mist/types'
 import type { SpaceEntrySortBy } from './sffs.types'
-import type { Icons } from '@deta/icons'
+import type { Icons } from '@mist/icons'
 
 export interface CreateSpaceEntryInput {
   resource_id: string

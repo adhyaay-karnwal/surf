@@ -3,10 +3,10 @@
   import { derived, writable, type Readable } from 'svelte/store'
   import { DropdownMenu, type CustomEventHandler } from 'bits-ui'
 
-  import { flyAndScaleDirectional, focus, wait } from '@deta/utils'
+  import { flyAndScaleDirectional, focus, wait } from '@mist/utils'
   import type { SelectItem } from '.'
   import SelectDropdownItem from './SelectDropdownItem.svelte'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
 
   export let items: Readable<SelectItem[]>
   export let selected: string | null = null

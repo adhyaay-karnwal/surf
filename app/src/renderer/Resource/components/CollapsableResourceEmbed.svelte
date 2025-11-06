@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@mist/icons'
   import {
     isModKeyPressed,
     tooltip,
@@ -7,22 +7,22 @@
     useLogScope,
     getHostname,
     getFileKind
-  } from '@deta/utils'
+  } from '@mist/utils'
 
   import { onMount, tick } from 'svelte'
   import type { WebviewTag } from 'electron'
   import { writable } from 'svelte/store'
-  import { useResourceManager } from '@deta/services/resources'
+  import { useResourceManager } from '@mist/services/resources'
   import {
     AddResourceToSpaceEventTrigger,
     OpenInMiniBrowserEventFrom,
     ResourceTagsBuiltInKeys
-  } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
-  import { SpaceEntryOrigin, type BookmarkTabState } from '@deta/types'
-  import { useToasts } from '@deta/ui'
+  } from '@mist/types'
+  import type { Resource } from '@mist/services/resources'
+  import { SpaceEntryOrigin, type BookmarkTabState } from '@mist/types'
+  import { useToasts } from '@mist/ui'
   import CollapsableBlock from './CollapsableBlock.svelte'
-  import Image from '@deta/ui/src/lib/components/Image/Image.svelte'
+  import Image from '@mist/ui/src/lib/components/Image/Image.svelte'
 
   export let resource: Resource
   export let tab: any | undefined = undefined
@@ -324,7 +324,7 @@
   {#if showImagePreview}
     <div class="image-preview-container">
       <Image
-        src={`surf://surf/resource/${resource.id}?raw=true`}
+        src={`mist://surf/resource/${resource.id}?raw=true`}
         alt={resource.metadata?.name || 'Image'}
         style="height: 100%; width: 100%; max-width: 100%; object-fit: contain; border-radius: 8px;"
       />

@@ -1,4 +1,4 @@
-import { ResourceTypes, type ResourceDataTable, type ResourceDataTableColumn } from '@deta/types'
+import { ResourceTypes, type ResourceDataTable, type ResourceDataTableColumn } from '@mist/types'
 import type { DetectedWebApp, WebService, WebServiceActionInputs } from '../types'
 import { WebAppExtractorActions } from '../extractors'
 import { SERVICES } from '../services'

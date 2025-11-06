@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Switch } from '../Switch'
-  import { Icon } from '@deta/icons'
-  import { tooltip, useDebounce } from '@deta/utils'
+  import { Icon } from '@mist/icons'
+  import { tooltip, useDebounce } from '@mist/utils'
 
   import { createEventDispatcher } from 'svelte'
 
