@@ -131,13 +131,13 @@ export class ContextManagerWCV {
     this.log.debug('Added resource context', result)
   }
 
-  async addNotebook(notebookId: string, opts?: AddContextItemOptions) {
+  async addJournal(journalId: string, opts?: AddContextItemOptions) {
     const result = await this.sendContextManagerActionEvent(
       WebContentsViewContextManagerActionType.ADD_NOTEBOOK_CONTEXT,
-      { id: notebookId }
+      { id: journalId }
     )
 
-    this.log.debug('Added notebook context', result)
+    this.log.debug('Added journal context', result)
   }
 
   async addTab(tabId: string, opts?: AddContextItemOptions) {
@@ -254,7 +254,7 @@ export class ContextManagerWCV {
     } else if (item.type === MentionItemType.RESOURCE) {
       return this.addResource(item.id, opts)
     } else if (item.type === MentionItemType.NOTEBOOK) {
-      return this.addNotebook(item.id, opts)
+      return this.addJournal(item.id, opts)
     } else if (item.type === MentionItemType.ALL_TABS) {
       return this.addTabs()
     } else if (item.type === MentionItemType.ACTIVE_TAB) {

@@ -41,11 +41,11 @@
       "import": "./dist/resources/index.js",
       "default": "./dist/resources/index.js"
     },
-    "./notebooks": {
-      "types": "./dist/notebooks/index.d.ts",
-      "svelte": "./src/lib/notebooks/index.ts",
-      "import": "./dist/notebooks/index.js",
-      "default": "./dist/notebooks/index.js"
+    "./journals": {
+      "types": "./dist/journals/index.d.ts",
+      "svelte": "./src/lib/journals/index.ts",
+      "import": "./dist/journals/index.js",
+      "default": "./dist/journals/index.js"
     },
     "./mentions": {
       "types": "./dist/mentions/index.d.ts",

@@ -34,7 +34,7 @@ class Logger {
   constructor(scope?: string) {
     const enabledScopes = import.meta.env.R_VITE_DEBUG
     this.scope = scope || (isBrowser() ? 'Browser' : 'Node')
-    // for surf only namespacing
+    // for mist only namespacing
     if (this.scope !== GLOBAL_SCOPE) {
       this.scope = `${GLOBAL_SCOPE}:${this.scope}`
     }

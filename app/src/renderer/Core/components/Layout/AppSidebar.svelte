@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import { useViewManager, ViewType } from '@mist/services/views'
   import { useBrowser } from '@mist/services/browser'
   import { Button } from '@mist/ui'
@@ -12,10 +12,10 @@
   import { isInternalRendererURL, useDebounce } from '@mist/utils'
   import { useResourceManager } from '@mist/services/resources'
   import { writable } from 'svelte/store'
-  import { NotebookDefaults, ViewLocation } from '@mist/types'
+  import { JournalDefaults, ViewLocation } from '@mist/types'
 
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
   const browser = useBrowser()
   const viewManager = useViewManager()
   const sidebarStore = useKVTable<
@@ -23,7 +23,7 @@
       siderbar_width: number
       sidebar_location: string
     } & BaseKVItem
-  >('notebook_sidebar')
+  >('journal_sidebar')
 
   const activeSidebarView = $derived(viewManager.activeSidebarView)
   const activeSidebarLocation = $derived(activeSidebarView?.url ?? writable(null))
@@ -66,13 +66,13 @@
   }
 
   const handleNewNote = async () => {
-    let notebookId: string | undefined = undefined
+    let journalId: string | undefined = undefined
     const { type, id } = activeSidebarView.typeDataValue
-    if (type === ViewType.Notebook && id) {
-      notebookId = id
+    if (type === ViewType.Journal && id) {
+      journalId = id
     }
 
-    await browser.createAndOpenNote(undefined, { target: 'sidebar', notebookId })
+    await browser.createAndOpenNote(undefined, { target: 'sidebar', journalId })
   }
 
   const handleSearchInput = useDebounce((value: string) => {
@@ -91,7 +91,7 @@
   $effect(() => {
     if (viewManager.sidebarViewOpen && viewManager.activeSidebarView === null) {
       viewManager.setSidebarState({
-        view: viewManager.create({ url: 'mist://notebook', permanentlyActive: true })
+        view: viewManager.create({ url: 'mist://journal', permanentlyActive: true })
       })
     }
   })

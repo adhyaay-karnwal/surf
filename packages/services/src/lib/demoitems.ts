@@ -5,10 +5,10 @@ import { ResourceTypes } from '@mist/types'
 
 import { ResourceNote, useResourceManager } from './resources'
 import { extractAndCreateWebResource } from './mediaImporter'
-import { Notebook, useNotebookManager } from './notebooks'
+import { Journal, useJournalManager } from './journals'
 import { useConfig } from './config'
 
-import { onboardingNotebook } from './constants/examples'
+import { onboardingJournal } from './constants/examples'
 import * as OnboardingNoteWelcome from './constants/onboarding/00.welcome.md'
 import * as OnboardingNoteManual from './constants/onboarding/01.manual.md'
 
@@ -16,54 +16,54 @@ const log = useLogScope('DemoItems')
 
 export async function checkAndCreateDemoItems() {
   log.debug('Checking and creating demo items if needed')
-  const onboardingNotebook = await createDemoNotebook()
+  const onboardingJournal = await createDemoJournal()
 
-  if (onboardingNotebook) {
-    await createDemoNotes(onboardingNotebook)
+  if (onboardingJournal) {
+    await createDemoNotes(onboardingJournal)
   }
 }
 
-export async function createDemoNotebook() {
-  const notebookManager = useNotebookManager()
+export async function createDemoJournal() {
+  const journalManager = useJournalManager()
   const resourceManager = useResourceManager()
   const configService = useConfig()
   const config = configService.getConfig()
 
-  if (config.settings?.onboarding?.seen_demo_notebook) {
-    log.debug('User has already seen demo notebook, skipping creation')
+  if (config.settings?.onboarding?.seen_demo_journal) {
+    log.debug('User has already seen demo journal, skipping creation')
     return
   }
 
   // Check if an onboarding space with the same name already exists
-  const notebooks = await notebookManager.loadNotebooks()
-  const existingOnboardingNotebook = notebooks.find((notebook) => notebook.data.onboarding === true)
+  const journals = await journalManager.loadJournals()
+  const existingOnboardingJournal = journals.find((journal) => journal.data.onboarding === true)
 
   // If an onboarding space already exists, make it active and return it
-  if (existingOnboardingNotebook) {
-    log.debug('Onboarding notebook already exists, skipping creation')
+  if (existingOnboardingJournal) {
+    log.debug('Onboarding journal already exists, skipping creation')
     await configService.updateSettings({
       onboarding: {
         ...config.settings.onboarding,
-        seen_demo_notebook: true
+        seen_demo_journal: true
       }
     })
-    return existingOnboardingNotebook
+    return existingOnboardingJournal
   }
 
-  // Create a new onboarding notebook if one doesn't exist
-  log.debug('Creating new onboarding notebook')
-  const notebook = await notebookManager.createNotebook({
-    name: onboardingNotebook.name,
-    customization: onboardingNotebook.customization,
+  // Create a new onboarding journal if one doesn't exist
+  log.debug('Creating new onboarding journal')
+  const journal = await journalManager.createJournal({
+    name: onboardingJournal.name,
+    customization: onboardingJournal.customization,
     index: 0,
     pinned: true,
     onboarding: true
   })
 
-  if (onboardingNotebook.urls) {
-    const urls = onboardingNotebook.urls
+  if (onboardingJournal.urls) {
+    const urls = onboardingJournal.urls
 
-    log.debug(`Adding ${urls.length} resources to onboarding notebook`)
+    log.debug(`Adding ${urls.length} resources to onboarding journal`)
     const resources = await Promise.all(
       urls.map(async (url) => {
         const existingResources = await resourceManager.getResourcesFromSourceURL(url)
@@ -83,16 +83,16 @@ export async function createDemoNotebook() {
         return resource.id
       })
     )
-    await notebookManager.addResourcesToNotebook(notebook.id, resources)
+    await journalManager.addResourcesToJournal(journal.id, resources)
     await configService.updateSettings({
       onboarding: {
         ...config.settings.onboarding,
-        seen_demo_notebook: true
+        seen_demo_journal: true
       }
     })
   }
 
-  return notebook
+  return journal
 }
 
 export type DemoNote = {
@@ -108,8 +108,8 @@ export function parseNoteContent(note: typeof OnboardingNoteWelcome, gettingStar
     .replaceAll('$GETTING_STARTED_LINK', gettingStartedLink || '')
 }
 
-export async function createDemoNote(note: DemoNote, notebook: Notebook) {
-  const notebookManager = useNotebookManager()
+export async function createDemoNote(note: DemoNote, journal: Journal) {
+  const journalManager = useJournalManager()
   const resourceManager = useResourceManager()
 
   const existingOnboardingNotes = await resourceManager.listResourcesByTags([
@@ -127,7 +127,7 @@ export async function createDemoNote(note: DemoNote, notebook: Notebook) {
       name: note.title
     })
 
-    await notebookManager.addResourcesToNotebook(notebook.id, [resource.id])
+    await journalManager.addResourcesToJournal(journal.id, [resource.id])
     return resource
   }
 
@@ -140,12 +140,12 @@ export async function createDemoNote(note: DemoNote, notebook: Notebook) {
     [ResourceTag.onboarding(note.id)]
   )
 
-  await notebookManager.addResourcesToNotebook(notebook.id, [resource.id])
+  await journalManager.addResourcesToJournal(journal.id, [resource.id])
 
   return resource
 }
 
-export async function createDemoNotes(notebook: Notebook) {
+export async function createDemoNotes(journal: Journal) {
   const resourceManager = useResourceManager()
 
   const manualResource = await createDemoNote(
@@ -154,16 +154,16 @@ export async function createDemoNotes(notebook: Notebook) {
       title: OnboardingNoteManual.attributes.title as string,
       content: parseNoteContent(OnboardingNoteManual)
     },
-    notebook
+    journal
   )
 
   const welcomeResource = await createDemoNote(
     {
       id: OnboardingNoteWelcome.attributes.id as string,
       title: OnboardingNoteWelcome.attributes.title as string,
-      content: parseNoteContent(OnboardingNoteWelcome, `mist://surf/resource/${manualResource.id}`)
+      content: parseNoteContent(OnboardingNoteWelcome, `mist://mist/resource/${manualResource.id}`)
     },
-    notebook
+    journal
   )
 
   await wait(300)

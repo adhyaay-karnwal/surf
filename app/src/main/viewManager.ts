@@ -598,7 +598,7 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
 
     const view = new WCView(
       {
-        partition: 'persist:surf-app-session',
+        partition: 'persist:mist-app-session',
         preload: path.resolve(__dirname, '../preload/overlay.js'),
         additionalArguments: additionalArgs,
         sandbox: false,

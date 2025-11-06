@@ -29,7 +29,7 @@
     Failed to import from {selectedBrowser?.name}. Please make sure it is installed and closed, then
     try again.
   </p>
-  <p>If the problem persists, contact us: <a href="mailto:hello@deta.surf">hello@deta.surf</a></p>
+  <p>If the problem persists, contact us: <a href="mailto:hello@deta.mist">hello@deta.mist</a></p>
 {:else if currentStepIdx === 3}
   <p>
     Your imported data is now saved in Stuff, Mist's central place for anything you save from the

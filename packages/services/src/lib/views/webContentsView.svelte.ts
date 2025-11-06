@@ -755,7 +755,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
     if (!uiLocation) return
 
     if (
-      ![ViewType.Resource, ViewType.Notebook, ViewType.NotebookHome].includes(this.view.typeValue)
+      ![ViewType.Resource, ViewType.Journal, ViewType.JournalHome].includes(this.view.typeValue)
     ) {
       return
     }
@@ -778,13 +778,13 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
   }
 
   async loadURL(url: string, force = false) {
-    const validNotebookTypes = [ViewType.Notebook, ViewType.NotebookHome, ViewType.Resource]
+    const validJournalTypes = [ViewType.Journal, ViewType.JournalHome, ViewType.Resource]
 
     const oldViewTypeData = this.view.typeDataValue
     const newViewTypeData = getViewTypeData(url)
 
-    const currentIsValid = validNotebookTypes.includes(oldViewTypeData.type)
-    const newIsValid = validNotebookTypes.includes(newViewTypeData.type)
+    const currentIsValid = validJournalTypes.includes(oldViewTypeData.type)
+    const newIsValid = validJournalTypes.includes(newViewTypeData.type)
 
     const oldIsRawResource = oldViewTypeData.type === ViewType.Resource && oldViewTypeData.raw
     const newIsRawResource = newViewTypeData.type === ViewType.Resource && newViewTypeData.raw
@@ -792,7 +792,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
     // const currentIsResource = this.view.typeValue === ViewType.Resource
     // const newIsResource = getViewType(url) === ViewType.Resource
 
-    // const canNavigateBetweenNotebooks = currentIsNotebook && newIsNotebook
+    // const canNavigateBetweenJournals = currentIsJournal && newIsJournal
     // const canNavigateBetweenResources = currentIsResource && newIsResource
 
     this.log.debug('Loading URL', url, { currentIsValid, newIsValid, newIsRawResource, force })
@@ -2054,7 +2054,7 @@ export class WebContentsView extends EventEmitterBase<WebContentsViewEmitterEven
 
     let url = parseUrlIntoCanonical(rawUrl) ?? rawUrl
 
-    const surfResourceId = url.match(/^surf:\/\/resource\/([^\/]+)/)?.[1]
+    const surfResourceId = url.match(/^mist:\/\/resource\/([^\/]+)/)?.[1]
     if (surfResourceId) {
       return await this.resourceManager.getResource(surfResourceId)
     }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { useResourceManager, getResourceCtxItems, type Resource } from '@mist/services/resources'
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import { DynamicIcon } from '@mist/icons'
   import { contextMenu, openDialog, type CtxItem} from "@mist/ui"
   import { SpaceEntryOrigin, type Fn } from '@mist/types';
@@ -9,7 +9,7 @@
 
   let {
     resource,
-    sourceNotebookId,
+    sourceJournalId,
     text = $bindable(),
     placeholder = '',
     icon, 
@@ -23,7 +23,7 @@
     ...restProps
   }: {
     resource?: Resource;
-    sourceNotebookId?: string
+    sourceJournalId?: string
     text?: string
     placeholder?: string
     icon?: string
@@ -37,7 +37,7 @@
   } = $props()
 
     const resourceManager = useResourceManager()
-    const notebookManager = useNotebookManager()
+    const journalManager = useJournalManager()
 
 
   let editorEl: HTMLSpanElement = $state()
@@ -70,19 +70,19 @@
     })
     if (!confirmed) return
 
-    await notebookManager.deleteResourcesFromMist(resource.id, true)
+    await journalManager.deleteResourcesFromMist(resource.id, true)
   }
 
-  const handleAddToNotebook = (notebookId: string) => {
-    notebookManager.addResourcesToNotebook(
-      notebookId,
+  const handleAddToJournal = (journalId: string) => {
+    journalManager.addResourcesToJournal(
+      journalId,
       [resource.id],
       SpaceEntryOrigin.ManuallyAdded,
       true
     )
   }
-  const handleRemoveFromNotebook = (notebookId: string) => {
-    notebookManager.removeResourcesFromNotebook(notebookId, [resource.id], true)
+  const handleRemoveFromJournal = (journalId: string) => {
+    journalManager.removeResourcesFromJournal(journalId, [resource.id], true)
   }
 
   const CTX_MENU_ITEMS: CtxItem[] = $derived(resource ?
@@ -95,10 +95,10 @@
         },
       ...getResourceCtxItems({
               resource,
-              sortedNotebooks: notebookManager.sortedNotebooks,
-              onAddToNotebook: handleAddToNotebook,
+              sortedJournals: journalManager.sortedJournals,
+              onAddToJournal: handleAddToJournal,
               onDeleteResource: handleDeleteResource,
-              onRemove: !sourceNotebookId ? undefined : () => handleRemoveFromNotebook(sourceNotebookId)
+              onRemove: !sourceJournalId ? undefined : () => handleRemoveFromJournal(sourceJournalId)
        })
      ] : null
   )

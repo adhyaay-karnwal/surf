@@ -125,7 +125,7 @@ jobs:
             app/dist/*.exe
             app/dist/*.AppImage
             app/dist/*.tar.gz
-            app/dist/surf-*.yml
+            app/dist/mist-*.yml
 
   comment-on-pr:
     needs: [prepare, build]

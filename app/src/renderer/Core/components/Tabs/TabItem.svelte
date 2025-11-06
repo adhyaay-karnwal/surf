@@ -137,8 +137,8 @@
   <div class="tab-icon">
     {#if $type === ViewType.Resource}
       <Icon name="note" size="1.1rem" />
-    {:else if $type === ViewType.Notebook}
-      <Icon name="notebook" />
+    {:else if $type === ViewType.Journal}
+      <Icon name="journal" />
     {:else}
       <Favicon url={$faviconURL || $url} title={$title} />
     {/if}

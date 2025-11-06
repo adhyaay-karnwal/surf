@@ -172,15 +172,15 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     // })
   }
 
-  private async refillPool(type?: 'web' | 'surf') {
+  private async refillPool(type?: 'web' | 'mist') {
     if (!type) {
-      await Promise.all([this.refillPool('web'), this.refillPool('surf')])
+      await Promise.all([this.refillPool('web'), this.refillPool('mist')])
 
       return
     }
 
     this.log.debug('Refilling view pool', type)
-    const viewPool = type === 'surf' ? this.viewPoolMistProtocol : this.viewPoolWebPages
+    const viewPool = type === 'mist' ? this.viewPoolMistProtocol : this.viewPoolWebPages
     const needed = this.poolSize - viewPool.length
 
     if (needed <= 0) return
@@ -189,7 +189,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
       const fullData = {
         id: generateID(),
         partition: 'persist:horizon',
-        url: type === 'surf' ? 'mist://surf/resource/blank' : 'about:blank',
+        url: type === 'mist' ? 'mist://mist/resource/blank' : 'about:blank',
         title: 'New Tab',
         faviconUrl: '',
         navigationHistoryIndex: -1,
@@ -218,7 +218,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     let view: WebContentsView | undefined
     if (url.protocol === 'http:' || url.protocol === 'https:') {
       view = this.viewPoolWebPages.pop()
-    } else if (url.protocol === 'surf:') {
+    } else if (url.protocol === 'mist:') {
       view = this.viewPoolMistProtocol.pop()
     }
 
@@ -507,7 +507,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   }
 
   openResourceInSidebar(resourceId: string) {
-    return this.openURLInSidebar(`mist://surf/resource/${resourceId}`)
+    return this.openURLInSidebar(`mist://mist/resource/${resourceId}`)
   }
 
   openURLInSidebar(url: string) {
@@ -530,7 +530,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   private async prepareNewHomepage() {
     try {
       this.log.debug('Preparing new homepage')
-      this.newHomepageView = await this.create({ url: 'mist://surf/notebook' }, true)
+      this.newHomepageView = await this.create({ url: 'mist://mist/journal' }, true)
       await this.newHomepageView.preloadWebContents({ activate: false })
     } catch (error) {
       this.log.error('Error preparing new homepage:', error)
@@ -540,7 +540,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   async openNewHomepage() {
     try {
       if (!this.newHomepageView) {
-        return this.openURLInSidebar('mist://surf/notebook')
+        return this.openURLInSidebar('mist://mist/journal')
       }
 
       const view = await this.openViewInSidebar(this.newHomepageView)

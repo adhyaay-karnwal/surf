@@ -158,7 +158,7 @@ export const handleMistlet = (state: State, node: Element) => {
       children: [
         {
           type: 'link',
-          url: `mist://surf/resource/${resourceId}`,
+          url: `mist://mist/resource/${resourceId}`,
           children: [{ type: 'text', value: name || 'Mistlet' }]
         }
         // { type: 'code', lang: 'html', value: (node.children[0] as any)?.value || '' }
@@ -179,7 +179,7 @@ export const handleMistlet = (state: State, node: Element) => {
 /**
  * Handles mention span elements like:
  * ```html
- * <span class="mention" data-type="mention" data-id="323e8d75-0fb2-402b-9a0f-7d0cd8dcf80d" data-label="Research" data-mention-type="notebook" data-icon="notebook">@Research</span>
+ * <span class="mention" data-type="mention" data-id="323e8d75-0fb2-402b-9a0f-7d0cd8dcf80d" data-label="Research" data-mention-type="journal" data-icon="journal">@Research</span>
  * ```
  */
 export const handleSpan = (state: State, node: Element) => {
@@ -200,10 +200,10 @@ export const handleSpan = (state: State, node: Element) => {
 
     // Generate URL based on mention type
     let url = id
-    if (mentionType === 'notebook') {
-      url = `mist://surf/notebook/${id}`
+    if (mentionType === 'journal') {
+      url = `mist://mist/journal/${id}`
     } else if (mentionType === 'resource') {
-      url = `mist://surf/resource/${id}`
+      url = `mist://mist/resource/${id}`
     }
 
     const result = {

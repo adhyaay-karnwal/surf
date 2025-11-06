@@ -31,7 +31,7 @@ export class MistBackendServerManager extends EventEmitter {
 
   start(): void {
     if (this.process) {
-      this.emit('warn', 'surf backend server is already running')
+      this.emit('warn', 'mist backend server is already running')
       return
     }
 
@@ -63,7 +63,7 @@ export class MistBackendServerManager extends EventEmitter {
 
   stop(): void {
     if (!this.process) {
-      this.emit('warn', 'surf backend server is not running')
+      this.emit('warn', 'mist backend server is not running')
       return
     }
 
@@ -146,13 +146,13 @@ export class MistBackendServerManager extends EventEmitter {
       this.restartAttempts++
       this.emit(
         'warn',
-        `surf backend server exited. restarting in ${this.restartDelay / 1000} seconds`
+        `mist backend server exited. restarting in ${this.restartDelay / 1000} seconds`
       )
       setTimeout(() => this.start(), this.restartDelay)
     } else {
       this.emit(
         'error',
-        'max restart attempts reached. surf backend server will not restart automatically'
+        'max restart attempts reached. mist backend server will not restart automatically'
       )
     }
   }
@@ -165,9 +165,9 @@ export class MistBackendServerManager extends EventEmitter {
       } else {
         execSync(`pkill -x ${processName}`)
       }
-      this.emit('info', 'killed existing surf backend server process')
+      this.emit('info', 'killed existing mist backend server process')
     } catch (error) {
-      this.emit('info', 'no existing surf backend server process found')
+      this.emit('info', 'no existing mist backend server process found')
     }
   }
 }

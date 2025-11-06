@@ -9,7 +9,7 @@ export enum MentionItemType {
   BUILT_IN = 'built-in',
   CONTEXT = 'context',
   RESOURCE = 'resource',
-  NOTEBOOK = 'notebook',
+  NOTEBOOK = 'journal',
   ALL_TABS = 'all-tabs',
   ACTIVE_TAB = 'active-tab',
   MODEL = 'model',

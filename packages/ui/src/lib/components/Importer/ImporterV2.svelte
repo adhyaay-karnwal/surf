@@ -5,7 +5,7 @@
 
 <script lang="ts">
   import { useResourceManager } from '@mist/services/resources'
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import { Importer } from '@mist/services'
   import { Icon } from '@mist/icons'
   import {
@@ -29,7 +29,7 @@
 
   const log = useLogScope('Importer')
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
   const dispatch = createEventDispatcher<{
     done: void
@@ -37,7 +37,7 @@
 
   const importer = Importer.create({
     resourceManager,
-    notebookManager
+    journalManager
   })
 
   const majorBrowsers = BROWSER_TYPE_DATA.filter((browser) =>

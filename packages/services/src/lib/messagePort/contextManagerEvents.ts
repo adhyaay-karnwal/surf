@@ -13,7 +13,7 @@ export enum WebContentsViewContextManagerActionType {
   ADD_TAB_CONTEXT = 'add-tab-context',
   ADD_ACTIVE_TAB_CONTEXT = 'add-active-tab-context',
   ADD_RESOURCE_CONTEXT = 'add-resource-context',
-  ADD_NOTEBOOK_CONTEXT = 'add-notebook-context',
+  ADD_NOTEBOOK_CONTEXT = 'add-journal-context',
   REMOVE_CONTEXT_ITEM = 'remove-context-item',
   CLEAR_ALL_CONTEXT = 'clear-all-context',
   GENERATE_PROMPTS = 'generate-prompts'

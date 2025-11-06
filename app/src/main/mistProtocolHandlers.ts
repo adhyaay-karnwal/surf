@@ -318,9 +318,9 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
       }
 
       targetPath = rootPath
-    } else if (url.hostname === 'surf') {
-      // Handle root requests (mist://surf/notebook/:id) and root assets
-      const match = url.pathname.match(/^\/(notebook|resource)(?:\/([^\/]+))?\/?$/)
+    } else if (url.hostname === 'mist') {
+      // Handle root requests (mist://mist/journal/:id) and root assets
+      const match = url.pathname.match(/^\/(journal|resource)(?:\/([^\/]+))?\/?$/)
 
       if (match) {
         const [, type, id] = match
@@ -328,7 +328,7 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
         if (id) {
           // If only ID is present, serve the main HTML
           if (url.pathname === `/${type}/${id}`) {
-            const rootPath = HOSTNAME_TO_ROOT['surf']
+            const rootPath = HOSTNAME_TO_ROOT['mist']
             if (!rootPath) {
               log.error('Invalid hostname for root path:', url.hostname)
               return new Response('Invalid Mist internal protocol hostname', { status: 400 })
@@ -336,7 +336,7 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
 
             targetPath = rootPath
           } else if (url.pathname === `/${type}`) {
-            const rootPath = HOSTNAME_TO_ROOT['surf']
+            const rootPath = HOSTNAME_TO_ROOT['mist']
             if (!rootPath) {
               log.error('Invalid hostname for root path:', url.hostname)
               return new Response('Invalid Mist internal protocol hostname', { status: 400 })
@@ -344,11 +344,11 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
 
             targetPath = rootPath
           } else {
-            // For asset requests (mist://surf/notebook/:id/some/file.js), remove the type and ID prefix
-            targetPath = url.href.replace(`mist://surf/${type}/${id}/`, '')
+            // For asset requests (mist://mist/journal/:id/some/file.js), remove the type and ID prefix
+            targetPath = url.href.replace(`mist://mist/${type}/${id}/`, '')
           }
         } else if (url.pathname === `/${type}`) {
-          const rootPath = HOSTNAME_TO_ROOT['surf']
+          const rootPath = HOSTNAME_TO_ROOT['mist']
           if (!rootPath) {
             log.error('Invalid hostname for root path:', url.hostname)
             return new Response('Invalid Mist internal protocol hostname', { status: 400 })
@@ -356,7 +356,7 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
 
           targetPath = rootPath
         } else {
-          // For root assets (mist://surf/notebook/assets/style.css)
+          // For root assets (mist://mist/journal/assets/style.css)
           targetPath = `${url.pathname.substring(type.length + 1)}`
         }
       } else {
@@ -366,7 +366,7 @@ export const handleMistFileRequest = async (req: GlobalRequest) => {
 
     return serveFile(req, targetPath)
   } catch (err) {
-    log.error('surf internal protocol error:', err, req.url)
+    log.error('mist internal protocol error:', err, req.url)
     return new Response('Internal Server Error', { status: 500 })
   }
 }

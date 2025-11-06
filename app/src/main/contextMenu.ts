@@ -89,7 +89,7 @@ export function setupContextMenu(window: Electron.WebContents, options: contextM
           }
         },
         {
-          label: 'Save Link to Notebook',
+          label: 'Save Link to Journal',
           visible: parameters.linkURL.length > 0,
           submenu: saveToSpaceItems
         },

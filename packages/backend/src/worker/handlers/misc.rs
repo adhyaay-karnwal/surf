@@ -852,7 +852,7 @@ pub fn handle_misc_message(
         MiscMessage::SetMistBackendHealth(state) => {
             worker.surf_backend_health.set_health(state);
             send_worker_response(&mut worker.channel, oneshot, Ok(()));
-            tracing::debug!("surf backend health: {state:?}");
+            tracing::debug!("mist backend health: {state:?}");
         }
         MiscMessage::SearchChatResources {
             query,

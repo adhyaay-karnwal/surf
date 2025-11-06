@@ -1,0 +1,12 @@
+{
+  "name": "@deta/icons",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "echo \"alias build\"",
+    "dev": "echo \"alias dev\""
+  },
+  "dependencies": {
+    "@mist/icons": "workspace:*"
+  }
+}

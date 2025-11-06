@@ -12,7 +12,7 @@ import { useMessagePortPrimary } from '../messagePort'
 
 import { TabsMentionProvider } from './providers/TabsMentionProvider'
 import { ResourceMentionProvider } from './providers/ResourceMentionProvider'
-import { NotebookMentionProvider } from './providers/NotebookMentionProvider'
+import { JournalMentionProvider } from './providers/JournalMentionProvider'
 import type { TabsService } from '../tabs/tabs.svelte'
 
 import { MentionTypes } from './mention.types'
@@ -82,8 +82,8 @@ export class MentionService {
     const resourceProvider = new ResourceMentionProvider()
     this.registerProvider(resourceProvider)
 
-    const notebookProvider = new NotebookMentionProvider()
-    this.registerProvider(notebookProvider)
+    const journalProvider = new JournalMentionProvider()
+    this.registerProvider(journalProvider)
 
     this.attachListeners()
   }

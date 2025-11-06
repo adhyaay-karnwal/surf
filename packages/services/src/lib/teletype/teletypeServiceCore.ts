@@ -8,7 +8,7 @@ import { ResourcesProvider } from './providers/ResourcesProvider'
 import { useBrowser } from '../browser'
 import { HostnameProvider } from './providers/HostnameProvider'
 import type { Fn } from '@mist/types'
-import { NotebooksProvider } from './providers/NotebooksProvider'
+import { JournalsProvider } from './providers/JournalsProvider'
 
 export class TeletypeServiceCore {
   private providers = new Map<string, ActionProvider>()
@@ -73,7 +73,7 @@ export class TeletypeServiceCore {
     this.registerProvider(new HostnameProvider()) // Async Hostname suggestions
     this.registerProvider(new SearchProvider()) // Async Google suggestions
     this.registerProvider(new ResourcesProvider()) // SFFS Resources search
-    this.registerProvider(new NotebooksProvider()) // Notebooks search
+    this.registerProvider(new JournalsProvider()) // Journals search
   }
 
   /**

@@ -29,7 +29,7 @@ import {
   SummarizeEventContentSource
 } from '@mist/types'
 import { ContextManagerWCV } from './contextManagerWCV'
-import { useNotebookManager } from '../notebooks'
+import { useJournalManager } from '../journals'
 
 export interface AppCreationResult {
   appId: string
@@ -83,12 +83,12 @@ export class AIService {
 
     if (global) {
       const tabsManager = useTabs()
-      const notebookManager = useNotebookManager()
+      const journalManager = useJournalManager()
       const contextService = ContextService.create(
         this,
         tabsManager,
         resourceManager,
-        notebookManager
+        journalManager
       )
       this.fallbackContextManager = contextService.createDefault()
     } else {

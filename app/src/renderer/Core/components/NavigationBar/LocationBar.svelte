@@ -55,9 +55,9 @@
       return truncate($viewTitle.length > 0 ? `/ ${$viewTitle}` : '', 69)
     }
 
-    if ($viewTypeData.type === ViewType.Notebook || $viewTypeData.type === ViewType.NotebookHome) {
+    if ($viewTypeData.type === ViewType.Journal || $viewTypeData.type === ViewType.JournalHome) {
       if ($viewTitle.startsWith('mist://')) {
-        return $viewTypeData.type === ViewType.NotebookHome ? 'Mist' : 'Notebook'
+        return $viewTypeData.type === ViewType.JournalHome ? 'Mist' : 'Journal'
       }
 
       return truncate($viewTitle, 69)

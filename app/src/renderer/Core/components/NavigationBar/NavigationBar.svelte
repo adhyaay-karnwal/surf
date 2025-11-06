@@ -26,7 +26,7 @@
     centeredBreadcrumbs = false,
     hideNavigationControls = false,
     hideSearch = false,
-    hideNotebookSidebar = false,
+    hideJournalSidebar = false,
     onsearchinput,
 
     roundLeftCorner,
@@ -38,7 +38,7 @@
     view: WebContentsView
     tab?: TabItem
     centeredBreadcrumbs?: boolean
-    hideNotebookSidebar?: boolean
+    hideJournalSidebar?: boolean
     readonlyLocation?: boolean
     locationInputDisabled?: boolean
     hideNavigationControls?: boolean
@@ -62,21 +62,21 @@
   const activeViewType = $derived(view.type ?? writable(''))
   const activeViewTypeData = $derived(view.typeData ?? writable({}))
 
-  let notebookSidebarOpen = $state(
-    localStorage.getItem('notebook_treeSidebarOpen')
-      ? localStorage.getItem('notebook_treeSidebarOpen') === 'true'
+  let journalSidebarOpen = $state(
+    localStorage.getItem('journal_treeSidebarOpen')
+      ? localStorage.getItem('journal_treeSidebarOpen') === 'true'
       : true
   )
 
-  function toggleNotebookSidebar() {
-    notebookSidebarOpen = !notebookSidebarOpen
-    localStorage.setItem('notebook_treeSidebarOpen', notebookSidebarOpen.toString())
+  function toggleJournalSidebar() {
+    journalSidebarOpen = !journalSidebarOpen
+    localStorage.setItem('journal_treeSidebarOpen', journalSidebarOpen.toString())
 
     if (window.api?.webContentsViewAction) {
       window.api
         .webContentsViewAction(view.id, 'send', {
-          channel: 'toggle-notebook-sidebar',
-          args: [{ open: notebookSidebarOpen }]
+          channel: 'toggle-journal-sidebar',
+          args: [{ open: journalSidebarOpen }]
         })
         .catch(console.error)
     }
@@ -150,26 +150,26 @@
 </script>
 
 <nav
-  class:grey={[ViewType.Notebook, ViewType.NotebookHome].includes($activeViewType)}
+  class:grey={[ViewType.Journal, ViewType.JournalHome].includes($activeViewType)}
   class:roundLeftCorner
   class:roundRightCorner
   class="navbar"
 >
   {@render leftChildren?.()}
 
-  {#if !hideNotebookSidebar && [ViewType.Notebook, ViewType.NotebookHome].includes($activeViewType)}
+  {#if !hideJournalSidebar && [ViewType.Journal, ViewType.JournalHome].includes($activeViewType)}
     <NavigationBarGroup slim>
-      <Button size="md" square onclick={toggleNotebookSidebar}>
-        <Icon name={notebookSidebarOpen ? 'sidebar.left' : 'sidebar.left'} size="1.2em" />
+      <Button size="md" square onclick={toggleJournalSidebar}>
+        <Icon name={journalSidebarOpen ? 'sidebar.left' : 'sidebar.left'} size="1.2em" />
       </Button>
     </NavigationBarGroup>
-  {:else if !hideNotebookSidebar && $activeViewType === ViewType.Resource}
+  {:else if !hideJournalSidebar && $activeViewType === ViewType.Resource}
     <ResourceLoader resource={$activeViewTypeData?.id} lazy={false}>
       {#snippet children(resource: Resource)}
         {#if resource.type !== ResourceTypes.PDF}
           <NavigationBarGroup slim>
-            <Button size="md" square onclick={toggleNotebookSidebar}>
-              <Icon name={notebookSidebarOpen ? 'sidebar.left' : 'sidebar.left'} size="1.2em" />
+            <Button size="md" square onclick={toggleJournalSidebar}>
+              <Icon name={journalSidebarOpen ? 'sidebar.left' : 'sidebar.left'} size="1.2em" />
             </Button>
           </NavigationBarGroup>
         {/if}
@@ -256,13 +256,13 @@
 
   <!--{#if false && !hideSearch}
     <NavigationBarGroup
-      style={![ViewType.Notebook, ViewType.NotebookHome].includes($activeViewType)
+      style={![ViewType.Journal, ViewType.JournalHome].includes($activeViewType)
         ? 'margin-left: -0.5rem'
         : ''}
     >
       <SearchInput
         placeholder="Search sources"
-        collapsed={![ViewType.Notebook, ViewType.NotebookHome].includes($activeViewType)}
+        collapsed={![ViewType.Journal, ViewType.JournalHome].includes($activeViewType)}
         {onsearchinput}
       />
     </NavigationBarGroup>

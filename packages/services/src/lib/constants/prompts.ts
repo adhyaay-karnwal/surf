@@ -71,7 +71,7 @@ export const EXAMPLE_PROMPTS = [
     icon: 'mention',
     label: 'Mentioning Sources',
     description:
-      '@mention any of your notebooks, notes, tabs and/or other media to pinpoint various contexts.',
+      '@mention any of your journals, notes, tabs and/or other media to pinpoint various contexts.',
     prompt: ''
   },
   {

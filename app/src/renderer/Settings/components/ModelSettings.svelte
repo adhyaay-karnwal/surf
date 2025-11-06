@@ -41,7 +41,7 @@
   export let selectedModelId: Writable<string>
   export let models: Writable<Model[]>
 
-  const AI_MODEL_DOCS = 'https://github.com/deta/surf/blob/main/docs/AI_MODELS.md'
+  const AI_MODEL_DOCS = 'https://github.com/deta/mist/blob/main/docs/AI_MODELS.md'
   const dispatch = createEventDispatcher<{
     'select-model': string
     'update-model': ModelUpdate

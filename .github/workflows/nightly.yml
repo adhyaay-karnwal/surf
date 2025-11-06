@@ -165,7 +165,7 @@ jobs:
             app/dist/*.exe
             app/dist/*.AppImage
             app/dist/*.tar.gz
-            app/dist/surf-*.yml
+            app/dist/mist-*.yml
 
   create-release:
     needs: [next-nightly-version, build]
@@ -185,6 +185,6 @@ jobs:
             build/**/*.exe
             build/**/*.AppImage
             build/**/*.tar.gz
-            build/**/surf-*.yml
+            build/**/mist-*.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

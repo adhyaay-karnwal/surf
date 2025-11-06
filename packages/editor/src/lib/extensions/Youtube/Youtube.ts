@@ -181,7 +181,7 @@ const isRedirectUrl = (url: string): boolean => {
   const _url = parseURL(url)
   return (
     _url?.protocol === 'https:' &&
-    _url?.hostname === 'deta.surf' &&
+    _url?.hostname === 'deta.mist' &&
     _url?.pathname.startsWith('/redirects/')
   )
 }

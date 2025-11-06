@@ -22,7 +22,7 @@ Mist's interface allows you to easily switch between models on the fly and use t
 
 You can enter your own API key by going to Preferences → AI and then selecting one of the built-in providers under “Configure your AI Models”.
 
-![byok](./assets/surf-byok.webp)
+![byok](./assets/mist-byok.webp)
 
 Read [OpenAI’s](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key) help page or visit [Anthropic’s Claud Console](https://console.anthropic.com/settings/keys) for your API keys.
 
@@ -127,10 +127,10 @@ You can also deploy your own [Inference Endpoint](https://endpoints.huggingface.
 
 In theory any provider that offers a OpenAI compatible chat completions API should work with Mist. In practice some providers are not fully compatible and can come with their own quirks. The only way to know for sure if a given provider works is by trying it out. Refer to the [Configuration Options](https://www.notion.so/Configuration-Options-199a5244a717800081a7ce12cef7bd93?pvs=21) above on what information is needed.
 
-If you do get a provider working please let us know on [**Discord**](https://discord.gg/AKaBGfRXbw) or via [**E-Mail**](mailto:hello@deta.surf) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
+If you do get a provider working please let us know on [**Discord**](https://discord.gg/AKaBGfRXbw) or via [**E-Mail**](mailto:hello@deta.mist) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
 
 ## Managed AI
 
 ---
 
-You can download a version of Mist with managed AI from the [Deta website](https://deta.surf/).
+You can download a version of Mist with managed AI from the [Deta website](https://deta.mist/).

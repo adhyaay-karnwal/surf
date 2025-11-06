@@ -2,7 +2,7 @@
   import { Icon } from '@mist/icons'
   import {
     Button,
-    NotebookCover,
+    JournalCover,
     openDialog,
     PageMention,
     ResourceLoader,
@@ -21,10 +21,10 @@
   } from '@mist/services/resources'
   import { ResourceTagsBuiltInKeys, ResourceTypes, type ViewLocation } from '@mist/types'
   import { type MessagePortClient } from '@mist/services/messagePort'
-  import { handleResourceClick } from '../handlers/notebookOpenHandlers'
-  import NotebookSidebar from '../components/notebook/NotebookSidebar.svelte'
-  import NotebookLayout from '../layouts/NotebookLayout.svelte'
-  import NotebookContents from '../components/notebook/NotebookContents.svelte'
+  import { handleResourceClick } from '../handlers/journalOpenHandlers'
+  import JournalSidebar from '../components/journal/JournalSidebar.svelte'
+  import JournalLayout from '../layouts/JournalLayout.svelte'
+  import JournalContents from '../components/journal/JournalContents.svelte'
   import { MentionItemType } from '@mist/editor'
   import { useConfig, useTeletypeService } from '@mist/services'
   import { provideAI } from '@mist/services/ai'
@@ -159,11 +159,11 @@
   <title>Drafts</title>
 </svelte:head>
 
-<NotebookLayout>
+<JournalLayout>
   <main>
     <div class="tty-wrapper">
       <div class="name">
-        <NotebookCover
+        <JournalCover
           title="Drafts"
           height="5ch"
           fontSize="0.3rem"
@@ -192,11 +192,11 @@
 
     {#if !hasMentions}
       <section class="contents-wrapper">
-        <NotebookContents notebookId="drafts" />
+        <JournalContents journalId="drafts" />
       </section>
     {/if}
   </main>
-</NotebookLayout>
+</JournalLayout>
 
 <style lang="scss">
   main {

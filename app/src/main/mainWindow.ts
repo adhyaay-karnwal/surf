@@ -166,7 +166,7 @@ export function createWindow() {
     const url = urlString ? new URL(urlString) : null
 
     // const isPDFViewerRequest = url && isInternalViewerURL(url, PDFViewerEntryPoint)
-    // const isNotebookViewerRequest = url && isInternalViewerURL(url, NotebookViewerEntryPoint)
+    // const isJournalViewerRequest = url && isInternalViewerURL(url, JournalViewerEntryPoint)
     // const isResourceViewerRequest = url && isInternalViewerURL(url, ResourceViewerEntryPoint)
 
     const shouldBlockMistRequest =
@@ -275,7 +275,7 @@ export function createWindow() {
         if (url.hostname === 'resource') {
           callback({ cancel: true })
           details.webContents?.loadURL(`mist://mist/resource/${url.pathname.slice(1)}`)
-        } else if (url.hostname === 'notebook') {
+        } else if (url.hostname === 'journal') {
           callback({ cancel: true })
           details.webContents?.loadURL(`mist://mist/journal/${url.pathname.slice(1)}`)
         } else {

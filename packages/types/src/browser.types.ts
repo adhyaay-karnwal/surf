@@ -93,13 +93,13 @@ export type OpenResourceOptions = {
   resourceId: string
   target?: OpenTarget
   offline?: boolean
-  from_notebook_tree_sidebar?: boolean
+  from_journal_tree_sidebar?: boolean
 }
 
-export type OpenNotebookOptions = {
-  notebookId: string
+export type OpenJournalOptions = {
+  journalId: string
   target?: OpenTarget
-  from_notebook_tree_sidebar?: boolean
+  from_journal_tree_sidebar?: boolean
 }
 
 export type NavigateURLOptions = {
@@ -114,18 +114,18 @@ export enum ViewType {
    */
   Page = 'page',
   /**
-   * A specific notebook
-   * @example mist://surf/notebook/:id
+   * A specific journal
+   * @example mist://mist/journal/:id
    */
-  Notebook = 'notebook',
+  Journal = 'journal',
   /**
-   * The notebooks home/root view
-   * @example mist://surf/notebook
+   * The journals home/root view
+   * @example mist://mist/journal
    */
-  NotebookHome = 'notebook_home',
+  JournalHome = 'journal_home',
   /**
    * A specific resource (most likely note)
-   * @example mist://surf/resource/:id
+   * @example mist://mist/resource/:id
    */
   Resource = 'resource',
   /**
@@ -140,7 +140,7 @@ export type ViewTypeData = {
    */
   type: ViewType
   /**
-   * Unique identifier for the resource or notebook displayed in the view
+   * Unique identifier for the resource or journal displayed in the view
    */
   id: string | null
   /**

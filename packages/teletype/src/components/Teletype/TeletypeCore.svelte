@@ -117,8 +117,8 @@
 
   const placeholder = $derived(
     hideNavigation
-      ? 'Search the notebook or ask a question...'
-      : 'Search the web, your notebooks, enter a URL or ask a question...'
+      ? 'Search the journal or ask a question...'
+      : 'Search the web, your journals, enter a URL or ask a question...'
     // $currentAction && $currentAction.placeholder ? $currentAction.placeholder : $placeholderText
   )
 

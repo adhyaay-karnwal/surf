@@ -60,7 +60,7 @@ export class TabsMentionProvider implements MentionProvider {
         icon: 'world',
         description: `All ${tabs.length} open tabs`,
         priority: 200,
-        keywords: ['all', 'tabs', 'every', 'everything', 'surf'],
+        keywords: ['all', 'tabs', 'every', 'everything', 'mist'],
         metadata: {
           isAllTabs: true,
           tabCount: tabs.length

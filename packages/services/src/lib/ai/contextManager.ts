@@ -32,7 +32,7 @@ import {
   ContextItemResource,
   ContextItemScreenshot,
   ContextItemSpace,
-  ContextItemNotebook
+  ContextItemJournal
 } from './context/index'
 import type { AIService, ChatPrompt } from './ai'
 import { ContextItemInbox } from './context/inbox'
@@ -53,7 +53,7 @@ import { ContextItemBrowsingHistory } from './context/history'
 import { WebParser, type SearchResultLink } from '@mist/web-parser'
 import { ContextItemWebSearch } from './context/web'
 import { ContextManagerWCV } from './contextManagerWCV'
-import { Notebook, NotebookManager, useNotebookManager } from '../notebooks'
+import { Journal, JournalManager, useJournalManager } from '../journals'
 import { useViewManager, ViewManager, ViewType } from '../views'
 import { useMessagePortPrimary } from '../messagePort'
 import {
@@ -92,7 +92,7 @@ export class ContextManager {
   ai: AIService
   tabsManager: TabsService
   resourceManager: ResourceManager
-  notebookManager: NotebookManager
+  journalManager: JournalManager
   viewManager: ViewManager
   log: ReturnType<typeof useLogScope>
 
@@ -108,7 +108,7 @@ export class ContextManager {
     this.ai = ai
     this.tabsManager = tabsManager
     this.resourceManager = resourceManager
-    this.notebookManager = useNotebookManager()
+    this.journalManager = useJournalManager()
     this.viewManager = useViewManager()
     this.log = useLogScope(`ContextManager ${key}`)
 
@@ -246,14 +246,14 @@ export class ContextManager {
 
               await this.onlyUseTabInContext(activeTab)
               await wait(200)
-            } else if (viewData.type === ViewType.Notebook && viewData.id) {
+            } else if (viewData.type === ViewType.Journal && viewData.id) {
               this.log.debug(
-                'Internal notebook URL detected, adding notebook to context',
+                'Internal journal URL detected, adding journal to context',
                 viewData.id
               )
-              const notebook = await this.notebookManager.getNotebook(viewData.id)
-              if (notebook) {
-                await this.onlyUseNotebookInContext(notebook)
+              const journal = await this.journalManager.getJournal(viewData.id)
+              if (journal) {
+                await this.onlyUseJournalInContext(journal)
                 await wait(200)
               }
             } else {
@@ -284,7 +284,7 @@ export class ContextManager {
           await this.addActiveTab()
           return null
         } else if (type === WebContentsViewContextManagerActionType.ADD_NOTEBOOK_CONTEXT) {
-          await this.addNotebook(payload.id)
+          await this.addJournal(payload.id)
           return null
         } else if (type === WebContentsViewContextManagerActionType.ADD_RESOURCE_CONTEXT) {
           await this.addResource(payload.id)
@@ -514,8 +514,8 @@ export class ContextManager {
     this.removeAllExcept(contextItem.id, trigger)
   }
 
-  async onlyUseNotebookInContext(notebook: Notebook, trigger?: PageChatUpdateContextEventTrigger) {
-    const contextItem = await this.addNotebook(notebook)
+  async onlyUseJournalInContext(journal: Journal, trigger?: PageChatUpdateContextEventTrigger) {
+    const contextItem = await this.addJournal(journal)
     this.removeAllExcept(contextItem.id, trigger)
   }
 
@@ -544,18 +544,18 @@ export class ContextManager {
     // return this.addContextItem(item, opts)
   }
 
-  async addNotebook(notebookOrId: Notebook | string, opts?: AddContextItemOptions) {
-    const notebook =
-      typeof notebookOrId === 'string'
-        ? await this.notebookManager.getNotebook(notebookOrId)
-        : notebookOrId
+  async addJournal(journalOrId: Journal | string, opts?: AddContextItemOptions) {
+    const journal =
+      typeof journalOrId === 'string'
+        ? await this.journalManager.getJournal(journalOrId)
+        : journalOrId
 
-    if (!notebook) {
-      this.log.error(`Notebook not found: ${notebookOrId}`)
-      throw new Error(`Notebook not found: ${notebookOrId}`)
+    if (!journal) {
+      this.log.error(`Journal not found: ${journalOrId}`)
+      throw new Error(`Journal not found: ${journalOrId}`)
     }
 
-    const item = new ContextItemNotebook(this.service, notebook)
+    const item = new ContextItemJournal(this.service, journal)
     return this.addContextItem(item, opts)
   }
 
@@ -1058,7 +1058,7 @@ export class ContextService {
   ai: AIService
   tabsManager: TabsService
   resourceManager: ResourceManager
-  notebookManager: NotebookManager
+  journalManager: JournalManager
   log: ReturnType<typeof useLogScope>
 
   private _items: Writable<{ item: ContextItem; scopes: string[] }[]>
@@ -1070,12 +1070,12 @@ export class ContextService {
     ai: AIService,
     tabsManager: TabsService,
     resourceManager: ResourceManager,
-    notebookManager: NotebookManager
+    journalManager: JournalManager
   ) {
     this.ai = ai
     this.tabsManager = tabsManager
     this.resourceManager = resourceManager
-    this.notebookManager = notebookManager
+    this.journalManager = journalManager
     this.log = useLogScope('ContextService')
 
     this._items = writable([])
@@ -1192,12 +1192,12 @@ export class ContextService {
 
   async preparePageTab(tab: TabItem) {
     await tick()
-    const surfUrlMatch = tab.view.urlValue.match(/surf:\/\/resource\/([^\/]+)/)
+    const surfUrlMatch = tab.view.urlValue.match(/mist:\/\/resource\/([^\/]+)/)
     if (surfUrlMatch) {
       const resourceId = surfUrlMatch[1]
       const resource = await this.resourceManager.getResource(resourceId)
       if (resource) {
-        this.log.debug('Resource found for surf url', resourceId)
+        this.log.debug('Resource found for mist url', resourceId)
         return resource
       }
 
@@ -1343,9 +1343,9 @@ export class ContextService {
     ai: AIService,
     tabsManager: TabsService,
     resourceManager: ResourceManager,
-    notebookManager: NotebookManager
+    journalManager: JournalManager
   ) {
-    return new ContextService(ai, tabsManager, resourceManager, notebookManager)
+    return new ContextService(ai, tabsManager, resourceManager, journalManager)
   }
 }
 

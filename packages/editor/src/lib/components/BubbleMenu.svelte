@@ -186,7 +186,7 @@
   const handleLinkItemSelect = (item: MentionItem) => {
     const resource = item.data
     if (resource) {
-      turnSelectionIntoLink(`mist://surf/resource/${resource.id}`)
+      turnSelectionIntoLink(`mist://mist/resource/${resource.id}`)
     }
 
     $inputShown = false

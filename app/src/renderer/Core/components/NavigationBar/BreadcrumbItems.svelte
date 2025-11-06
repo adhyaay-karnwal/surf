@@ -1,6 +1,6 @@
 <script lang="ts">
   import { constructBreadcrumbs } from './breadcrumbs'
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import Breadcrumb from './Breadcrumb.svelte'
   import { truncate } from '@mist/utils'
   import { writable } from 'svelte/store'
@@ -12,7 +12,7 @@
     view: WebContentsView
   } = $props()
 
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
   const activeLocation = $derived(view.url ?? writable(''))
   const activeHistory = $derived(view.navigationHistory)
@@ -24,7 +24,7 @@
   $effect(
     async () =>
       (breadcrumbs = await constructBreadcrumbs(
-        notebookManager,
+        journalManager,
         [...$activeHistory, { title: 'active', url: $activeLocation }],
         $activeHistoryIndex,
         view,

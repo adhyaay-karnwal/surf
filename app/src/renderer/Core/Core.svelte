@@ -109,9 +109,7 @@
 
       if (
         viewManager.sidebarViewOpen &&
-        [ViewType.NotebookHome, ViewType.Notebook].includes(
-          viewManager.activeSidebarView?.typeValue
-        )
+        [ViewType.JournalHome, ViewType.Journal].includes(viewManager.activeSidebarView?.typeValue)
       )
         viewManager.setSidebarState({ open: false })
 
@@ -184,7 +182,7 @@
 
     shortcutsManager.registerHandler(ShortcutActions.TOGGLE_SIDEBAR, () => {
       if (
-        [ViewType.NotebookHome, ViewType.Notebook].includes(tabsService.activeTab?.view?.typeValue)
+        [ViewType.JournalHome, ViewType.Journal].includes(tabsService.activeTab?.view?.typeValue)
       ) {
         tabsService.delete(tabsService.activeTabIdValue)
       }
@@ -363,7 +361,7 @@
       background: radial-gradient(
         90% 260% at -10% 50%,
         light-dark(color(display-p3 0.94 0.92 1), color(display-p3 0.078 0.058 0.145)) 0%,
-        light-dark(color(display-p3 0.85 0.80 0.99), color(display-p3 0.055 0.043 0.109)) 58%,
+        light-dark(color(display-p3 0.85 0.8 0.99), color(display-p3 0.055 0.043 0.109)) 58%,
         light-dark(color(display-p3 0.92 0.89 1), color(display-p3 0.035 0.027 0.082)) 100%
       );
     }

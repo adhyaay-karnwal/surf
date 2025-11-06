@@ -44,7 +44,7 @@ import {
   SpaceEntryOrigin,
   type SFFSRawResource,
   type SpaceEntrySearchOptions,
-  type NotebookData,
+  type JournalData,
   type OpenTarget,
   MARKDOWN_RESOURCE_TYPES,
   isMarkdownResourceType,
@@ -55,7 +55,7 @@ import {
   EventContext,
   ResourceProcessingStateType,
   ResourceTagDataStateValue,
-  NotebookDefaults,
+  JournalDefaults,
   type DetectedResource,
   type EventBusMessage,
   type ResourceData,
@@ -70,7 +70,7 @@ import { WebParser } from '@mist/web-parser'
 import type { ConfigService } from '../config'
 import { EventEmitterBase, ResourceTag, SearchResourceTags } from '@mist/utils'
 import { type CtxItem } from '@mist/ui'
-import { Notebook } from '../notebooks'
+import { Journal } from '../journals'
 import { SvelteMap } from 'svelte/reactivity'
 
 export const getPrimaryResourceType = (type: string) => {
@@ -101,25 +101,25 @@ const DUMMY_PATH = '__dummy'
 
 export const getResourceCtxItems = ({
   resource,
-  sortedNotebooks,
+  sortedJournals,
   onPin,
   onUnPin,
   onOpen,
   onOpenAsFile,
   onExport,
-  onAddToNotebook,
+  onAddToJournal,
   onOpenOffline,
   onDeleteResource,
   onRemove
 }: {
   resource: Resource
-  sortedNotebooks: Notebook[]
+  sortedJournals: Journal[]
   onPin?: () => void
   onUnPin?: () => void
   onOpen?: (target: OpenTarget) => void
   onOpenAsFile?: (resourceId: string) => void
   onExport?: (resourceId: string) => void
-  onAddToNotebook: (notebookId: string) => void
+  onAddToJournal: (journalId: string) => void
   onOpenOffline: (resourceId: string) => void
   onDeleteResource: (resourceId: string) => void
   onRemove: (resourceId: string) => void
@@ -162,16 +162,16 @@ export const getResourceCtxItems = ({
     {
       type: 'sub-menu',
       icon: 'add',
-      text: 'Add to Notebook',
+      text: 'Add to Journal',
       search: true,
-      items: sortedNotebooks
+      items: sortedJournals
         .filter((e) => e.data?.name?.toLowerCase() !== '.tempspace')
         .filter((e) => e !== undefined)
-        .map((notebook) => ({
+        .map((journal) => ({
           type: 'action',
           //icon: space.iconString, // TODO: FIX for ntoebooks
-          text: notebook.nameValue,
-          action: () => onAddToNotebook(notebook.id)
+          text: journal.nameValue,
+          action: () => onAddToJournal(journal.id)
         }))
     },
 
@@ -244,7 +244,7 @@ export const getResourceCtxItems = ({
               {
                 type: 'action',
                 icon: 'close',
-                text: 'Remove from Notebook',
+                text: 'Remove from Journal',
                 kind: 'danger',
                 action: () => onRemove(resource.id)
               },
@@ -276,8 +276,8 @@ export enum ResourceManagerEvents {
   Updated = 'updated',
   Recovered = 'recovered',
 
-  NotebookAddResources = 'notebookAddResources',
-  NotebookRemoveResources = 'notebookRemoveResources'
+  JournalAddResources = 'journalAddResources',
+  JournalRemoveResources = 'journalRemoveResources'
 }
 export type ResourceManagerEventHandlers = {
   [ResourceManagerEvents.Created]: (resource: ResourceObject) => void
@@ -285,11 +285,8 @@ export type ResourceManagerEventHandlers = {
   [ResourceManagerEvents.Updated]: (resource: ResourceObject) => void
   [ResourceManagerEvents.Recovered]: (resourceId: string) => void
 
-  [ResourceManagerEvents.NotebookAddResources]: (notebookId: string, resourceIds: string[]) => void
-  [ResourceManagerEvents.NotebookRemoveResources]: (
-    notebookId: string,
-    resourceIds: string[]
-  ) => void
+  [ResourceManagerEvents.JournalAddResources]: (journalId: string, resourceIds: string[]) => void
+  [ResourceManagerEvents.JournalRemoveResources]: (journalId: string, resourceIds: string[]) => void
 }
 
 export enum ResourceEvents {
@@ -1072,7 +1069,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
   }
 
   async getResourcesFromSourceURL(url: string, tags?: SFFSResourceTag[]) {
-    const surfUrlMatch = url.match(/surf:\/\/resource\/([^\/]+)/)
+    const surfUrlMatch = url.match(/mist:\/\/resource\/([^\/]+)/)
     if (surfUrlMatch) {
       const resource = await this.getResource(surfUrlMatch[1])
       return resource ? [resource] : []
@@ -1375,13 +1372,13 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
 
     resource.updateMetadata(updates)
 
-    // Emit ResourceManagerEvents.Updated to notify listeners (like NotebookManager)
+    // Emit ResourceManagerEvents.Updated to notify listeners (like JournalManager)
     this.emit(ResourceManagerEvents.Updated, resource)
 
     if (
       updates.name &&
       updates.name.trim().length > 0 &&
-      updates.name !== NotebookDefaults.NOTE_DEFAULT_NAME &&
+      updates.name !== JournalDefaults.NOTE_DEFAULT_NAME &&
       !updates.name.startsWith('Note - ')
     ) {
       await this.unmarkResourceAsEmpty(id)
@@ -1708,7 +1705,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
     return resources
   }
 
-  async createSpace(name: NotebookData) {
+  async createSpace(name: JournalData) {
     return await this.sffs.createSpace(name as unknown as SpaceData)
   }
 
@@ -1722,7 +1719,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
     return spaces // [inboxSpace, everythingSpace, ...spaces] as Space[]
   }
 
-  async updateSpace(spaceId: string, name: NotebookData) {
+  async updateSpace(spaceId: string, name: JournalData) {
     return await this.sffs.updateSpace(spaceId, name as unknown as SpaceData)
   }
 
@@ -1753,7 +1750,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
 
     await tick()
 
-    this.emit(ResourceManagerEvents.NotebookAddResources, space_id, resourceIds)
+    this.emit(ResourceManagerEvents.JournalAddResources, space_id, resourceIds)
     return res
   }
 
@@ -1769,7 +1766,7 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
 
     await this.sffs.deleteEntriesInSpaceByEntryIds(space_id, resourceIds)
 
-    this.emit(ResourceManagerEvents.NotebookRemoveResources, space_id, resourceIds)
+    this.emit(ResourceManagerEvents.JournalRemoveResources, space_id, resourceIds)
   }
 
   async getSpaceContents(space_id: string, opts?: SpaceEntrySearchOptions): Promise<SpaceEntry[]> {

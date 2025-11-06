@@ -5,41 +5,41 @@
 
   import { prepareContextMenu } from '@mist/ui'
   import { provideConfig } from '@mist/services'
-  import { createNotebookManager } from '@mist/services/notebooks'
+  import { createJournalManager } from '@mist/services/journals'
   import { createResourceManager } from '@mist/services/resources'
   import { createTeletypeService } from '@mist/services/teletype'
   import { useMessagePortClient } from '@mist/services/messagePort'
 
   import IndexRoute from './routes/IndexRoute.svelte'
-  import NotebookDetailRoute from './routes/NotebookDetailRoute.svelte'
+  import JournalDetailRoute from './routes/JournalDetailRoute.svelte'
   import DraftsRoute from './routes/DraftsRoute.svelte'
   import Resource from './routes/ResourceRoute.svelte'
-  import NotebookTreeView from './components/notebook/NotebookTreeView.svelte'
+  import JournalTreeView from './components/journal/JournalTreeView.svelte'
   import { ViewLocation } from '@mist/types'
-  import NotebookEditor from './components/notebook/NotebookEditor/NotebookEditor.svelte'
-  import { Notebook } from '@mist/services/notebooks'
+  import JournalEditor from './components/journal/JournalEditor/JournalEditor.svelte'
+  import { Journal } from '@mist/services/journals'
 
-  const notebookId = window.location.pathname.slice(1) || null
+  const journalId = window.location.pathname.slice(1) || null
 
   const messagePort = useMessagePortClient()
   const config = provideConfig()
   const resourceManager = createResourceManager(config)
-  const notebookManager = createNotebookManager(resourceManager, config, messagePort)
+  const journalManager = createJournalManager(resourceManager, config, messagePort)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const teletypeService = createTeletypeService()
 
-  let isCustomizingNotebook = $state(undefined) as Notebook | undefined | null
+  let isCustomizingJournal = $state(undefined) as Journal | undefined | null
 
   let resourcesPanelOpen = $state(
     false /*
-    localStorage.getItem('notebook_resourcePanelOpen')
-      ? localStorage.getItem('notebook_resourcePanelOpen') === 'true'
+    localStorage.getItem('journal_resourcePanelOpen')
+      ? localStorage.getItem('journal_resourcePanelOpen') === 'true'
       : false*/
   )
 
   let treeSidebarOpen = $state(
-    localStorage.getItem('notebook_treeSidebarOpen')
-      ? localStorage.getItem('notebook_treeSidebarOpen') === 'true'
+    localStorage.getItem('journal_treeSidebarOpen')
+      ? localStorage.getItem('journal_treeSidebarOpen') === 'true'
       : true
   )
 
@@ -48,7 +48,7 @@
   const DEFAULT_SIDEBAR_WIDTH = 250
 
   const stored = parseInt(
-    localStorage.getItem('notebook_sidebarWidth') || String(DEFAULT_SIDEBAR_WIDTH)
+    localStorage.getItem('journal_sidebarWidth') || String(DEFAULT_SIDEBAR_WIDTH)
   )
   // Clamp stored value to current MIN/MAX range
   let sidebarWidth = $state(Math.max(MIN_SIDEBAR_WIDTH, Math.min(MAX_SIDEBAR_WIDTH, stored)))
@@ -77,7 +77,7 @@
       // Debounce localStorage update (only save after resize stops)
       if (saveWidthTimeout) clearTimeout(saveWidthTimeout)
       saveWidthTimeout = setTimeout(() => {
-        localStorage.setItem('notebook_sidebarWidth', String(sidebarWidth))
+        localStorage.setItem('journal_sidebarWidth', String(sidebarWidth))
       }, 500) as unknown as number
     })
   }
@@ -91,7 +91,7 @@
 
     // Force final save on mouseup
     if (saveWidthTimeout) clearTimeout(saveWidthTimeout)
-    localStorage.setItem('notebook_sidebarWidth', String(sidebarWidth))
+    localStorage.setItem('journal_sidebarWidth', String(sidebarWidth))
   }
 
   onMount(() => {
@@ -108,17 +108,17 @@
   })
 
   let title = $derived(
-    notebookId === 'drafts'
+    journalId === 'drafts'
       ? 'Drafts'
-      : notebookId === 'history'
+      : journalId === 'history'
         ? 'History'
-        : !notebookId
+        : !journalId
           ? 'Mist'
-          : 'Notebook'
+          : 'Journal'
   )
 
-  $effect(() => localStorage.setItem('notebook_resourcePanelOpen', resourcesPanelOpen.toString()))
-  $effect(() => localStorage.setItem('notebook_treeSidebarOpen', treeSidebarOpen.toString()))
+  $effect(() => localStorage.setItem('journal_resourcePanelOpen', resourcesPanelOpen.toString()))
+  $effect(() => localStorage.setItem('journal_treeSidebarOpen', treeSidebarOpen.toString()))
 
   onMount(prepareContextMenu)
   onMount(() => {
@@ -144,7 +144,7 @@
         }
       }),
 
-      window.api?.onToggleNotebookSidebar?.(handleToggleRequest)
+      window.api?.onToggleJournalSidebar?.(handleToggleRequest)
     ]
 
     return () => {
@@ -154,7 +154,7 @@
 
   const routes: RouteConfig[] = [
     {
-      path: '/notebook',
+      path: '/journal',
       component: IndexRoute,
       props: {
         resourcesPanelOpen: resourcesPanelOpen,
@@ -162,7 +162,7 @@
       }
     },
     {
-      path: '/notebook/drafts',
+      path: '/journal/drafts',
       component: DraftsRoute,
       props: {
         messagePort: messagePort,
@@ -170,8 +170,8 @@
       }
     },
     {
-      path: '/notebook/(?!drafts)(?<notebookId>[^/]+)',
-      component: NotebookDetailRoute,
+      path: '/journal/(?!drafts)(?<journalId>[^/]+)',
+      component: JournalDetailRoute,
       props: {
         messagePort: messagePort,
         resourcesPanelOpen: resourcesPanelOpen
@@ -183,19 +183,19 @@
     }
   ]
 
-  const onCustomizeNotebook = (notebook: Notebook) => {
-    isCustomizingNotebook = notebook
+  const onCustomizeJournal = (journal: Journal) => {
+    isCustomizingJournal = journal
   }
 </script>
 
 <div class="resource-container">
-  {#if isCustomizingNotebook}
-    <NotebookEditor bind:notebook={isCustomizingNotebook} />
+  {#if isCustomizingJournal}
+    <JournalEditor bind:journal={isCustomizingJournal} />
   {/if}
 
   {#if treeSidebarOpen}
     <aside class="left-tree-sidebar" style="width: {sidebarWidth}px;">
-      <NotebookTreeView bind:isVisible={treeSidebarOpen} {onCustomizeNotebook} />
+      <JournalTreeView bind:isVisible={treeSidebarOpen} {onCustomizeJournal} />
       <div
         class="resize-handle"
         class:resizing={isResizing}
@@ -273,15 +273,13 @@
   }
 
   :global(body) {
-    background:
-      light-dark(
+    background: light-dark(
         linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1)),
         linear-gradient(rgba(13, 20, 33, 0.85), rgba(13, 20, 33, 0.95))
       ),
       url('./assets/greenfield.png');
     background: light-dark(rgba(250, 250, 250, 1), #0d1421);
-    background:
-      light-dark(
+    background: light-dark(
         linear-gradient(to bottom, rgba(250, 250, 250, 1) 0%, rgba(255, 255, 255, 0.9) 10%),
         linear-gradient(to bottom, rgba(13, 20, 33, 0.95) 0%, rgba(13, 20, 33, 0.98) 12%)
       ),

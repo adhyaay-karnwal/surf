@@ -75,8 +75,8 @@ const eventHandlers = {
     })
   },
 
-  onToggleNotebookSidebar: (callback: (data: { open: boolean }) => void) => {
-    return IPC_EVENTS_RENDERER.toggleNotebookSidebar.on((_, data) => {
+  onToggleJournalSidebar: (callback: (data: { open: boolean }) => void) => {
+    return IPC_EVENTS_RENDERER.toggleJournalSidebar.on((_, data) => {
       try {
         callback(data)
       } catch (error) {

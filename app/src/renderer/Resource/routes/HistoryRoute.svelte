@@ -1,15 +1,15 @@
 <script lang="ts">
   import { Icon } from '@mist/icons'
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import { Button, PageMention } from '@mist/ui'
   import { onMount } from 'svelte'
 
   let editorEl = $state() as HTMLElement
 
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
 
   onMount(() => {
-    notebookManager.loadNotebooks()
+    journalManager.loadJournals()
   })
 </script>
 
@@ -23,12 +23,12 @@
   <div class="container-list">
     <!--<span class="label">Notes</span>-->
     <ul>
-      <!--{#each $sortedNotebooksList as container, i}
+      <!--{#each $sortedJournalsList as container, i}
         <li>
           <PageMention
             text={`${container.data.emoji ? container.data.emoji + " " : ""}${container.data.folderName}`}
             onclick={async () => {
-              await navigation.navigate(`mist://notebook/${container.id}`)
+              await navigation.navigate(`mist://journal/${container.id}`)
                 .finished;
             }}
             --delay={50 + i * 50 + "ms"}

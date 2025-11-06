@@ -2,7 +2,7 @@
   import { writable } from 'svelte/store'
   import { Icon } from '@mist/icons'
   import { useBrowser } from '@mist/services/browser'
-  import { useNotebookManager } from '@mist/services/notebooks'
+  import { useJournalManager } from '@mist/services/journals'
   import { useResourceManager, type Resource } from '@mist/services/resources'
   import type { TabItem } from '@mist/services/tabs'
   import { constructBreadcrumbs } from './breadcrumbs'
@@ -26,7 +26,7 @@
   const log = useLogScope('NoteMenu')
   const browser = useBrowser()
   const resourceManager = useResourceManager()
-  const notebookManager = useNotebookManager()
+  const journalManager = useJournalManager()
   const activeLocation = $derived(view.url ?? writable(''))
   const viewType = $derived(view.type)
 
@@ -40,7 +40,7 @@
   $effect(
     async () =>
       (breadcrumbs = await constructBreadcrumbs(
-        notebookManager,
+        journalManager,
         [...$activeHistory, { title: 'active', url: $activeLocation }],
         $activeHistoryIndex,
         view
@@ -69,7 +69,7 @@
       if (targetBreadcrumb) {
         view.webContents.loadURL(targetBreadcrumb.url)
       } else {
-        view.webContents.loadURL('mist://surf/notebook')
+        view.webContents.loadURL('mist://mist/journal')
       }
     } catch (err) {
       log.error('Failed to delete resource', err)

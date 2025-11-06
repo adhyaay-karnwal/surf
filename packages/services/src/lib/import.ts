@@ -8,17 +8,17 @@ import { useLogScope } from '@mist/utils/io'
 import { ResourceTag } from '@mist/utils/formatting'
 
 import { type Resource, type ResourceManager } from './resources'
-import { NotebookManager } from './notebooks'
+import { JournalManager } from './journals'
 
 export class Importer {
   log: ReturnType<typeof useLogScope>
   resourceManager: ResourceManager
-  notebookManager: NotebookManager
+  journalManager: JournalManager
 
-  constructor(resourceManager: ResourceManager, notebookManager: NotebookManager) {
+  constructor(resourceManager: ResourceManager, journalManager: JournalManager) {
     this.log = useLogScope('Importer')
     this.resourceManager = resourceManager
-    this.notebookManager = notebookManager
+    this.journalManager = journalManager
   }
 
   async importHistory(type: BrowserType) {
@@ -43,18 +43,18 @@ export class Importer {
           : `${folder.title} - ${browserMetadata?.name ?? type}`
 
         // check if the folder already exists
-        const notebooks = Array.from(this.notebookManager.notebooks.values())
-        let notebook = notebooks.find(
-          (notebook) => notebook.nameValue === folder.title || notebook.nameValue === formattedTitle
+        const journals = Array.from(this.journalManager.journals.values())
+        let journal = journals.find(
+          (journal) => journal.nameValue === folder.title || journal.nameValue === formattedTitle
         )
 
-        if (!notebook) {
-          notebook = await this.notebookManager.createNotebook({
+        if (!journal) {
+          journal = await this.journalManager.createJournal({
             name: formattedTitle,
             imported: true
           })
         } else {
-          await notebook.updateData({
+          await journal.updateData({
             imported: true
           })
         }
@@ -80,8 +80,8 @@ export class Importer {
           })
         )
 
-        await this.notebookManager.addResourcesToNotebook(
-          notebook.id,
+        await this.journalManager.addResourcesToJournal(
+          journal.id,
           resources.map((r) => r.id),
           SpaceEntryOrigin.ManuallyAdded
         )
@@ -92,8 +92,8 @@ export class Importer {
     return importedResources
   }
 
-  static create(service: { resourceManager: ResourceManager; notebookManager: NotebookManager }) {
-    const { resourceManager, notebookManager } = service
-    return new Importer(resourceManager, notebookManager)
+  static create(service: { resourceManager: ResourceManager; journalManager: JournalManager }) {
+    const { resourceManager, journalManager } = service
+    return new Importer(resourceManager, journalManager)
   }
 }

@@ -1,6 +1,6 @@
-import type { NotebookCustomization } from '@mist/types'
+import type { JournalCustomization } from '@mist/types'
 
-export const onboardingNotebook = {
+export const onboardingJournal = {
   name: 'Intro to Mist',
   customization: {
     coverColor: [
@@ -52,14 +52,14 @@ export const onboardingNotebook = {
         color: 'var(--scribble-color)'
       }
     ]
-  } as NotebookCustomization,
+  } as JournalCustomization,
   urls: [
-    'https://deta.surf'
-    // 'https://www.xda-developers.com/deta-surf-promising-new-browser/',
+    'https://deta.mist'
+    // 'https://www.xda-developers.com/deta-mist-promising-new-browser/',
     // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
     // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://deta.surf/people/efe',
-    // 'https://deta.surf/people/reese',
-    // 'https://productidentity.co/p/surf-the-browser'
+    // 'https://deta.mist/people/efe',
+    // 'https://deta.mist/people/reese',
+    // 'https://productidentity.co/p/mist-the-browser'
   ]
 }

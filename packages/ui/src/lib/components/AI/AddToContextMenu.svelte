@@ -25,10 +25,10 @@
     { type: 'separator' },
     {
       id: 'mentions',
-      label: 'Mention Tabs, Notebooks & Sources',
+      label: 'Mention Tabs, Journals & Sources',
       icon: 'note',
       description:
-        'Type @ to mention your tabs, notebooks or saved sources and use them in the context.',
+        'Type @ to mention your tabs, journals or saved sources and use them in the context.',
       action: onMentionSelect
     }
   ] as DropdownItem[]

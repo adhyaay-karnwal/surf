@@ -9,7 +9,7 @@
   // TODO: Decouple this rendering from the Resource?
   let {
     resource,
-    sourceNotebookId,
+    sourceJournalId,
     text = false,
     onlyCard = false,
     showSaved = false,
@@ -24,7 +24,7 @@
     //faviconImage
   }: {
     resource: Resource
-    sourceNotebookId?: string
+    sourceJournalId?: string
     text?: boolean
     onlyCard?: boolean
     showSaved?: boolean

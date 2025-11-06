@@ -8,11 +8,11 @@ We encourage you to review the current issues and feature requests before contri
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Mist Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@deta.surf](mailto:hello@deta.surf).
+This project and everyone participating in it is governed by the [Mist Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@deta.mist](mailto:hello@deta.mist).
 
 ## I need help!
 
-If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](http://deta.surf/discord), open an issue on GitHub or email us at [hello@deta.surf](mailto:hello@deta.surf).
+If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](http://deta.mist/discord), open an issue on GitHub or email us at [hello@deta.mist](mailto:hello@deta.mist).
 
 ## What's inside?
 
@@ -27,7 +27,7 @@ The core app is split into the different processes, `main`, `preload` and `rende
 Within the `renderer` there are several different entrypoints for the different view types in Mist, each one essentially acts as its own web application (using Svelte):
 
 - `Core`: main app UI
-- `Resource`: notebooks and resource views like the notes
+- `Resource`: journals and resource views like the notes
 - `PDF`: custom PDF viewer
 - `Overlay`: overlay window used for dialogs and other floaty UIs^
 - `Settings`: settings window
@@ -47,7 +47,7 @@ The `main` directory is the main process of the Electron app, responsible for wi
 
 - `@mist/backend`: a Rust backend that's compiled to a Node.js module
 - `@mist/backend-server`: a Rust backend that's compiled to a standalone server, responsible for compute intensive AI tasks (embeddings)
-- `@mist/services`: core services powering the application like tabs, resources, notebooks, settings, etc.
+- `@mist/services`: core services powering the application like tabs, resources, journals, settings, etc.
 - `@mist/editor`: Tiptap based rich text editor component
 - `@mist/teletype`: custom command menu library
 - `@mist/dragcula`: drag and drop library

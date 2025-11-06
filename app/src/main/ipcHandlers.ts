@@ -52,8 +52,8 @@ export const validateIPCSender = (event: Electron.IpcMainEvent | Electron.IpcMai
   }
 
   if (
-    event.senderFrame?.url.startsWith('mist://surf/resource/') ||
-    event.senderFrame?.url.startsWith('mist://surf/notebook')
+    event.senderFrame?.url.startsWith('mist://mist/resource/') ||
+    event.senderFrame?.url.startsWith('mist://mist/journal')
   ) {
     validIDs.push(event.sender.id)
   }

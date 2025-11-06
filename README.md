@@ -2,15 +2,15 @@
   
 ![splash](./docs/assets/repo-header.png)
 
-[**Website**](https://deta.surf) - [**Discord**](https://deta.surf/discord)
+[**Website**](https://deta.mist) - [**Discord**](https://deta.mist/discord)
 
 </div>
 
 <br>
 
-# Deta Mist: Your AI Notebook
+# Deta Mist: Your AI Journal
 
-Deta Mist is an AI notebook that brings all your files and the web directly into your stream of thought.
+Deta Mist is an AI journal that brings all your files and the web directly into your stream of thought.
 
 It’s meant for simultaneous research and thinking that minimizes the grunt work: manually searching, opening windows & tabs, scrolling, copying and pasting into a document editor.
 
@@ -22,13 +22,13 @@ Mist is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows &
 
 Most applications are focused on a single task, or a single media type: notes, websites, or PDFs. Real thinking requires juggling media across sources to make connections and synthesize ideas. We want to help people think better, across all their media.
 
-Mist is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://deta.surf/motivation).
+Mist is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://deta.mist/motivation).
 
 ## Installation
 
-Checkout the [GitHub releases](https://github.com/deta/surf/releases) for the latest stable version of Mist for MacOS, Windows and Linux.
+Checkout the [GitHub releases](https://github.com/deta/mist/releases) for the latest stable version of Mist for MacOS, Windows and Linux.
 
-You can also download Mist with some managed & additional features (e.g. AI) from the [Deta website](https://deta.surf). That version is subject to different terms.
+You can also download Mist with some managed & additional features (e.g. AI) from the [Deta website](https://deta.mist). That version is subject to different terms.
 
 For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -41,14 +41,14 @@ For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTI
 
 ## Features
 
-### Multi-Media Library & Notebooks
+### Multi-Media Library & Journals
 
-![notebooks](./docs/assets/readme/notebook-grid.png)
+![journals](./docs/assets/readme/journal-grid.png)
 
 Store almost any media in a private library on your computer, in an open and transparent format.
 
 - Support for local files, sites & links from the web (YouTube, Tweets & more), or create media directly in Mist.
-- Organize this library into Notebooks.
+- Organize this library into Journals.
 - Open and use much of your library offline.
 - Use your library to power Mist’s AI features.
 
@@ -79,7 +79,7 @@ Mist is built around tabs, split view and a sidebar for easy navigation.
 
 - Open local notes, files or web pages in tabs.
 - Split view allows you to view and interact with multiple resources side by side.
-- The sidebar provides quick access to your Notebooks & notes.
+- The sidebar provides quick access to your Journals & notes.
 
 ### Mistlets (App Generation)
 
@@ -107,7 +107,7 @@ Find the most common shortcuts [here](./docs/SHORTCUTS.md).
 
 ## Security
 
-_To report a security concern, please see_ https://github.com/deta/surf/security/policy
+_To report a security concern, please see_ https://github.com/deta/mist/security/policy
 
 ## Contributing
 
@@ -130,7 +130,7 @@ See [LICENSE](LICENSE) for more details about the Apache 2.0 license.
 
 **Note:** The Deta name and logos are trademarks of Deta GmbH and are **not** covered by the Apache 2.0 license.
 
-Deta GmbH is a commercial open source company. Mist is designed to operate as open source software without needing Deta's servers. Deta GmbH also offers a modified version of Mist (which integrates with Deta's servers) and is subject to separate terms and conditions. This version of Mist can be downloaded from the [Deta website](https://deta.surf/).
+Deta GmbH is a commercial open source company. Mist is designed to operate as open source software without needing Deta's servers. Deta GmbH also offers a modified version of Mist (which integrates with Deta's servers) and is subject to separate terms and conditions. This version of Mist can be downloaded from the [Deta website](https://deta.mist/).
 
 ## Acknowledgements
 

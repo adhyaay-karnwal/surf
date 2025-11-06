@@ -1,5 +1,5 @@
 import { provideConfig } from '../config'
-import { createNotebookManager } from '../notebooks'
+import { createJournalManager } from '../journals'
 import { createResourceManager } from '../resources'
 import { createMentionService } from '../mentions'
 import { createTeletypeServiceCore } from '../teletype'
@@ -24,7 +24,7 @@ export const initServices = () => {
   const messagePort = useMessagePortPrimary()
   const config = provideConfig()
   const resourceManager = createResourceManager(config)
-  const notebookManager = createNotebookManager(resourceManager, config, messagePort)
+  const journalManager = createJournalManager(resourceManager, config, messagePort)
   const viewManager = createViewManager(resourceManager)
   const tabsService = createTabsService(viewManager)
   const ai = provideAI(resourceManager, config, true)
@@ -43,7 +43,7 @@ export const initServices = () => {
     viewManager,
     tabsService,
     resourceManager,
-    notebookManager,
+    journalManager,
     mentionService,
     teletypeService,
     downloadsManager,

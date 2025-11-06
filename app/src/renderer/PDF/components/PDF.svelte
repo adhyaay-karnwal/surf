@@ -70,7 +70,7 @@
       if (pdfDownloadURL) {
         pdfSlick.loadDocument(pdfDownloadURL).then(async () => {
           if (pdfSlickReady) pdfSlickReady(pdfSlick)
-          if (!path.startsWith('mist://surf/resource')) {
+          if (!path.startsWith('mist://mist/resource')) {
             const title = filename ?? (await getDocumentTitle(pdfSlick))
             if (title && title !== 'document.pdf') document.title = title
           }

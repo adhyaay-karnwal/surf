@@ -22,7 +22,7 @@ const isDefaultBrowserWindows = async () => {
       { encoding: 'utf-8' }
     ).toString()
 
-    const appProgId = 'ea.browser.deta.surf'
+    const appProgId = 'ea.browser.deta.mist'
 
     const isHttpDefault = httpProgId.includes(appProgId)
     const isHttpsDefault = httpsProgId.includes(appProgId)

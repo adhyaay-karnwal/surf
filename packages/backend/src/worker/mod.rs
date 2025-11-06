@@ -44,7 +44,7 @@ impl PathConfig {
 
     pub fn db_path(&self) -> String {
         Path::new(&self.backend_root_path)
-            .join("surf-0-01.sqlite")
+            .join("mist-0-01.sqlite")
             .as_os_str()
             .to_string_lossy()
             .to_string()
