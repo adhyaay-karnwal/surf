@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Fn } from '@deta/types'
+  import type { Fn } from '@breeze/types'
   import type { Snippet } from 'svelte'
 
   const {

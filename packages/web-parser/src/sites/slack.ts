@@ -2,12 +2,12 @@ import {
   ResourceTypes,
   type ResourceDataChatMessage,
   type ResourceDataChatThread
-} from '@deta/types'
+} from '@breeze/types'
 
 import { WebAppExtractor } from '../extractors'
 import type { DetectedResource, DetectedWebApp, WebService } from '../types'
 import { DOMExtractor } from '../extractors/dom'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@breeze/utils'
 import { sanitizeHTML } from '../utils'
 
 export type SlackMessageData = {

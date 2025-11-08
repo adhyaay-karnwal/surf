@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { MaskedScroll, SearchInput } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { MaskedScroll, SearchInput } from '@breeze/ui'
   import type { Snippet } from 'svelte'
 
   import type { SearchableItem } from './searchable.types'

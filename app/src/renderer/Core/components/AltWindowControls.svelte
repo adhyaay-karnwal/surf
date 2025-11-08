@@ -1,6 +1,6 @@
 <script>
-  import { Icon } from '@deta/icons'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { Button } from '@breeze/ui'
 
   const handleMinimize = () => {
     window.api.controlWindow('minimize')

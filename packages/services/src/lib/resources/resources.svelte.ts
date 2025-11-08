@@ -17,11 +17,11 @@ import {
   copyToClipboard,
   htmlToMarkdown,
   optimisticParseJSON
-} from '@deta/utils'
+} from '@breeze/utils'
 import {
   generateMarkdownWithFrontmatter,
   parseMarkdownWithFrontmatter
-} from '@deta/utils/src/formatting/markdown-extended'
+} from '@breeze/utils/src/formatting/markdown-extended'
 import { SFFS } from '../sffs'
 import {
   type AiSFFSQueryResponse,
@@ -49,7 +49,7 @@ import {
   MARKDOWN_RESOURCE_TYPES,
   isMarkdownResourceType,
   isWebResourceType
-} from '@deta/types'
+} from '@breeze/types'
 import {
   EventBusMessageType,
   EventContext,
@@ -63,13 +63,13 @@ import {
   type ResourceDataHistoryEntry,
   type ResourceState,
   type ResourceStateCombined
-} from '@deta/types'
+} from '@breeze/types'
 import { getContext, onDestroy, setContext, tick } from 'svelte'
-import type { Model } from '@deta/backend/types'
-import { WebParser } from '@deta/web-parser'
+import type { Model } from '@breeze/backend/types'
+import { WebParser } from '@breeze/web-parser'
 import type { ConfigService } from '../config'
-import { EventEmitterBase, ResourceTag, SearchResourceTags } from '@deta/utils'
-import { type CtxItem } from '@deta/ui'
+import { EventEmitterBase, ResourceTag, SearchResourceTags } from '@breeze/utils'
+import { type CtxItem } from '@breeze/ui'
 import { Notebook } from '../notebooks'
 import { SvelteMap } from 'svelte/reactivity'
 
@@ -251,7 +251,7 @@ export const getResourceCtxItems = ({
               {
                 type: 'action',
                 icon: 'trash',
-                text: 'Delete from Surf',
+                text: 'Delete from Breeze',
                 kind: 'danger',
                 action: () => onDeleteResource(resource.id)
               }
@@ -1072,9 +1072,9 @@ export class ResourceManager extends EventEmitterBase<ResourceManagerEventHandle
   }
 
   async getResourcesFromSourceURL(url: string, tags?: SFFSResourceTag[]) {
-    const surfUrlMatch = url.match(/surf:\/\/resource\/([^\/]+)/)
-    if (surfUrlMatch) {
-      const resource = await this.getResource(surfUrlMatch[1])
+    const breezeUrlMatch = url.match(/breeze:\/\/resource\/([^\/]+)/)
+    if (breezeUrlMatch) {
+      const resource = await this.getResource(breezeUrlMatch[1])
       return resource ? [resource] : []
     }
 

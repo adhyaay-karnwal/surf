@@ -53,7 +53,7 @@ Mode 3: Application/Visualization Creation or Iteration
 - Use for ANY request to create, generate or update visual content or a usable app with a user interface.
   NOTE: this does not include requests for direct code generation or programming tasks.
 
-- Apps may be referred as 'Surflet(s)' by the user or in the note
+- Apps may be referred as 'Breezelet(s)' by the user or in the note
 
 - Examples:
 
@@ -62,7 +62,7 @@ Mode 3: Application/Visualization Creation or Iteration
   - "Build a dashboard for..."
   - "Make an interactive visualization..."
   - "Generate a graph of..."
-  - "Update the surflet..."
+  - "Update the breezelet..."
 
 - Counter-Examples:
   - "Write a function to..."

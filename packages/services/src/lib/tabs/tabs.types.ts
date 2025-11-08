@@ -1,4 +1,4 @@
-import type { PageHighlightSelectionData, WebContentsViewData } from '@deta/types'
+import type { PageHighlightSelectionData, WebContentsViewData } from '@breeze/types'
 
 import type { TabItem } from './tabs.svelte'
 import type { BaseKVItem } from '../kv'

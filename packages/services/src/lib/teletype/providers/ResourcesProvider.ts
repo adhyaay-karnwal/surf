@@ -1,4 +1,4 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
 import {
   generateUUID,
@@ -7,9 +7,9 @@ import {
   SearchResourceTags,
   truncate,
   getFileKind
-} from '@deta/utils'
+} from '@breeze/utils'
 import { Resource, ResourceJSON, useResourceManager } from '../../resources'
-import { ResourceTagsBuiltInKeys, ResourceTypes } from '@deta/types'
+import { ResourceTagsBuiltInKeys, ResourceTypes } from '@breeze/types'
 import { useBrowser } from '../../browser'
 
 export class ResourcesProvider implements ActionProvider {

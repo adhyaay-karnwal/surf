@@ -1,24 +1,24 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager, type Notebook } from '@deta/services/notebooks'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { useNotebookManager, type Notebook } from '@breeze/services/notebooks'
+  import { Button } from '@breeze/ui'
   import { onMount } from 'svelte'
-  import { MaskedScroll, openDialog, contextMenu, NotebookCover } from '@deta/ui'
-  import { conditionalArrayItem, truncate, useDebounce, useLogScope } from '@deta/utils'
+  import { MaskedScroll, openDialog, contextMenu, NotebookCover } from '@breeze/ui'
+  import { conditionalArrayItem, truncate, useDebounce, useLogScope } from '@breeze/utils'
   import TeletypeEntry from '../../Core/components/Teletype/TeletypeEntry.svelte'
   import { openNotebook, openResource } from '../handlers/notebookOpenHandlers'
-  import { type ChatPrompt, type Fn, ViewLocation } from '@deta/types'
-  import { useResourceManager } from '@deta/services/resources'
-  import { provideAI } from '@deta/services/ai'
-  import { useMessagePortClient } from '@deta/services/messagePort'
-  import { BUILT_IN_PAGE_PROMPTS, type ExamplePrompt } from '@deta/services/constants'
-  import { useConfig } from '@deta/services'
+  import { type ChatPrompt, type Fn, ViewLocation } from '@breeze/types'
+  import { useResourceManager } from '@breeze/services/resources'
+  import { provideAI } from '@breeze/services/ai'
+  import { useMessagePortClient } from '@breeze/services/messagePort'
+  import { BUILT_IN_PAGE_PROMPTS, type ExamplePrompt } from '@breeze/services/constants'
+  import { useConfig } from '@breeze/services'
   import NotebookLayout from '../layouts/NotebookLayout.svelte'
   import NotebookEditor from '../components/notebook/NotebookEditor/NotebookEditor.svelte'
   import { useTeletypeService } from '../../../../../packages/services/src/lib'
   import NotebookContents from '../components/notebook/NotebookContents.svelte'
   import PromptPills from '../components/PromptPills.svelte'
-  import { MentionItemType } from '@deta/editor'
+  import { MentionItemType } from '@breeze/editor'
   import NotebookSidecarExample from '../components/notebook/NotebookSidecarExample.svelte'
 
   let {
@@ -178,7 +178,7 @@
   })
 
   onMount(() => {
-    document.title = 'Surf'
+    document.title = 'Breeze'
     // notebookManager.loadNotebooks()
 
     if (shouldMentionActiveTab()) {
@@ -226,7 +226,7 @@
 </script>
 
 <svelte:head>
-  <title>Surf</title>
+  <title>Breeze</title>
 </svelte:head>
 
 {#if isCustomizingNotebook}
@@ -263,7 +263,7 @@
     {/if}
   </main>
 
-  <!-- <NotebookSidebar title="Surf" bind:open={resourcesPanelOpen} /> -->
+  <!-- <NotebookSidebar title="Breeze" bind:open={resourcesPanelOpen} /> -->
 </NotebookLayout>
 
 <style lang="scss">

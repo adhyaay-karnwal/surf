@@ -21,7 +21,7 @@ pub fn should_narrow_search_prompt_simple() -> String {
 
 pub fn create_app_prompt(current_time: &str) -> String {
     format!("
-You are an AI that creates self-contained web applications called \"Surflets\" using only HTML code.
+You are an AI that creates self-contained web applications called \"Breezelets\" using only HTML code.
 
 ## Core Requirements
 
@@ -112,7 +112,7 @@ You are an AI that creates self-contained web applications called \"Surflets\" u
 
 ## Technical Notes
 - Local storage and IndexedDB available for data persistence
-- Users may refer to apps as \"Surflets\"
+- Users may refer to apps as \"Breezelets\"
 - Use CSS for full width/height utilization: body {{ margin: 0; padding: 8px; min-height: 100vh; }}
 - Avoid unnecessary wrapper divs that create card-like appearances
 - Content should flow naturally and fill available space
@@ -230,14 +230,14 @@ Here are some guidelines to follow:
 
 - There might be multiple documents provided as context for the query. The context will be provided in JSON format.
 
-- Users might refer to apps as 'Surflet(s)' in their queries.
+- Users might refer to apps as 'Breezelet(s)' in their queries.
 
 Here's the current date and time in UTC: {}
 
 ", current_time).to_string()
 }
 
-pub fn note_prompt(current_time: &str, websearch: bool, surflet: bool) -> String {
+pub fn note_prompt(current_time: &str, websearch: bool, breezelet: bool) -> String {
     let websearch_section = if websearch {
         "
 
@@ -256,22 +256,22 @@ Be mindful of the current date and time (given to you in UTC) when forming the q
 The document might contain web search already completed, in that case, you can use the existing web search results to answer the query. The results will be provided as context documents. The document will contain the websearch results as:
     <websearch data-query=\"query\" data-results=\"[{{}}]\"></websearch>
 
-In cases where you need both a websearch and a surflet, do not use both in the same response, use a surflet only after the document already has a web search result."
+In cases where you need both a websearch and a breezelet, do not use both in the same response, use a breezelet only after the document already has a web search result."
     } else {
         ""
     };
 
-    let surflet_section = if surflet {
+    let breezelet_section = if breezelet {
         "
 
 **For Apps and Visualizations:**
 
-- For requests to create apps, games or visualizations (these are also called 'surflets') use the special surflet syntax. Example usage:
+- For requests to create apps, games or visualizations (these are also called 'breezelets') use the special breezelet syntax. Example usage:
     <answer>
-    :::surflet{{name=\"Tic Tac Toe\" prompt=\"Create an interactive tic tac toe game with a 3x3 grid, player vs player gameplay, win detection, and score tracking\"}}
+    :::breezelet{{name=\"Tic Tac Toe\" prompt=\"Create an interactive tic tac toe game with a 3x3 grid, player vs player gameplay, win detection, and score tracking\"}}
     </answer>
 
-  DO NOT MENTION THAT YOU ARE USING THE SURFLET SYNTAX, JUST USE IT.
+  DO NOT MENTION THAT YOU ARE USING THE BREEZELET SYNTAX, JUST USE IT.
 
 - **IMPORTANT: The name and prompt attributes are required and must never be empty:**
   - `name`: A user-friendly name for the app (e.g., \"Calculator\", \"Todo List\")
@@ -294,16 +294,16 @@ In cases where you need both a websearch and a surflet, do not use both in the s
         ""
     };
 
-    let context_surflet_text = if surflet {
+    let context_breezelet_text = if breezelet {
         "
-- For apps and visualizations, provide all needed information from the context in the prompt attribute of the surflet syntax WHILE STILL IN A SINGLE LINE."
+- For apps and visualizations, provide all needed information from the context in the prompt attribute of the breezelet syntax WHILE STILL IN A SINGLE LINE."
     } else {
         ""
     };
 
-    let citation_surflet_text = if surflet {
+    let citation_breezelet_text = if breezelet {
         "
-- No citations are needed for apps or visualizations (surflets) and answers based on your own knowledge."
+- No citations are needed for apps or visualizations (breezelets) and answers based on your own knowledge."
     } else {
         "
 - No citations are needed for answers based on your own knowledge."
@@ -335,10 +335,10 @@ If you need more information from the user to answer a question, simply ask for 
 
 Current date/time (UTC): {}",
         websearch_section,
-        surflet_section,
+        breezelet_section,
         context_websearch_text,
-        citation_surflet_text,
-        context_surflet_text,
+        citation_breezelet_text,
+        context_breezelet_text,
         current_time
     )
 }

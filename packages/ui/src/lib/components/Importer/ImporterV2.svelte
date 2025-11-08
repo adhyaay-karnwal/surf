@@ -4,17 +4,17 @@
 </script>
 
 <script lang="ts">
-  import { useResourceManager } from '@deta/services/resources'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { Importer } from '@deta/services'
-  import { Icon } from '@deta/icons'
+  import { useResourceManager } from '@breeze/services/resources'
+  import { useNotebookManager } from '@breeze/services/notebooks'
+  import { Importer } from '@breeze/services'
+  import { Icon } from '@breeze/icons'
   import {
     BROWSER_TYPE_DATA,
     BrowserType,
     PRIMARY_BROWSRS,
     type BrowserTypeItem
-  } from '@deta/types'
-  import { isMac, useLogScope, wait } from '@deta/utils'
+  } from '@breeze/types'
+  import { isMac, useLogScope, wait } from '@breeze/utils'
 
   import { createEventDispatcher } from 'svelte'
   import ImportDataItem from './ImportDataItem.svelte'

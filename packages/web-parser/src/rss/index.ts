@@ -1,5 +1,5 @@
-import { ResourceDataPost } from '@deta/types'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { ResourceDataPost } from '@breeze/types'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@breeze/utils'
 import Parser from 'rss-parser'
 import { sanitizeHTML } from '../utils'
 

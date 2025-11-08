@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import type { Icons } from '@deta/icons'
+  import type { Icons } from '@breeze/icons'
 
   export interface PromptPillItem {
     label?: string
@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import { startingClass } from '@deta/utils/dom'
+  import { startingClass } from '@breeze/utils/dom'
   import PromptPill from './PromptPill.svelte'
 
   const dispatch = createEventDispatcher<{

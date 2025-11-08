@@ -1,6 +1,6 @@
 import { derived } from 'svelte/store'
 
-import { SpaceEntryOrigin, type SpaceData } from '@deta/types'
+import { SpaceEntryOrigin, type SpaceData } from '@breeze/types'
 
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'

@@ -1,17 +1,17 @@
-import { EventContext, GeneratePromptsEventTrigger, ResourceTagsBuiltInKeys } from '@deta/types'
-import { truncateURL, getFileType, getURLBase, getFileKind } from '@deta/utils'
+import { EventContext, GeneratePromptsEventTrigger, ResourceTagsBuiltInKeys } from '@breeze/types'
+import { truncateURL, getFileType, getURLBase, getFileKind } from '@breeze/utils'
 import { derived, get, type Writable, writable } from 'svelte/store'
 
-import { blobToDataUrl } from '@deta/utils/browser'
+import { blobToDataUrl } from '@breeze/utils/browser'
 import { ResourceJSON, type Resource } from '../../resources'
 
 import type { ContextService } from '../contextManager'
 import { type ContextItemIcon, ContextItemIconTypes, ContextItemTypes } from './types'
 import { ContextItemBase } from './base'
-import { ModelTiers } from '@deta/types/src/ai.types'
+import { ModelTiers } from '@breeze/types/src/ai.types'
 import type { ChatPrompt } from '../chat'
-import { WebParser, type ResourceContent } from '@deta/web-parser'
-import { isGeneratedResource } from '@deta/services/resources'
+import { WebParser, type ResourceContent } from '@breeze/web-parser'
+import { isGeneratedResource } from '@breeze/services/resources'
 import { TabItem } from '../../tabs'
 
 const RESOURCE_PROCESSING_TIMEOUT = 30000

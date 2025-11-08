@@ -1,14 +1,14 @@
-import { ResourceTypes, type ResourceDataPost } from '@deta/types'
+import { ResourceTypes, type ResourceDataPost } from '@breeze/types'
 
 import { APIExtractor, WebAppExtractor } from '../extractors'
 import type { DetectedWebApp, WebService, WebServiceActionInputs } from '../types'
 import { SERVICES } from '../services'
 import { WebParser } from '..'
 import { sanitizeHTML } from '../utils'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@breeze/utils'
 
 export const TwitterRegexPatterns = {
-  // example: /@detahq/status/1441160730730736640
+  // example: /@breezehq/status/1441160730730736640
   tweet: /^\/[a-zA-Z0-9_-]+\/status\/[0-9]+\/?$/
 }
 

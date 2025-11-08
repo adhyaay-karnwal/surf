@@ -1,4 +1,4 @@
-import { isDev, useLogScope, type ScopedLogger } from '@deta/utils'
+import { isDev, useLogScope, type ScopedLogger } from '@breeze/utils'
 import type {
   BookmarkFolder,
   BrowserType,
@@ -36,7 +36,7 @@ import type {
   AIChatMessageSource,
   AIDocsSimilarity,
   YoutubeTranscript
-} from '@deta/types'
+} from '@breeze/types'
 
 import type {
   App,
@@ -47,13 +47,13 @@ import type {
   QueryResourcesOptions,
   Message,
   CreateChatCompletionOptions
-} from '@deta/backend/types'
+} from '@breeze/backend/types'
 import {
   APIKeyMissingError,
   BadRequestError,
   TooManyRequestsError,
   UnauthorizedError
-} from '@deta/backend/types'
+} from '@breeze/backend/types'
 
 export type HorizonToCreate = Optional<
   HorizonData,
@@ -1140,7 +1140,7 @@ export class SFFS {
       inlineImages?: string[]
       general?: boolean
       websearch?: boolean
-      surflet?: boolean
+      breezelet?: boolean
     }
   ): Promise<void> {
     this.log.debug(
@@ -1169,7 +1169,7 @@ export class SFFS {
       limit: opts?.limit ?? 20,
       general: opts?.general,
       websearch: opts?.websearch,
-      surflet: opts?.surflet
+      breezelet: opts?.breezelet
     }
     return this.withErrorHandling(
       this.backend,

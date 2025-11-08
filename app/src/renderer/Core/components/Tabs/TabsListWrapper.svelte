@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TabOrientation } from '@deta/services/tabs'
+  import { TabOrientation } from '@breeze/services/tabs'
   import TabsList from './TabsList/TabsList.svelte'
   import VerticalTabsList from './VerticalTabsList.svelte'
 

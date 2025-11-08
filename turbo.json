@@ -4,40 +4,40 @@
   "globalPassThroughEnv": ["*"],
   "ui": "tui",
   "tasks": {
-    "@deta/utils#build": {
-      "dependsOn": ["@deta/types#build"],
+    "@breeze/utils#build": {
+      "dependsOn": ["@breeze/types#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/services#build": {
-      "dependsOn": ["@deta/types#build", "@deta/utils#build"],
+    "@breeze/services#build": {
+      "dependsOn": ["@breeze/types#build", "@breeze/utils#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/ui#build": {
-      "dependsOn": ["@deta/utils#build", "@deta/icons#build", "@deta/services#build"],
+    "@breeze/ui#build": {
+      "dependsOn": ["@breeze/utils#build", "@breeze/icons#build", "@breeze/services#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/icons#build": {
+    "@breeze/icons#build": {
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/editor#build": {
-      "dependsOn": ["@deta/icons#build", "@deta/utils#build", "@deta/types#build"],
+    "@breeze/editor#build": {
+      "dependsOn": ["@breeze/icons#build", "@breeze/utils#build", "@breeze/types#build"],
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/backend#build": {
+    "@breeze/backend#build": {
       "cache": false
     },
-    "@deta/backend#dev": {
+    "@breeze/backend#dev": {
       "cache": false
     },
-    "@deta/backend-server#build": {
+    "@breeze/backend-server#build": {
       "cache": false
     },
-    "@deta/backend-server#dev": {
+    "@breeze/backend-server#dev": {
       "cache": false
     },
     "desktop#build": {
@@ -74,37 +74,37 @@
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/dragcula#build": {
+    "@breeze/dragcula#build": {
       "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
-    "@deta/types#build": {
-      "dependsOn": ["@deta/icons#build"],
+    "@breeze/types#build": {
+      "dependsOn": ["@breeze/icons#build"],
       "outputs": ["build/**"],
       "outputLogs": "new-only"
     },
-    "@deta/ui#dev:tailwind": {
+    "@breeze/ui#dev:tailwind": {
       "outputs": ["src/output.css"],
       "outputLogs": "new-only",
       "persistent": true
     },
-    "@deta/ui#build:tailwind": {
+    "@breeze/ui#build:tailwind": {
       "outputs": ["src/output.css"],
       "outputLogs": "new-only"
     },
     "build:app:frontend": {
       "dependsOn": [
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build",
-        "@deta/utils#build",
-        "@deta/services#build",
-        "@deta/ui#build",
-        "@deta/icons#build",
-        "@deta/editor#build"
+        "@breeze/ui#build:tailwind",
+        "@breeze/dragcula#build",
+        "@breeze/utils#build",
+        "@breeze/services#build",
+        "@breeze/ui#build",
+        "@breeze/icons#build",
+        "@breeze/editor#build"
       ]
     },
     "build:app:backend": {
-      "dependsOn": ["@deta/backend#build", "@deta/backend-server#build"]
+      "dependsOn": ["@breeze/backend#build", "@breeze/backend-server#build"]
     },
     "build:app": {
       "dependsOn": ["build:app:frontend", "build:app:backend"],
@@ -119,34 +119,34 @@
     },
     "desktop#dev": {
       "dependsOn": [
-        "@deta/backend#build",
-        "@deta/backend-server#dev",
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build"
+        "@breeze/backend#build",
+        "@breeze/backend-server#dev",
+        "@breeze/ui#build:tailwind",
+        "@breeze/dragcula#build"
       ],
       "with": [
-        "@deta/utils#dev",
-        "@deta/services#dev",
-        "@deta/ui#dev",
-        "@deta/icons#dev",
-        "@deta/editor#dev"
+        "@breeze/utils#dev",
+        "@breeze/services#dev",
+        "@breeze/ui#dev",
+        "@breeze/icons#dev",
+        "@breeze/editor#dev"
       ],
       "persistent": true,
       "cache": false
     },
     "dev": {
       "dependsOn": [
-        "@deta/backend#build",
-        "@deta/backend-server#dev",
-        "@deta/ui#build:tailwind",
-        "@deta/dragcula#build"
+        "@breeze/backend#build",
+        "@breeze/backend-server#dev",
+        "@breeze/ui#build:tailwind",
+        "@breeze/dragcula#build"
       ],
       "with": [
-        "@deta/utils#dev",
-        "@deta/services#dev",
-        "@deta/ui#dev",
-        "@deta/icons#dev",
-        "@deta/editor#dev"
+        "@breeze/utils#dev",
+        "@breeze/services#dev",
+        "@breeze/ui#dev",
+        "@breeze/icons#dev",
+        "@breeze/editor#dev"
       ],
       "persistent": true,
       "cache": false

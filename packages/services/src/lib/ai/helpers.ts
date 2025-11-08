@@ -8,9 +8,9 @@ import {
   type DetectedResource,
   type WebViewEventSendNames,
   type WebViewSendEvents
-} from '@deta/types'
-import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@deta/utils'
-import { WebParser } from '@deta/web-parser'
+} from '@breeze/types'
+import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@breeze/utils'
+import { WebParser } from '@breeze/web-parser'
 import { PromptIDs, getPrompt } from './prompts'
 import type { AIService } from './aiClean'
 import {
@@ -18,10 +18,10 @@ import {
   BadRequestError,
   TooManyRequestsError,
   UnauthorizedError
-} from '@deta/backend/types'
-import { type ChatError } from '@deta/types/src/ai.types'
-import { ResourceManager } from '@deta/services/resources'
-import { ResourceTag } from '@deta/utils/formatting'
+} from '@breeze/backend/types'
+import { type ChatError } from '@breeze/types/src/ai.types'
+import { ResourceManager } from '@breeze/services/resources'
+import { ResourceTag } from '@breeze/utils/formatting'
 
 const log = useLogScope('AI')
 
@@ -608,7 +608,7 @@ export const parseChatOutputToHtml = async (output: AIChatMessageParsed) => {
   return html
 }
 
-export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) => {
+export const parseChatOutputToBreezeletCode = async (output: AIChatMessageParsed) => {
   const content = output.content
 
   const completeCodeBlockRegex = /```(?:[\w]*\n)?([\s\S]*?)```/
@@ -623,18 +623,18 @@ export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) 
   } else if (openMatch) {
     match = openMatch[1]
   }
-  const surflet = document.createElement('surflet')
+  const breezelet = document.createElement('breezelet')
   const codeElement = document.createElement('code')
   codeElement.textContent = match // this properly escapes the content
 
-  surflet.appendChild(codeElement)
-  return surflet.outerHTML
+  breezelet.appendChild(codeElement)
+  return breezelet.outerHTML
 }
 
 const prepLoadingPhrases = [
   'Analysing your context…',
   'Getting to the essence…',
-  'Surfing the data…',
+  'Breezeing the data…',
   'Unpacking details…',
   'Summoning the goodies…',
   'Charging the knowledge battery…',

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
 
   export let text: string = 'Thinking…'
 </script>

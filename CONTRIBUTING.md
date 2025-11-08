@@ -1,22 +1,22 @@
-# Contributing to Deta Surf
+# Contributing to Breeze Breeze
 
-We welcome contributions from the community to help improve Deta Surf! Whether you're fixing bugs, adding new features, or improving documentation, your contributions are valuable to us.
+We welcome contributions from the community to help improve Breeze Breeze! Whether you're fixing bugs, adding new features, or improving documentation, your contributions are valuable to us.
 
-Please note that Surf has been open-sourced for transparency and community involvement, but it is still in active development. A lot of the code has been written quickly to prototype features, so please be patient and understanding when contributing.
+Please note that Breeze has been open-sourced for transparency and community involvement, but it is still in active development. A lot of the code has been written quickly to prototype features, so please be patient and understanding when contributing.
 
 We encourage you to review the current issues and feature requests before contributing. If you find something you'd like to work on, please comment on the issue or create a new one to let us know you're interested.
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Surf Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@deta.surf](mailto:hello@deta.surf).
+This project and everyone participating in it is governed by the [Breeze Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@breeze.breeze](mailto:hello@breeze.breeze).
 
 ## I need help!
 
-If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](http://deta.surf/discord), open an issue on GitHub or email us at [hello@deta.surf](mailto:hello@deta.surf).
+If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](http://breeze.breeze/discord), open an issue on GitHub or email us at [hello@breeze.breeze](mailto:hello@breeze.breeze).
 
 ## What's inside?
 
-The Deta Surf codebase is structured as a monorepo with several ´packages´ and the core Electron application in `app`. It uses Yarn Workspaces and Turborepo to manage dependencies and build processes.
+The Breeze Breeze codebase is structured as a monorepo with several ´packages´ and the core Electron application in `app`. It uses Yarn Workspaces and Turborepo to manage dependencies and build processes.
 
 ### Core App
 
@@ -24,7 +24,7 @@ The core Electron application is located in the `app` folder. It is built with [
 
 The core app is split into the different processes, `main`, `preload` and `renderer`.
 
-Within the `renderer` there are several different entrypoints for the different view types in Surf, each one essentially acts as its own web application (using Svelte):
+Within the `renderer` there are several different entrypoints for the different view types in Breeze, each one essentially acts as its own web application (using Svelte):
 
 - `Core`: main app UI
 - `Resource`: notebooks and resource views like the notes
@@ -45,17 +45,17 @@ The `main` directory is the main process of the Electron app, responsible for wi
 
 ### Packages
 
-- `@deta/backend`: a Rust backend that's compiled to a Node.js module
-- `@deta/backend-server`: a Rust backend that's compiled to a standalone server, responsible for compute intensive AI tasks (embeddings)
-- `@deta/services`: core services powering the application like tabs, resources, notebooks, settings, etc.
-- `@deta/editor`: Tiptap based rich text editor component
-- `@deta/teletype`: custom command menu library
-- `@deta/dragcula`: drag and drop library
-- `@deta/web-parser`: web content parsing library used for resource extraction / web clipping
-- `@deta/ui`: UI component library
-- `@deta/utils`: shared utilities used by multiple packages and the app
-- `@deta/icons`: icon library based on [`tabler`](https://tabler.io/icons)
-- `@deta/types`: shared TypeScript types used throughout the monorepo
+- `@breeze/backend`: a Rust backend that's compiled to a Node.js module
+- `@breeze/backend-server`: a Rust backend that's compiled to a standalone server, responsible for compute intensive AI tasks (embeddings)
+- `@breeze/services`: core services powering the application like tabs, resources, notebooks, settings, etc.
+- `@breeze/editor`: Tiptap based rich text editor component
+- `@breeze/teletype`: custom command menu library
+- `@breeze/dragcula`: drag and drop library
+- `@breeze/web-parser`: web content parsing library used for resource extraction / web clipping
+- `@breeze/ui`: UI component library
+- `@breeze/utils`: shared utilities used by multiple packages and the app
+- `@breeze/icons`: icon library based on [`tabler`](https://tabler.io/icons)
+- `@breeze/types`: shared TypeScript types used throughout the monorepo
 
 Each package is either written in [TypeScript](https://www.typescriptlang.org/) or Rust, the UI parts are built with [Svelte](https://svelte.dev/).
 
@@ -63,7 +63,7 @@ Each package is either written in [TypeScript](https://www.typescriptlang.org/) 
 
 To use a non-notarized version on MacOS:
 
-- download a suitable `dmg` from [releases](https://github.com/deta/horizon/releases)
+- download a suitable `dmg` from [releases](https://github.com/breeze/horizon/releases)
 - move it to your `Applications` folder
 - run `xattr -cr /Applications/{release_name}.app` in your Terminal, replace {release_name} with the actual release name
 - start the app

@@ -7,27 +7,27 @@
     openDialog,
     ResourceLoader,
     SearchInput
-  } from '@deta/ui'
+  } from '@breeze/ui'
   import {
     type NotebookEntry,
     ResourceTypes,
     type Option,
     type OpenTarget,
     SpaceEntryOrigin
-  } from '@deta/types'
-  import { NotebookLoader, SurfLoader, SourceCard } from '@deta/ui'
-  import { type Notebook } from '@deta/services/notebooks'
-  import { type Resource, getResourceCtxItems } from '@deta/services/resources'
+  } from '@breeze/types'
+  import { NotebookLoader, BreezeLoader, SourceCard } from '@breeze/ui'
+  import { type Notebook } from '@breeze/services/notebooks'
+  import { type Resource, getResourceCtxItems } from '@breeze/services/resources'
   import {
     isModKeyPressed,
     SearchResourceTags,
     truncate,
     useDebounce,
     useThrottle
-  } from '@deta/utils'
-  import type { ResourceSearchResult } from '@deta/services/resources'
+  } from '@breeze/utils'
+  import type { ResourceSearchResult } from '@breeze/services/resources'
   import NotebookSidebarSection from './NotebookSidebarSection.svelte'
-  import { useNotebookManager } from '@deta/services/notebooks'
+  import { useNotebookManager } from '@breeze/services/notebooks'
   import NotebookSidebarNoteName from './NotebookSidebarNoteName.svelte'
   import {
     handleNotebookClick,
@@ -35,10 +35,10 @@
     openNotebook,
     openResource
   } from '../../handlers/notebookOpenHandlers'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
   import NotebookEditor from './NotebookEditor/NotebookEditor.svelte'
   import { onMount } from 'svelte'
-  import { useMessagePortClient } from '@deta/services/messagePort'
+  import { useMessagePortClient } from '@breeze/services/messagePort'
 
   let {
     notebookId,
@@ -251,7 +251,7 @@
     </header>
 
     <MaskedScroll --padding={'0.5rem 0.5rem 0rem 0.5rem'}>
-      <SurfLoader
+      <BreezeLoader
         excludeWithinSpaces
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
@@ -277,9 +277,9 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </BreezeLoader>
 
-      <SurfLoader
+      <BreezeLoader
         excludeWithinSpaces
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
         search={{
@@ -331,7 +331,7 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </BreezeLoader>
     </MaskedScroll>
   {:else if !notebookId}
     <header class="px pt">
@@ -347,7 +347,7 @@
     </header>
     <!--<section style="height: 4rem; padding-inline: 1.5rem; padding-block: 1rem;">
       <h1>
-        {query ? 'Search Results' : 'Surf'}
+        {query ? 'Search Results' : 'Breeze'}
       </h1>
     </section>-->
     <MaskedScroll --padding={'0.5rem 0.5rem 0rem 0.5rem'}>
@@ -456,7 +456,7 @@
         </NotebookSidebarSection>
       {/if}
 
-      <SurfLoader
+      <BreezeLoader
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
           query,
@@ -484,9 +484,9 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </BreezeLoader>
 
-      <SurfLoader
+      <BreezeLoader
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
         search={{
           query,
@@ -537,7 +537,7 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </BreezeLoader>
     </MaskedScroll>
   {:else}
     <NotebookLoader

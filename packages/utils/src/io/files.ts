@@ -1,4 +1,4 @@
-import { isMarkdownResourceType, ResourceTypes, type SFFSRawCompositeResource } from '@deta/types'
+import { isMarkdownResourceType, ResourceTypes, type SFFSRawCompositeResource } from '@breeze/types'
 import { fromMime } from 'human-filetypes'
 import mime from 'mime-types'
 import { uuidToBase62 } from '../data'

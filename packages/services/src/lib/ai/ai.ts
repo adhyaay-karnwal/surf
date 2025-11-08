@@ -3,21 +3,27 @@ import type { ConfigService } from '../config'
 import { ResourceManager } from '../resources'
 import type { SFFS } from '../sffs'
 
-import { type App, type Message, type Model as ModelBackend } from '@deta/backend/types'
+import { type App, type Message, type Model as ModelBackend } from '@breeze/backend/types'
 import { derived, get, writable, type Readable, type Writable } from 'svelte/store'
-import { appendURLPath, generateHash, isDev, useLocalStorageStore, useLogScope } from '@deta/utils'
+import {
+  appendURLPath,
+  generateHash,
+  isDev,
+  useLocalStorageStore,
+  useLogScope
+} from '@breeze/utils'
 import {
   FILENAME_CLEANUP_PROMPT,
   PAGE_PROMPTS_GENERATOR_PROMPT,
   SIMPLE_SUMMARIZER_PROMPT
 } from '../constants/prompts'
-import { type AiSFFSQueryResponse } from '@deta/types'
+import { type AiSFFSQueryResponse } from '@breeze/types'
 import {
   BUILT_IN_MODELS,
   ModelTiers,
   OPEN_AI_PATH_SUFFIX,
   type Model
-} from '@deta/types/src/ai.types'
+} from '@breeze/types/src/ai.types'
 import { parseAIError } from './helpers'
 import { useTabs, type TabsService } from '../tabs'
 import { AIChat, type ChatCompletionResponse, type ChatPrompt } from './chat'
@@ -27,7 +33,7 @@ import {
   GeneratePromptsEventTrigger,
   PromptType,
   SummarizeEventContentSource
-} from '@deta/types'
+} from '@breeze/types'
 import { ContextManagerWCV } from './contextManagerWCV'
 import { useNotebookManager } from '../notebooks'
 

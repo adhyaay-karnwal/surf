@@ -6,9 +6,9 @@ const binDir = process.env.RESOURCES_BIN_DIR || join(__dirname, '../../../app/re
 const sourceBin = 'backend-server'
 
 const isDev = process.argv.includes('--dev')
-// dev: surf-backend-dev, prod: surf-backend
-// dev-win: surf-backend-dev.exe, prod-win: surf-backend.exe
-const targetBin = `surf-backend${isDev ? '-dev' : ''}${process.platform === 'win32' ? '.exe' : ''}`
+// dev: breeze-backend-dev, prod: breeze-backend
+// dev-win: breeze-backend-dev.exe, prod-win: breeze-backend.exe
+const targetBin = `breeze-backend${isDev ? '-dev' : ''}${process.platform === 'win32' ? '.exe' : ''}`
 const targetBinPath = join(binDir, targetBin)
 const extraArgsIndex = process.argv.indexOf('--')
 const extraArgs = extraArgsIndex !== -1 ? process.argv.slice(extraArgsIndex + 1) : []

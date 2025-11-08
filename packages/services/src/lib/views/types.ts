@@ -5,7 +5,7 @@ import type {
   WebContentsViewEventType,
   WebViewEventSendNames,
   WebViewSendEvents
-} from '@deta/types'
+} from '@breeze/types'
 import type { WebContents, WebContentsView } from './webContentsView.svelte'
 import type { NewWindowRequest } from '../ipc'
 
@@ -106,4 +106,4 @@ export type BookmarkPageOpts = {
   createdForChat?: boolean
 }
 
-export { ViewType, type ViewTypeData } from '@deta/types'
+export { ViewType, type ViewTypeData } from '@breeze/types'

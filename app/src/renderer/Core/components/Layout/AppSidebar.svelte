@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { useViewManager, ViewType } from '@deta/services/views'
-  import { useBrowser } from '@deta/services/browser'
-  import { Button } from '@deta/ui'
-  import { Icon } from '@deta/icons'
+  import { useNotebookManager } from '@breeze/services/notebooks'
+  import { useViewManager, ViewType } from '@breeze/services/views'
+  import { useBrowser } from '@breeze/services/browser'
+  import { Button } from '@breeze/ui'
+  import { Icon } from '@breeze/icons'
   import WebContentsView from '../WebContentsView.svelte'
   import NavigationBar from '../NavigationBar/NavigationBar.svelte'
   import NavigationBarGroup from '../NavigationBar/NavigationBarGroup.svelte'
-  import { useKVTable, type BaseKVItem } from '@deta/services'
+  import { useKVTable, type BaseKVItem } from '@breeze/services'
   import { onMount } from 'svelte'
-  import { isInternalRendererURL, useDebounce } from '@deta/utils'
-  import { useResourceManager } from '@deta/services/resources'
+  import { isInternalRendererURL, useDebounce } from '@breeze/utils'
+  import { useResourceManager } from '@breeze/services/resources'
   import { writable } from 'svelte/store'
-  import { NotebookDefaults, ViewLocation } from '@deta/types'
+  import { NotebookDefaults, ViewLocation } from '@breeze/types'
 
   const resourceManager = useResourceManager()
   const notebookManager = useNotebookManager()
@@ -91,14 +91,18 @@
   $effect(() => {
     if (viewManager.sidebarViewOpen && viewManager.activeSidebarView === null) {
       viewManager.setSidebarState({
-        view: viewManager.create({ url: 'surf://notebook', permanentlyActive: true })
+        view: viewManager.create({ url: 'breeze://notebook', permanentlyActive: true })
       })
     }
   })
 
   onMount(async () => {
     if ((await sidebarStore.read('cfg')) === undefined) {
-      await sidebarStore.create({ id: 'cfg', siderbar_width: 670, sidebar_location: 'surf://new' })
+      await sidebarStore.create({
+        id: 'cfg',
+        siderbar_width: 670,
+        sidebar_location: 'breeze://new'
+      })
     }
 
     const cfg = await sidebarStore.read('cfg')
@@ -131,7 +135,7 @@
           >
             {#snippet leftChildren()}
               <NavigationBarGroup slim>
-                <!-- TODO: Implement sth like surf://new -->
+                <!-- TODO: Implement sth like breeze://new -->
                 <Button size="md" square onclick={handleNewNote}>
                   <Icon name="edit" size="1.2em" />
                 </Button>

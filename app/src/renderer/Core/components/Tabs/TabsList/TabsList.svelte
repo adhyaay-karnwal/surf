@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useTabs } from '@deta/services/tabs'
+  import { useTabs } from '@breeze/services/tabs'
   import TabItem from '../TabItem.svelte'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
   import {
     calculateTabLayout,
     measureContainerWidth,
@@ -9,9 +9,9 @@
   } from './tabsLayout.svelte'
   import { onMount, tick } from 'svelte'
 
-  import { useDebounce } from '@deta/utils'
-  import { Button } from '@deta/ui'
-  import { HTMLAxisDragZone } from '@deta/dragcula'
+  import { useDebounce } from '@breeze/utils'
+  import { Button } from '@breeze/ui'
+  import { HTMLAxisDragZone } from '@breeze/dragcula'
   import { createTabsDragAndDrop } from './dnd.svelte'
 
   const tabsService = useTabs()

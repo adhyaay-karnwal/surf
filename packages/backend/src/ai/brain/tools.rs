@@ -8,7 +8,7 @@ use crate::ai::llm::client::{CancellationToken, Model};
 use crate::{BackendError, BackendResult};
 
 pub const WEBSEARCH_AGENT_TOOL_NAME: &str = "websearch_agent_tool";
-pub const SURFLET_AGENT_TOOL_NAME: &str = "surflet_agent_tool";
+pub const BREEZELET_AGENT_TOOL_NAME: &str = "breezelet_agent_tool";
 pub const CONTEXT_MANAGEMENT_TOOL_NAME: &str = "context_management_tool";
 
 // WebSearch Agent Tool
@@ -93,31 +93,31 @@ impl Tool for WebSearchAgentTool {
     }
 }
 
-// Surflet Agent Tool
-pub struct SurfletAgentTool {
+// Breezelet Agent Tool
+pub struct BreezeletAgentTool {
     agent: Agent,
 }
 
-impl SurfletAgentTool {
+impl BreezeletAgentTool {
     pub fn new(agent: Agent) -> Self {
         Self { agent }
     }
 }
 
 #[derive(serde::Deserialize)]
-pub struct SurfletArgs {
+pub struct BreezeletArgs {
     name: String,
     prompt: String,
     resource_id: Option<String>,
 }
 
-impl Tool for SurfletAgentTool {
+impl Tool for BreezeletAgentTool {
     fn name(&self) -> &str {
-        SURFLET_AGENT_TOOL_NAME
+        BREEZELET_AGENT_TOOL_NAME
     }
 
     fn description(&self) -> &str {
-        "Calls the Surflet Agent to create interactive apps, games, visualizations, and tools"
+        "Calls the Breezelet Agent to create interactive apps, games, visualizations, and tools"
     }
 
     fn execution_message(&self) -> Option<&str> {
@@ -130,11 +130,11 @@ impl Tool for SurfletAgentTool {
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "User-friendly name for the app/surflet"
+                    "description": "User-friendly name for the app/breezelet"
                 },
                 "prompt": {
                     "type": "string",
-                    "description": "User request for the surflet"
+                    "description": "User request for the breezelet"
                 },
                 "resource_id": {
                     "type": "string",
@@ -155,16 +155,16 @@ impl Tool for SurfletAgentTool {
         context_manager: &mut dyn ContextManager,
         cancellation_token: CancellationToken,
     ) -> BackendResult<()> {
-        let args: SurfletArgs = serde_json::from_value(parameters)?;
+        let args: BreezeletArgs = serde_json::from_value(parameters)?;
 
-        // Format the message for the surflet agent
+        // Format the message for the breezelet agent
         let message = if let Some(resource_id) = args.resource_id {
             format!(
-                "Update surflet '{}' (ID: {}) with: {}",
+                "Update breezelet '{}' (ID: {}) with: {}",
                 args.name, resource_id, args.prompt
             )
         } else {
-            format!("Create surflet '{}': {}", args.name, args.prompt)
+            format!("Create breezelet '{}': {}", args.name, args.prompt)
         };
 
         let config = ExecuteConfig {
@@ -181,11 +181,11 @@ impl Tool for SurfletAgentTool {
         match result {
             AgentResult::Success(_response) => Ok(()),
             AgentResult::MaxIterationsReached(response) => Err(BackendError::GenericError(
-                format!("Surflet agent max iterations reached: {}", response),
+                format!("Breezelet agent max iterations reached: {}", response),
             )),
             AgentResult::Cancelled => Err(BackendError::CancelledError),
             AgentResult::Error(error) => Err(BackendError::GenericError(format!(
-                "Surflet agent error: {}",
+                "Breezelet agent error: {}",
                 error
             ))),
         }

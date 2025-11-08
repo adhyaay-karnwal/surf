@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { type Notebook } from '@deta/services/notebook'
-  import { type Fn } from '@deta/types'
-  import { clickOutside } from '@deta/utils'
+  import { type Notebook } from '@breeze/services/notebook'
+  import { type Fn } from '@breeze/types'
+  import { clickOutside } from '@breeze/utils'
 
   let {
     notebook,

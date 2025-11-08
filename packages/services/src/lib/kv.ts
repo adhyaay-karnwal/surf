@@ -1,5 +1,11 @@
-import { isDev, useLogScope, generateID, optimisticParseJSON, type ScopedLogger } from '@deta/utils'
-import type { Optional } from '@deta/types'
+import {
+  isDev,
+  useLogScope,
+  generateID,
+  optimisticParseJSON,
+  type ScopedLogger
+} from '@breeze/utils'
+import type { Optional } from '@breeze/types'
 
 export type BaseKVItem = {
   id: string

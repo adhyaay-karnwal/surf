@@ -185,7 +185,7 @@ pub enum MiscMessage {
         inline_images: Option<Vec<String>>,
         general: bool,
         websearch: bool,
-        surflet: bool,
+        breezelet: bool,
     },
     CreateAppQuery {
         chunk_callback: Root<JsFunction>,
@@ -219,7 +219,7 @@ pub enum MiscMessage {
     GetYoutubeTranscript(String),
     RunMigration,
     SendEventBusMessage(EventBusMessage),
-    SetSurfBackendHealth(bool),
+    SetBreezeBackendHealth(bool),
     SearchChatResources {
         query: String,
         model: Model,

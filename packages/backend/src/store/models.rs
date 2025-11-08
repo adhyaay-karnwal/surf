@@ -885,9 +885,9 @@ mod tests {
         let hostname = get_hostname_from_uri(uri);
         assert_eq!(hostname, Some("www.google.com".to_string()));
 
-        let uri = "https://deta.space";
+        let uri = "https://breeze.space";
         let hostname = get_hostname_from_uri(uri);
-        assert_eq!(hostname, Some("deta.space".to_string()));
+        assert_eq!(hostname, Some("breeze.space".to_string()));
 
         let uri = "non valid uri";
         let hostname = get_hostname_from_uri(uri);

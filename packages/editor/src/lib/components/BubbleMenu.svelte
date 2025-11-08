@@ -3,7 +3,7 @@
   import { BubbleMenu, type Editor } from 'svelte-tiptap'
   import { NodeSelection } from '@tiptap/pm/state'
 
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
   import { createEventDispatcher, tick } from 'svelte'
   import {
     isMac,
@@ -11,7 +11,7 @@
     parseStringIntoUrl,
     tooltip,
     useDebounce
-  } from '@deta/utils'
+  } from '@breeze/utils'
   import type {
     EditorRewriteEvent,
     EditorSimilaritiesSearchEvent,
@@ -186,7 +186,7 @@
   const handleLinkItemSelect = (item: MentionItem) => {
     const resource = item.data
     if (resource) {
-      turnSelectionIntoLink(`surf://surf/resource/${resource.id}`)
+      turnSelectionIntoLink(`breeze://breeze/resource/${resource.id}`)
     }
 
     $inputShown = false

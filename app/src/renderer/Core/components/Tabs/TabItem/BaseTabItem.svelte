@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { useTabs, TabItem } from '@deta/services/tabs'
-  import { spawnBoxSmoke } from '@deta/ui/src/lib/components/Effects/index'
-  import { Favicon, Button } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { HTMLDragItem, DragData, Dragcula } from '@deta/dragcula'
-  import { DragTypeNames } from '@deta/types'
+  import { useTabs, TabItem } from '@breeze/services/tabs'
+  import { spawnBoxSmoke } from '@breeze/ui/src/lib/components/Effects/index'
+  import { Favicon, Button } from '@breeze/ui'
+  import { Icon } from '@breeze/icons'
+  import { HTMLDragItem, DragData, Dragcula } from '@breeze/dragcula'
+  import { DragTypeNames } from '@breeze/types'
   import { onMount, onDestroy } from 'svelte'
 
   let {
@@ -78,7 +78,7 @@
       }
 
       // Check if this is the tab being dragged
-      const draggedTab = activeDrag.item?.data?.getData(DragTypeNames.SURF_TAB)
+      const draggedTab = activeDrag.item?.data?.getData(DragTypeNames.BREEZE_TAB)
       if (!draggedTab || draggedTab.id !== tab.id) {
         isCurrentlyInPinZone = false
         return
@@ -118,7 +118,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.BREEZE_TAB, tab)
       return dragData
     })()
   }}

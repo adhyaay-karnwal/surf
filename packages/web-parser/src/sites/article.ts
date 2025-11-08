@@ -1,10 +1,10 @@
-import { ResourceTypes, type ResourceDataArticle } from '@deta/types'
+import { ResourceTypes, type ResourceDataArticle } from '@breeze/types'
 import { Readability, isProbablyReaderable } from '@mozilla/readability'
 
 import { MetadataExtractor, WebAppExtractor } from '../extractors'
 import type { DetectedWebApp } from '../types'
 import { generateNameFromURL, sanitizeHTML } from '../utils'
-import { parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { parseStringIntoUrl, parseTextIntoISOString } from '@breeze/utils'
 import { DOMExtractor } from '../extractors/dom'
 
 export type RawArticleData = {

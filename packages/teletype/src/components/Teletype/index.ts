@@ -11,8 +11,8 @@ import type {
   Options
 } from './types'
 import { useDebounce } from '../../utils/debounce'
-import { useLogScope } from '@deta/utils'
-import type { Editor } from '@deta/editor'
+import { useLogScope } from '@breeze/utils'
+import type { Editor } from '@breeze/editor'
 
 class TeletypeCore {
   options?: Options

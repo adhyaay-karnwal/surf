@@ -1,11 +1,11 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
 import {
   normalizeURL,
   generateUUID,
   useLogScope,
   parseStringIntoBrowserLocation
-} from '@deta/utils'
+} from '@breeze/utils'
 import { type TeletypeService } from '../teletypeService'
 
 export class NavigationProvider implements ActionProvider {

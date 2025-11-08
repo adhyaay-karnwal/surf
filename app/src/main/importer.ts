@@ -1,9 +1,9 @@
 import { dialog } from 'electron'
 
-import { BrowserType } from '@deta/types'
+import { BrowserType } from '@breeze/types'
 
 import { ipcSenders } from './ipcHandlers'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 const log = useLogScope('Importer')
 

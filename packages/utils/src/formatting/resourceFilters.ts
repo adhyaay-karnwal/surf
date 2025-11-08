@@ -1,5 +1,5 @@
-import { ResourceTypes, type SFFSResourceTag } from '@deta/types'
-import { SearchResourceTags } from '@deta/utils'
+import { ResourceTypes, type SFFSResourceTag } from '@breeze/types'
+import { SearchResourceTags } from '@breeze/utils'
 
 export type FilterItem = {
   id: string
@@ -59,8 +59,8 @@ export const RESOURCE_FILTERS: FilterItem[] = [
   //   tags: [...filterDocumentTags('prefix')]
   // },
   {
-    id: 'surflets',
-    label: 'Surflets',
+    id: 'breezelets',
+    label: 'Breezelets',
     tags: [...filterGeneratedArtifactsTags()]
   },
   // {

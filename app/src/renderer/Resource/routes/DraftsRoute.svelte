@@ -1,34 +1,34 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
   import {
     Button,
     NotebookCover,
     openDialog,
     PageMention,
     ResourceLoader,
-    SurfLoader
-  } from '@deta/ui'
+    BreezeLoader
+  } from '@breeze/ui'
   import { onMount } from 'svelte'
-  import { MaskedScroll } from '@deta/ui'
-  import { contextMenu, type CtxItem } from '@deta/ui'
+  import { MaskedScroll } from '@breeze/ui'
+  import { contextMenu, type CtxItem } from '@breeze/ui'
   import TeletypeEntry from '../../Core/components/Teletype/TeletypeEntry.svelte'
-  import { SearchResourceTags, truncate, useDebounce, useLogScope } from '@deta/utils'
+  import { SearchResourceTags, truncate, useDebounce, useLogScope } from '@breeze/utils'
   import {
     useResourceManager,
     type Resource,
     type ResourceNote,
     ResourceManagerEvents
-  } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys, ResourceTypes, type ViewLocation } from '@deta/types'
-  import { type MessagePortClient } from '@deta/services/messagePort'
+  } from '@breeze/services/resources'
+  import { ResourceTagsBuiltInKeys, ResourceTypes, type ViewLocation } from '@breeze/types'
+  import { type MessagePortClient } from '@breeze/services/messagePort'
   import { handleResourceClick } from '../handlers/notebookOpenHandlers'
   import NotebookSidebar from '../components/notebook/NotebookSidebar.svelte'
   import NotebookLayout from '../layouts/NotebookLayout.svelte'
   import NotebookContents from '../components/notebook/NotebookContents.svelte'
-  import { MentionItemType } from '@deta/editor'
-  import { useConfig, useTeletypeService } from '@deta/services'
-  import { provideAI } from '@deta/services/ai'
-  import { BUILT_IN_PAGE_PROMPTS } from '@deta/services/constants'
+  import { MentionItemType } from '@breeze/editor'
+  import { useConfig, useTeletypeService } from '@breeze/services'
+  import { provideAI } from '@breeze/services/ai'
+  import { BUILT_IN_PAGE_PROMPTS } from '@breeze/services/constants'
   import PromptPills from '../components/PromptPills.svelte'
 
   let {

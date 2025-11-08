@@ -17,7 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "paths": {
-      "@deta/*": ["./packages/*"],
+      "@breeze/types": ["../types/src/index.ts"],
+      "@breeze/types/*": ["../types/src/*"],
+      "@breeze/*": ["../*/src", "../*/"],
       "~/*": ["./*"]
     },
     "noErrorTruncation": true

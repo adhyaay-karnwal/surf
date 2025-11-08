@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { DynamicIcon } from '@deta/icons'
-  import { Favicon } from '@deta/ui'
+  import { DynamicIcon } from '@breeze/icons'
+  import { Favicon } from '@breeze/ui'
   import { MentionItemType, type MentionItem } from '../../types'
 
   let {

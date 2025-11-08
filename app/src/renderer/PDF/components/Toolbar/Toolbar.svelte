@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clsx } from 'clsx'
   import { pdfSlickStore, isThumbsbarOpen } from '../../store'
-  import { Button } from '@deta/ui'
+  import { Button } from '@breeze/ui'
   import Splitter from './Splitter.svelte'
   //import ZoomSelector from './ZoomSelector.svelte'
   //import MoreActions from './MoreActions.svelte'

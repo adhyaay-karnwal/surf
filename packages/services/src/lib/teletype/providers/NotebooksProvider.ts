@@ -1,6 +1,6 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
-import { generateUUID, useLogScope, truncate } from '@deta/utils'
+import { generateUUID, useLogScope, truncate } from '@breeze/utils'
 import { useBrowser } from '../../browser'
 import { Notebook, useNotebookManager } from '../../notebooks'
 

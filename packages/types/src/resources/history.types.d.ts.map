@@ -1,0 +1,1 @@
+{"version":3,"file":"history.types.d.ts","sourceRoot":"","sources":["history.types.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,wBAAwB;IACvC,iCAAiC;IACjC,OAAO,EAAE,MAAM,CAAA;IACf,wBAAwB;IACxB,KAAK,EAAE,MAAM,CAAA;IACb,wFAAwF;IACxF,MAAM,EAAE,MAAM,GAAG,IAAI,CAAA;IACrB,8CAA8C;IAC9C,uBAAuB,EAAE,MAAM,GAAG,IAAI,CAAA;IACtC,mFAAmF;IACnF,WAAW,EAAE,MAAM,CAAA;CACpB"}

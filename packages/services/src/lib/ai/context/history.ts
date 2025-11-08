@@ -1,16 +1,16 @@
 import { writable } from 'svelte/store'
 
-import { optimisticParseJSON } from '@deta/utils'
-import { ModelTiers } from '@deta/types/src/ai.types'
+import { optimisticParseJSON } from '@breeze/utils'
+import { ModelTiers } from '@breeze/types/src/ai.types'
 
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'
 import { ContextItemIconTypes, ContextItemTypes } from './types'
 import { ResourceManager } from '../../resources'
-import { ResourceTag } from '@deta/utils/formatting'
+import { ResourceTag } from '@breeze/utils/formatting'
 import { BROWSER_HISTORY_QUERY_PROMPT } from '../../constants/prompts'
 import { extractAndCreateWebResource } from '../../mediaImporter'
-import { type HistoryEntry } from '@deta/types'
+import { type HistoryEntry } from '@breeze/types'
 
 export type BrowserHistoryQuery = {
   query: string

@@ -1,6 +1,6 @@
-import { useKVTable, type BaseKVItem } from '@deta/services'
+import { useKVTable, type BaseKVItem } from '@breeze/services'
 import type { TreeState, BaseTreeNode, ExtendedTreeViewState } from './tree.types'
-import { type ScopedLogger, useLogScope } from '@deta/utils'
+import { type ScopedLogger, useLogScope } from '@breeze/utils'
 
 export interface TreeViewStateItem extends BaseKVItem {
   treeId: string

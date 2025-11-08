@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, slide, fly } from 'svelte/transition'
-  import type { Fn } from '@deta/types'
+  import type { Fn } from '@breeze/types'
   import type { Notification } from './types'
   import Icon from './Icon.svelte'
   import { bounceOut, elasticOut, expoOut, quadOut } from 'svelte/easing'

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
 
-  import { useLogScope, setLogLevel } from '@deta/utils/io'
-  import { ViewLocation, ViewType, type Fn } from '@deta/types'
+  import { useLogScope, setLogLevel } from '@breeze/utils/io'
+  import { ViewLocation, ViewType, type Fn } from '@breeze/types'
 
-  import { ShortcutActions } from '@deta/services/shortcuts'
-  import { initServices } from '@deta/services/helpers'
+  import { ShortcutActions } from '@breeze/services/shortcuts'
+  import { initServices } from '@breeze/services/helpers'
   import { handlePreloadEvents } from './handlers/preloadEvents'
 
   import WebContentsView from './components/WebContentsView.svelte'
@@ -15,16 +15,16 @@
     toggleTabOrientation,
     TabOrientation,
     initializeTabOrientation
-  } from '@deta/services/tabs'
+  } from '@breeze/services/tabs'
   import NavigationBar from './components/NavigationBar/NavigationBar.svelte'
   import NavigationBarGroup from './components/NavigationBar/NavigationBarGroup.svelte'
   import AppSidebar from './components/Layout/AppSidebar.svelte'
-  import { isLinux, isMac, isWindows, ResourceTag, useDebounce, wait } from '@deta/utils'
-  import { Button, prepareContextMenu } from '@deta/ui'
+  import { isLinux, isMac, isWindows, ResourceTag, useDebounce, wait } from '@breeze/utils'
+  import { Button, prepareContextMenu } from '@breeze/ui'
   import { debugMode } from './stores/debug'
   import AltWindowControls from './components/AltWindowControls.svelte'
-  import { Icon } from '@deta/icons'
-  import { checkAndCreateDemoItems } from '@deta/services'
+  import { Icon } from '@breeze/icons'
+  import { checkAndCreateDemoItems } from '@breeze/services'
 
   const log = useLogScope('Core')
 

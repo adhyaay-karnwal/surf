@@ -1,8 +1,14 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
-import { generateUUID, useLogScope, prependProtocol, getFileKind, normalizeURL } from '@deta/utils'
+import {
+  generateUUID,
+  useLogScope,
+  prependProtocol,
+  getFileKind,
+  normalizeURL
+} from '@breeze/utils'
 import { useResourceManager } from '../../resources'
-import { type HistoryEntry } from '@deta/types'
+import { type HistoryEntry } from '@breeze/types'
 import { useBrowser } from '../../browser'
 
 export class HostnameProvider implements ActionProvider {

@@ -1,8 +1,8 @@
 import type { MentionProvider, MentionItem, MentionType } from '../mention.types'
 import { MentionTypes } from '../mention.types'
-import { getFileKind, SearchResourceTags, truncate, useLogScope } from '@deta/utils'
+import { getFileKind, SearchResourceTags, truncate, useLogScope } from '@breeze/utils'
 import { Resource, ResourceJSON, useResourceManager } from '../../resources'
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+import { ResourceTagsBuiltInKeys } from '@breeze/types'
 
 export class ResourceMentionProvider implements MentionProvider {
   readonly name = 'resources'

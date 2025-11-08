@@ -4,7 +4,7 @@ import {
   useLogScope,
   type ScopedLogger,
   type DummyPromise
-} from '@deta/utils'
+} from '@breeze/utils'
 import { useViewManager, type ViewManager } from './viewManager.svelte'
 import {
   WebContentsViewActionType,
@@ -12,7 +12,7 @@ import {
   type Fn,
   type WebContentsViewActionOutputs,
   type WebContentsViewEvent
-} from '@deta/types'
+} from '@breeze/types'
 
 export class Overlay {
   id: string
@@ -175,7 +175,7 @@ export class OverlayManager {
     const overlayId = `overlay-${Date.now()}`
 
     const overlayWindow = window.open(
-      'surf-internal://Core/Overlay/overlay.html',
+      'breeze-internal://Core/Overlay/overlay.html',
       `portal_${overlayId}`,
       `componentId=${overlayId}`
     ) as Window | null

@@ -2,19 +2,19 @@
   
 ![splash](./docs/assets/repo-header.png)
 
-[**Website**](https://deta.surf) - [**Discord**](https://deta.surf/discord)
+[**Website**](https://breeze.breeze) - [**Discord**](https://breeze.breeze/discord)
 
 </div>
 
 <br>
 
-# Deta Surf: Your AI Notebook
+# Breeze Breeze: Your AI Notebook
 
-Deta Surf is an AI notebook that brings all your files and the web directly into your stream of thought.
+Breeze Breeze is an AI notebook that brings all your files and the web directly into your stream of thought.
 
 It’s meant for simultaneous research and thinking that minimizes the grunt work: manually searching, opening windows & tabs, scrolling, copying and pasting into a document editor.
 
-Surf is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows & Linux, stores data locally in open formats, and is open source.
+Breeze is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows & Linux, stores data locally in open formats, and is open source.
 
 ![split](./docs/assets/split-note.webp)
 
@@ -22,13 +22,13 @@ Surf is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows &
 
 Most applications are focused on a single task, or a single media type: notes, websites, or PDFs. Real thinking requires juggling media across sources to make connections and synthesize ideas. We want to help people think better, across all their media.
 
-Surf is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://deta.surf/motivation).
+Breeze is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://breeze.breeze/motivation).
 
 ## Installation
 
-Checkout the [GitHub releases](https://github.com/deta/surf/releases) for the latest stable version of Surf for MacOS, Windows and Linux.
+Checkout the [GitHub releases](https://github.com/breeze/breeze/releases) for the latest stable version of Breeze for MacOS, Windows and Linux.
 
-You can also download Surf with some managed & additional features (e.g. AI) from the [Deta website](https://deta.surf). That version is subject to different terms.
+You can also download Breeze with some managed & additional features (e.g. AI) from the [Breeze website](https://breeze.breeze). That version is subject to different terms.
 
 For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -47,12 +47,12 @@ For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTI
 
 Store almost any media in a private library on your computer, in an open and transparent format.
 
-- Support for local files, sites & links from the web (YouTube, Tweets & more), or create media directly in Surf.
+- Support for local files, sites & links from the web (YouTube, Tweets & more), or create media directly in Breeze.
 - Organize this library into Notebooks.
 - Open and use much of your library offline.
-- Use your library to power Surf’s AI features.
+- Use your library to power Breeze’s AI features.
 
-Surf's library is built on a local storage engine called SFFS (Surf Flat File System), which stores data in open and transparent formats.
+Breeze's library is built on a local storage engine called SFFS (Breeze Flat File System), which stores data in open and transparent formats.
 
 [Details on the library](/docs/LIBRARY.md).
 
@@ -65,8 +65,8 @@ Explore and think across your digital stuff without opening up a bunch of window
 - `@-mention` and auto-generate from any tab, website or any resource in your [library](./docs/LIBRARY.md).
 - Trigger [web searches](./docs/SMART_NOTES.md#web-search) to do research, and bring the results back in your notes.
 - Integrated [citations](./docs/SMART_NOTES.md#citations) deeplinked to original sources, whether a section on a webpage, a timestamp in a video, or a page in a PDF.
-- Generate interactive applications without writing code using [Surflets](./docs/Surflets.md).
-- Paste in images, tables or data from other applications and have Surf understand and incorporate them.
+- Generate interactive applications without writing code using [Breezelets](./docs/Breezelets.md).
+- Paste in images, tables or data from other applications and have Breeze understand and incorporate them.
 - Use rich formating, code blocks, to-do lists and more in your notes.
 
 [Read more](/docs/SMART_NOTES.md).
@@ -75,25 +75,25 @@ Explore and think across your digital stuff without opening up a bunch of window
 
 ![split](./docs/assets/another-split.webp)
 
-Surf is built around tabs, split view and a sidebar for easy navigation.
+Breeze is built around tabs, split view and a sidebar for easy navigation.
 
 - Open local notes, files or web pages in tabs.
 - Split view allows you to view and interact with multiple resources side by side.
 - The sidebar provides quick access to your Notebooks & notes.
 
-### Surflets (App Generation)
+### Breezelets (App Generation)
 
-![surflets](./docs/assets/readme/surflets.png)
+![breezelets](./docs/assets/readme/breezelets.png)
 
-Surf can code interactive applets to help you visualize, understand or explore concepts or data that are aided with code.
+Breeze can code interactive applets to help you visualize, understand or explore concepts or data that are aided with code.
 
-[Read more](./docs/SURFLETS.md).
+[Read more](./docs/BREEZELETS.md).
 
 ### AI
 
 ![models.png](./docs/assets/readme/models.png)
 
-[Surf’s notes](./docs/SMART_NOTES.md) and [Surflets](./docs/SURFLETS.md) are powered by large language models of your choice.
+[Breeze’s notes](./docs/SMART_NOTES.md) and [Breezelets](./docs/BREEZELETS.md) are powered by large language models of your choice.
 
 - Bring your own key for popular models
 - Add a cloud model
@@ -107,7 +107,7 @@ Find the most common shortcuts [here](./docs/SHORTCUTS.md).
 
 ## Security
 
-_To report a security concern, please see_ https://github.com/deta/surf/security/policy
+_To report a security concern, please see_ https://github.com/breeze/breeze/security/policy
 
 ## Contributing
 
@@ -128,9 +128,9 @@ Unless otherwise specified in the file or directory, all code defaults to the Ap
 
 See [LICENSE](LICENSE) for more details about the Apache 2.0 license.
 
-**Note:** The Deta name and logos are trademarks of Deta GmbH and are **not** covered by the Apache 2.0 license.
+**Note:** The Breeze name and logos are trademarks of Breeze GmbH and are **not** covered by the Apache 2.0 license.
 
-Deta GmbH is a commercial open source company. Surf is designed to operate as open source software without needing Deta's servers. Deta GmbH also offers a modified version of Surf (which integrates with Deta's servers) and is subject to separate terms and conditions. This version of Surf can be downloaded from the [Deta website](https://deta.surf/).
+Breeze GmbH is a commercial open source company. Breeze is designed to operate as open source software without needing Breeze's servers. Breeze GmbH also offers a modified version of Breeze (which integrates with Breeze's servers) and is subject to separate terms and conditions. This version of Breeze can be downloaded from the [Breeze website](https://breeze.breeze/).
 
 ## Acknowledgements
 

@@ -1,8 +1,8 @@
-import { ResourceTypes, type ResourceDataPost } from '@deta/types'
+import { ResourceTypes, type ResourceDataPost } from '@breeze/types'
 
 import { WebAppExtractor } from '../extractors'
 import type { DetectedWebApp, WebService, WebServiceActionInputs } from '../types'
-import { makeAbsoluteURL, parseStringIntoUrl, parseTextIntoISOString } from '@deta/utils'
+import { makeAbsoluteURL, parseStringIntoUrl, parseTextIntoISOString } from '@breeze/utils'
 import { DOMExtractor } from '../extractors/dom'
 import { SERVICES } from '../services'
 import { WebParser } from '..'

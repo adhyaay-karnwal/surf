@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type WebContentsView } from '@deta/services/views'
+  import { type WebContentsView } from '@breeze/services/views'
 
   let { webContents = $bindable() }: { webContents: WebContentsView } = $props()
 

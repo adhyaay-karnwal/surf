@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Toast } from './toast'
-  import { Icon } from '@deta/icons'
-  import { hover, tooltip } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { hover, tooltip } from '@breeze/utils'
   import { createEventDispatcher } from 'svelte'
   import { scale } from 'svelte/transition'
 
@@ -63,7 +63,7 @@
 </article>
 
 <style lang="scss">
-  @use '@deta/ui/styles/utils' as utils;
+  @use '@breeze/ui/styles/utils' as utils;
 
   .toast {
     @include utils.light-dark-custom(

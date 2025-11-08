@@ -24,7 +24,7 @@
     <div class="flex flex-row w-full justify-between">
       <div class="span flex flex-col">
         <span class="headline">Where did this note go?</span>
-        <span class="message">Surf has storage, called Stuff, try it out</span>
+        <span class="message">Breeze has storage, called Stuff, try it out</span>
       </div>
       <div class="button-wrapper">
         <Button text={`Open Stuff (${isMac() ? '⌘' : 'Ctrl'} + O)`} onClick={handleOpenStuff} />
@@ -34,7 +34,7 @@
 </div>
 
 <style lang="scss">
-  // @use '@deta/ui/styles/utils' as utils;
+  // @use '@breeze/ui/styles/utils' as utils;
 
   .shadow-wrapper {
     filter: drop-shadow(0px 8px 10px rgba(6, 5, 53, 0.04))

@@ -1,6 +1,6 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import type { ActionProvider, TeletypeAction } from '../types'
-import { generateUUID, useLogScope } from '@deta/utils'
+import { generateUUID, useLogScope } from '@breeze/utils'
 import { useBrowser } from '../../browser'
 
 export class SearchProvider implements ActionProvider {

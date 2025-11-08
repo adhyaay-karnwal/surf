@@ -9,7 +9,7 @@
   import ActionItem from './Action.svelte'
 
   import { createEventDispatcher, onMount, tick, onDestroy } from 'svelte'
-  import { isModKeyPressed, useLogScope } from '@deta/utils'
+  import { isModKeyPressed, useLogScope } from '@breeze/utils'
 
   let {
     actions,

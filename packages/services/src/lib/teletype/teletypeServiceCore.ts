@@ -1,13 +1,13 @@
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 import type { ActionProvider, TeletypeAction, TeletypeServiceOptions } from './types'
 import { SearchProvider } from './providers/SearchProvider'
 import { AskProvider } from './providers/AskProvider'
 import { type TeletypeActionSerialized, useMessagePortPrimary } from '../messagePort'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@breeze/editor'
 import { ResourcesProvider } from './providers/ResourcesProvider'
 import { useBrowser } from '../browser'
 import { HostnameProvider } from './providers/HostnameProvider'
-import type { Fn } from '@deta/types'
+import type { Fn } from '@breeze/types'
 import { NotebooksProvider } from './providers/NotebooksProvider'
 
 export class TeletypeServiceCore {

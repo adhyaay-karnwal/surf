@@ -3,21 +3,21 @@
   import * as router from '@mateothegreat/svelte5-router'
   import { Router, type RouteConfig } from '@mateothegreat/svelte5-router'
 
-  import { prepareContextMenu } from '@deta/ui'
-  import { provideConfig } from '@deta/services'
-  import { createNotebookManager } from '@deta/services/notebooks'
-  import { createResourceManager } from '@deta/services/resources'
-  import { createTeletypeService } from '@deta/services/teletype'
-  import { useMessagePortClient } from '@deta/services/messagePort'
+  import { prepareContextMenu } from '@breeze/ui'
+  import { provideConfig } from '@breeze/services'
+  import { createNotebookManager } from '@breeze/services/notebooks'
+  import { createResourceManager } from '@breeze/services/resources'
+  import { createTeletypeService } from '@breeze/services/teletype'
+  import { useMessagePortClient } from '@breeze/services/messagePort'
 
   import IndexRoute from './routes/IndexRoute.svelte'
   import NotebookDetailRoute from './routes/NotebookDetailRoute.svelte'
   import DraftsRoute from './routes/DraftsRoute.svelte'
   import Resource from './routes/ResourceRoute.svelte'
   import NotebookTreeView from './components/notebook/NotebookTreeView.svelte'
-  import { ViewLocation } from '@deta/types'
+  import { ViewLocation } from '@breeze/types'
   import NotebookEditor from './components/notebook/NotebookEditor/NotebookEditor.svelte'
-  import { Notebook } from '@deta/services/notebooks'
+  import { Notebook } from '@breeze/services/notebooks'
 
   const notebookId = window.location.pathname.slice(1) || null
 
@@ -113,7 +113,7 @@
       : notebookId === 'history'
         ? 'History'
         : !notebookId
-          ? 'Surf'
+          ? 'Breeze'
           : 'Notebook'
   )
 
@@ -273,15 +273,13 @@
   }
 
   :global(body) {
-    background:
-      light-dark(
+    background: light-dark(
         linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1)),
         linear-gradient(rgba(13, 20, 33, 0.85), rgba(13, 20, 33, 0.95))
       ),
       url('./assets/greenfield.png');
     background: light-dark(rgba(250, 250, 250, 1), #0d1421);
-    background:
-      light-dark(
+    background: light-dark(
         linear-gradient(to bottom, rgba(250, 250, 250, 1) 0%, rgba(255, 255, 255, 0.9) 10%),
         linear-gradient(to bottom, rgba(13, 20, 33, 0.95) 0%, rgba(13, 20, 33, 0.98) 12%)
       ),

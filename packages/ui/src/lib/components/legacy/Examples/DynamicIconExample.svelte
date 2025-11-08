@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@breeze/icons'
 
   export let space: any
 
   const items = [
     {
       label: 'Website',
-      icon: 'favicon;;https://deta.surf'
+      icon: 'favicon;;https://breeze.breeze'
     },
     {
       label: 'Image',

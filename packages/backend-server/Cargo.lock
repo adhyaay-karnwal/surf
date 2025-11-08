@@ -479,7 +479,7 @@ checksum = "d817e038c30374a4bcb22f94d0a8a0e216958d4c3dcde369b1439fec4bdda6e6"
 [[package]]
 name = "fastembed"
 version = "3.14.1"
-source = "git+https://github.com/deta/fastembed-rs?tag=v3.14.1-patch.1#22b7374367dd5bb036d08552a6ee8faa8b2c30c0"
+source = "git+https://github.com/breeze/fastembed-rs?tag=v3.14.1-patch.1#22b7374367dd5bb036d08552a6ee8faa8b2c30c0"
 dependencies = [
  "anyhow",
  "hf-hub",
@@ -2474,7 +2474,7 @@ dependencies = [
 [[package]]
 name = "usearch"
 version = "2.14.0"
-source = "git+https://github.com/deta/usearch?branch=main#6d4f1bf50385d6cdc4f9a5f4bbb5b2db0fee6611"
+source = "git+https://github.com/breeze/usearch?branch=main#6d4f1bf50385d6cdc4f9a5f4bbb5b2db0fee6611"
 dependencies = [
  "cxx",
  "cxx-build",

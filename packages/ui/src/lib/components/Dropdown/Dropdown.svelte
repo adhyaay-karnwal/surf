@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import { DynamicIcon } from '@deta/icons'
+    import { DynamicIcon } from '@breeze/icons'
     import { DropdownMenu } from 'bits-ui'
     
     import type { DropdownItem, DropdownItemAction } from './dropdown.types'

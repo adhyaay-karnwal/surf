@@ -13,7 +13,7 @@ use crate::{
     BackendError, BackendResult,
 };
 use handlers::*;
-use tunnel::SurfBackendHealth;
+use tunnel::BreezeBackendHealth;
 
 use chrono::{DateTime, Utc};
 use crossbeam_channel as crossbeam;
@@ -44,7 +44,7 @@ impl PathConfig {
 
     pub fn db_path(&self) -> String {
         Path::new(&self.backend_root_path)
-            .join("surf-0-01.sqlite")
+            .join("breeze-0-01.sqlite")
             .as_os_str()
             .to_string_lossy()
             .to_string()
@@ -90,7 +90,7 @@ pub struct WorkerConfig {
     pub channel_config: ChannelConfig,
     pub language_setting: String,
     pub run_migrations: bool,
-    pub surf_backend_health: SurfBackendHealth,
+    pub breeze_backend_health: BreezeBackendHealth,
 }
 
 pub struct Worker {
@@ -106,7 +106,7 @@ pub struct Worker {
     pub resources_path: String,
     pub language_setting: String,
     pub async_runtime: tokio::runtime::Runtime,
-    pub surf_backend_health: SurfBackendHealth,
+    pub breeze_backend_health: BreezeBackendHealth,
     pub created_at: DateTime<Utc>,
 }
 
@@ -130,7 +130,7 @@ impl Worker {
             resources_path,
             language_setting: config.language_setting,
             async_runtime: tokio::runtime::Runtime::new()?,
-            surf_backend_health: config.surf_backend_health,
+            breeze_backend_health: config.breeze_backend_health,
             created_at: current_time(),
         })
     }

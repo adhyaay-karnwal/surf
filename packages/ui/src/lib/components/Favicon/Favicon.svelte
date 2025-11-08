@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useLogScope } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { useLogScope } from '@breeze/utils'
 
   export let url: string
   export let title: string = ''

@@ -1,4 +1,4 @@
-import { type AnnotationRangeData, type AnnotationType } from '@deta/types'
+import { type AnnotationRangeData, type AnnotationType } from '@breeze/types'
 
 import { getXPath } from './xpath'
 
@@ -140,15 +140,15 @@ export const applyRangeHighlight = (
   type: AnnotationType,
   onClick?: (id: string) => void
 ) => {
-  const elem = document.createElement('deta-annotation')
+  const elem = document.createElement('breeze-annotation')
 
   // set attributes for the element so we can identify it later
   elem.setAttribute('id', id)
   elem.setAttribute('data-annotation-type', type)
 
   // styling
-  elem.classList.add('deta-annotation')
-  elem.classList.add('deta-annotation-highlight')
+  elem.classList.add('breeze-annotation')
+  elem.classList.add('breeze-annotation-highlight')
 
   wrapRangeInNode(range, elem, onClick)
 }

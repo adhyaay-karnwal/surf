@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
 
   export let url: string
   export let label: string | undefined = undefined

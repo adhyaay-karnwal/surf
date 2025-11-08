@@ -13,9 +13,9 @@ import {
 } from 'fs'
 
 import { getUserConfig } from '../../main/config'
-import { getResourceFileExtension, getResourceFileName } from '@deta/utils/io'
-import { SFFSRawCompositeResource } from '@deta/types'
-import { optimisticParseJSON } from '@deta/utils/data'
+import { getResourceFileExtension, getResourceFileName } from '@breeze/utils/io'
+import { SFFSRawCompositeResource } from '@breeze/types'
+import { optimisticParseJSON } from '@breeze/utils/data'
 
 enum ResourceProcessingStateType {
   Pending = 'pending',
@@ -86,7 +86,7 @@ export const initSFFS = (opts?: SFFSOptions) => {
 
   mkdirSync(BACKEND_RESOURCES_PATH, { recursive: true })
 
-  const sffs = require('@deta/backend')
+  const sffs = require('@breeze/backend')
 
   let handle = null
   let server: http.Server | null = null

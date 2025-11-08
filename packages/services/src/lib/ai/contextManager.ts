@@ -10,15 +10,15 @@ import {
   useLocalStorage,
   useLogScope,
   wait
-} from '@deta/utils'
+} from '@breeze/utils'
 
 import {
   type Fn,
   PageChatUpdateContextEventAction,
   PageChatUpdateContextItemType,
   type PageChatUpdateContextEventTrigger
-} from '@deta/types'
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+} from '@breeze/types'
+import { ResourceTagsBuiltInKeys } from '@breeze/types'
 
 import { ResourceJSON, type Resource, type ResourceManager } from '../resources'
 import { TabsServiceEmitterNames, type TabItem, type TabsService } from '../tabs'
@@ -48,9 +48,9 @@ import {
   TABS_MENTION,
   WIKIPEDIA_SEARCH_MENTION
 } from '../constants/chat'
-import { MentionItemType, type MentionItem } from '@deta/editor'
+import { MentionItemType, type MentionItem } from '@breeze/editor'
 import { ContextItemBrowsingHistory } from './context/history'
-import { WebParser, type SearchResultLink } from '@deta/web-parser'
+import { WebParser, type SearchResultLink } from '@breeze/web-parser'
 import { ContextItemWebSearch } from './context/web'
 import { ContextManagerWCV } from './contextManagerWCV'
 import { Notebook, NotebookManager, useNotebookManager } from '../notebooks'
@@ -1192,12 +1192,12 @@ export class ContextService {
 
   async preparePageTab(tab: TabItem) {
     await tick()
-    const surfUrlMatch = tab.view.urlValue.match(/surf:\/\/resource\/([^\/]+)/)
-    if (surfUrlMatch) {
-      const resourceId = surfUrlMatch[1]
+    const breezeUrlMatch = tab.view.urlValue.match(/breeze:\/\/resource\/([^\/]+)/)
+    if (breezeUrlMatch) {
+      const resourceId = breezeUrlMatch[1]
       const resource = await this.resourceManager.getResource(resourceId)
       if (resource) {
-        this.log.debug('Resource found for surf url', resourceId)
+        this.log.debug('Resource found for breeze url', resourceId)
         return resource
       }
 

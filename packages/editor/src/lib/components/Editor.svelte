@@ -10,7 +10,7 @@
 
   import { createEditor, Editor, EditorContent, FloatingMenu } from 'svelte-tiptap'
   import { Extension, generateHTML, generateJSON, generateText } from '@tiptap/core'
-  import { conditionalArrayItem, useAnimationFrameThrottle } from '@deta/utils'
+  import { conditionalArrayItem, useAnimationFrameThrottle } from '@breeze/utils'
 
   import { createEditorExtensions } from '../editor'
   import { isInTitleNode } from '../utils'
@@ -19,7 +19,7 @@
   import type { MentionAction, MentionNodeAttrs } from '../extensions/Mention'
   import BubbleMenu from './BubbleMenu.svelte'
   import { TextSelection } from '@tiptap/pm/state'
-  import { DragTypeNames } from '@deta/types'
+  import { DragTypeNames } from '@breeze/types'
   import type { SlashCommandPayload } from '../extensions/Slash/index'
   import type { SlashItemsFetcher } from '../extensions/Slash/suggestion'
   import type { MentionItemsFetcher } from '../extensions/Mention/suggestion'
@@ -36,7 +36,7 @@
   export let parseHashtags: boolean = false
   export let submitOnEnter: boolean = false
   export let citationComponent: ComponentType<SvelteComponent> | undefined = undefined
-  export let surfletComponent: ComponentType<SvelteComponent> | undefined = undefined
+  export let breezeletComponent: ComponentType<SvelteComponent> | undefined = undefined
   export let webSearchComponent: ComponentType<SvelteComponent> | undefined = undefined
   export let autocomplete: boolean = false
   export let floatingMenu: boolean = false
@@ -409,7 +409,7 @@
     onFloatyInputStateChange: () => {},
     onFirstLineStateChanged: handleFirstLineChanged,
     onLastLineVisibilityChanged: handleLastLineVisibilityChanged,
-    surfletComponent: surfletComponent,
+    breezeletComponent: breezeletComponent,
     webSearchComponent: webSearchComponent,
     onWebSearchCompleted: onWebSearchCompleted,
     onLinkClick: onLinkClick
@@ -557,7 +557,7 @@
             }
 
             // if a tab is being dropped we need to prevent the default behavior so TipTap does not handle it
-            const tabId = e.dataTransfer?.getData(DragTypeNames.SURF_TAB_ID)
+            const tabId = e.dataTransfer?.getData(DragTypeNames.BREEZE_TAB_ID)
             if (tabId) {
               e.preventDefault()
               return false

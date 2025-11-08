@@ -1,4 +1,4 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 
 export type TeletypeActionPayload = {
   query: string

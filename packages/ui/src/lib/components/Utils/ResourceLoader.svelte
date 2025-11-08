@@ -16,8 +16,8 @@
    */
   import { type Snippet } from 'svelte'
   import { onMount, onDestroy } from 'svelte'
-  import { useResourceManager, ResourceManagerEvents } from '@deta/services/resources'
-  import { type Resource } from '@deta/services/resources'
+  import { useResourceManager, ResourceManagerEvents } from '@breeze/services/resources'
+  import { type Resource } from '@breeze/services/resources'
 
   let {
     resource,

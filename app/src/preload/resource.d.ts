@@ -1,6 +1,6 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 import type { API, PreloadEventHandlers } from './core'
-import { RendererType } from '@deta/types'
+import { RendererType } from '@breeze/types'
 
 declare global {
   interface Window {

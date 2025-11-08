@@ -1,4 +1,4 @@
-import type { TabItem } from '@deta/services/tabs'
+import type { TabItem } from '@breeze/services/tabs'
 import type { VerticalTabDimensions, VerticalLayoutCalculation, TabLayoutConfig } from '../types'
 
 const DEFAULT_VERTICAL_CONFIG: Required<

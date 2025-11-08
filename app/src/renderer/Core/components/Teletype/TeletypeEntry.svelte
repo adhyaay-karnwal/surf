@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { TeletypeProvider, Teletype } from '@deta/teletype'
-  import { DynamicIcon } from '@deta/icons'
-  import { type TeletypeService, useTeletypeService } from '@deta/services'
-  import type { MentionItem } from '@deta/editor'
-  import { useLogScope } from '@deta/utils/io'
+  import { TeletypeProvider, Teletype } from '@breeze/teletype'
+  import { DynamicIcon } from '@breeze/icons'
+  import { type TeletypeService, useTeletypeService } from '@breeze/services'
+  import type { MentionItem } from '@breeze/editor'
+  import { useLogScope } from '@breeze/utils/io'
   import { onMount } from 'svelte'
   import ToolsList from './ToolsList.svelte'
-  import { AddToContextMenu, ModelPicker } from '@deta/ui'
+  import { AddToContextMenu, ModelPicker } from '@breeze/ui'
 
   const log = useLogScope('TeletypeEntry')
 

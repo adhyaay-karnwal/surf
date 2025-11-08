@@ -13,7 +13,7 @@
     TreeDragDropOperation
   } from './tree.types'
   import type { TreeStore } from './tree.store.svelte'
-  import { useLogScope } from '@deta/utils'
+  import { useLogScope } from '@breeze/utils'
 
   type TreeNodeProps<T extends BaseTreeNode = BaseTreeNode> = {
     node: T

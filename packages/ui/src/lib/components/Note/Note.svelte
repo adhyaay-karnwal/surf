@@ -24,10 +24,10 @@
     MentionItemType,
     type EditorAutocompleteEvent,
     type MentionItem
-  } from '@deta/editor'
-  import '@deta/editor/src/editor.scss'
+  } from '@breeze/editor'
+  import '@breeze/editor/src/editor.scss'
 
-  import { Resource, ResourceNote, useResourceManager } from '@deta/services/resources'
+  import { Resource, ResourceNote, useResourceManager } from '@breeze/services/resources'
   import {
     generateID,
     getFileKind,
@@ -35,7 +35,7 @@
     getFormattedDate,
     isMac,
     isModKeyPressed,
-    parseSurfProtocolURL,
+    parseBreezeProtocolURL,
     truncateURL,
     useDebounce,
     useLocalStorageStore,
@@ -43,14 +43,14 @@
     useThrottle,
     wait,
     htmlToMarkdown
-  } from '@deta/utils'
-  import { generateContentHash, parseChatOutputToHtml } from '@deta/services/ai'
+  } from '@breeze/utils'
+  import { generateContentHash, parseChatOutputToHtml } from '@breeze/services/ai'
   import {
     startAIGeneration,
     endAIGeneration,
     updateAIGenerationProgress,
     isGeneratingAI as globalIsGeneratingAI
-  } from '@deta/services/ai'
+  } from '@breeze/services/ai'
   import {
     EventContext,
     GeneratePromptsEventTrigger,
@@ -64,39 +64,39 @@
     PromptType,
     ResourceTagsBuiltInKeys,
     ResourceTypes,
-  } from '@deta/types'
+  } from '@breeze/types'
   import {
     type AIChatMessageParsed,
     type AIChatMessageSource,
     type HighlightWebviewTextEvent,
     type JumpToWebviewTimestampEvent
-  } from '@deta/types'
-  import { provideAI } from '@deta/services/ai'
-  import { SMART_NOTES_SUGGESTIONS_GENERATOR_PROMPT } from '@deta/services/constants'
-  import type { ChatPrompt, MentionAction } from '@deta/types'
-  import { Toast, useToasts } from '@deta/ui'
-  import { useConfig } from '@deta/services'
-  import { createWikipediaAPI } from '@deta/web-parser'
-  import { isGeneratedResource } from '@deta/services/resources'
+  } from '@breeze/types'
+  import { provideAI } from '@breeze/services/ai'
+  import { SMART_NOTES_SUGGESTIONS_GENERATOR_PROMPT } from '@breeze/services/constants'
+  import type { ChatPrompt, MentionAction } from '@breeze/types'
+  import { Toast, useToasts } from '@breeze/ui'
+  import { useConfig } from '@breeze/services'
+  import { createWikipediaAPI } from '@breeze/web-parser'
+  import { isGeneratedResource } from '@breeze/services/resources'
   import {
     updateCaretPopoverVisibility,
     type CaretPosition
-  } from '@deta/editor/extensions/CaretIndicator'
-  import { NOTE_MENTION, EVERYTHING_MENTION, INBOX_MENTION } from '@deta/services/constants'
+  } from '@breeze/editor/extensions/CaretIndicator'
+  import { NOTE_MENTION, EVERYTHING_MENTION, INBOX_MENTION } from '@breeze/services/constants'
   import {
     BUILT_IN_SLASH_COMMANDS,
     type SlashCommandPayload,
     type SlashMenuItem,
     type SlashItemsFetcher
-  } from '@deta/editor/extensions/Slash'
+  } from '@breeze/editor/extensions/Slash'
   import CaretPopover from './CaretPopover.svelte'
-  // import { openContextMenu } from '@deta/ui'
-  import { createResourcesFromMediaItems, processPaste } from '@deta/services'
-  import { createMentionsFetcher, createResourcesMentionsFetcher } from '@deta/services/ai'
-  import type { LinkClickHandler } from '@deta/editor/extensions/Link'
-  import { EditorAIGeneration, NoteEditor } from '@deta/services/ai'
-  import { useTabs } from '@deta/services/tabs'
-  import { SearchResourceTags, ResourceTag } from '@deta/utils/formatting'
+  // import { openContextMenu } from '@breeze/ui'
+  import { createResourcesFromMediaItems, processPaste } from '@breeze/services'
+  import { createMentionsFetcher, createResourcesMentionsFetcher } from '@breeze/services/ai'
+  import type { LinkClickHandler } from '@breeze/editor/extensions/Link'
+  import { EditorAIGeneration, NoteEditor } from '@breeze/services/ai'
+  import { useTabs } from '@breeze/services/tabs'
+  import { SearchResourceTags, ResourceTag } from '@breeze/utils/formatting'
 
   export let resource: ResourceNote
   export let autofocus: boolean = true
@@ -233,15 +233,15 @@
 
       await wait(500)
 
-      // Add event listeners for surflet events
-      const handleCreateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received create-surflet event', e.detail)
-        handleCreateSurflet(e.detail?.code)
+      // Add event listeners for breezelet events
+      const handleCreateBreezeletEvent = (e: CustomEvent) => {
+        log.debug('Received create-breezelet event', e.detail)
+        handleCreateBreezelet(e.detail?.code)
       }
 
-      const handleUpdateSurfletEvent = (e: CustomEvent) => {
-        log.debug('Received update-surflet event', e.detail)
-        updateSurfletContent(e.detail?.code)
+      const handleUpdateBreezeletEvent = (e: CustomEvent) => {
+        log.debug('Received update-breezelet event', e.detail)
+        updateBreezeletContent(e.detail?.code)
       }
 
       const handleOpenStuffEvent = () => {
@@ -257,14 +257,14 @@
         editorElement.addEventListener('scroll', handleScroll)
       }
 
-      document.addEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+      document.addEventListener('create-breezelet', handleCreateBreezeletEvent as EventListener)
       document.addEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-      document.addEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+      document.addEventListener('update-breezelet', handleUpdateBreezeletEvent as EventListener)
 
       return () => {
-        document.removeEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+        document.removeEventListener('create-breezelet', handleCreateBreezeletEvent as EventListener)
         document.removeEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-        document.removeEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+        document.removeEventListener('update-breezelet', handleUpdateBreezeletEvent as EventListener)
       }
     }
 
@@ -350,9 +350,9 @@
           return `Generating suggestions based on "${contextName}"${mentions.length > 0 ? ' and the mentioned contexts' : ''}…`
         } else if ($showPrompts) {
           if (!contextName) {
-            return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Surf continue writing…`
+            return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Breeze continue writing…`
           }
-          return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Surf write based on ${contextName}`
+          return `Select a suggestion or press ${isMac() ? '⌘' : 'ctrl'} + ↵ to let Breeze write based on ${contextName}`
         } else {
           return `Write or type / for commands…`
         }
@@ -938,7 +938,7 @@
 
     log.debug('Link clicked', href, target)
 
-    const resourceId = parseSurfProtocolURL(href)
+    const resourceId = parseBreezeProtocolURL(href)
     if (resourceId) {
       log.debug('Trying to open resource', resourceId)
       const resource = await resourceManager.getResource(resourceId)
@@ -1460,7 +1460,7 @@
     // chatInputEditor.commands.focus()
   }
 
-  export const handleCreateSurflet = (code?: string) => {
+  export const handleCreateBreezelet = (code?: string) => {
     try {
       const editor = editorElem.getEditor()
 
@@ -1468,46 +1468,46 @@
       const currentPosition = editor.view.state.selection.from
 
       // Use the provided code or fall back to predefined code
-      const surfletCode = code // || predefinedSurfletCode
+      const breezeletCode = code // || predefinedBreezeletCode
 
       // Remove markdown code block markers if present
-      // const cleanCode = surfletCode.replace(/```javascript|```/g, '')
+      // const cleanCode = breezeletCode.replace(/```javascript|```/g, '')
 
-      // Create a surflet node with the code
-      const surfletNode = editor.view.state.schema.nodes.surflet?.create({ codeContent: '' }, null)
+      // Create a breezelet node with the code
+      const breezeletNode = editor.view.state.schema.nodes.breezelet?.create({ codeContent: '' }, null)
 
-      if (!surfletNode) {
-        log.error('Surflet node type not found in schema')
+      if (!breezeletNode) {
+        log.error('Breezelet node type not found in schema')
         return
       }
 
-      // Insert the surflet node at the current position
+      // Insert the breezelet node at the current position
       const tr = editor.view.state.tr
-      tr.insert(currentPosition, surfletNode)
+      tr.insert(currentPosition, breezeletNode)
       editor.view.dispatch(tr)
 
       // Focus the editor after insertion
       editor.commands.focus()
 
-      log.debug('Surflet inserted successfully')
+      log.debug('Breezelet inserted successfully')
     } catch (err) {
-      log.error('Error inserting surflet', err)
+      log.error('Error inserting breezelet', err)
     }
   }
 
   /**
-   * Update the content of the most recently created surflet
-   * @param code The new code to set for the surflet
+   * Update the content of the most recently created breezelet
+   * @param code The new code to set for the breezelet
    */
-  const updateSurfletContent = (code?: string) => {
+  const updateBreezeletContent = (code?: string) => {
     if (!code) {
-      log.debug('No code provided to update surflet')
+      log.debug('No code provided to update breezelet')
       return
     }
 
     // Check if editorElem exists and is initialized
     if (!editorElem) {
-      log.debug('Editor element not available for surflet update')
+      log.debug('Editor element not available for breezelet update')
       return
     }
 
@@ -1515,47 +1515,47 @@
       // Get the editor and check if it's available
       const editor = editorElem.getEditor()
       if (!editor || !editor.state || !editor.view) {
-        log.debug('Editor not fully initialized for surflet update')
+        log.debug('Editor not fully initialized for breezelet update')
         return
       }
 
-      // Find the surflet node in the document
-      const surfletNodes: { pos: number; node: any }[] = []
+      // Find the breezelet node in the document
+      const breezeletNodes: { pos: number; node: any }[] = []
       editor.state.doc.descendants((node, pos) => {
-        if (node.type.name === 'surflet') {
-          surfletNodes.push({ pos, node })
+        if (node.type.name === 'breezelet') {
+          breezeletNodes.push({ pos, node })
         }
         return true
       })
 
-      // If no surflet nodes found, log debug and return
-      if (surfletNodes.length === 0) {
-        log.debug('No surflet node found to update')
+      // If no breezelet nodes found, log debug and return
+      if (breezeletNodes.length === 0) {
+        log.debug('No breezelet node found to update')
         return
       }
 
-      // Get the last surflet node (most recently created)
-      const lastSurflet = surfletNodes[surfletNodes.length - 1]
+      // Get the last breezelet node (most recently created)
+      const lastBreezelet = breezeletNodes[breezeletNodes.length - 1]
 
-      if (!lastSurflet) {
-        log.error('Last surflet node not found')
+      if (!lastBreezelet) {
+        log.error('Last breezelet node not found')
         return
       }
 
       // Create a transaction to update the node's attributes
       const tr = editor.state.tr
-      tr.setNodeMarkup(lastSurflet.pos, undefined, {
-        ...lastSurflet.node.attrs,
+      tr.setNodeMarkup(lastBreezelet.pos, undefined, {
+        ...lastBreezelet.node.attrs,
         codeContent: code
       })
 
       // Dispatch the transaction to update the editor
       editor.view.dispatch(tr)
 
-      log.debug('Surflet content updated successfully')
+      log.debug('Breezelet content updated successfully')
     } catch (err) {
       // Use debug level instead of error to avoid spamming console
-      log.debug('Could not update surflet content', err)
+      log.debug('Could not update breezelet content', err)
     }
   }
 
@@ -1914,7 +1914,7 @@
           bind:editorElement
           placeholder={escapeFirstLineChat
             ? 'Start writing a note…'
-            : `Ask Surf or start writing a note (esc) …`}
+            : `Ask Breeze or start writing a note (esc) …`}
           placeholderNewLine={$editorPlaceholder}
           autocomplete={!($isFirstLine && escapeFirstLineChat)}
           floatingMenu

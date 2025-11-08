@@ -23,7 +23,7 @@ const sanitize = (parts) => {
 }
 
 StyleDictionary.registerFormat({
-  name: 'deta/css-variables',
+  name: 'breeze/css-variables',
   format: ({ dictionary }) => {
     const lines = []
     const classRules = []
@@ -234,7 +234,7 @@ const sd = new StyleDictionary({
       files: [
         {
           destination: 'tokens.css',
-          format: 'deta/css-variables',
+          format: 'breeze/css-variables',
         },
       ],
     },

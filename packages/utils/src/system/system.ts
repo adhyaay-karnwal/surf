@@ -1,4 +1,4 @@
-import { RendererType } from '@deta/types'
+import { RendererType } from '@breeze/types'
 
 export const isMac = () => {
   return import.meta.env.PLATFORM === 'darwin'

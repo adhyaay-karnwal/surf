@@ -3,7 +3,7 @@ import { type ContextViewDensity, type ContextViewType } from './contexts.types'
 import { type WebViewEventTransform } from './ipc.webview.types'
 import { type AnnotationType } from './resources.types'
 
-/** @deprecated - OLD SURF-alpha TYPES ==================== */
+/** @deprecated - OLD BREEZE-alpha TYPES ==================== */
 
 export type AIMessageContext = 'inline' | 'chat'
 export type AIMessageBaseMedia = 'image' | 'text' | 'webpage' | 'pdf'

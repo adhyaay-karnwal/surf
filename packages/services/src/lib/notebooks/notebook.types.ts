@@ -1,4 +1,4 @@
-import type { NotebookData } from '@deta/types'
+import type { NotebookData } from '@breeze/types'
 import type { Notebook } from './notebook.svelte'
 
 export enum NotebookManagerEvents {

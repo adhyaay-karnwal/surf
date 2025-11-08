@@ -10,21 +10,25 @@
     contextMenu,
     type CtxItem,
     openDialog
-  } from '@deta/ui'
-  import { ResourceLoader, NotebookCover } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { ResourceTypes, SpaceEntryOrigin, type OpenTarget } from '@deta/types'
-  import { useResourceManager, type Resource, getResourceCtxItems } from '@deta/services/resources'
-  import { NotebookManagerEvents } from '@deta/services/notebooks'
+  } from '@breeze/ui'
+  import { ResourceLoader, NotebookCover } from '@breeze/ui'
+  import { Icon } from '@breeze/icons'
+  import { useNotebookManager } from '@breeze/services/notebooks'
+  import { ResourceTypes, SpaceEntryOrigin, type OpenTarget } from '@breeze/types'
+  import {
+    useResourceManager,
+    type Resource,
+    getResourceCtxItems
+  } from '@breeze/services/resources'
+  import { NotebookManagerEvents } from '@breeze/services/notebooks'
   import {
     openResource,
     openNotebook,
     determineClickOpenTarget
   } from '../../handlers/notebookOpenHandlers'
-  import { isModKeyPressed, truncate, conditionalArrayItem, useDebounce } from '@deta/utils'
+  import { isModKeyPressed, truncate, conditionalArrayItem, useDebounce } from '@breeze/utils'
 
-  import { createTreeStore } from '@deta/ui'
+  import { createTreeStore } from '@breeze/ui'
   import { createNotebookTreeDragAndDrop, type NotebookTreeNode } from './notebookTreeDnd.svelte'
 
   // Props
@@ -79,7 +83,7 @@
       ]
     })
     if (!confirmed) return
-    notebookManager.deleteResourcesFromSurf(resource.id, true)
+    notebookManager.deleteResourcesFromBreeze(resource.id, true)
   }
 
   // Get context menu items for notebooks

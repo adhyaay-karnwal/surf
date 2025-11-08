@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import { isWebResourceType, ResourceTagsBuiltInKeys } from '@deta/types'
-  import { mimeTypeToCodeLanguage, useLogScope } from '@deta/utils'
-  import { Icon } from '@deta/icons'
+  import { isWebResourceType, ResourceTagsBuiltInKeys } from '@breeze/types'
+  import { mimeTypeToCodeLanguage, useLogScope } from '@breeze/utils'
+  import { Icon } from '@breeze/icons'
 
-  import { useResourceManager, type Resource } from '@deta/services/resources'
+  import { useResourceManager, type Resource } from '@breeze/services/resources'
 
-  import SurfletRenderer from './SurfletRenderer.svelte'
+  import BreezeletRenderer from './BreezeletRenderer.svelte'
   import CollapsableResourceEmbed from './CollapsableResourceEmbed.svelte'
 
   export let id: string
@@ -48,7 +48,7 @@
 
 {#if resource}
   {#if generatedResource}
-    <SurfletRenderer
+    <BreezeletRenderer
       {resource}
       {isEditable}
       expandable={!hidePreview}

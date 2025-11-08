@@ -1,9 +1,9 @@
-import type { Fn } from '@deta/types'
-import { getViewType, getViewTypeData } from '@deta/utils/formatting'
-import { type NotebookManager } from '@deta/services/notebooks'
-import { type WebContentsView, ViewType } from '@deta/services/views'
-import { useLogScope } from '@deta/utils/io'
-import { wait } from '@deta/utils'
+import type { Fn } from '@breeze/types'
+import { getViewType, getViewTypeData } from '@breeze/utils/formatting'
+import { type NotebookManager } from '@breeze/services/notebooks'
+import { type WebContentsView, ViewType } from '@breeze/services/views'
+import { useLogScope } from '@breeze/utils/io'
+import { wait } from '@breeze/utils'
 
 const log = useLogScope('Breadcrumbs')
 
@@ -46,10 +46,10 @@ export async function constructBreadcrumbs(
       log.debug('Final breadcrumbs:', breadcrumbs)
       return breadcrumbs
     } else {
-      // Always start with Surf root
+      // Always start with Breeze root
       breadcrumbs.push({
-        title: 'Surf',
-        url: new URL('surf://surf/notebook').toString(),
+        title: 'Breeze',
+        url: new URL('breeze://breeze/notebook').toString(),
         navigationIdx: currentHistory.findIndex(
           (entry) => getViewType(entry.url) === ViewType.NotebookHome
         )
@@ -66,7 +66,7 @@ export async function constructBreadcrumbs(
           if (resource.spaceIdsValue.length === 0) {
             breadcrumbs.push({
               title: 'Drafts',
-              url: new URL('surf://surf/notebook/drafts').toString(),
+              url: new URL('breeze://breeze/notebook/drafts').toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes('/notebook/drafts')
               )
@@ -76,7 +76,7 @@ export async function constructBreadcrumbs(
             const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
             breadcrumbs.push({
               title: notebookName,
-              url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+              url: new URL(`breeze://breeze/notebook/${notebookId}`).toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes(`/notebook/${notebookId}`)
               )
@@ -112,7 +112,7 @@ export async function constructBreadcrumbs(
           const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
           breadcrumbs.push({
             title: notebookName,
-            url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+            url: new URL(`breeze://breeze/notebook/${notebookId}`).toString(),
             navigationIdx: currentHistory.findIndex((entry) =>
               entry.url.includes(`/notebook/${notebookId}`)
             )
@@ -120,9 +120,9 @@ export async function constructBreadcrumbs(
         } else if (spaceIds.length === 0) {
           breadcrumbs.push({
             title: 'Drafts',
-            url: 'surf://surf/notebook/drafts',
+            url: 'breeze://breeze/notebook/drafts',
             navigationIdx: currentHistory.findIndex(
-              (entry) => entry.url === 'surf://surf/notebook/drafts'
+              (entry) => entry.url === 'breeze://breeze/notebook/drafts'
             )
           })
         }

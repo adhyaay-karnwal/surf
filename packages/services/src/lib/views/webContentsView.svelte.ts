@@ -32,7 +32,7 @@ import {
   type ResourceDataPDF,
   type Download,
   ViewLocation
-} from '@deta/types'
+} from '@breeze/types'
 import {
   useLogScope,
   EventEmitterBase,
@@ -42,8 +42,8 @@ import {
   isInternalViewerURL,
   copyToClipboard,
   useTimeout
-} from '@deta/utils'
-import { getTextElementsFromHtml } from '@deta/utils/dom'
+} from '@breeze/utils'
+import { getTextElementsFromHtml } from '@breeze/utils/dom'
 import {
   compareURLs,
   getHostname,
@@ -52,7 +52,7 @@ import {
   parseUrlIntoCanonical,
   ResourceTag,
   cleanupPageTitle
-} from '@deta/utils/formatting'
+} from '@breeze/utils/formatting'
 import { HistoryEntriesManager } from '../history'
 import { ConfigService } from '../config'
 import { KeyboardManager, useKeyboardManager } from '../shortcuts/index'
@@ -69,8 +69,8 @@ import {
   ViewManagerEmitterNames
 } from './types'
 import { Resource, ResourceManager } from '../resources'
-import { WebParser } from '@deta/web-parser'
-import { type MentionItem } from '@deta/editor'
+import { WebParser } from '@breeze/web-parser'
+import { type MentionItem } from '@breeze/editor'
 import { type DownloadsManager, useDownloadsManager } from '../downloads.svelte'
 import { type AIQueryPayload } from '../messagePort'
 
@@ -815,7 +815,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
       entry &&
       entry.url === this.view.urlValue &&
       entry.title &&
-      !entry.title.startsWith('surf://')
+      !entry.title.startsWith('breeze://')
     ) {
       this.log.debug('URL matches current history entry', entry)
       this.view.title.set(entry.title)
@@ -2054,9 +2054,9 @@ export class WebContentsView extends EventEmitterBase<WebContentsViewEmitterEven
 
     let url = parseUrlIntoCanonical(rawUrl) ?? rawUrl
 
-    const surfResourceId = url.match(/^surf:\/\/resource\/([^\/]+)/)?.[1]
-    if (surfResourceId) {
-      return await this.resourceManager.getResource(surfResourceId)
+    const breezeResourceId = url.match(/^breeze:\/\/resource\/([^\/]+)/)?.[1]
+    if (breezeResourceId) {
+      return await this.resourceManager.getResource(breezeResourceId)
     }
 
     // strip &t from url suffix
