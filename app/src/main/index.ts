@@ -190,7 +190,7 @@ const initializeApp = async () => {
 
   isAppLaunched = true
   setInterval(cleanupTempFiles, 60 * 60 * 1000)
-  electronApp.setAppUserModelId('ea.browser.breeze.breeze')
+  electronApp.setAppUserModelId('breeze')
 
   const appPath = app.getAppPath() + (isDev ? '' : '.unpacked')
   const userDataPath = app.getPath('userData')

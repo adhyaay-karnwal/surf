@@ -1,4 +1,4 @@
-!define APP_PROGID "engineer.breeze.desktop"
+!define APP_PROGID "breeze"
 !define VS_REDIST_EXE "vc_redist.x64.exe"
 !define VS_REDIST_URL "https://aka.ms/vs/17/release/vc_redist.x64.exe"
 !define VS_REDIST_VERSION "14.40.33816.00"

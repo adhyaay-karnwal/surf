@@ -12,7 +12,7 @@ The Breeze team takes the security of Breeze seriously. If you discover a securi
 2. Click **Report a vulnerability**
 3. Fill out the vulnerability report form with as much detail as possible
 
-Alternatively, if you cannot use GitHub's reporting feature, please email us at: **security@breeze.breeze**
+Alternatively, if you cannot use GitHub's reporting feature, please email us at: **adhyaay@breeze.engineer**
 
 ### What to Include
 
@@ -56,7 +56,7 @@ We follow a **coordinated disclosure** approach:
 
 ## Contact
 
-- **Security Email**: security@breeze.breeze
+- **Security Email**: adhyaay@breeze.engineer
 - **Security Team**: @security (GitHub team mention)
 
 ---

@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { BrowserTypeItem } from '@breeze/types'
   import type { ImportStatus } from './ImporterV2.svelte'
+  import { BREEZE_SUPPORT_EMAIL } from '@breeze/services/src/lib/constants/branding'
+
+  const supportEmail = BREEZE_SUPPORT_EMAIL
 
   export let currentStepIdx: number = 0
   export let selectedBrowser: BrowserTypeItem | null = null
@@ -29,7 +32,10 @@
     Failed to import from {selectedBrowser?.name}. Please make sure it is installed and closed, then
     try again.
   </p>
-  <p>If the problem persists, contact us: <a href="mailto:hello@breeze.breeze">hello@breeze.breeze</a></p>
+  <p>
+    If the problem persists, contact us:
+    <a href={`mailto:${supportEmail}`}>{supportEmail}</a>
+  </p>
 {:else if currentStepIdx === 3}
   <p>
     Your imported data is now saved in Stuff, Breeze's central place for anything you save from the

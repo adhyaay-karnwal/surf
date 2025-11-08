@@ -8,7 +8,7 @@ const params = {
 
 function electronBuilderConfig() {
   return {
-    appId: 'engineer.breeze.desktop',
+    appId: 'breeze',
     productName: params.buildName,
     directories: {
       buildResources: params.buildResourcesDir || 'build/resources/prod'
@@ -74,7 +74,7 @@ function electronBuilderConfig() {
     },
     linux: {
       target: ['AppImage'],
-      maintainer: 'breeze.engineer',
+      maintainer: 'Adhyaay Karnwal',
       artifactName: `${params.buildName}-${params.appVersion}.\${arch}.\${ext}`,
       category: 'WebBrowser'
     },

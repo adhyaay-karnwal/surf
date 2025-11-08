@@ -8,11 +8,11 @@ We encourage you to review the current issues and feature requests before contri
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Breeze Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@breeze.breeze](mailto:hello@breeze.breeze).
+This project and everyone participating in it is governed by the [Breeze Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [adhyaay@breeze.engineer](mailto:adhyaay@breeze.engineer).
 
 ## I need help!
 
-If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](http://breeze.breeze/discord), open an issue on GitHub or email us at [hello@breeze.breeze](mailto:hello@breeze.breeze).
+If you need help getting started or have questions about the codebase, feel free to reach out to us on our [Discord server](https://breeze.engineer/discord), open an issue on GitHub or email us at [adhyaay@breeze.engineer](mailto:adhyaay@breeze.engineer).
 
 ## What's inside?
 

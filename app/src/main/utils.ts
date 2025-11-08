@@ -22,7 +22,7 @@ const isDefaultBrowserWindows = async () => {
       { encoding: 'utf-8' }
     ).toString()
 
-    const appProgId = 'ea.browser.breeze.breeze'
+    const appProgId = 'breeze'
 
     const isHttpDefault = httpProgId.includes(appProgId)
     const isHttpsDefault = httpsProgId.includes(appProgId)

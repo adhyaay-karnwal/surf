@@ -127,10 +127,10 @@ You can also deploy your own [Inference Endpoint](https://endpoints.huggingface.
 
 In theory any provider that offers a OpenAI compatible chat completions API should work with Breeze. In practice some providers are not fully compatible and can come with their own quirks. The only way to know for sure if a given provider works is by trying it out. Refer to the [Configuration Options](https://www.notion.so/Configuration-Options-199a5244a717800081a7ce12cef7bd93?pvs=21) above on what information is needed.
 
-If you do get a provider working please let us know on [**Discord**](https://discord.gg/AKaBGfRXbw) or via [**E-Mail**](mailto:hello@breeze.breeze) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
+If you do get a provider working please let us know on [**Discord**](https://discord.gg/AKaBGfRXbw) or via [**E-Mail**](mailto:adhyaay@breeze.engineer) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
 
 ## Managed AI
 
 ---
 
-You can download a version of Breeze with managed AI from the [Breeze website](https://breeze.breeze/).
+You can download a version of Breeze with managed AI from the [Breeze website](https://breeze.engineer/).

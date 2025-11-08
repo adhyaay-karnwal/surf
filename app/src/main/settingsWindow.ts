@@ -5,6 +5,7 @@ import { applyCSPToSession } from './csp'
 import { isMac } from '@breeze/utils/system'
 import { SettingsWindowTab } from '@breeze/types/src/window.types'
 import { SettingsWindowEntrypoint } from './utils'
+import { BREEZE_DISCORD_URL, BREEZE_SITE_URL } from './branding'
 
 let settingsWindow: BrowserWindow | undefined
 
@@ -58,9 +59,13 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
     event.preventDefault()
   })
 
+  const siteRoot = BREEZE_SITE_URL.replace(/\/$/, '')
+  const discordRoot = BREEZE_DISCORD_URL.replace(/\/$/, '')
+
   settingsWindow.webContents.setWindowOpenHandler((details) => {
     const ALLOWED_DOMAINS = [
-      'https://breeze.breeze',
+      siteRoot,
+      discordRoot,
       'https://breeze.notion.site',
       'https://github.com',
       'https://ollama.com',
@@ -70,7 +75,7 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
       'https://aistudio.google.com'
     ]
 
-    let isAllowedUrl = ALLOWED_DOMAINS.some((domain) => details.url.startsWith(domain))
+    const isAllowedUrl = ALLOWED_DOMAINS.some((domain) => details.url.startsWith(domain))
     if (isAllowedUrl) {
       shell.openExternal(details.url)
     }

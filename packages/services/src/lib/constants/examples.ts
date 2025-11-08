@@ -1,4 +1,5 @@
 import type { NotebookCustomization } from '@breeze/types'
+import { BREEZE_SITE_URL } from './branding'
 
 export const onboardingNotebook = {
   name: 'Intro to Breeze',
@@ -54,12 +55,12 @@ export const onboardingNotebook = {
     ]
   } as NotebookCustomization,
   urls: [
-    'https://breeze.breeze'
+    BREEZE_SITE_URL
     // 'https://www.xda-developers.com/breeze-breeze-promising-new-browser/',
     // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
     // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://breeze.breeze/people/efe',
-    // 'https://breeze.breeze/people/reese',
+    // `${BREEZE_SITE_URL}/people/efe`,
+    // `${BREEZE_SITE_URL}/people/reese`,
     // 'https://productidentity.co/p/breeze-the-browser'
   ]
 }

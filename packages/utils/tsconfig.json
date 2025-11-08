@@ -13,5 +13,6 @@
     "composite": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true
-  }
+  },
+  "references": [{ "path": "../types/tsconfig.json" }]
 }

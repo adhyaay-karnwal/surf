@@ -2,7 +2,7 @@
   
 ![splash](./docs/assets/repo-header.png)
 
-[**Website**](https://breeze.breeze) - [**Discord**](https://breeze.breeze/discord)
+[**Website**](https://breeze.engineer) - [**Discord**](https://breeze.engineer/discord)
 
 </div>
 
@@ -22,13 +22,13 @@ Breeze is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows
 
 Most applications are focused on a single task, or a single media type: notes, websites, or PDFs. Real thinking requires juggling media across sources to make connections and synthesize ideas. We want to help people think better, across all their media.
 
-Breeze is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://breeze.breeze/motivation).
+Breeze is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://breeze.engineer/motivation).
 
 ## Installation
 
 Checkout the [GitHub releases](https://github.com/breeze/breeze/releases) for the latest stable version of Breeze for MacOS, Windows and Linux.
 
-You can also download Breeze with some managed & additional features (e.g. AI) from the [Breeze website](https://breeze.breeze). That version is subject to different terms.
+You can also download Breeze with some managed & additional features (e.g. AI) from the [Breeze website](https://breeze.engineer). That version is subject to different terms.
 
 For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -130,7 +130,7 @@ See [LICENSE](LICENSE) for more details about the Apache 2.0 license.
 
 **Note:** The Breeze name and logos are trademarks of Breeze GmbH and are **not** covered by the Apache 2.0 license.
 
-Breeze GmbH is a commercial open source company. Breeze is designed to operate as open source software without needing Breeze's servers. Breeze GmbH also offers a modified version of Breeze (which integrates with Breeze's servers) and is subject to separate terms and conditions. This version of Breeze can be downloaded from the [Breeze website](https://breeze.breeze/).
+Breeze GmbH is a commercial open source company. Breeze is designed to operate as open source software without needing Breeze's servers. Breeze GmbH also offers a modified version of Breeze (which integrates with Breeze's servers) and is subject to separate terms and conditions. This version of Breeze can be downloaded from the [Breeze website](https://breeze.engineer/).
 
 ## Acknowledgements
 
