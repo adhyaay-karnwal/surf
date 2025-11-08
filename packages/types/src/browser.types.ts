@@ -115,17 +115,17 @@ export enum ViewType {
   Page = 'page',
   /**
    * A specific notebook
-   * @example surf://surf/notebook/:id
+   * @example breeze://surf/notebook/:id
    */
   Notebook = 'notebook',
   /**
    * The notebooks home/root view
-   * @example surf://surf/notebook
+   * @example breeze://surf/notebook
    */
   NotebookHome = 'notebook_home',
   /**
    * A specific resource (most likely note)
-   * @example surf://surf/resource/:id
+   * @example breeze://surf/resource/:id
    */
   Resource = 'resource',
   /**

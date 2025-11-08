@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
   import type { Resource } from '@deta/services/resources'
-  import SurfletRenderer from './SurfletRenderer.svelte'
+  import BreezeletRenderer from './BreezeletRenderer.svelte'
   import { ResourceTag } from '@deta/utils/formatting'
   import { AddResourceToSpaceEventTrigger, ResourceTagsBuiltInKeys } from '@deta/types'
   import { SpaceEntryOrigin } from '@deta/types'
@@ -19,12 +19,12 @@
   export const uuid: string = ''
 
   export let updateAttributes: (attrs: Record<string, any>) => void
-  export let name: string = 'New Surflet'
+  export let name: string = 'New Breezelet'
   export let prompt: string = ''
   export let resourceId: string = ''
   export let done: string = 'false'
 
-  const log = useLogScope('Surflet Component')
+  const log = useLogScope('Breezelet Component')
   const resourceManager = useResourceManager()
   const aiService = useAI()
 
@@ -95,7 +95,7 @@
     }
   }
 
-  const removeSurfletSilentTag = async () => {
+  const removeBreezeletSilentTag = async () => {
     if (!$resource) {
       log.warn('No resource to remove silent tag from')
       return
@@ -108,7 +108,7 @@
     }
   }
 
-  const addSurfletToSpace = async (spaceId: string) => {
+  const addBreezeletToSpace = async (spaceId: string) => {
     if (!$resource) {
       log.warn('No resource to add to space')
       return
@@ -142,7 +142,7 @@
     }
   }
 
-  const updateSurfletName = async (newName: string, updateNodeAttrs: boolean = false) => {
+  const updateBreezeletName = async (newName: string, updateNodeAttrs: boolean = false) => {
     if (!$resource) {
       log.warn('No resource to update name for')
       return
@@ -162,7 +162,7 @@
     }
   }
 
-  const saveSurflet = async () => {
+  const saveBreezelet = async () => {
     try {
       if (!$resource) {
         // const tab = tabsManager?.activeTabValue
@@ -191,12 +191,12 @@
     }
   }
 
-  const handleUpdateSurfletName = async (event: any) => {
+  const handleUpdateBreezeletName = async (event: any) => {
     const newName = event.detail
     log.debug('Handle update surflet name called', newName)
     if (newName && newName.trim()) {
       try {
-        await updateSurfletName(newName, true)
+        await updateBreezeletName(newName, true)
       } catch (error) {
         // Name update failure is not critical, log but don't show error to user
         log.error('Failed to update surflet name', error)
@@ -206,7 +206,7 @@
     }
   }
 
-  const handleSaveSurflet = async (event: CustomEvent<{ spaceId?: string }>) => {
+  const handleSaveBreezelet = async (event: CustomEvent<{ spaceId?: string }>) => {
     log.debug('Handle save surflet called', event.detail)
     const { spaceId } = event.detail
 
@@ -222,9 +222,9 @@
 
     try {
       if (spaceId) {
-        await addSurfletToSpace(spaceId)
+        await addBreezeletToSpace(spaceId)
       }
-      await removeSurfletSilentTag()
+      await removeBreezeletSilentTag()
     } catch (error: any) {
       setError(
         'resource_saving',
@@ -281,10 +281,10 @@
     log.debug('Done handler called')
     try {
       doneGenerating.set(true)
-      await saveSurflet()
+      await saveBreezelet()
 
       if ($resource) {
-        await updateSurfletName($title, false)
+        await updateBreezeletName($title, false)
 
         // prevent race condition
         if (!isUpdatingAttributes && updateAttributes) {
@@ -510,7 +510,7 @@
     </div>
   </div>
 {:else}
-  <SurfletRenderer
+  <BreezeletRenderer
     {resource}
     {title}
     {codeContent}
@@ -521,9 +521,9 @@
     minHeight="150px"
     maxHeight="800px"
     initialHeight="550px"
-    on:save-surflet={handleSaveSurflet}
+    on:save-surflet={handleSaveBreezelet}
     on:set-preview-image={handleSetPreviewImage}
-    on:set-surflet-name={handleUpdateSurfletName}
+    on:set-surflet-name={handleUpdateBreezeletName}
   />
 {/if}
 

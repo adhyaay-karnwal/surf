@@ -60,7 +60,7 @@ export const RESOURCE_FILTERS: FilterItem[] = [
   // },
   {
     id: 'surflets',
-    label: 'Surflets',
+    label: 'Breezelets',
     tags: [...filterGeneratedArtifactsTags()]
   },
   // {

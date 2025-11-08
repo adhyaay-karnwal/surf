@@ -45,7 +45,7 @@ import type { ComponentType, SvelteComponent } from 'svelte'
 import { conditionalArrayItem } from '@deta/utils'
 import type { SlashItemsFetcher } from './extensions/Slash/suggestion'
 import { Citation } from './extensions/Citation/citation'
-import { Surflet } from './extensions/Surflet/surflet'
+import { Breezelet } from './extensions/Breezelet/surflet'
 import { WebSearch } from './extensions/WebSearch/websearch'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import Link from './extensions/Link'
@@ -226,7 +226,7 @@ export const createEditorExtensions = (opts?: ExtensionOptions) => [
   ),
   ...conditionalArrayItem(
     !!opts?.surfletComponent,
-    Surflet.configure({
+    Breezelet.configure({
       component: opts?.surfletComponent
     })
   ),

@@ -424,7 +424,7 @@ export const appendURLPath = (url: string, path: string) => {
 
 /**
  * Try to parse a surf protocol URL and return the resourceId
- * Surf protocol URL format: surf://surf/resource/<id>
+ * Surf protocol URL format: breeze://surf/resource/<id>
  * @deprecated This is no longer valid with having other surf paths not only resource
  * @param rawUrl The URL to parse
  * @returns resourceId or null if the URL is not a surf protocol URL
@@ -548,7 +548,7 @@ export const getCleanHostname = (url: string) => {
 
 export const cleanupPageTitle = (title: string) => {
   try {
-    if (!title.startsWith('surf://')) {
+    if (!title.startsWith('breeze://')) {
       return title
     }
 

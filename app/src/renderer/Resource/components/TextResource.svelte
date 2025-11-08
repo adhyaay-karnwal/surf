@@ -107,10 +107,10 @@
   } from '@deta/editor/src/lib/extensions/Slash/index'
   import type { SlashItemsFetcher } from '@deta/editor/src/lib/extensions/Slash/suggestion'
   import { BUILT_IN_SLASH_COMMANDS } from '@deta/editor/src/lib/extensions/Slash/actions'
-  import Surflet from './Surflet.svelte'
+  import Breezelet from './Breezelet.svelte'
   import WebSearch from './WebSearch.svelte'
   import { createResourcesFromMediaItems, processPaste } from '@deta/services'
-  import { predefinedSurfletCode } from './predefinedSurflets'
+  import { predefinedBreezeletCode } from './predefinedBreezelets'
   import { createRemoteMentionsFetcher, createResourcesMentionsFetcher } from '@deta/services/ai'
   import type { LinkClickHandler } from '@deta/editor/src/lib/extensions/Link/helpers/clickHandler'
   import { EditorAIGeneration, NoteEditor } from '@deta/services/ai'
@@ -429,14 +429,14 @@
       await tick()
 
       // Add event listeners for surflet events
-      const handleCreateSurfletEvent = (e: CustomEvent) => {
+      const handleCreateBreezeletEvent = (e: CustomEvent) => {
         log.debug('Received create-surflet event', e.detail)
-        handleCreateSurflet(e.detail?.code)
+        handleCreateBreezelet(e.detail?.code)
       }
 
-      const handleUpdateSurfletEvent = (e: CustomEvent) => {
+      const handleUpdateBreezeletEvent = (e: CustomEvent) => {
         log.debug('Received update-surflet event', e.detail)
-        updateSurfletContent(e.detail?.code)
+        updateBreezeletContent(e.detail?.code)
       }
 
       const handleOpenStuffEvent = () => {
@@ -457,17 +457,17 @@
         const noteEditor = NoteEditor.create(editor, editorElem, editorElement)
       }
 
-      document.addEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+      document.addEventListener('create-surflet', handleCreateBreezeletEvent as EventListener)
       document.addEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-      document.addEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+      document.addEventListener('update-surflet', handleUpdateBreezeletEvent as EventListener)
 
       log.debug('Text resource setup complete')
       messagePort.noteReady.send()
 
       return () => {
-        document.removeEventListener('create-surflet', handleCreateSurfletEvent as EventListener)
+        document.removeEventListener('create-surflet', handleCreateBreezeletEvent as EventListener)
         document.removeEventListener('onboarding-open-stuff', handleOpenStuffEvent as EventListener)
-        document.removeEventListener('update-surflet', handleUpdateSurfletEvent as EventListener)
+        document.removeEventListener('update-surflet', handleUpdateBreezeletEvent as EventListener)
       }
     }
 
@@ -1446,7 +1446,7 @@
         return
       } else if (type === MentionItemType.NOTEBOOK) {
         messagePort.navigateURL.send({
-          url: `surf://surf/notebook/${id}`,
+          url: `breeze://surf/notebook/${id}`,
           target
         })
         return
@@ -2031,7 +2031,7 @@
     chatInputEditor.commands.focus()
   }
 
-  export const handleCreateSurflet = (code?: string) => {
+  export const handleCreateBreezelet = (code?: string) => {
     try {
       const editor = editorElem.getEditor()
 
@@ -2039,7 +2039,7 @@
       const currentPosition = editor.view.state.selection.from
 
       // Use the provided code or fall back to predefined code
-      const surfletCode = code || predefinedSurfletCode
+      const surfletCode = code || predefinedBreezeletCode
 
       // Remove markdown code block markers if present
       const cleanCode = surfletCode.replace(/```javascript|```/g, '')
@@ -2058,7 +2058,7 @@
       // Focus the editor after insertion
       editor.commands.focus()
 
-      log.debug('Surflet inserted successfully')
+      log.debug('Breezelet inserted successfully')
     } catch (err) {
       log.error('Error inserting surflet', err)
     }
@@ -2068,7 +2068,7 @@
    * Update the content of the most recently created surflet
    * @param code The new code to set for the surflet
    */
-  const updateSurfletContent = (code?: string) => {
+  const updateBreezeletContent = (code?: string) => {
     if (!code) {
       log.debug('No code provided to update surflet')
       return
@@ -2104,19 +2104,19 @@
       }
 
       // Get the last surflet node (most recently created)
-      const lastSurflet = surfletNodes[surfletNodes.length - 1]
+      const lastBreezelet = surfletNodes[surfletNodes.length - 1]
 
       // Create a transaction to update the node's attributes
       const tr = editor.state.tr
-      tr.setNodeMarkup(lastSurflet.pos, undefined, {
-        ...lastSurflet.node.attrs,
+      tr.setNodeMarkup(lastBreezelet.pos, undefined, {
+        ...lastBreezelet.node.attrs,
         codeContent: code
       })
 
       // Dispatch the transaction to update the editor
       editor.view.dispatch(tr)
 
-      log.debug('Surflet content updated successfully')
+      log.debug('Breezelet content updated successfully')
     } catch (err) {
       // Use debug level instead of error to avoid spamming console
       log.debug('Could not update surflet content', err)
@@ -2558,7 +2558,7 @@
             bind:editorElement
             placeholderNewLine={$editorPlaceholder}
             citationComponent={CitationItem}
-            surfletComponent={Surflet}
+            surfletComponent={Breezelet}
             webSearchComponent={WebSearch}
             resourceComponent={EmbeddedResource}
             floatingMenu

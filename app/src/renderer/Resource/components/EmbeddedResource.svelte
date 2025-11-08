@@ -7,7 +7,7 @@
 
   import { useResourceManager, type Resource } from '@deta/services/resources'
 
-  import SurfletRenderer from './SurfletRenderer.svelte'
+  import BreezeletRenderer from './BreezeletRenderer.svelte'
   import CollapsableResourceEmbed from './CollapsableResourceEmbed.svelte'
 
   export let id: string
@@ -48,7 +48,7 @@
 
 {#if resource}
   {#if generatedResource}
-    <SurfletRenderer
+    <BreezeletRenderer
       {resource}
       {isEditable}
       expandable={!hidePreview}

@@ -63,7 +63,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   private unsubs: Fn[] = []
   private newHomepageView: WebContentsView | null = null
   private viewPoolWebPages: WebContentsView[] = [] // Pool of pre-created views for http(s)://
-  private viewPoolSurfProtocol: WebContentsView[] = [] // Pool of pre-created views for surf://
+  private viewPoolBreezeProtocol: WebContentsView[] = [] // Pool of pre-created views for breeze://
   private readonly poolSize = 1 // Number of views to pre-create
 
   static self: ViewManager
@@ -180,7 +180,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     }
 
     this.log.debug('Refilling view pool', type)
-    const viewPool = type === 'surf' ? this.viewPoolSurfProtocol : this.viewPoolWebPages
+    const viewPool = type === 'surf' ? this.viewPoolBreezeProtocol : this.viewPoolWebPages
     const needed = this.poolSize - viewPool.length
 
     if (needed <= 0) return
@@ -189,7 +189,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
       const fullData = {
         id: generateID(),
         partition: 'persist:horizon',
-        url: type === 'surf' ? 'surf://surf/resource/blank' : 'about:blank',
+        url: type === 'surf' ? 'breeze://surf/resource/blank' : 'about:blank',
         title: 'New Tab',
         faviconUrl: '',
         navigationHistoryIndex: -1,
@@ -209,7 +209,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   }
 
   private reusePooledViewIfPossible(data: WebContentsViewData) {
-    if (this.viewPoolWebPages.length === 0 && this.viewPoolSurfProtocol.length === 0) {
+    if (this.viewPoolWebPages.length === 0 && this.viewPoolBreezeProtocol.length === 0) {
       return null
     }
 
@@ -219,7 +219,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     if (url.protocol === 'http:' || url.protocol === 'https:') {
       view = this.viewPoolWebPages.pop()
     } else if (url.protocol === 'surf:') {
-      view = this.viewPoolSurfProtocol.pop()
+      view = this.viewPoolBreezeProtocol.pop()
     }
 
     // Use any available pooled view for web pages
@@ -507,7 +507,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   }
 
   openResourceInSidebar(resourceId: string) {
-    return this.openURLInSidebar(`surf://surf/resource/${resourceId}`)
+    return this.openURLInSidebar(`breeze://surf/resource/${resourceId}`)
   }
 
   openURLInSidebar(url: string) {
@@ -530,7 +530,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   private async prepareNewHomepage() {
     try {
       this.log.debug('Preparing new homepage')
-      this.newHomepageView = await this.create({ url: 'surf://surf/notebook' }, true)
+      this.newHomepageView = await this.create({ url: 'breeze://surf/notebook' }, true)
       await this.newHomepageView.preloadWebContents({ activate: false })
     } catch (error) {
       this.log.error('Error preparing new homepage:', error)
@@ -540,7 +540,7 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
   async openNewHomepage() {
     try {
       if (!this.newHomepageView) {
-        return this.openURLInSidebar('surf://surf/notebook')
+        return this.openURLInSidebar('breeze://surf/notebook')
       }
 
       const view = await this.openViewInSidebar(this.newHomepageView)
@@ -561,8 +561,8 @@ export class ViewManager extends EventEmitterBase<ViewManagerEmitterEvents> {
     this.unsubs.forEach((unsub) => unsub())
     this.newHomepageView?.onDestroy()
 
-    this.viewPoolSurfProtocol.forEach((view) => view.onDestroy())
-    this.viewPoolSurfProtocol = []
+    this.viewPoolBreezeProtocol.forEach((view) => view.onDestroy())
+    this.viewPoolBreezeProtocol = []
 
     this.viewPoolWebPages.forEach((view) => view.onDestroy())
     this.viewPoolWebPages = []

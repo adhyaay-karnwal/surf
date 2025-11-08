@@ -608,7 +608,7 @@ export const parseChatOutputToHtml = async (output: AIChatMessageParsed) => {
   return html
 }
 
-export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) => {
+export const parseChatOutputToBreezeletCode = async (output: AIChatMessageParsed) => {
   const content = output.content
 
   const completeCodeBlockRegex = /```(?:[\w]*\n)?([\s\S]*?)```/

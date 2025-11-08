@@ -476,13 +476,13 @@ export class AIChat {
   async getChatModeForPromptAndTab(
     prompts: string[],
     activeTab: TabPage | null,
-    hasSurfletInContext: boolean = false,
+    hasBreezeletInContext: boolean = false,
     tier?: ModelTiers
   ): Promise<ChatMode> {
     try {
       const payload = {
         prompts,
-        has_app_in_context: hasSurfletInContext,
+        has_app_in_context: hasBreezeletInContext,
         ...(activeTab && {
           title: activeTab.title,
           url:

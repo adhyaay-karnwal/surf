@@ -56,7 +56,7 @@
     }
 
     if ($viewTypeData.type === ViewType.Notebook || $viewTypeData.type === ViewType.NotebookHome) {
-      if ($viewTitle.startsWith('surf://')) {
+      if ($viewTitle.startsWith('breeze://')) {
         return $viewTypeData.type === ViewType.NotebookHome ? 'Surf' : 'Notebook'
       }
 
@@ -69,14 +69,14 @@
           return 'Resource'
         }
 
-        if (isActiveLocationInternalRenderer.href.startsWith('surf://')) {
+        if (isActiveLocationInternalRenderer.href.startsWith('breeze://')) {
           return 'Resource'
         }
 
         return truncate(isActiveLocationInternalRenderer.href, 69)
       }
 
-      if ($viewTitle.startsWith('surf://')) {
+      if ($viewTitle.startsWith('breeze://')) {
         return 'Resource'
       }
 

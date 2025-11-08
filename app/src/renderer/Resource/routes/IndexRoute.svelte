@@ -178,7 +178,7 @@
   })
 
   onMount(() => {
-    document.title = 'Surf'
+    document.title = 'Breeze'
     // notebookManager.loadNotebooks()
 
     if (shouldMentionActiveTab()) {
@@ -226,7 +226,7 @@
 </script>
 
 <svelte:head>
-  <title>Surf</title>
+  <title>Breeze</title>
 </svelte:head>
 
 {#if isCustomizingNotebook}
@@ -263,32 +263,32 @@
     {/if}
   </main>
 
-  <!-- <NotebookSidebar title="Surf" bind:open={resourcesPanelOpen} /> -->
+  <!-- <NotebookSidebar title="Breeze" bind:open={resourcesPanelOpen} /> -->
 </NotebookLayout>
 
 <style lang="scss">
   main {
     width: 100%;
     height: 100%;
-    max-width: 680px;
+    max-width: 700px;
     margin: 0 auto;
     position: relative;
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 
     section {
       flex-shrink: 1;
-      padding-inline: 0.5rem;
+      padding-inline: 0.625rem;
 
       transform: translateY(0px);
       transition:
-        opacity 223ms ease-out,
-        transform 223ms ease-out;
+        opacity 240ms ease-out,
+        transform 240ms ease-out;
       transition-delay: var(--delay, 0ms);
       @starting-style {
-        transform: translateY(2px);
+        transform: translateY(3px);
         opacity: 0;
       }
     }
@@ -298,8 +298,8 @@
     width: 100%;
 
     h1 {
-      font-size: 30px;
-      margin-bottom: 0.75rem;
+      font-size: 32px;
+      margin-bottom: 0.875rem;
       font-family: 'Gambarino';
       text-align: center;
       color: light-dark(var(--on-surface, #374151), var(--on-surface-dark, #cbd5f5));
@@ -307,16 +307,16 @@
 
     .empty {
       width: 100%;
-      border: 1px dashed light-dark(rgba(0, 0, 0, 0.2), rgba(71, 85, 105, 0.4));
-      padding: 0.5rem 0.75rem;
-      border-radius: 10px;
+      border: 1px dashed light-dark(rgba(0, 0, 0, 0.18), rgba(71, 85, 105, 0.35));
+      padding: 0.625rem 0.875rem;
+      border-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: light-dark(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.3));
+      color: light-dark(rgba(0, 0, 0, 0.24), rgba(255, 255, 255, 0.28));
 
       p {
-        max-width: 40ch;
+        max-width: 42ch;
         text-align: center;
         text-wrap: pretty;
       }
@@ -325,11 +325,10 @@
     .notebook-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
+      gap: 0.875rem;
 
       display: flex;
       flex-wrap: wrap;
-      //justify-content: space-between;
       justify-items: center;
     }
     .notebook-wrapper {
@@ -337,12 +336,12 @@
 
       transform: translateY(0px);
       transition:
-        opacity 223ms ease-out,
-        transform 123ms ease-out,
-        box-shadow 123ms ease-out;
+        opacity 240ms ease-out,
+        transform 140ms ease-out,
+        box-shadow 140ms ease-out;
       transition-delay: var(--delay, 0ms);
       @starting-style {
-        transform: translateY(2px);
+        transform: translateY(3px);
         opacity: 0;
       }
     }
@@ -351,11 +350,10 @@
   .notebook-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0.75rem;
+    gap: 0.875rem;
 
     display: flex;
     flex-wrap: wrap;
-    //justify-content: space-between;
     justify-items: center;
   }
 
@@ -364,23 +362,23 @@
     margin-right: calc(-50vw + 50%);
     padding-left: calc(50vw - 50%);
     padding-right: calc(50vw - 50%);
-    margin-top: 1rem;
-    opacity: 0.5;
-    transition: opacity 223ms ease-out;
+    margin-top: 1.25rem;
+    opacity: 0.45;
+    transition: opacity 240ms ease-out;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.95;
     }
 
     > :global(*) {
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto;
-      padding-inline: 1.5rem;
+      padding-inline: 1.625rem;
     }
   }
 
   .prompts-wrapper {
-    padding-left: 1.25rem;
-    margin-bottom: -1rem;
+    padding-left: 1.375rem;
+    margin-bottom: -1.125rem;
   }
 </style>
