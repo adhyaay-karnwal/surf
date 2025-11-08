@@ -144,7 +144,7 @@ export const handleWebsearch = (state: State, node: Element) => {
  * <surflet data-resource-id="edc810e3-9018-4b37-a13a-a30e492edf1d" data-prompt="Create an interactive demo of Apple" data-done="true" data-name="Liquid Glass UI Demo"></surflet>
  * ```
  */
-export const handleSurflet = (state: State, node: Element) => {
+export const handleBreezelet = (state: State, node: Element) => {
   try {
     const resourceId = node.properties?.dataResourceId as string
     const name = node.properties?.dataName as string
@@ -158,8 +158,8 @@ export const handleSurflet = (state: State, node: Element) => {
       children: [
         {
           type: 'link',
-          url: `surf://surf/resource/${resourceId}`,
-          children: [{ type: 'text', value: name || 'Surflet' }]
+          url: `breeze://surf/resource/${resourceId}`,
+          children: [{ type: 'text', value: name || 'Breezelet' }]
         }
         // { type: 'code', lang: 'html', value: (node.children[0] as any)?.value || '' }
       ]
@@ -201,9 +201,9 @@ export const handleSpan = (state: State, node: Element) => {
     // Generate URL based on mention type
     let url = id
     if (mentionType === 'notebook') {
-      url = `surf://surf/notebook/${id}`
+      url = `breeze://surf/notebook/${id}`
     } else if (mentionType === 'resource') {
-      url = `surf://surf/resource/${id}`
+      url = `breeze://surf/resource/${id}`
     }
 
     const result = {

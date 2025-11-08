@@ -28,7 +28,7 @@ const imageProcessorHandles = new Map<
 let imageProcessor: Worker | null = null
 let imageProcessorDeinitTimeout: NodeJS.Timeout | null = null
 
-let log = useLogScope('surfProtocolHandlers')
+let log = useLogScope('breezeProtocolHandlers')
 
 const imageProcessorOnMessage = (result: {
   messageID: string
@@ -177,7 +177,7 @@ const createCacheDirIfNotExists = async (cacheDir: string) => {
   }
 }
 
-const surfProtocolHandleImages = async ({
+const breezeProtocolHandleImages = async ({
   requestURL,
   resourceId,
   imgPath,
@@ -319,7 +319,7 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
 
       targetPath = rootPath
     } else if (url.hostname === 'surf') {
-      // Handle root requests (surf://surf/notebook/:id) and root assets
+      // Handle root requests (breeze://surf/notebook/:id) and root assets
       const match = url.pathname.match(/^\/(notebook|resource)(?:\/([^\/]+))?\/?$/)
 
       if (match) {
@@ -344,8 +344,8 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
 
             targetPath = rootPath
           } else {
-            // For asset requests (surf://surf/notebook/:id/some/file.js), remove the type and ID prefix
-            targetPath = url.href.replace(`surf://surf/${type}/${id}/`, '')
+            // For asset requests (breeze://surf/notebook/:id/some/file.js), remove the type and ID prefix
+            targetPath = url.href.replace(`breeze://surf/${type}/${id}/`, '')
           }
         } else if (url.pathname === `/${type}`) {
           const rootPath = HOSTNAME_TO_ROOT['surf']
@@ -356,7 +356,7 @@ export const handleSurfFileRequest = async (req: GlobalRequest) => {
 
           targetPath = rootPath
         } else {
-          // For root assets (surf://surf/notebook/assets/style.css)
+          // For root assets (breeze://surf/notebook/assets/style.css)
           targetPath = `${url.pathname.substring(type.length + 1)}`
         }
       } else {
@@ -471,7 +471,7 @@ const handleSurfResourceDataRequest = async (req: GlobalRequest, resourceId: str
     response.headers.get('content-type')?.startsWith('image/') &&
     !response.headers.get('content-type')?.startsWith('image/gif')
   ) {
-    return surfProtocolHandleImages({
+    return breezeProtocolHandleImages({
       requestURL: req.url,
       resourceId: resourceId,
       imgPath: filePath,
@@ -486,7 +486,7 @@ export const surfInternalProtocolHandler = async (req: GlobalRequest) => {
   return handleSurfFileRequest(req)
 }
 
-export const surfProtocolHandler = async (req: GlobalRequest) => {
+export const breezeProtocolHandler = async (req: GlobalRequest) => {
   try {
     const id = req.url.match(/^surf:\/\/surf\/resource\/([^\/\?]+)/)?.[1]
     if (id) {
@@ -510,7 +510,7 @@ export const surfletProtocolHandler = async (req: GlobalRequest) => {
 
     const url = new URL(req.url)
     if (!url.hostname.endsWith('.app.local')) {
-      return new Response('Invalid Surflet protocol URL', { status: 400 })
+      return new Response('Invalid Breezelet protocol URL', { status: 400 })
     }
     const isV2Protocol = url.hostname.endsWith('.v2.app.local')
     const suffix = isV2Protocol ? '.v2.app.local' : '.app.local'

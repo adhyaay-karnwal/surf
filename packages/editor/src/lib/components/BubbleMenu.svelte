@@ -186,7 +186,7 @@
   const handleLinkItemSelect = (item: MentionItem) => {
     const resource = item.data
     if (resource) {
-      turnSelectionIntoLink(`surf://surf/resource/${resource.id}`)
+      turnSelectionIntoLink(`breeze://surf/resource/${resource.id}`)
     }
 
     $inputShown = false

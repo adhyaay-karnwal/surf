@@ -24,9 +24,9 @@ import { writeFile } from 'fs/promises'
 import {
   checkSurfProtocolRequest,
   surfInternalProtocolHandler,
-  surfProtocolHandler,
+  breezeProtocolHandler,
   surfletProtocolHandler
-} from './surfProtocolHandlers'
+} from './breezeProtocolHandlers'
 import { attachWCViewManager, WCViewManager } from './viewManager'
 import { useLogScope } from '@deta/utils'
 
@@ -158,7 +158,7 @@ export function createWindow() {
 
   webRequestManager.addBeforeRequest(webviewSession, (details, callback) => {
     const isSurfProtocol = details.url.startsWith('surf:')
-    const isSurfletProtocol = details.url.startsWith('surflet:')
+    const isBreezeletProtocol = details.url.startsWith('surflet:')
     const isInternalPageRequest = details.url.startsWith('surf-internal:')
 
     const isMainFrameRequest = details.resourceType === 'mainFrame'
@@ -172,19 +172,19 @@ export function createWindow() {
     const shouldBlockSurfRequest =
       isSurfProtocol && !(checkSurfProtocolRequest(details.url) || isMainFrameRequest)
 
-    const shouldBlockSurfletRequest =
-      isSurfletProtocol && (!isMainFrameRequest || !details.webContents)
+    const shouldBlockBreezeletRequest =
+      isBreezeletProtocol && (!isMainFrameRequest || !details.webContents)
 
     const shouldBlockInternalRequest =
       isInternalPageRequest && (!isMainFrameRequest || !details.webContents)
 
     const shouldBlock =
-      shouldBlockSurfRequest || shouldBlockSurfletRequest || shouldBlockInternalRequest
+      shouldBlockSurfRequest || shouldBlockBreezeletRequest || shouldBlockInternalRequest
 
     if (shouldBlock) {
       // log.warn('Blocking request:', details.url, url, {
       //   shouldBlockSurfRequest,
-      //   shouldBlockSurfletRequest,
+      //   shouldBlockBreezeletRequest,
       //   shouldBlockInternalRequest
       // })
 
@@ -274,10 +274,10 @@ export function createWindow() {
       } else {
         if (url.hostname === 'resource') {
           callback({ cancel: true })
-          details.webContents?.loadURL(`surf://surf/resource/${url.pathname.slice(1)}`)
+          details.webContents?.loadURL(`breeze://surf/resource/${url.pathname.slice(1)}`)
         } else if (url.hostname === 'notebook') {
           callback({ cancel: true })
-          details.webContents?.loadURL(`surf://surf/notebook/${url.pathname.slice(1)}`)
+          details.webContents?.loadURL(`breeze://surf/notebook/${url.pathname.slice(1)}`)
         } else {
           callback({ cancel: false })
         }
@@ -322,9 +322,9 @@ export function createWindow() {
   })
 
   try {
-    webviewSession.protocol.handle('surf', surfProtocolHandler)
+    webviewSession.protocol.handle('surf', breezeProtocolHandler)
     webviewSession.protocol.handle('surflet', surfletProtocolHandler)
-    mainWindowSession.protocol.handle('surf', surfProtocolHandler)
+    mainWindowSession.protocol.handle('surf', breezeProtocolHandler)
     mainWindowSession.protocol.handle('surf-internal', surfInternalProtocolHandler)
   } catch (e) {
     log.error('possibly failed to register surf protocol: ', e)
@@ -387,7 +387,7 @@ export function createWindow() {
   //   mainWindow.loadFile(join(__dirname, '../renderer/Core/core.html'))
   // }
 
-  mainWindow.loadURL('surf-internal://Core/Core/core.html')
+  mainWindow.loadURL('breeze-internal://Core/Core/core.html')
 }
 
 export function getMainWindow(): BrowserWindow | undefined {

@@ -37,26 +37,26 @@
   --black-03: rgba(0, 0, 0, 0.03);
   --black-00: rgba(0, 0, 0, 0);
 
-  // TODO: Not cleaned up yet
+  // Breeze theme colors - lighter, airier palette
   --red: rgba(255, 0, 0, 1);
-  --dark-on-pinned-surface: rgba(75, 85, 99, 1);
-  --dark-on-unpinned-surface-horizontal: rgb(93, 93, 108);
-  --dark-on-unpinned-surface-horizontal-hover: rgba(30, 34, 39, 0.9);
-  --dark-on-unpinned-surface: rgba(45, 55, 69, 1);
-  --ring-color: rgba(59, 130, 246, 0.75);
-  --ring-color-muted: rgba(59, 130, 246, 0.5);
-  --ring-color-shade: rgba(59, 130, 246, 0.12);
-  --dark-on-unpinned-surface-ring: inset 0px 1.5px 0px -0.75px rgba(59, 130, 246, 0.33),
-    inset 1.5px 0px 0px -0.75px rgba(59, 130, 246, 0.33),
-    inset -1.5px 0px 0px -0.75px rgba(59, 130, 246, 0.33),
-    inset 0px -1.5px 0px -0.75px rgba(59, 130, 246, 0.33);
+  --dark-on-pinned-surface: rgba(70, 85, 105, 1);
+  --dark-on-unpinned-surface-horizontal: rgb(90, 100, 120);
+  --dark-on-unpinned-surface-horizontal-hover: rgba(35, 45, 60, 0.85);
+  --dark-on-unpinned-surface: rgba(50, 65, 85, 1);
+  --ring-color: rgba(96, 165, 250, 0.7);
+  --ring-color-muted: rgba(96, 165, 250, 0.45);
+  --ring-color-shade: rgba(96, 165, 250, 0.1);
+  --dark-on-unpinned-surface-ring: inset 0px 1.5px 0px -0.75px rgba(96, 165, 250, 0.3),
+    inset 1.5px 0px 0px -0.75px rgba(96, 165, 250, 0.3),
+    inset -1.5px 0px 0px -0.75px rgba(96, 165, 250, 0.3),
+    inset 0px -1.5px 0px -0.75px rgba(96, 165, 250, 0.3);
 
-  --sky-gray: rgba(88, 104, 132, 1);
-  --sky-gray-09: rgba(88, 104, 132, 0.09);
-  --sky-gray-03: rgba(88, 104, 132, 0.03);
+  --sky-gray: rgba(100, 116, 145, 1);
+  --sky-gray-09: rgba(100, 116, 145, 0.09);
+  --sky-gray-03: rgba(100, 116, 145, 0.03);
 
-  --sky-blue: #e0f2fe;
-  --dark-outline: rgba(5, 5, 25, 0.3);
+  --sky-blue: #dbeafe;
+  --dark-outline: rgba(10, 15, 35, 0.25);
 
 
 

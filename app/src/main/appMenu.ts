@@ -36,7 +36,7 @@ class AppMenu {
 
   private initializeTemplate(): void {
     this.template = [
-      this.getSurfMenu(),
+      this.getBreezeMenu(),
       this.getFileMenu(),
       this.getEditMenu(),
       this.getViewMenu(),
@@ -106,19 +106,19 @@ class AppMenu {
 
   private createDataLocationMenuItem(): MenuConfig {
     const userDataPath = app.getPath('userData')
-    const surfDataPath = join(userDataPath, 'sffs_backend')
-    const label = isMac() ? 'Show Surf Data in Finder' : 'Show Surf Data in File Manager'
+    const breezeDataPath = join(userDataPath, 'sffs_backend')
+    const label = isMac() ? 'Show Breeze Data in Finder' : 'Show Breeze Data in File Manager'
 
     return {
       label,
-      click: () => shell.openPath(surfDataPath)
+      click: () => shell.openPath(breezeDataPath)
     }
   }
 
-  private getSurfMenu(isMacApp = isMac()): MenuConfig {
-    const surfItems = [
+  private getBreezeMenu(isMacApp = isMac()): MenuConfig {
+    const breezeItems = [
       ...(isMacApp
-        ? ([{ label: 'About Surf', role: 'about' }, { type: 'separator' }] as MenuConfig[])
+        ? ([{ label: 'About Breeze', role: 'about' }, { type: 'separator' }] as MenuConfig[])
         : []),
       {
         label: 'Preferences',
@@ -137,7 +137,7 @@ class AppMenu {
             { role: 'services', label: 'Services' },
             { type: 'separator' },
             {
-              label: 'Hide Surf',
+              label: 'Hide Breeze',
               accelerator: 'CmdOrCtrl+H',
               role: 'hide'
             },
@@ -150,12 +150,12 @@ class AppMenu {
           ]
         : []),
       { type: 'separator' },
-      { label: 'Quit Surf', role: 'quit' }
+      { label: 'Quit Breeze', role: 'quit' }
     ]
 
     return {
-      label: isMacApp ? app.name : 'Surf',
-      submenu: surfItems as MenuConfig[]
+      label: isMacApp ? app.name : 'Breeze',
+      submenu: breezeItems as MenuConfig[]
     }
   }
 
@@ -290,7 +290,7 @@ class AppMenu {
           accelerator: 'CmdOrCtrl+Alt+Shift+R'
         },
         {
-          label: 'Toggle Developer Tools for Surf',
+          label: 'Toggle Developer Tools for Breeze',
           accelerator: isMac() ? 'Cmd+Shift+I' : 'Option+Shift+I',
           role: 'toggleDevTools'
         }

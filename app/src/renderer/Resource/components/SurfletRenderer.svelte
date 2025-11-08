@@ -59,7 +59,7 @@
   let startHeight = 0
   let localTitle = $title
 
-  const log = useLogScope('SurfletRenderer')
+  const log = useLogScope('BreezeletRenderer')
   const resourceManager = useResourceManager()
 
   const dispatch = createEventDispatcher<{
@@ -361,7 +361,7 @@
     }
   }
 
-  const saveSurfletAsNonSilent = async (spaceId?: string) => {
+  const saveBreezeletAsNonSilent = async (spaceId?: string) => {
     dispatch('save-surflet', { spaceId })
     saveState.set('saved')
     await saveScreenshot()
@@ -440,7 +440,7 @@
     )?.value
     const suffix = protocolVersion ? `${protocolVersion}.app.local` : 'app.local'
     // @ts-ignore
-    webview.src = `surflet://${$resource?.id}.${suffix}`
+    webview.src = `breezelet://${$resource?.id}.${suffix}`
   }
 
   export const reloadApp = async () => {
@@ -712,7 +712,7 @@
                   resource={$resource}
                   side="left"
                   className="flex items-center  p-1 rounded-md  transition-colors"
-                  on:save={async (e) => await saveSurfletAsNonSilent(e.detail)}
+                  on:save={async (e) => await saveBreezeletAsNonSilent(e.detail)}
                 />
               {/if} -->
 

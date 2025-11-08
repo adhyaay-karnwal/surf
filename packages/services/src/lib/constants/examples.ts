@@ -1,7 +1,7 @@
 import type { NotebookCustomization } from '@deta/types'
 
 export const onboardingNotebook = {
-  name: 'Intro to Surf',
+  name: 'Welcome to Breeze',
   customization: {
     coverColor: [
       ['#FFDFBA', '#FFDFBA'],
@@ -54,12 +54,8 @@ export const onboardingNotebook = {
     ]
   } as NotebookCustomization,
   urls: [
-    'https://deta.surf'
-    // 'https://www.xda-developers.com/deta-surf-promising-new-browser/',
-    // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
-    // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://deta.surf/people/efe',
-    // 'https://deta.surf/people/reese',
-    // 'https://productidentity.co/p/surf-the-browser'
+    'https://www.wikipedia.org',
+    'https://www.khanacademy.org',
+    'https://www.coursera.org'
   ]
 }

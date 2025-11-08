@@ -14,7 +14,7 @@ import { remarkParseCustomComponents, rehypeProcessCustomComponents } from './ma
 import {
   handleCitations,
   handleWebsearch,
-  handleSurflet,
+  handleBreezelet,
   handleSpan,
   handleDIV
 } from './html-parsers'
@@ -30,7 +30,7 @@ export const htmlToMarkdown = async (html: string, parseCustomNodes = false) => 
             handlers: {
               citation: handleCitations,
               websearch: handleWebsearch,
-              surflet: handleSurflet,
+              surflet: handleBreezelet,
               span: handleSpan,
               div: handleDIV
             }

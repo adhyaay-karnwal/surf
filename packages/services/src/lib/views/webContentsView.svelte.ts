@@ -815,7 +815,7 @@ export class WebContents extends EventEmitterBase<WebContentsEmitterEvents> {
       entry &&
       entry.url === this.view.urlValue &&
       entry.title &&
-      !entry.title.startsWith('surf://')
+      !entry.title.startsWith('breeze://')
     ) {
       this.log.debug('URL matches current history entry', entry)
       this.view.title.set(entry.title)

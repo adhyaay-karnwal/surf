@@ -91,14 +91,14 @@
   $effect(() => {
     if (viewManager.sidebarViewOpen && viewManager.activeSidebarView === null) {
       viewManager.setSidebarState({
-        view: viewManager.create({ url: 'surf://notebook', permanentlyActive: true })
+        view: viewManager.create({ url: 'breeze://notebook', permanentlyActive: true })
       })
     }
   })
 
   onMount(async () => {
     if ((await sidebarStore.read('cfg')) === undefined) {
-      await sidebarStore.create({ id: 'cfg', siderbar_width: 670, sidebar_location: 'surf://new' })
+      await sidebarStore.create({ id: 'cfg', siderbar_width: 670, sidebar_location: 'breeze://new' })
     }
 
     const cfg = await sidebarStore.read('cfg')
@@ -131,7 +131,7 @@
           >
             {#snippet leftChildren()}
               <NavigationBarGroup slim>
-                <!-- TODO: Implement sth like surf://new -->
+                <!-- TODO: Implement sth like breeze://new -->
                 <Button size="md" square onclick={handleNewNote}>
                   <Icon name="edit" size="1.2em" />
                 </Button>

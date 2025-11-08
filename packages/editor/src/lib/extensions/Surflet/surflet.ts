@@ -2,12 +2,12 @@ import { mergeAttributes, Node } from '@tiptap/core'
 import type { ComponentType, SvelteComponent } from 'svelte'
 import { createClassComponent } from 'svelte/legacy'
 
-export interface SurfletOptions {
+export interface BreezeletOptions {
   HTMLAttributes: Record<string, any>
   component?: ComponentType<SvelteComponent>
 }
 
-export const Surflet = Node.create<SurfletOptions>({
+export const Breezelet = Node.create<BreezeletOptions>({
   name: 'surflet',
   group: 'block',
   code: true,
@@ -64,7 +64,7 @@ export const Surflet = Node.create<SurfletOptions>({
         }
       },
       name: {
-        default: 'Surflet',
+        default: 'Breezelet',
         parseHTML: (element) => {
           return element.getAttribute('data-name')
         },

@@ -166,7 +166,7 @@
             {/if}
 
             {#if isGeneratedResource(resource)}
-              <span class="subtitle typo-title-sm" style="opacity: 0.3;">Surflet</span>
+              <span class="subtitle typo-title-sm" style="opacity: 0.3;">Breezelet</span>
             {:else if data.url}
               <span class="subtitle typo-title-sm" style="opacity: 0.3;"
                 >{new URL(data.url)?.host}</span

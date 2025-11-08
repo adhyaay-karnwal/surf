@@ -22,7 +22,7 @@ const isDefaultBrowserWindows = async () => {
       { encoding: 'utf-8' }
     ).toString()
 
-    const appProgId = 'ea.browser.deta.surf'
+    const appProgId = 'engineer.breeze.browser'
 
     const isHttpDefault = httpProgId.includes(appProgId)
     const isHttpsDefault = httpsProgId.includes(appProgId)
@@ -77,18 +77,18 @@ export const isPathSafe = (basePath: string, filePath: string): boolean => {
 }
 
 export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: boolean): string => {
-  // For Google sign-in pages, we keep the Surf version at the end of the User-Agent
+  // For Google sign-in pages, we keep the Breeze version at the end of the User-Agent
   // to avoid "secure browser" warnings. For everything else, we strip out both
-  // Electron and Surf versions.
-  const surfVersion =
+  // Electron and Breeze versions.
+  const breezeVersion =
     current
       .split(' ')
-      .find((part) => part.startsWith('Surf/'))
-      ?.replace('Surf/', '') || ''
+      .find((part) => part.startsWith('Breeze/'))
+      ?.replace('Breeze/', '') || ''
 
   let result = current
     .split(' ')
-    .filter((part) => !part.startsWith('Electron/') && !part.startsWith('Surf/'))
+    .filter((part) => !part.startsWith('Electron/') && !part.startsWith('Breeze/'))
     .join(' ')
     .replace(
       process.versions.chrome || '',
@@ -100,8 +100,8 @@ export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: bo
         : ''
     )
 
-  if (isGoogleAccounts && surfVersion) {
-    result += ` Surf/${surfVersion}`
+  if (isGoogleAccounts && breezeVersion) {
+    result += ` Breeze/${breezeVersion}`
   }
 
   return result
@@ -170,8 +170,8 @@ export const CoreEntryPoint = (() => {
   }
 })()
 
-export function checkIfSurfProtocolUrl(url: string): boolean {
-  return url.startsWith('surf://') || url.startsWith(ResourceViewerEntryPoint)
+export function checkIfBreezeProtocolUrl(url: string): boolean {
+  return url.startsWith('breeze://') || url.startsWith(ResourceViewerEntryPoint)
 }
 
 export async function checkFileExists(path: string) {
