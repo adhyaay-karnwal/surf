@@ -3,8 +3,8 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { readdir, unlink, stat } from 'fs/promises'
 import { join, dirname } from 'path'
 import { mkdirSync } from 'fs'
-import { isDev, isMac, isWindows } from '@deta/utils/system'
-import { IPC_EVENTS_MAIN } from '@deta/services/ipc'
+import { isDev, isMac, isWindows } from '@breeze/utils/system'
+import { IPC_EVENTS_MAIN } from '@breeze/services/ipc'
 
 import { createWindow, getMainWindow } from './mainWindow'
 import { setAppMenu } from './appMenu'
@@ -13,16 +13,16 @@ import { setupAdblocker } from './adblocker'
 import { ipcSenders, setupIpc } from './ipcHandlers'
 import { getUserConfig, updateUserConfig } from './config'
 import { isAppSetup, isDefaultBrowser, markAppAsSetup } from './utils'
-import { SurfBackendServerManager } from './surfBackend'
+import { BreezeBackendServerManager } from './breezeBackend'
 import { CrashHandler } from './crashHandler'
-import { surfProtocolExternalURLHandler } from './surfProtocolHandlers'
-import { useLogScope } from '@deta/utils'
+import { breezeProtocolExternalURLHandler } from './breezeProtocolHandlers'
+import { useLogScope } from '@breeze/utils'
 import { initializeSFFSMain } from './sffs'
 
 const log = useLogScope('Main')
 
 const CONFIG = {
-  appName: import.meta.env.M_VITE_PRODUCT_NAME || 'Surf',
+  appName: import.meta.env.M_VITE_PRODUCT_NAME || 'Breeze',
   appVersion: import.meta.env.M_VITE_APP_VERSION,
   useTmpDataDir: import.meta.env.M_VITE_USE_TMP_DATA_DIR === 'true',
   disableAutoUpdate: import.meta.env.M_VITE_DISABLE_AUTO_UPDATE === 'true',
@@ -36,7 +36,7 @@ const CONFIG = {
 
 let isAppLaunched = false
 let appOpenedWithURL: string | null = null
-let surfBackendManager: SurfBackendServerManager | null = null
+let breezeBackendManager: BreezeBackendServerManager | null = null
 
 async function cleanupTempFiles() {
   try {
@@ -67,10 +67,10 @@ const initializePaths = () => {
 }
 
 const registerProtocols = () => {
-  app.setAsDefaultProtocolClient('surf')
+  app.setAsDefaultProtocolClient('breeze')
   protocol.registerSchemesAsPrivileged([
     {
-      scheme: 'surf',
+      scheme: 'breeze',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -80,7 +80,7 @@ const registerProtocols = () => {
       }
     },
     {
-      scheme: 'surf-internal',
+      scheme: 'breeze-internal',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -92,7 +92,7 @@ const registerProtocols = () => {
       }
     },
     {
-      scheme: 'surflet',
+      scheme: 'breezelet',
       privileges: {
         standard: true,
         supportFetchAPI: true,
@@ -138,18 +138,18 @@ const setupBackendServer = async (appPath: string, backendRootPath: string, user
     appPath,
     'resources',
     'bin',
-    // dev: surf-backend-dev, prod: surf-backend
-    // dev-windows: surf-backend-dev.exe, prod-windows: surf-backend.exe
-    `surf-backend${isDev ? '-dev' : ''}${isWindows() ? '.exe' : ''}`
+    // dev: breeze-backend-dev, prod: breeze-backend
+    // dev-windows: breeze-backend-dev.exe, prod-windows: breeze-backend.exe
+    `breeze-backend${isDev ? '-dev' : ''}${isWindows() ? '.exe' : ''}`
   )
 
-  surfBackendManager = new SurfBackendServerManager(backendServerPath, [
+  breezeBackendManager = new BreezeBackendServerManager(backendServerPath, [
     backendRootPath,
     'false',
     isDev ? CONFIG.embeddingModelMode : userConfig.settings?.embedding_model
   ])
 
-  surfBackendManager
+  breezeBackendManager
     .on('stdout', (data) => log.info('[backend:stdout] ', data))
     .on('stderr', (data) => log.error('[backend:stderr]', data))
     .on('error', (error) => log.error('[backend:error ]', error))
@@ -158,29 +158,29 @@ const setupBackendServer = async (appPath: string, backendRootPath: string, user
     .on('exit', (code) => log.info('[backend:exit  ] code:', code))
     .on('signal', (signal) => log.info('[backend:signal] signal:', signal))
 
-  surfBackendManager
+  breezeBackendManager
     ?.on('ready', () => {
       const webContents = getMainWindow()?.webContents
-      if (webContents) IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, true)
+      if (webContents) IPC_EVENTS_MAIN.setBreezeBackendHealth.sendToWebContents(webContents, true)
     })
     .on('close', () => {
       const webContents = getMainWindow()?.webContents
-      if (webContents) IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, false)
+      if (webContents) IPC_EVENTS_MAIN.setBreezeBackendHealth.sendToWebContents(webContents, false)
     })
 
   IPC_EVENTS_MAIN.appReady.on(() => {
-    if (surfBackendManager) {
+    if (breezeBackendManager) {
       const webContents = getMainWindow()?.webContents
       if (webContents)
-        IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(
+        IPC_EVENTS_MAIN.setBreezeBackendHealth.sendToWebContents(
           webContents,
-          surfBackendManager.isHealthy
+          breezeBackendManager.isHealthy
         )
     }
   })
 
-  surfBackendManager.start()
-  await surfBackendManager.waitForStart()
+  breezeBackendManager.start()
+  await breezeBackendManager.waitForStart()
 
   initializeSFFSMain()
 }
@@ -190,7 +190,7 @@ const initializeApp = async () => {
 
   isAppLaunched = true
   setInterval(cleanupTempFiles, 60 * 60 * 1000)
-  electronApp.setAppUserModelId('ea.browser.deta.surf')
+  electronApp.setAppUserModelId('breeze')
 
   const appPath = app.getAppPath() + (isDev ? '' : '.unpacked')
   const userDataPath = app.getPath('userData')
@@ -213,7 +213,7 @@ const initializeApp = async () => {
   try {
     await setupBackendServer(appPath, backendRootPath, userConfig)
   } catch (err) {
-    log.error(`failed to start the surf backend process: ${err}`)
+    log.error(`failed to start the breeze backend process: ${err}`)
   }
 
   IPC_EVENTS_MAIN.appReady.once(async () => {
@@ -227,9 +227,9 @@ const initializeApp = async () => {
     }
 
     const webContents = getMainWindow()?.webContents
-    const isHealthy = surfBackendManager?.isHealthy
+    const isHealthy = breezeBackendManager?.isHealthy
     if (webContents && isHealthy)
-      IPC_EVENTS_MAIN.setSurfBackendHealth.sendToWebContents(webContents, isHealthy)
+      IPC_EVENTS_MAIN.setBreezeBackendHealth.sendToWebContents(webContents, isHealthy)
 
     if (userConfig.show_changelog) {
       ipcSenders.openChangelog()
@@ -278,7 +278,7 @@ const setupApplication = () => {
       }
     })
     .on('will-quit', async () => {
-      surfBackendManager?.stop()
+      breezeBackendManager?.stop()
       await cleanupTempFiles()
     })
 

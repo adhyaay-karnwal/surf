@@ -2,8 +2,8 @@ import contextMenu from 'electron-context-menu'
 import { ipcSenders } from './ipcHandlers'
 import { getCachedSpaces } from './spaces'
 import { type MenuItemConstructorOptions } from 'electron'
-import { SpaceBasicData } from '@deta/services/ipc'
-import { conditionalArrayItem } from '@deta/utils/data'
+import { SpaceBasicData } from '@breeze/services/ipc'
+import { conditionalArrayItem } from '@breeze/utils/data'
 
 const createSpaceAction = (space: SpaceBasicData, handler: () => void) => {
   return {

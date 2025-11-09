@@ -25,23 +25,23 @@
     ProviderLabels,
     ProviderIcons,
     type Model
-  } from '@deta/types/src/ai.types'
+  } from '@breeze/types'
   import {
     FormField,
     Expandable,
     SelectDropdown,
     SelectDropdownItem,
     type SelectItem
-  } from '@deta/ui/legacy'
-  import { Icon } from '@deta/icons'
-  import { generateID, truncate } from '@deta/utils'
+  } from '@breeze/ui/legacy'
+  import { Icon } from '@breeze/icons'
+  import { generateID, truncate } from '@breeze/utils'
   import { createEventDispatcher, onMount } from 'svelte'
-  import { Button, Dropdown, type DropdownItem, openDialog } from '@deta/ui'
+  import { Button, Dropdown, type DropdownItem, openDialog } from '@breeze/ui'
 
   export let selectedModelId: Writable<string>
   export let models: Writable<Model[]>
 
-  const AI_MODEL_DOCS = 'https://github.com/deta/surf/blob/main/docs/AI_MODELS.md'
+  const AI_MODEL_DOCS = 'https://github.com/breeze/breeze/blob/main/docs/AI_MODELS.md'
   const dispatch = createEventDispatcher<{
     'select-model': string
     'update-model': ModelUpdate
@@ -274,7 +274,7 @@
 
       <div class="details-text">
         <p>
-          Your selected model will be used across all Surf features. Surf may switch to more
+          Your selected model will be used across all Breeze features. Breeze may switch to more
           efficient models from the same provider for certain features.
         </p>
       </div>
@@ -458,7 +458,7 @@
                 <FormField
                   label="Model Label"
                   placeholder="My Custom Model"
-                  infoText="Give your custom model a name so you can identify it within Surf's UI"
+                  infoText="Give your custom model a name so you can identify it within Breeze's UI"
                   value={model.label}
                   on:save={(e) => updateModel(model.id, { label: e.detail })}
                 />

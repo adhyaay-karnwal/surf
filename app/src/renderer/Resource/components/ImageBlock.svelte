@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { useDebounce, useLogScope } from '@deta/utils'
-  import { useResourceManager } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
+  import { useDebounce, useLogScope } from '@breeze/utils'
+  import { useResourceManager } from '@breeze/services/resources'
+  import { ResourceTagsBuiltInKeys } from '@breeze/types'
+  import type { Resource } from '@breeze/services/resources'
 
   export let resource: Resource
   export let isEditable: boolean = true

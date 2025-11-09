@@ -1,6 +1,6 @@
 import type { MentionProvider, MentionItem, MentionType } from '../mention.types'
 import { MentionTypes } from '../mention.types'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 import { Notebook, useNotebookManager } from '../../notebooks'
 
 export class NotebookMentionProvider implements MentionProvider {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TabItem } from '@deta/services/tabs'
+  import { TabItem } from '@breeze/services/tabs'
   import VerticalBaseTabItem from './VerticalBaseTabItem.svelte'
 
   let {

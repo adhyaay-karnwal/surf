@@ -3,7 +3,7 @@ use std::sync::Arc;
 use crate::ai::brain::agents::context::ContextManager;
 use crate::ai::brain::agents::context_manager::context_manager::create_context_manager_agent;
 use crate::ai::brain::agents::io::AgentIO;
-use crate::ai::brain::agents::surflet::surflet::create_surflet_agent;
+use crate::ai::brain::agents::breezelet::breezelet::create_breezelet_agent;
 use crate::ai::brain::agents::websearch::tools::SearchEngineCaller;
 use crate::ai::brain::agents::AgentResult;
 use crate::ai::brain::agents::{Agent, AgentConfig, ExecuteConfig};
@@ -13,7 +13,7 @@ use crate::ai::brain::tools::ContextManagementTool;
 use crate::ai::llm::client::{CancellationToken, LLMClient, Model};
 use crate::{BackendError, BackendResult};
 
-use super::tools::SurfletAgentTool;
+use super::tools::BreezeletAgentTool;
 
 #[allow(dead_code)]
 pub struct Orchestrator {
@@ -59,7 +59,7 @@ impl Orchestrator {
             js_tool_registry,
         };
         orc.init_web_search_agent()?;
-        orc.init_surflet_agent()?;
+        orc.init_breezelet_agent()?;
         orc.init_context_manager_agent()?;
         Ok(orc)
     }
@@ -88,14 +88,14 @@ impl Orchestrator {
         Ok(())
     }
 
-    pub fn init_surflet_agent(&mut self) -> BackendResult<()> {
-        let surflet_agent = create_surflet_agent(
+    pub fn init_breezelet_agent(&mut self) -> BackendResult<()> {
+        let breezelet_agent = create_breezelet_agent(
             Arc::clone(&self.llm_client),
             Arc::clone(&self.js_tool_registry),
         );
-        let surflet_tool = Box::new(SurfletAgentTool::new(surflet_agent));
+        let breezelet_tool = Box::new(BreezeletAgentTool::new(breezelet_agent));
         if let Some(ref mut lead_agent) = self.lead_agent {
-            lead_agent.add_tool(surflet_tool);
+            lead_agent.add_tool(breezelet_tool);
         }
         Ok(())
     }

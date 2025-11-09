@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isMac } from '@deta/utils/system'
+  import { isMac } from '@breeze/utils/system'
   import KeyCap from './KeyCap.svelte'
   import { onMount, onDestroy, createEventDispatcher } from 'svelte'
   type KeyType = string
@@ -248,7 +248,7 @@
 </div>
 
 <style lang="scss">
-  @use '@deta/ui/styles/utils' as utils;
+  @use '@breeze/ui/styles/utils' as utils;
   .shortcut-container {
     display: inline-flex;
     align-items: center;

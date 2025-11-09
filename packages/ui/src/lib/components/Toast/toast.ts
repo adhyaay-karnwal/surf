@@ -1,6 +1,6 @@
 import { get, writable, type Writable } from 'svelte/store'
-import { useLogScope, generateID, isDev, EventEmitterBase } from '@deta/utils'
-import { type Optional } from '@deta/types'
+import { useLogScope, generateID, isDev, EventEmitterBase } from '@breeze/utils'
+import { type Optional } from '@breeze/types'
 import { getContext, setContext } from 'svelte'
 
 export type ToastAction = {

@@ -2,9 +2,10 @@ import { app, BrowserWindow, session, shell } from 'electron'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
 import { applyCSPToSession } from './csp'
-import { isMac } from '@deta/utils/system'
-import { SettingsWindowTab } from '@deta/types/src/window.types'
+import { isMac } from '@breeze/utils/system'
+import { SettingsWindowTab } from '@breeze/types'
 import { SettingsWindowEntrypoint } from './utils'
+import { BREEZE_DISCORD_URL, BREEZE_SITE_URL } from './branding'
 
 let settingsWindow: BrowserWindow | undefined
 
@@ -14,7 +15,7 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
     return
   }
 
-  const settingsWindowSession = session.fromPartition('persist:surf-app-session')
+  const settingsWindowSession = session.fromPartition('persist:breeze-app-session')
 
   settingsWindow = new BrowserWindow({
     width: 1000,
@@ -58,10 +59,14 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
     event.preventDefault()
   })
 
+  const siteRoot = BREEZE_SITE_URL.replace(/\/$/, '')
+  const discordRoot = BREEZE_DISCORD_URL.replace(/\/$/, '')
+
   settingsWindow.webContents.setWindowOpenHandler((details) => {
     const ALLOWED_DOMAINS = [
-      'https://deta.surf',
-      'https://deta.notion.site',
+      siteRoot,
+      discordRoot,
+      'https://breeze.notion.site',
       'https://github.com',
       'https://ollama.com',
       'https://openrouter.ai',
@@ -70,7 +75,7 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
       'https://aistudio.google.com'
     ]
 
-    let isAllowedUrl = ALLOWED_DOMAINS.some((domain) => details.url.startsWith(domain))
+    const isAllowedUrl = ALLOWED_DOMAINS.some((domain) => details.url.startsWith(domain))
     if (isAllowedUrl) {
       shell.openExternal(details.url)
     }

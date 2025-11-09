@@ -48,7 +48,7 @@ export function esbuildConsolidatePreloads(outDir: string): Plugin {
           format: 'cjs',
           platform: 'node',
           sourcemap: false,
-          external: ['electron', '@deta/backend', 'electron-chrome-extensions'], // Add other node builtins as needed
+          external: ['electron', '@breeze/backend', 'electron-chrome-extensions'], // Add other node builtins as needed
           loader: {
             '.js': 'js'
           },

@@ -1,5 +1,5 @@
-import { type Fn } from '@deta/types'
-import { toggleTabOrientation } from '@deta/services/tabs'
+import { type Fn } from '@breeze/types'
+import { toggleTabOrientation } from '@breeze/services/tabs'
 
 import { setupDownloadEvents } from './downloadEvents'
 import { setupTabViewEvents } from './tabViewEvents'

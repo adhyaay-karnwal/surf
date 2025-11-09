@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Switch } from '@deta/ui/legacy'
+  import { Switch } from '@breeze/ui/legacy'
   import SettingsOption from './SettingsOption.svelte'
-  import type { UserSettings } from '@deta/types'
-  import { Icon } from '@deta/icons'
+  import type { UserSettings } from '@breeze/types'
+  import { Icon } from '@breeze/icons'
   import { createEventDispatcher } from 'svelte'
-  import { openDialog } from '@deta/ui'
+  import { openDialog } from '@breeze/ui'
 
   export let userConfigSettings: UserSettings
 
@@ -20,8 +20,8 @@
       icon: 'sidebar.right',
       title: value ? 'Enable Notes Sidebar' : 'Disable Notes Sidebar',
       message: value
-        ? 'To use the experimental notes sidebar Surf needs to restart.'
-        : 'To use the chat sidebar again Surf needs to restart.',
+        ? 'To use the experimental notes sidebar Breeze needs to restart.'
+        : 'To use the chat sidebar again Breeze needs to restart.',
       actions: [
         { title: 'Cancel', type: 'reset' },
         {
@@ -44,11 +44,11 @@
   $: localUseSidebar = userConfigSettings.experimental_notes_chat_sidebar
 </script>
 
-<SettingsOption icon="file-text-ai" title="Surf Notes" on:update>
+<SettingsOption icon="file-text-ai" title="Breeze Notes" on:update>
   <p slot="description">
-    Access context-aware Surf AI features like auto completion, citation generation, and more from
-    within your Surf notes. <a
-      href="https://deta.notion.site/Smart-Notes-17da5244a717805c8525eec0d42f7598"
+    Access context-aware Breeze AI features like auto completion, citation generation, and more from
+    within your Breeze notes. <a
+      href="https://breeze.notion.site/Smart-Notes-17da5244a717805c8525eec0d42f7598"
       target="_blank">More information</a
     >
   </p>
@@ -59,7 +59,7 @@
         <Icon name="sidebar.right" size="20px" stroke-width="2" />
         <h3>Notes Sidebar</h3>
       </div>
-      <p>Create and view Surf notes in the sidebar replacing the old chat interface.</p>
+      <p>Create and view Breeze notes in the sidebar replacing the old chat interface.</p>
     </div>
 
     <Switch color="#ff4eed" bind:checked={localUseSidebar} on:update={handleToggleNotesSidebar} />

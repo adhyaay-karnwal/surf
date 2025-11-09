@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Switch } from '@deta/ui/legacy'
-  import { Icon, type Icons } from '@deta/icons'
-  import { openDialog } from '@deta/ui'
+  import { Switch } from '@breeze/ui/legacy'
+  import { Icon, type Icons } from '@breeze/icons'
+  import { openDialog } from '@breeze/ui'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher<{ update: boolean }>()

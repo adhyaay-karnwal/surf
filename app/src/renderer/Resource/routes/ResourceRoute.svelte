@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
-  import { provideConfig } from '@deta/services'
-  import { createResourceManager, type Resource } from '@deta/services/resources'
-  import { provideAI } from '@deta/services/ai'
-  import { isWebResourceType, ResourceTypes, type CitationClickEvent } from '@deta/types'
+  import { provideConfig } from '@breeze/services'
+  import { createResourceManager, type Resource } from '@breeze/services/resources'
+  import { provideAI } from '@breeze/services/ai'
+  import { isWebResourceType, ResourceTypes, type CitationClickEvent } from '@breeze/types'
 
   import TextResource from '../components/TextResource.svelte'
-  import { useMessagePortClient } from '@deta/services/messagePort'
-  import { useLogScope, wait } from '@deta/utils'
+  import { useMessagePortClient } from '@breeze/services/messagePort'
+  import { useLogScope, wait } from '@breeze/utils'
   import { type RouteResult } from '@mateothegreat/svelte5-router'
 
   let {
@@ -77,7 +77,7 @@
         onCitationClick={handleCitationClick}
       />
     {:else if isImageResource}
-      <img src={`surf://surf/resource/${resource.id}?raw`} />
+      <img src={`breeze://breeze/resource/${resource.id}?raw`} />
     {:else}
       <div>
         <p><strong>Name:</strong> {resource.metadata.name}</p>

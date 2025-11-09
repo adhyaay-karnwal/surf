@@ -4,8 +4,8 @@ FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
 echo $FILES
 [ -z "$FILES" ] && exit 0
 
-echo "$FILES" | tr ' ' '\n' | grep -E '\.(js|ts|tsx|yml|json|md|svelte)$' | xargs ./node_modules/.bin/prettier --ignore-path .gitignore --ignore-path .prettierignore --write
+echo "$FILES" | tr ' ' '\n' | grep -E '\.(js|ts|tsx|yml|json|md|svelte)$' | xargs -r ./node_modules/.bin/prettier --ignore-path .gitignore --ignore-path .prettierignore --write
 
-echo "$FILES" | xargs git add
+echo "$FILES" | xargs -r git add
 
 exit 0

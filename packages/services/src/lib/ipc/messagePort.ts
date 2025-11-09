@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron'
 import type { MessagePortCallbackClient, MessagePortCallbackPrimary } from '../messagePort/types'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 const log = useLogScope('MessagePort')
 

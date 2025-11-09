@@ -5,16 +5,16 @@ import {
   ResourceTag,
   truncate,
   getFileKind
-} from '@deta/utils'
+} from '@breeze/utils'
 import {
   ResourceTagsBuiltInKeys,
   type SFFSResourceMetadata,
   type SFFSResourceTag
-} from '@deta/types'
-import { WebParser } from '@deta/web-parser'
+} from '@breeze/types'
+import { WebParser } from '@breeze/web-parser'
 
 import { Resource, type ResourceManager } from './resources/resources.svelte'
-import { type MentionItem, MentionItemType } from '@deta/editor'
+import { type MentionItem, MentionItemType } from '@breeze/editor'
 import { useNotebookManager } from './notebooks'
 
 const log = useLogScope('mediaImporter')
@@ -612,7 +612,7 @@ export const promptForFilesAndTurnIntoResources = async (
 ) => {
   const files = await promptUserToSelectFiles({
     title: 'Select File to Use as Context',
-    buttonLabel: 'Import to Surf',
+    buttonLabel: 'Import to Breeze',
     filters: [
       {
         name: 'Files',

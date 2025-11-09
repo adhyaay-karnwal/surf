@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { HTMLAxisDragZone, type DragculaDragEvent, type DragOperation } from '@deta/dragcula'
+  import { HTMLAxisDragZone, type DragculaDragEvent, type DragOperation } from '@breeze/dragcula'
   import type { BaseTreeNode, TreeDragConfig, TreeDragDropOperation, TreeDragContext } from './tree.types'
   import { defaultTreeAccepts, extractTreeDragData, createTreeDragOperation } from './tree.dnd'
   import type { Snippet } from 'svelte'

@@ -25,7 +25,15 @@ if (process.platform === 'linux') {
   process.env.ELECTRON_OZONE_PLATFORM_HINT = 'auto'
 }
 process.env.TESSDATA_PREFIX = path.resolve(__dirname, '..', 'resources', 'tessdata')
-process.env.M_VITE_PRODUCT_NAME = 'Surf-dev'
+process.env.M_VITE_PRODUCT_NAME = 'Breeze-dev'
+process.env.M_VITE_BREEZE_SITE_URL = process.env.M_VITE_BREEZE_SITE_URL || 'https://breeze.engineer'
+process.env.R_VITE_BREEZE_SITE_URL = process.env.R_VITE_BREEZE_SITE_URL || 'https://breeze.engineer'
+process.env.M_VITE_BREEZE_SUPPORT_EMAIL =
+  process.env.M_VITE_BREEZE_SUPPORT_EMAIL || 'adhyaay@breeze.engineer'
+process.env.R_VITE_BREEZE_SUPPORT_EMAIL =
+  process.env.R_VITE_BREEZE_SUPPORT_EMAIL || 'adhyaay@breeze.engineer'
+process.env.M_VITE_TELEMETRY_URL =
+  process.env.M_VITE_TELEMETRY_URL || 'https://telemetry.breeze.engineer'
 process.env.RUST_LOG = process.env.RUST_LOG || 'none,backend_server=INFO,backend=DEBUG'
 
 const extraArgsIndex = process.argv.indexOf('--')

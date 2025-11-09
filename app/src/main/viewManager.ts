@@ -1,18 +1,18 @@
-import { IPC_EVENTS_MAIN } from '@deta/services/ipc'
+import { IPC_EVENTS_MAIN } from '@breeze/services/ipc'
 import {
   WebContentsViewActionType,
   WebContentsViewEventType,
   WebContentsViewEventTypeNames,
   WebContentsViewManagerActionType,
   type WebContentsViewCreateOptions
-} from '@deta/types'
+} from '@breeze/types'
 import { app, BrowserWindow, WebContentsView, session, nativeTheme } from 'electron'
 import { validateIPCSender } from './ipcHandlers'
-import { IPCListenerUnsubscribe } from '@deta/services/ipc'
-import { EventEmitterBase, useLogScope } from '@deta/utils'
+import { IPCListenerUnsubscribe } from '@breeze/services/ipc'
+import { EventEmitterBase, useLogScope } from '@breeze/utils'
 import path from 'path'
-import { isDev } from '@deta/utils/system'
-import { checkIfSurfProtocolUrl, PDFViewerEntryPoint } from './utils'
+import { isDev } from '@breeze/utils/system'
+import { checkIfBreezeProtocolUrl, PDFViewerEntryPoint } from './utils'
 import { MessageChannelMain } from 'electron/main'
 import { getUserConfig } from './config'
 
@@ -179,13 +179,15 @@ export class WCView {
       return
     }
 
-    const newIsSurfUrl = checkIfSurfProtocolUrl(newUrl) && !newUrl.startsWith(PDFViewerEntryPoint)
-    const oldIsSurfUrl = checkIfSurfProtocolUrl(oldUrl) && !oldUrl.startsWith(PDFViewerEntryPoint)
+    const newIsBreezeUrl =
+      checkIfBreezeProtocolUrl(newUrl) && !newUrl.startsWith(PDFViewerEntryPoint)
+    const oldIsBreezeUrl =
+      checkIfBreezeProtocolUrl(oldUrl) && !oldUrl.startsWith(PDFViewerEntryPoint)
 
-    // if we load a surf:// URL, we need to re-create the WebContentsView with a different preload
-    if (newIsSurfUrl && !oldIsSurfUrl) {
+    // if we load a breeze:// URL, we need to re-create the WebContentsView with a different preload
+    if (newIsBreezeUrl && !oldIsBreezeUrl) {
       log.log(
-        '[main] webcontentsview: loading surf:// URL, re-creating WCV with resource view preload'
+        '[main] webcontentsview: loading breeze:// URL, re-creating WCV with resource view preload'
       )
       this.recreateWCVWithDifferentWebPreferences({
         sandbox: false,
@@ -193,9 +195,9 @@ export class WCView {
         contextIsolation: true,
         preload: path.resolve(__dirname, '../preload/resource.js')
       })
-    } else if (!newIsSurfUrl && oldIsSurfUrl) {
+    } else if (!newIsBreezeUrl && oldIsBreezeUrl) {
       log.log(
-        '[main] webcontentsview: loading non-surf:// URL, re-creating WCV with webcontents preload'
+        '[main] webcontentsview: loading non-breeze:// URL, re-creating WCV with webcontents preload'
       )
       this.recreateWCVWithDifferentWebPreferences({
         preload: path.resolve(__dirname, '../preload/webcontents.js')
@@ -216,7 +218,7 @@ export class WCView {
   }
 
   async loadOverlay() {
-    this.wcv.webContents.loadURL('surf-internal://Core/Overlay/overlay.html')
+    this.wcv.webContents.loadURL('breeze-internal://Core/Overlay/overlay.html')
     // if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     //   this.wcv.webContents.loadURL(
     //     `${process.env['ELECTRON_RENDERER_URL']}/Overlay/overlay.html?overlayId=${this.opts.overlayId}`
@@ -445,9 +447,9 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
     // Regular views get color scheme injection via attachViewIPCEvents dom-ready handler
     if (view.wcv && !view.wcv.webContents.isDestroyed() && view.isOverlay) {
       const url = view.wcv.webContents.getURL()
-      const isSurfUrl = checkIfSurfProtocolUrl(url) || url.startsWith('surf-internal://')
+      const isBreezeUrl = checkIfBreezeProtocolUrl(url) || url.startsWith('breeze-internal://')
 
-      if (isSurfUrl) {
+      if (isBreezeUrl) {
         view.wcv.webContents
           .executeJavaScript(
             `
@@ -470,13 +472,13 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
     // Set nativeTheme to allow websites to detect dark mode preference via prefers-color-scheme
     nativeTheme.themeSource = colorScheme
 
-    // Inject color scheme into all existing views (only for internal surf:// URLs)
+    // Inject color scheme into all existing views (only for internal breeze:// URLs)
     this.views.forEach((view) => {
       if (view.wcv && !view.wcv.webContents.isDestroyed()) {
         const url = view.wcv.webContents.getURL()
-        const isSurfUrl = checkIfSurfProtocolUrl(url) || url.startsWith('surf-internal://')
+        const isBreezeUrl = checkIfBreezeProtocolUrl(url) || url.startsWith('breeze-internal://')
 
-        if (isSurfUrl) {
+        if (isBreezeUrl) {
           view.wcv.webContents
             .executeJavaScript(
               `
@@ -512,11 +514,11 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
 
       const url = currentEntry?.url ?? opts.url
 
-      const newIsSurfUrl = url ? checkIfSurfProtocolUrl(url) : false
+      const newIsBreezeUrl = url ? checkIfBreezeProtocolUrl(url) : false
 
       log.log('[main] webcontentsview-create: creating new view with options', logOptions, {
         url,
-        newIsSurfUrl
+        newIsBreezeUrl
       })
 
       const view = new WCView(
@@ -533,7 +535,7 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
               : [])
           ],
           sandbox: false,
-          preload: newIsSurfUrl
+          preload: newIsBreezeUrl
             ? path.resolve(__dirname, '../preload/resource.js')
             : path.resolve(__dirname, '../preload/webcontents.js')
         },
@@ -598,7 +600,7 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
 
     const view = new WCView(
       {
-        partition: 'persist:surf-app-session',
+        partition: 'persist:breeze-app-session',
         preload: path.resolve(__dirname, '../preload/overlay.js'),
         additionalArguments: additionalArgs,
         sandbox: false,
@@ -958,12 +960,12 @@ export class WCViewManager extends EventEmitterBase<WCViewManagerEvents> {
 
       this.setupMessagePort(view)
 
-      // Inject color scheme into newly created view (only for internal surf:// URLs)
+      // Inject color scheme into newly created view (only for internal breeze:// URLs)
       // This is the ONLY place where we inject color scheme for regular views
       const url = view.wcv.webContents.getURL()
-      const isSurfUrl = checkIfSurfProtocolUrl(url) || url.startsWith('surf-internal://')
+      const isBreezeUrl = checkIfBreezeProtocolUrl(url) || url.startsWith('breeze-internal://')
 
-      if (isSurfUrl) {
+      if (isBreezeUrl) {
         const config = getUserConfig()
         const colorScheme = config.settings?.app_style || 'light'
 

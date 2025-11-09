@@ -1,4 +1,4 @@
-import type { Icons } from '@deta/icons'
+import type { Icons } from '@breeze/icons'
 
 export type SelectItem = {
   id: string

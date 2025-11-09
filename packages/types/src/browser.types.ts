@@ -1,5 +1,5 @@
-import type { CreateTabEventTrigger, EventContext } from '@deta/types'
-import type { AIChatMessageSource } from '@deta/types/src/ai.types'
+import type { CreateTabEventTrigger, EventContext } from '@breeze/types'
+import type { AIChatMessageSource } from './ai.types'
 
 export enum RendererType {
   Main = 'main',
@@ -22,7 +22,7 @@ export type DroppedTabLocation = { dropZoneID: 'pinned-tabs' | 'tabs'; index: nu
 export type DroppedTab = { from: DroppedTabLocation; to: DroppedTabLocation }
 
 /**
- * @deprecated Use `CreateTabOptions` from @deta/services instead
+ * @deprecated Use `CreateTabOptions` from @breeze/services instead
  */
 export type CreateTabOptions = {
   active?: boolean
@@ -115,17 +115,17 @@ export enum ViewType {
   Page = 'page',
   /**
    * A specific notebook
-   * @example surf://surf/notebook/:id
+   * @example breeze://breeze/notebook/:id
    */
   Notebook = 'notebook',
   /**
    * The notebooks home/root view
-   * @example surf://surf/notebook
+   * @example breeze://breeze/notebook
    */
   NotebookHome = 'notebook_home',
   /**
    * A specific resource (most likely note)
-   * @example surf://surf/resource/:id
+   * @example breeze://breeze/resource/:id
    */
   Resource = 'resource',
   /**

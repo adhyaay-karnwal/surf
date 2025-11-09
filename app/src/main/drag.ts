@@ -1,7 +1,7 @@
 import { app, nativeImage } from 'electron'
 import fs from 'fs/promises'
 import path from 'path'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 const log = useLogScope('drag')
 

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { constructBreadcrumbs } from './breadcrumbs'
-  import { useNotebookManager } from '@deta/services/notebooks'
+  import { useNotebookManager } from '@breeze/services/notebooks'
   import Breadcrumb from './Breadcrumb.svelte'
-  import { truncate } from '@deta/utils'
+  import { truncate } from '@breeze/utils'
   import { writable } from 'svelte/store'
-  import type { WebContentsView } from '@deta/services/views'
+  import type { WebContentsView } from '@breeze/services/views'
 
   let {
     view

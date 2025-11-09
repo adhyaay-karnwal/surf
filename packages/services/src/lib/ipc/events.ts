@@ -14,7 +14,7 @@ import type {
   WebContentsViewManagerActionEvent,
   WebContentsViewActionEvent,
   ControlWindow
-} from '@deta/types'
+} from '@breeze/types'
 import { createIPCService, type IPCEvent } from './ipc'
 
 export const ipcService = createIPCService()
@@ -171,7 +171,7 @@ const IPC_EVENTS = ipcService.registerEvents({
   importedFiles: ipcService.addEvent<string[]>('imported-files'),
   importBrowserHistory: ipcService.addEvent<BrowserType>('import-browser-history'),
   importBrowserBookmarks: ipcService.addEvent<BrowserType>('import-browser-bookmarks'),
-  setSurfBackendHealth: ipcService.addEvent<boolean>('set-surf-backend-health'),
+  setBreezeBackendHealth: ipcService.addEvent<boolean>('set-breeze-backend-health'),
   setActiveTabWebContentsId: ipcService.addEvent<number>('set-active-tab-webcontents-id'),
   closeTabWebContentsId: ipcService.addEvent<number>('close-tab-webcontents-id'),
   saveLink: ipcService.addEvent<{ url: string; spaceId?: string }>('save-link'),

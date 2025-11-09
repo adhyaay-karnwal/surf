@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { Button } from '@breeze/ui'
   import { type Snippet } from 'svelte'
 
   let {

@@ -2,7 +2,7 @@ import type { BaseTreeNode, TreeState, TreeConfig, TreeEvents, TreeDragDropOpera
 import { TreePersistence } from './TreePersistence'
 import * as treeUtils from './tree.utils'
 import { findNodePath, getNodeByPath } from './tree.dnd'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 export function createTreeStore<T extends BaseTreeNode>(
   initialNodes: T[],

@@ -1,6 +1,6 @@
-import type { TreeDragDropOperation, TreeNodeStore } from '@deta/ui'
-import type { Notebook, NotebookManager } from '@deta/services/notebooks'
-import { ResourceTypes, SpaceEntryOrigin } from '@deta/types'
+import type { TreeDragDropOperation, TreeNodeStore } from '@breeze/ui'
+import type { Notebook, NotebookManager } from '@breeze/services/notebooks'
+import { ResourceTypes, SpaceEntryOrigin } from '@breeze/types'
 
 // Enhanced tree node type for notebooks and notes
 export type NotebookTreeNode = {

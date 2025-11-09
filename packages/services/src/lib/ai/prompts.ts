@@ -1,5 +1,5 @@
 import { INLINE_PROMPTS, PAGE_PROMPTS } from '../constants/prompts'
-import type { EditablePrompt } from '@deta/types'
+import type { EditablePrompt } from '@breeze/types'
 
 export enum PromptIDs {
   INLINE_SUMMARIZER = 'inline_summarize',

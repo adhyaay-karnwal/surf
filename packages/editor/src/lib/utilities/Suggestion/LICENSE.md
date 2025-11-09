@@ -1,4 +1,4 @@
-Note: This license only applies to the specific files in this directory that were originally created by Tiptap GmbH and modified by the Deta team for our use cases. It does not apply to any other files in this repository that may have different licenses.
+Note: This license only applies to the specific files in this directory that were originally created by Tiptap GmbH and modified by the Breeze team for our use cases. It does not apply to any other files in this repository that may have different licenses.
 
 MIT License
 

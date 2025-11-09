@@ -1,5 +1,5 @@
 {
-  "name": "@deta/teletype",
+  "name": "@breeze/teletype",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -22,7 +22,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'"
   },
   "devDependencies": {
-    "@deta/editor": "*",
+    "@breeze/editor": "*",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tsconfig/svelte": "^5.0.4",
     "focus-svelte": "^0.3.4",

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { useDownloadsManager } from '@deta/services'
-  import type { DownloadState } from '@deta/types'
-  import { Button } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { useDownloadsManager } from '@breeze/services'
+  import type { DownloadState } from '@breeze/types'
+  import { Button } from '@breeze/ui'
 
   const downloadsManager = useDownloadsManager()
 

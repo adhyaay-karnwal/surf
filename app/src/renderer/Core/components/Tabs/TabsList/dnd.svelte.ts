@@ -1,6 +1,6 @@
-import { type DragculaDragEvent } from '@deta/dragcula'
-import { type TabsService, type TabItem } from '@deta/services/tabs'
-import { DragTypeNames, type DragTypes } from '@deta/types'
+import { type DragculaDragEvent } from '@breeze/dragcula'
+import { type TabsService, type TabItem } from '@breeze/services/tabs'
+import { DragTypeNames, type DragTypes } from '@breeze/types'
 
 // Debounced cleanup to avoid multiple DOM queries
 let cleanupRaf: number | null = null
@@ -23,7 +23,7 @@ let isDragOperationInProgress = false
 
 export function createTabsDragAndDrop(tabsService: TabsService) {
   const handleTabDrop = async (dragEvent: DragculaDragEvent<DragTypes>) => {
-    if (!dragEvent.item?.data?.hasData(DragTypeNames.SURF_TAB)) {
+    if (!dragEvent.item?.data?.hasData(DragTypeNames.BREEZE_TAB)) {
       return
     }
 
@@ -33,7 +33,7 @@ export function createTabsDragAndDrop(tabsService: TabsService) {
       return
     }
 
-    const draggedTab = dragEvent.item.data.getData(DragTypeNames.SURF_TAB) as TabItem
+    const draggedTab = dragEvent.item.data.getData(DragTypeNames.BREEZE_TAB) as TabItem
     const draggedTabId = draggedTab.id
 
     const currentIndex = tabsService.tabs.findIndex((tab) => tab.id === draggedTabId)
@@ -144,11 +144,11 @@ export function createTabsDragAndDrop(tabsService: TabsService) {
   }
 
   const acceptTabDrag = (dragOperation: any) => {
-    if (!dragOperation.item?.data?.hasData(DragTypeNames.SURF_TAB)) {
+    if (!dragOperation.item?.data?.hasData(DragTypeNames.BREEZE_TAB)) {
       return false
     }
 
-    const draggedTab = dragOperation.item.data.getData(DragTypeNames.SURF_TAB) as TabItem
+    const draggedTab = dragOperation.item.data.getData(DragTypeNames.BREEZE_TAB) as TabItem
     const draggedTabId = draggedTab.id
 
     const currentIndex = tabsService.tabs.findIndex((tab) => tab.id === draggedTabId)
@@ -161,11 +161,11 @@ export function createTabsDragAndDrop(tabsService: TabsService) {
   }
 
   const acceptUnpinnedTabDrag = (dragOperation: any) => {
-    if (!dragOperation.item?.data?.hasData(DragTypeNames.SURF_TAB)) {
+    if (!dragOperation.item?.data?.hasData(DragTypeNames.BREEZE_TAB)) {
       return false
     }
 
-    const draggedTab = dragOperation.item.data.getData(DragTypeNames.SURF_TAB) as TabItem
+    const draggedTab = dragOperation.item.data.getData(DragTypeNames.BREEZE_TAB) as TabItem
     const tab = tabsService.tabs.find((t) => t.id === draggedTab.id)
 
     // Only accept unpinned tabs
@@ -173,11 +173,11 @@ export function createTabsDragAndDrop(tabsService: TabsService) {
   }
 
   const handlePinZoneDrop = async (dragEvent: DragculaDragEvent<DragTypes>) => {
-    if (!dragEvent.item?.data?.hasData(DragTypeNames.SURF_TAB)) {
+    if (!dragEvent.item?.data?.hasData(DragTypeNames.BREEZE_TAB)) {
       return
     }
 
-    const draggedTab = dragEvent.item.data.getData(DragTypeNames.SURF_TAB) as TabItem
+    const draggedTab = dragEvent.item.data.getData(DragTypeNames.BREEZE_TAB) as TabItem
     const tab = tabsService.tabs.find((t) => t.id === draggedTab.id)
 
     if (!tab || tab.pinned) {

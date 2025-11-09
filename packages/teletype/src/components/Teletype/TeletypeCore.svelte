@@ -7,16 +7,16 @@
   import { useTeletype } from './index'
   import Breadcrumb from './Breadcrumb.svelte'
   import ActionList from './ActionList.svelte'
-  import { DynamicIcon, Icon } from '@deta/icons'
+  import { DynamicIcon, Icon } from '@breeze/icons'
   import ActionPanel from './ActionPanel.svelte'
   import { onMount, tick, createEventDispatcher, type Snippet } from 'svelte'
-  import { isDev, isMac } from '@deta/utils/system'
-  import { Editor, type MentionItem } from '@deta/editor'
-  import { createRemoteMentionsFetcher } from '@deta/services/ai'
-  import { Button } from '@deta/ui'
-  import { ShortcutVisualizer } from '@deta/ui'
-  import '@deta/editor/src/editor.scss'
-  import { parseStringIntoBrowserLocation } from '@deta/utils/formatting'
+  import { isDev, isMac } from '@breeze/utils/system'
+  import { Editor, type MentionItem } from '@breeze/editor'
+  import { createRemoteMentionsFetcher } from '@breeze/services/ai'
+  import { Button } from '@breeze/ui'
+  import { ShortcutVisualizer } from '@breeze/ui'
+  import '@breeze/editor/src/editor.scss'
+  import { parseStringIntoBrowserLocation } from '@breeze/utils/formatting'
 
   const dispatch = createEventDispatcher<{
     clear: void
@@ -637,7 +637,7 @@
               disabled={$inputValueWithoutMentions.length === 0}
             >
               {#if ttyActions.secondary === 'ask'}
-                Ask Surf
+                Ask Breeze
               {:else if ttyActions.secondary === 'create-note'}
                 Create Note
               {:else if ttyActions.secondary === 'search-web'}
@@ -661,7 +661,7 @@
             disabled={$inputValueWithoutMentions.length === 0}
           >
             {#if ttyActions.primary === 'ask'}
-              Ask Surf
+              Ask Breeze
             {:else if ttyActions.primary === 'create-note'}
               Create Note
             {:else if ttyActions.primary === 'search-web'}

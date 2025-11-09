@@ -1,8 +1,8 @@
 import { getContext, setContext } from 'svelte'
 import { get, writable, type Writable } from 'svelte/store'
 
-import { useLogScope } from '@deta/utils/io'
-import type { UserConfig, UserSettings } from '@deta/types'
+import { useLogScope } from '@breeze/utils/io'
+import type { UserConfig, UserSettings } from '@breeze/types'
 
 export class ConfigService {
   config: Writable<UserConfig>

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { useTabs } from '@deta/services/tabs'
+  import { useTabs } from '@breeze/services/tabs'
   import VerticalPinnedTab from './VerticalPinnedTab.svelte'
   import VerticalUnpinnedTab from './VerticalUnpinnedTab.svelte'
-  import { Icon } from '@deta/icons'
-  import { isMac } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { isMac } from '@breeze/utils'
   import {
     calculateVerticalTabLayout,
     measureContainerHeight,
@@ -11,9 +11,9 @@
   } from './TabsList/verticalTabsLayout.svelte'
   import type { VerticalLayoutCalculation } from './types'
   import { onMount, tick } from 'svelte'
-  import { useDebounce } from '@deta/utils'
-  import { Button } from '@deta/ui'
-  import { HTMLAxisDragZone } from '@deta/dragcula'
+  import { useDebounce } from '@breeze/utils'
+  import { Button } from '@breeze/ui'
+  import { HTMLAxisDragZone } from '@breeze/dragcula'
   import { createTabsDragAndDrop, cleanupDropIndicators } from './TabsList/dnd.svelte'
   import { onDestroy } from 'svelte'
 

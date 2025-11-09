@@ -1,14 +1,14 @@
 import { app } from 'electron'
 import { initBackend } from '../preload/helpers/backend'
-import { isDev } from '@deta/utils/system'
+import { isDev } from '@breeze/utils/system'
 import type {
   SFFSRawCompositeResource,
   SFFSRawResource,
   SFFSRawResourceTag,
   SFFSResource,
   SFFSResourceTag
-} from '@deta/types'
-import { optimisticParseJSON } from '@deta/utils'
+} from '@breeze/types'
+import { optimisticParseJSON } from '@breeze/utils'
 
 export class SFFSMain {
   sffs: any
@@ -132,7 +132,7 @@ export const initializeSFFSMain = () => {
     appPath: `${app.getAppPath()}${isDev ? '' : '.unpacked'}`
   })
 
-  ;(result.sffs as any).js__backend_set_surf_backend_health(true)
+  ;(result.sffs as any).js__backend_set_breeze_backend_health(true)
 
   sffsMain = new SFFSMain(result.sffs, result.resources)
   return sffsMain

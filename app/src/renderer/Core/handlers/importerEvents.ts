@@ -1,8 +1,8 @@
-import { createResourcesFromFiles } from '@deta/services'
-import { useResourceManager } from '@deta/services/resources'
+import { createResourcesFromFiles } from '@breeze/services'
+import { useResourceManager } from '@breeze/services/resources'
 
 import type { PreloadEvents } from './preloadEvents'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 export const setupImportEvents = (events: PreloadEvents) => {
   const log = useLogScope('ImportEvents')

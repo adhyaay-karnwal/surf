@@ -5,10 +5,10 @@ import { attachContextMenu } from './contextMenu'
 import { WindowState } from './winState'
 import { initAdblocker } from './adblocker'
 import { initDownloadManager } from './downloadManager'
-import { isDev, isMac } from '@deta/utils/system'
-import { PDFViewerParams, parseURL } from '@deta/utils/formatting'
+import { isDev, isMac } from '@breeze/utils/system'
+import { PDFViewerParams, parseURL } from '@breeze/utils/formatting'
 
-import { IPC_EVENTS_MAIN } from '@deta/services/ipc'
+import { IPC_EVENTS_MAIN } from '@breeze/services/ipc'
 import { setupPermissionHandlers } from './permissionHandler'
 import { applyCSPToSession } from './csp'
 import {
@@ -22,13 +22,13 @@ import { getWebRequestManager } from './webRequestManager'
 // import electronDragClick from 'electron-drag-click'
 import { writeFile } from 'fs/promises'
 import {
-  checkSurfProtocolRequest,
-  surfInternalProtocolHandler,
-  surfProtocolHandler,
-  surfletProtocolHandler
-} from './surfProtocolHandlers'
+  checkBreezeProtocolRequest,
+  breezeInternalProtocolHandler,
+  breezeProtocolHandler,
+  breezeletProtocolHandler
+} from './breezeProtocolHandlers'
 import { attachWCViewManager, WCViewManager } from './viewManager'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 const log = useLogScope('MainWindow')
 
@@ -89,7 +89,7 @@ export function createWindow() {
     height: Math.min(windowBounds.height, screenBounds.height)
   }
 
-  const mainWindowSession = session.fromPartition('persist:surf-app-session')
+  const mainWindowSession = session.fromPartition('persist:breeze-app-session')
   mainWindow = new BrowserWindow({
     width: boundWindow.width,
     height: boundWindow.height,
@@ -157,9 +157,9 @@ export function createWindow() {
   })()
 
   webRequestManager.addBeforeRequest(webviewSession, (details, callback) => {
-    const isSurfProtocol = details.url.startsWith('surf:')
-    const isSurfletProtocol = details.url.startsWith('surflet:')
-    const isInternalPageRequest = details.url.startsWith('surf-internal:')
+    const isBreezeProtocol = details.url.startsWith('breeze:')
+    const isBreezeletProtocol = details.url.startsWith('breezelet:')
+    const isInternalPageRequest = details.url.startsWith('breeze-internal:')
 
     const isMainFrameRequest = details.resourceType === 'mainFrame'
     const urlString = details.webContents && details.webContents.getURL()
@@ -169,22 +169,22 @@ export function createWindow() {
     // const isNotebookViewerRequest = url && isInternalViewerURL(url, NotebookViewerEntryPoint)
     // const isResourceViewerRequest = url && isInternalViewerURL(url, ResourceViewerEntryPoint)
 
-    const shouldBlockSurfRequest =
-      isSurfProtocol && !(checkSurfProtocolRequest(details.url) || isMainFrameRequest)
+    const shouldBlockBreezeRequest =
+      isBreezeProtocol && !(checkBreezeProtocolRequest(details.url) || isMainFrameRequest)
 
-    const shouldBlockSurfletRequest =
-      isSurfletProtocol && (!isMainFrameRequest || !details.webContents)
+    const shouldBlockBreezeletRequest =
+      isBreezeletProtocol && (!isMainFrameRequest || !details.webContents)
 
     const shouldBlockInternalRequest =
       isInternalPageRequest && (!isMainFrameRequest || !details.webContents)
 
     const shouldBlock =
-      shouldBlockSurfRequest || shouldBlockSurfletRequest || shouldBlockInternalRequest
+      shouldBlockBreezeRequest || shouldBlockBreezeletRequest || shouldBlockInternalRequest
 
     if (shouldBlock) {
       // log.warn('Blocking request:', details.url, url, {
-      //   shouldBlockSurfRequest,
-      //   shouldBlockSurfletRequest,
+      //   shouldBlockBreezeRequest,
+      //   shouldBlockBreezeletRequest,
       //   shouldBlockInternalRequest
       // })
 
@@ -267,17 +267,17 @@ export function createWindow() {
       return
     }
 
-    if (url.protocol === 'surf:') {
+    if (url.protocol === 'breeze:') {
       if (isPDF) {
         callback({ cancel: true })
         loadPDFViewer({ path: details.url, filename })
       } else {
         if (url.hostname === 'resource') {
           callback({ cancel: true })
-          details.webContents?.loadURL(`surf://surf/resource/${url.pathname.slice(1)}`)
+          details.webContents?.loadURL(`breeze://breeze/resource/${url.pathname.slice(1)}`)
         } else if (url.hostname === 'notebook') {
           callback({ cancel: true })
-          details.webContents?.loadURL(`surf://surf/notebook/${url.pathname.slice(1)}`)
+          details.webContents?.loadURL(`breeze://breeze/notebook/${url.pathname.slice(1)}`)
         } else {
           callback({ cancel: false })
         }
@@ -322,12 +322,12 @@ export function createWindow() {
   })
 
   try {
-    webviewSession.protocol.handle('surf', surfProtocolHandler)
-    webviewSession.protocol.handle('surflet', surfletProtocolHandler)
-    mainWindowSession.protocol.handle('surf', surfProtocolHandler)
-    mainWindowSession.protocol.handle('surf-internal', surfInternalProtocolHandler)
+    webviewSession.protocol.handle('breeze', breezeProtocolHandler)
+    webviewSession.protocol.handle('breezelet', breezeletProtocolHandler)
+    mainWindowSession.protocol.handle('breeze', breezeProtocolHandler)
+    mainWindowSession.protocol.handle('breeze-internal', breezeInternalProtocolHandler)
   } catch (e) {
-    log.error('possibly failed to register surf protocol: ', e)
+    log.error('possibly failed to register breeze protocol: ', e)
   }
 
   applyCSPToSession(mainWindowSession)
@@ -387,7 +387,7 @@ export function createWindow() {
   //   mainWindow.loadFile(join(__dirname, '../renderer/Core/core.html'))
   // }
 
-  mainWindow.loadURL('surf-internal://Core/Core/core.html')
+  mainWindow.loadURL('breeze-internal://Core/Core/core.html')
 }
 
 export function getMainWindow(): BrowserWindow | undefined {
@@ -404,7 +404,7 @@ function setupMainWindowWebContentsHandlers(
 ) {
   // Prevent direct navigation in the main window by handling the `will-navigate`
   // event and the `setWindowOpenHandler`. The main window should only host the SPA
-  // Surf frontend and not navigate away from it. Any requested navigations should
+  // Breeze frontend and not navigate away from it. Any requested navigations should
   // be handled within the frontend.
   contents.on('will-navigate', (event) => {
     const mainWindow = getMainWindow()
@@ -465,7 +465,7 @@ function setupMainWindowWebContentsHandlers(
 
   // Handle navigation requests within webviews:
   // 1. Set up a window open handler for each webview when it's attached.
-  // 2. Send navigation requests to the main window renderer (Surf preload) for handling.
+  // 2. Send navigation requests to the main window renderer (Breeze preload) for handling.
   // 3. Allow opening new windows but deny other requests, and handle them within the renderer.
   contents.on('did-attach-webview', (_, contents) => {
     contents.setWindowOpenHandler((details: Electron.HandlerDetails) => {
@@ -478,9 +478,9 @@ function setupMainWindowWebContentsHandlers(
       if (shouldCreateWindow) {
         // IMPORTANT NOTE: DO NOT expose any sort of Node.js capabilities to the newly
         // created window here. The creation of it is controlled from the renderer. Because
-        // of this, Surf won't play well with websites that for some reason utilizes more
+        // of this, Breeze won't play well with websites that for some reason utilizes more
         // than one window. In the future, Each new window we create should receive its own
-        // instance of Surf.
+        // instance of Breeze.
         return {
           action: 'allow',
           createWindow: undefined,
@@ -498,9 +498,9 @@ function setupMainWindowWebContentsHandlers(
 
       const url = new URL(details.url)
       if (
-        url.protocol === 'surf:' ||
-        url.protocol === 'surflet:' ||
-        url.protocol === 'surf-internal:'
+        url.protocol === 'breeze:' ||
+        url.protocol === 'breezelet:' ||
+        url.protocol === 'breeze-internal:'
       ) {
         return { action: 'deny' }
       }
@@ -534,9 +534,9 @@ function setupWebContentsViewWebContentsHandlers(contents: Electron.WebContents)
       if (shouldCreateWindow) {
         // IMPORTANT NOTE: DO NOT expose any sort of Node.js capabilities to the newly
         // created window here. The creation of it is controlled from the renderer. Because
-        // of this, Surf won't play well with websites that for some reason utilizes more
+        // of this, Breeze won't play well with websites that for some reason utilizes more
         // than one window. In the future, Each new window we create should receive its own
-        // instance of Surf.
+        // instance of Breeze.
         return {
           action: 'allow',
           createWindow: undefined,
@@ -554,9 +554,9 @@ function setupWebContentsViewWebContentsHandlers(contents: Electron.WebContents)
 
       const url = new URL(details.url)
       if (
-        url.protocol === 'surf:' ||
-        url.protocol === 'surflet:' ||
-        url.protocol === 'surf-internal:'
+        url.protocol === 'breeze:' ||
+        url.protocol === 'breezelet:' ||
+        url.protocol === 'breeze-internal:'
       ) {
         log.warn('[main] Denied new window request:', details)
         return { action: 'deny' }

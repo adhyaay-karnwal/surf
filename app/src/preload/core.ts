@@ -28,7 +28,7 @@ import {
   WebContentsViewActionOutputs,
   RendererType,
   type ControlWindow
-} from '@deta/types'
+} from '@breeze/types'
 
 import {
   IPC_EVENTS_RENDERER,
@@ -37,11 +37,11 @@ import {
   setupMessagePortPrimary,
   type ShowOpenDialog,
   SpaceBasicData
-} from '@deta/services/ipc'
+} from '@breeze/services/ipc'
 
 import { getUserConfig } from '../main/config'
 import { initBackend } from './helpers/backend'
-import type { MessagePortCallbackPrimary } from '@deta/services/messagePort'
+import type { MessagePortCallbackPrimary } from '@breeze/services/messagePort'
 
 const USER_DATA_PATH =
   process.argv.find((arg) => arg.startsWith('--userDataPath='))?.split('=')[1] ?? ''
@@ -779,9 +779,9 @@ const api = {
 
 const { sffs, resources } = initBackend()
 
-IPC_EVENTS_RENDERER.setSurfBackendHealth.on((_, state) => {
+IPC_EVENTS_RENDERER.setBreezeBackendHealth.on((_, state) => {
   // @ts-ignore
-  sffs.js__backend_set_surf_backend_health(state)
+  sffs.js__backend_set_breeze_backend_health(state)
 })
 
 if (process.contextIsolated) {

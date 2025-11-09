@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button } from '@deta/ui'
+  import { Button } from '@breeze/ui'
   import Portal from 'svelte-portal'
   import { clsx } from 'clsx'
   import Tooltip from '../../Tooltip.svelte'

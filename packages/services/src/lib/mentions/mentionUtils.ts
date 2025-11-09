@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { generateUUID } from '@deta/utils'
+import { generateUUID } from '@breeze/utils'
 import type { MentionItem, MentionType } from './mention.types'
 
 /**

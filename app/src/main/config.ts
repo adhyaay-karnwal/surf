@@ -1,9 +1,8 @@
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
-import { type UserConfig } from '@deta/types'
-import { BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@deta/types/src/ai.types'
-import { useLogScope } from '@deta/utils'
+import { type UserConfig, BUILT_IN_MODELS, BuiltInModelIDs, DEFAULT_AI_MODEL } from '@breeze/types'
+import { useLogScope } from '@breeze/utils'
 
 const log = useLogScope('Config')
 

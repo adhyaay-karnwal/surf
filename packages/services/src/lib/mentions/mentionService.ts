@@ -1,5 +1,5 @@
 import { writable, derived, get, type Writable, type Readable } from 'svelte/store'
-import { useDebounce, useLogScope, useThrottle } from '@deta/utils'
+import { useDebounce, useLogScope, useThrottle } from '@breeze/utils'
 import type {
   MentionProvider,
   MentionItem,
@@ -17,7 +17,7 @@ import type { TabsService } from '../tabs/tabs.svelte'
 
 import { MentionTypes } from './mention.types'
 import { tick } from 'svelte'
-import type { Fn } from '@deta/types'
+import type { Fn } from '@breeze/types'
 import { useBrowser } from '../browser'
 
 export class MentionService {

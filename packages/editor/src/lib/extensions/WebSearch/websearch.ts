@@ -1,7 +1,7 @@
 import { mergeAttributes, Node } from '@tiptap/core'
 import type { ComponentType, SvelteComponent } from 'svelte'
 import { createClassComponent } from 'svelte/legacy'
-import type { LinkClickHandler } from '@deta/editor/src/lib/extensions/Link/helpers/clickHandler'
+import type { LinkClickHandler } from '@breeze/editor/src/lib/extensions/Link/helpers/clickHandler'
 
 export interface WebSearchOptions {
   HTMLAttributes: Record<string, any>

@@ -1,17 +1,17 @@
 export enum DragTypeNames {
-  SURF_TAB = 'vnd/surf/tab',
-  SURF_TAB_ID = 'application/vnd.space.dragcula.tabId',
+  BREEZE_TAB = 'vnd/breeze/tab',
+  BREEZE_TAB_ID = 'application/vnd.space.dragcula.tabId',
 
-  SURF_RESOURCE = 'vnd/surf/resource',
-  SURF_RESOURCE_ID = 'application/vnd.space.dragcula.resourceId',
-  ASYNC_SURF_RESOURCE = 'vnd/async/surf/resource',
+  BREEZE_RESOURCE = 'vnd/breeze/resource',
+  BREEZE_RESOURCE_ID = 'application/vnd.space.dragcula.resourceId',
+  ASYNC_BREEZE_RESOURCE = 'vnd/async/breeze/resource',
 
-  SURF_SPACE = 'vnd/surf/space',
+  BREEZE_SPACE = 'vnd/breeze/space',
 
-  DESKTOP_ITEM = 'vnd/surf/desktop_item',
+  DESKTOP_ITEM = 'vnd/breeze/desktop_item',
 
-  SURF_HISTORY_ENTRY = 'vnd/surf/history_entry',
-  SURF_HISTORY_ENTRY_ID = 'application/vnd.space.dragcula.historyEntryId'
+  BREEZE_HISTORY_ENTRY = 'vnd/breeze/history_entry',
+  BREEZE_HISTORY_ENTRY_ID = 'application/vnd.space.dragcula.historyEntryId'
 }
 
 export type DragTypes = Record<keyof typeof DragTypeNames, any>

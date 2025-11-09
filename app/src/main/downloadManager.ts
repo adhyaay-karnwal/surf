@@ -4,10 +4,10 @@ import { randomUUID } from 'crypto'
 import fs, { promises as fsp } from 'fs'
 import path from 'path'
 import mime from 'mime-types'
-import { IPC_EVENTS_MAIN } from '@deta/services/ipc'
-import type { DownloadPathResponseMessage, SFFSResource } from '@deta/types'
+import { IPC_EVENTS_MAIN } from '@breeze/services/ipc'
+import type { DownloadPathResponseMessage, SFFSResource } from '@breeze/types'
 import { isPathSafe, checkFileExists } from './utils'
-import { htmlToMarkdown, useLogScope } from '@deta/utils'
+import { htmlToMarkdown, useLogScope } from '@breeze/utils'
 import { useSFFSMain } from './sffs'
 import { getUserConfig, updateUserConfigSettings } from './config'
 
@@ -304,7 +304,7 @@ export const openResourceAsFile = async (resourceId: string, basePath: string) =
         cancelId: 1,
         title: 'Open Resource Location',
         message:
-          'Heads up: Please avoid renaming or moving resource files outside of Surf to prevent issues.'
+          'Heads up: Please avoid renaming or moving resource files outside of Breeze to prevent issues.'
       })
 
       if (response !== 0) {

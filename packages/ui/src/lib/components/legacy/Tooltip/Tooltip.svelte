@@ -3,7 +3,7 @@
    * Unified Tooltip component so that we don't style each one individually any longer using tailwind.
    */
 
-  import { flyAndScale } from '@deta/utils'
+  import { flyAndScale } from '@breeze/utils'
   import { Tooltip } from 'bits-ui'
 
   export let side: 'top' | 'left' | 'right' | 'bottom' | undefined = 'top'

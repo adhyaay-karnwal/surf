@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { isModKeyPressed } from '@deta/utils'
+  import { isModKeyPressed } from '@breeze/utils'
   import { type MentionItem, MentionItemType } from '../../types'
   import type { MentionAction } from './mention'
-  import { DynamicIcon } from '@deta/icons'
-  import { Favicon } from '@deta/ui'
+  import { DynamicIcon } from '@breeze/icons'
+  import { Favicon } from '@breeze/ui'
 
   export let id: string
   export let label: string

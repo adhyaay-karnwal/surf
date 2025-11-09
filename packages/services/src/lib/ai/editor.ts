@@ -2,10 +2,10 @@ import { findChildren } from '@tiptap/core'
 import type { Attrs, Node } from '@tiptap/pm/model'
 import type { Transaction } from '@tiptap/pm/state'
 
-import { conditionalArrayItem, generateID, useLogScope, wait } from '@deta/utils'
+import { conditionalArrayItem, generateID, useLogScope, wait } from '@breeze/utils'
 
-import type { Editor as EditorComp } from '@deta/editor'
-import { type Editor } from '@deta/editor/editor'
+import type { Editor as EditorComp } from '@breeze/editor'
+import { type Editor } from '@breeze/editor/editor'
 
 export type AIGenerationStatus = 'idle' | 'initializing' | 'generating' | 'completed' | 'failed'
 

@@ -3,9 +3,9 @@ import {
   ResourceTagDataStateValue,
   SpaceEntryOrigin,
   type BrowserType
-} from '@deta/types'
-import { useLogScope } from '@deta/utils/io'
-import { ResourceTag } from '@deta/utils/formatting'
+} from '@breeze/types'
+import { useLogScope } from '@breeze/utils/io'
+import { ResourceTag } from '@breeze/utils/formatting'
 
 import { type Resource, type ResourceManager } from './resources'
 import { NotebookManager } from './notebooks'

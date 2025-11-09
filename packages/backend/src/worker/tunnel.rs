@@ -26,12 +26,12 @@ pub struct WorkerTunnel {
     pub tqueue_rx: crossbeam::Receiver<ProcessorMessage>,
     pub aiqueue_rx: crossbeam::Receiver<AIMessage>,
     pub event_bus_rx_callback: Arc<Root<JsFunction>>,
-    pub surf_backend_health: SurfBackendHealth,
+    pub breeze_backend_health: BreezeBackendHealth,
 }
 
-pub struct SurfBackendHealth(Arc<(Mutex<bool>, Condvar)>);
+pub struct BreezeBackendHealth(Arc<(Mutex<bool>, Condvar)>);
 
-impl SurfBackendHealth {
+impl BreezeBackendHealth {
     pub fn new(initial_state: Option<bool>) -> Self {
         Self(Arc::new((
             Mutex::new(initial_state.unwrap_or_default()),
@@ -46,10 +46,10 @@ impl SurfBackendHealth {
             return;
         }
         while !*healthy {
-            tracing::warn!("surf-backend server isn't healthy, sleeping the processor thread");
+            tracing::warn!("breeze-backend server isn't healthy, sleeping the processor thread");
             healthy = cvar.wait(healthy).unwrap();
         }
-        tracing::info!("surf-backend server is healthy again, resuming processor thread");
+        tracing::info!("breeze-backend server is healthy again, resuming processor thread");
     }
 
     pub fn set_health(&self, healthy: bool) {
@@ -62,7 +62,7 @@ impl SurfBackendHealth {
     }
 }
 
-impl Clone for SurfBackendHealth {
+impl Clone for BreezeBackendHealth {
     fn clone(&self) -> Self {
         Self(self.0.clone())
     }
@@ -92,14 +92,14 @@ impl WorkerTunnel {
         let (worker_tx, worker_rx) = crossbeam::unbounded();
         let (tqueue_tx, tqueue_rx) = crossbeam::unbounded();
         let (aiqueue_tx, aiqueue_rx) = crossbeam::unbounded();
-        let surf_backend_health = SurfBackendHealth::new(Some(false));
+        let breeze_backend_health = BreezeBackendHealth::new(Some(false));
         let event_bus_rx_callback = Arc::new(event_bus_rx_callback);
         let tunnel = Self {
             worker_tx,
             tqueue_rx,
             aiqueue_rx,
             event_bus_rx_callback: event_bus_rx_callback.clone(),
-            surf_backend_health: surf_backend_health.clone(),
+            breeze_backend_health: breeze_backend_health.clone(),
         };
 
         Self::spawn_threads(cx, config, worker_rx, tqueue_tx, aiqueue_tx, &tunnel);
@@ -125,7 +125,7 @@ impl WorkerTunnel {
             tqueue_tx,
             aiqueue_tx,
             Arc::clone(&tunnel.event_bus_rx_callback),
-            tunnel.surf_backend_health.clone(),
+            tunnel.breeze_backend_health.clone(),
         );
         Self::spawn_processor_threads(tunnel, &config);
     }
@@ -137,7 +137,7 @@ impl WorkerTunnel {
         tqueue_tx: crossbeam::Sender<ProcessorMessage>,
         aiqueue_tx: crossbeam::Sender<AIMessage>,
         event_bus_rx_callback: Arc<Root<JsFunction>>,
-        surf_backend_health: SurfBackendHealth,
+        breeze_backend_health: BreezeBackendHealth,
     ) where
         C: Context<'a>,
     {
@@ -150,7 +150,7 @@ impl WorkerTunnel {
             let tqueue_tx = tqueue_tx.clone();
             let aiqueue_tx = aiqueue_tx.clone();
             let callback = Arc::clone(&event_bus_rx_callback);
-            let surf_backend_health = surf_backend_health.clone();
+            let breeze_backend_health = breeze_backend_health.clone();
             let libuv_ch = libuv_ch.clone();
             let thread_name = format!("W{n}");
 
@@ -188,7 +188,7 @@ impl WorkerTunnel {
                         channel_config,
                         language_setting: language_setting.clone(),
                         run_migrations: _run_migrations,
-                        surf_backend_health: surf_backend_health.clone(),
+                        breeze_backend_health: breeze_backend_health.clone(),
                     };
 
                     worker_thread_entry_point(worker_rx.clone(), worker_config)

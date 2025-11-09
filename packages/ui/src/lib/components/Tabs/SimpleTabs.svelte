@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import { DynamicIcon } from "@deta/icons"
+  import { DynamicIcon } from "@breeze/icons"
 
   let { tabs, activeTabId = $bindable(''), onSelect }: { tabs: Tab[]; activeTabId: string; onSelect?: (tab: Tab) => void } = $props()
 </script>

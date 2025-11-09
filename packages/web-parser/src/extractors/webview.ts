@@ -1,7 +1,7 @@
 import type { WebviewTag } from 'electron'
 import { type DetectedResource, type DetectedWebApp, type WebServiceActionInputs } from '../types'
-import { WebViewEventReceiveNames, WebViewEventSendNames } from '@deta/types'
-import { shouldIgnoreWebviewErrorCode } from '@deta/utils'
+import { WebViewEventReceiveNames, WebViewEventSendNames } from '@breeze/types'
+import { shouldIgnoreWebviewErrorCode } from '@breeze/utils'
 
 const DEFAULT_EXTRACTION_TIMEOUT = 10000
 const DEFAULT_INITIALIZING_TIMEOUT = 7000

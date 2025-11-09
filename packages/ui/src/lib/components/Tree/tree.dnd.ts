@@ -1,4 +1,4 @@
-import { DragData } from '@deta/dragcula'
+import { DragData } from '@breeze/dragcula'
 import type { BaseTreeNode, TreeDragDropOperation, TreeDragConfig, TreeDragContext, TreeHierarchyRules } from './tree.types'
 
 // Constants for tree DND

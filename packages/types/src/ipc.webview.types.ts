@@ -61,7 +61,7 @@ export enum WebViewEventSendNames {
 // `webview.executeJavaScript(..., true)` but this means that it sadly
 // works separate from our other IPC events.
 export enum WebViewGestureRequiredEventNames {
-  RequestEnterPIP = 'surf__request_enter_pip'
+  RequestEnterPIP = 'breeze__request_enter_pip'
 }
 
 export type WebViewEventTransformationOutput = {
@@ -217,7 +217,7 @@ export type WebViewSendEvents = {
 }
 
 export enum WebviewAnnotationEventNames {
-  Click = 'deta_annotation_click'
+  Click = 'breeze_annotation_click'
 }
 
 export type WebviewAnnotationEvents = {

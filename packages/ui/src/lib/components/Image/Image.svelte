@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon, type Icons } from '@deta/icons'
+  import { Icon, type Icons } from '@breeze/icons'
 
   export let src: string
   export let alt: string

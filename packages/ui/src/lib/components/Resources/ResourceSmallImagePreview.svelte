@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { type Resource } from '@deta/services/resources'
-  import { blobToSmallImageUrl } from '@deta/utils/browser'
+  import { Icon } from '@breeze/icons'
+  import { type Resource } from '@breeze/services/resources'
+  import { blobToSmallImageUrl } from '@breeze/utils/browser'
 
   export let resource: Resource
 

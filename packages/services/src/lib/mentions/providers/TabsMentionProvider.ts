@@ -2,7 +2,7 @@ import type { MentionProvider, MentionItem, MentionType } from '../mention.types
 import { MentionTypes } from '../mention.types'
 import { filterAndSortMentions } from '../mentionUtils'
 import type { TabsService, TabItem } from '../../tabs/tabs.svelte'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 
 export class TabsMentionProvider implements MentionProvider {
   readonly name = 'tabs'
@@ -60,7 +60,7 @@ export class TabsMentionProvider implements MentionProvider {
         icon: 'world',
         description: `All ${tabs.length} open tabs`,
         priority: 200,
-        keywords: ['all', 'tabs', 'every', 'everything', 'surf'],
+        keywords: ['all', 'tabs', 'every', 'everything', 'breeze'],
         metadata: {
           isAllTabs: true,
           tabCount: tabs.length

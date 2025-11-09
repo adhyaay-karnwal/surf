@@ -141,8 +141,8 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
           SHOULD_NOTARIZE: 'true'
 
-          PRODUCT_NAME: 'Surf'
-          M_VITE_PRODUCT_NAME: 'Surf'
+          PRODUCT_NAME: 'Breeze'
+          M_VITE_PRODUCT_NAME: 'Breeze'
           BUILD_RESOURCES_DIR: build/resources/nightly
 
           R_VITE_MAIN_ONBOARDING_VIDEO_URL: ${{ secrets.MAIN_ONBOARDING_VIDEO_URL }}/${{ needs.next-nightly-version.outputs.version }}
@@ -155,7 +155,7 @@ jobs:
             app/dist/*.exe
             app/dist/*.AppImage
             app/dist/*.tar.gz
-            app/dist/surf-*.yml
+            app/dist/breeze-*.yml
 
   create-release:
     needs: [next-nightly-version, build]
@@ -175,6 +175,6 @@ jobs:
             build/**/*.exe
             build/**/*.AppImage
             build/**/*.tar.gz
-            build/**/surf-*.yml
+            build/**/breeze-*.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

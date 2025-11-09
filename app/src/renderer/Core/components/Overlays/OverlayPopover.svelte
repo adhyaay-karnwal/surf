@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clickOutside, useLogScope } from '@deta/utils'
+  import { clickOutside, useLogScope } from '@breeze/utils'
   import Overlay from '../Overlays/Overlay.svelte'
   import type { OverlayPopoverProps } from './types'
 

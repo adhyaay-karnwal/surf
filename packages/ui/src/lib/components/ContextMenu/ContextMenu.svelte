@@ -52,14 +52,14 @@
     }
   }
 
-  import { isDev, wait } from '@deta/utils'
-  import { copyStyles } from '@deta/utils/src/dom/copy-styles.svelte'
+  import { isDev, wait } from '@breeze/utils'
+  import { copyStyles } from '@breeze/utils/src/dom/copy-styles.svelte'
   import {
     type Overlay,
     type OverlayManager,
     useOverlayManager,
     useViewManager
-  } from '@deta/services/views'
+  } from '@breeze/services/views'
   import ContextMenu from './ContextMenu.svelte'
 
   const contextMenuOpen = writable(false)
@@ -250,8 +250,8 @@
   import type { ActionReturn } from 'svelte/action'
   import { derived, writable, get } from 'svelte/store'
   import ContextMenuItems from './ContextMenuItems.svelte'
-  import { useLogScope } from '@deta/utils/io'
-  import { clickOutside } from '@deta/utils'
+  import { useLogScope } from '@breeze/utils/io'
+  import { clickOutside } from '@breeze/utils'
 
   import './style.scss'
   import { type Attachment } from 'svelte/attachments'

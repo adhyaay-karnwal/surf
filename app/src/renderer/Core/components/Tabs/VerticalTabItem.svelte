@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { useTabs, TabItem } from '@deta/services/tabs'
-  import { Favicon, Button, type CtxItem, contextMenu } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { HTMLDragItem, DragData } from '@deta/dragcula'
-  import { DragTypeNames } from '@deta/types'
-  import { getCleanHostname } from '@deta/utils'
-  import { useBrowser } from '@deta/services/browser'
-  import { spawnBoxSmoke } from '@deta/ui/src/lib/components/Effects/index'
-  import { ViewType } from '@deta/services/views'
+  import { useTabs, TabItem } from '@breeze/services/tabs'
+  import { Favicon, Button, type CtxItem, contextMenu } from '@breeze/ui'
+  import { Icon } from '@breeze/icons'
+  import { HTMLDragItem, DragData } from '@breeze/dragcula'
+  import { DragTypeNames } from '@breeze/types'
+  import { getCleanHostname } from '@breeze/utils'
+  import { useBrowser } from '@breeze/services/browser'
+  import { spawnBoxSmoke } from '@breeze/ui/src/lib/components/Effects/index'
+  import { ViewType } from '@breeze/services/views'
 
   let {
     tab,
@@ -114,7 +114,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.BREEZE_TAB, tab)
       return dragData
     })()
   }}

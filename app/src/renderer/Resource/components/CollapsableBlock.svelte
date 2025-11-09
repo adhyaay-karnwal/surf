@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { generateID, useDebounce, useLogScope, optimisticParseJSON } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { generateID, useDebounce, useLogScope, optimisticParseJSON } from '@breeze/utils'
 
   import { createEventDispatcher, onMount } from 'svelte'
-  import { useResourceManager } from '@deta/services/resources'
-  import { ResourceTagsBuiltInKeys } from '@deta/types'
-  import type { Resource } from '@deta/services/resources'
-  import { DragTypeNames } from '@deta/types'
+  import { useResourceManager } from '@breeze/services/resources'
+  import { ResourceTagsBuiltInKeys } from '@breeze/types'
+  import type { Resource } from '@breeze/services/resources'
+  import { DragTypeNames } from '@breeze/types'
   import type {
     DragTypes,
     ResourceTagsBuiltIn,
     SFFSResourceTag,
     UserViewPrefsTagValue
-  } from '@deta/types'
+  } from '@breeze/types'
   import ImageBlock from './ImageBlock.svelte'
 
   // New
@@ -238,9 +238,9 @@
   const handleDragStart = async (drag: DragculaDragEvent<DragTypes>) => {
     if (resource) {
       const item = drag.item!
-      drag.dataTransfer?.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
-      item.data.setData(DragTypeNames.SURF_RESOURCE, resource)
-      item.data.setData(DragTypeNames.SURF_RESOURCE_ID, resource.id)
+      drag.dataTransfer?.setData(DragTypeNames.BREEZE_RESOURCE_ID, resource.id)
+      item.data.setData(DragTypeNames.BREEZE_RESOURCE, resource)
+      item.data.setData(DragTypeNames.BREEZE_RESOURCE_ID, resource.id)
       drag.continue()
     } else {
       drag.abort()
@@ -511,7 +511,7 @@
 {/if}
 
 <style lang="scss">
-  @use '@deta/ui/src/lib/styles/utils' as utils;
+  @use '@breeze/ui/src/lib/styles/utils' as utils;
 
   :global(.code-wrapper code.hljs) {
     overflow: unset;

@@ -1,4 +1,4 @@
-.deta-component-wrapper [data-tooltip] {
+.breeze-component-wrapper [data-tooltip] {
   position: relative;
 
   --tooltip-arrow-size: 6px;
@@ -16,8 +16,8 @@
   --tooltip-delay: 0.5s;
 }
 
-.deta-component-wrapper [data-tooltip]:before,
-.deta-component-wrapper [data-tooltip]:after {
+.breeze-component-wrapper [data-tooltip]:before,
+.breeze-component-wrapper [data-tooltip]:after {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -25,7 +25,7 @@
   transform: translate(-50%, 5px);
 }
 
-.deta-component-wrapper [data-tooltip]:before {
+.breeze-component-wrapper [data-tooltip]:before {
   position: absolute;
   z-index: var(--tooltip-z-index);
   bottom: 100%;
@@ -46,7 +46,7 @@
   transition: opacity 0.2s ease-out var(--tooltip-delay);
 }
 
-.deta-component-wrapper [data-tooltip]:after {
+.breeze-component-wrapper [data-tooltip]:after {
   position: absolute;
   bottom: 100%;
   margin-bottom: var(--tooltip-offset-y);
@@ -60,22 +60,22 @@
   line-height: 0;
 }
 
-.deta-component-wrapper [data-tooltip]:hover:before,
-.deta-component-wrapper [data-tooltip]:hover:after {
+.breeze-component-wrapper [data-tooltip]:hover:before,
+.breeze-component-wrapper [data-tooltip]:hover:after {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, 0);
 }
-.deta-component-wrapper [data-tooltip='false']:hover:before,
-.deta-component-wrapper [data-tooltip='false']:hover:after {
+.breeze-component-wrapper [data-tooltip='false']:hover:before,
+.breeze-component-wrapper [data-tooltip='false']:hover:after {
   visibility: hidden;
   opacity: 0;
 }
 
-deta-annotation.deta-annotation-highlight {
+breeze-annotation.breeze-annotation-highlight {
   background-color: #ffcee4;
 }
 
-deta-annotation.deta-annotation-highlight.deta-annotion-glow {
+breeze-annotation.breeze-annotation-highlight.breeze-annotion-glow {
   background-color: #ff95c5;
 }

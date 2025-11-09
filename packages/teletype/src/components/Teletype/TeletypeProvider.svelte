@@ -1,7 +1,7 @@
 <script lang="ts">
   import { provideTeletype } from './index'
   import type { Action, Options } from './types'
-  import { useLogScope } from '@deta/utils'
+  import { useLogScope } from '@breeze/utils'
 
   let {
     actions = [],

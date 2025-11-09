@@ -1,6 +1,6 @@
 # =================================================================== 
 # Patch: Modifications to @ghostery/adblocker-electron
-# Author: Deta Team
+# Author: Breeze Team
 # License: Mozilla Public License 2.0 (https://mozilla.org/MPL/2.0/)
 # Original work licensed under MPL-2.0
 # 
@@ -14,7 +14,7 @@
 # - dist/esm/index.js
 # - Related TypeScript definition files
 # 
-# Source Repository: https://github.com/deta/adblocker
+# Source Repository: https://github.com/ghostery/adblocker
 # ===================================================================
 diff --git a/node_modules/@ghostery/adblocker-electron/dist/adblocker.umd.min.js b/node_modules/@ghostery/adblocker-electron/dist/adblocker.umd.min.js
 index 35484ec..caae162 100644

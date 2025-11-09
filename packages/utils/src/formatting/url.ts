@@ -1,6 +1,6 @@
 import { isIP } from 'is-ip'
 import { isWindows, isDev } from '../system/system'
-import { ViewType } from '@deta/types'
+import { ViewType } from '@breeze/types'
 
 export const prependProtocol = (url: string, secure = true) => {
   try {
@@ -176,9 +176,9 @@ export const generateRootDomain = (urlInput: string | URL) => {
 
 export const checkIfSpaceApp = (url: URL) => {
   return (
-    url.hostname.endsWith('deta.app') ||
-    url.hostname.endsWith('deta.pizza') ||
-    url.hostname.endsWith('deta.dev')
+    url.hostname.endsWith('breeze.app') ||
+    url.hostname.endsWith('breeze.pizza') ||
+    url.hostname.endsWith('breeze.dev')
   )
 }
 
@@ -423,19 +423,19 @@ export const appendURLPath = (url: string, path: string) => {
 }
 
 /**
- * Try to parse a surf protocol URL and return the resourceId
- * Surf protocol URL format: surf://surf/resource/<id>
- * @deprecated This is no longer valid with having other surf paths not only resource
+ * Try to parse a breeze protocol URL and return the resourceId
+ * Breeze protocol URL format: breeze://breeze/resource/<id>
+ * @deprecated This is no longer valid with having other breeze paths not only resource
  * @param rawUrl The URL to parse
- * @returns resourceId or null if the URL is not a surf protocol URL
+ * @returns resourceId or null if the URL is not a breeze protocol URL
  */
-export const parseSurfProtocolURL = (rawUrl: URL | string) => {
+export const parseBreezeProtocolURL = (rawUrl: URL | string) => {
   const url = typeof rawUrl === 'string' ? parseURL(rawUrl) : rawUrl
   if (!url) {
     return null
   }
 
-  if (url.protocol === 'surf:') {
+  if (url.protocol === 'breeze:') {
     const resourceId = url.pathname.split('/')[2]
     if (!resourceId) {
       return null
@@ -450,13 +450,13 @@ export const parseSurfProtocolURL = (rawUrl: URL | string) => {
 /**
  * Returns whether a given URL if it is part of the internal "renderer" i.e:
  *  in DEV: http://localhost:XXXX/...html
- *  in PROD: file:///Users/max/Programming/Deta/surf/app/dist/mac-arm64/Surf.app/Contents/Resources/app.asar/out/renderer/Notebook/notebook.html?path=surf%3A%2F%2Fnotebook%2Fb75c4bc4-fbf9-46a0-ab35-2eca431f38e4&notebookId=b75c4bc4-fbf9-46a0-ab35-2eca431f38e4
+ *  in PROD: file:///Users/max/Programming/Breeze/breeze/app/dist/mac-arm64/Breeze.app/Contents/Resources/app.asar/out/renderer/Notebook/notebook.html?path=breeze%3A%2F%2Fnotebook%2Fb75c4bc4-fbf9-46a0-ab35-2eca431f38e4&notebookId=b75c4bc4-fbf9-46a0-ab35-2eca431f38e4
  *
  */
 export function isInternalRendererURL(url: string | URL): URL | null {
   try {
     const _url = url instanceof URL ? url : new URL(url)
-    if (_url.protocol === 'surf:') return _url
+    if (_url.protocol === 'breeze:') return _url
 
     const devPartialPaths = [
       '/Resource/resource.html',
@@ -537,7 +537,7 @@ export const getCleanHostname = (url: string) => {
     } else if (viewType === ViewType.Notebook) {
       return 'Notebook'
     } else if (viewType === ViewType.NotebookHome) {
-      return 'Surf'
+      return 'Breeze'
     } else {
       return getHostname(url) || url
     }
@@ -548,7 +548,7 @@ export const getCleanHostname = (url: string) => {
 
 export const cleanupPageTitle = (title: string) => {
   try {
-    if (!title.startsWith('surf://')) {
+    if (!title.startsWith('breeze://')) {
       return title
     }
 
@@ -558,7 +558,7 @@ export const cleanupPageTitle = (title: string) => {
     } else if (viewType === ViewType.Notebook) {
       return 'Notebook'
     } else if (viewType === ViewType.NotebookHome) {
-      return 'Surf'
+      return 'Breeze'
     } else {
       return title
     }

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Notebook, type NotebookCoverColor } from "@deta/services/notebooks"
-  import { clickOutside, generateID } from '@deta/utils'
-  import { type Fn } from '@deta/types'
+  import { Notebook, type NotebookCoverColor } from "@breeze/services/notebooks"
+  import { clickOutside, generateID } from '@breeze/utils'
+  import { type Fn } from '@breeze/types'
   import NotebookCoverSticker from "./NotebookCoverSticker.svelte"
   import LeatherOverlay from "./leather_overlay.jpg?url"
-  import { signature } from '@deta/ui'
+  import { signature } from '@breeze/ui'
 
   let {
     readonly = true,

@@ -4,15 +4,15 @@
   import { createEventDispatcher, tick } from 'svelte'
   import { derived, writable } from 'svelte/store'
 
-  import { Icon, IconConfirmation } from '@deta/icons'
-  import type { WebViewEventTransform } from '@deta/types'
+  import { Icon, IconConfirmation } from '@breeze/icons'
+  import type { WebViewEventTransform } from '@breeze/types'
 
   import AiPrompts from './AIPrompts.svelte'
   import Wrapper from './Wrapper.svelte'
   import Button from './Button.svelte'
-  import { Editor, getEditorContentText } from '@deta/editor'
-  import '@deta/editor/src/editor.scss'
-  import MarkdownRenderer from '@deta/editor/src/lib/components/MarkdownRenderer.svelte'
+  import { Editor, getEditorContentText } from '@breeze/editor'
+  import '@breeze/editor/src/editor.scss'
+  import MarkdownRenderer from '@breeze/editor/src/lib/components/MarkdownRenderer.svelte'
   import { onMount } from 'svelte'
 
   export let text = ''

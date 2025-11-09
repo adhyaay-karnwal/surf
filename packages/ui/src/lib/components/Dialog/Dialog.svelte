@@ -81,7 +81,7 @@
 
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@breeze/icons'
 
   export let icon: string | undefined
   export let title: string | undefined

@@ -1,7 +1,7 @@
 pub mod context;
 pub mod context_manager;
 pub mod io;
-pub mod surflet;
+pub mod breezelet;
 pub mod tools;
 pub mod websearch;
 

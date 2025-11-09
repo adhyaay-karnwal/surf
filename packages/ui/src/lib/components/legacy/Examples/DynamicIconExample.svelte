@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { DynamicIcon } from '@deta/icons'
+  import { DynamicIcon } from '@breeze/icons'
+  import { BREEZE_SITE_URL } from '@breeze/services/constants'
 
   export let space: any
+
+  const siteUrl = BREEZE_SITE_URL.replace(/\/$/, '')
 
   const items = [
     {
       label: 'Website',
-      icon: 'favicon;;https://deta.surf'
+      icon: `favicon;;${siteUrl}`
     },
     {
       label: 'Image',

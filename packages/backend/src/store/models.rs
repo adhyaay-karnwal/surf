@@ -530,10 +530,11 @@ pub struct PostProcessingJob {
     pub state: ResourceProcessingState,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Default)]
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "type")]
 pub enum ResourceProcessingState {
+    #[default]
     Pending,
     Started,
     Failed { message: String },
@@ -553,12 +554,6 @@ impl FromSql for ResourceProcessingState {
         let str_value = String::column_result(value)?;
         serde_json::from_str(&str_value)
             .map_err(|e| rusqlite::types::FromSqlError::Other(Box::new(e)))
-    }
-}
-
-impl Default for ResourceProcessingState {
-    fn default() -> Self {
-        Self::Pending
     }
 }
 
@@ -885,9 +880,9 @@ mod tests {
         let hostname = get_hostname_from_uri(uri);
         assert_eq!(hostname, Some("www.google.com".to_string()));
 
-        let uri = "https://deta.space";
+        let uri = "https://breeze.space";
         let hostname = get_hostname_from_uri(uri);
-        assert_eq!(hostname, Some("deta.space".to_string()));
+        assert_eq!(hostname, Some("breeze.space".to_string()));
 
         let uri = "non valid uri";
         let hostname = get_hostname_from_uri(uri);

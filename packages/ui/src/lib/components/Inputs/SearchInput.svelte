@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { clickOutside } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { clickOutside } from '@breeze/utils'
   import { onMount, tick } from 'svelte'
 
   let {

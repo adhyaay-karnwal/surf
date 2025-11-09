@@ -7,14 +7,14 @@ import type {
   DownloadRequestMessage,
   DownloadState,
   DownloadUpdatedMessage
-} from '@deta/types'
-import { ResourceTypes } from '@deta/types'
+} from '@breeze/types'
+import { ResourceTypes } from '@breeze/types'
 
-import { shortenFilename, useLogScope } from '@deta/utils/io'
-import { ResourceTag } from '@deta/utils/formatting'
+import { shortenFilename, useLogScope } from '@breeze/utils/io'
+import { ResourceTag } from '@breeze/utils/formatting'
 
 import { useResourceManager } from './resources'
-import { isDev } from '@deta/utils'
+import { isDev } from '@breeze/utils'
 
 export class DownloadsManager {
   private downloadCompleteTimeoutMs = 5000 // keep completed downloads in the UI for 5 seconds

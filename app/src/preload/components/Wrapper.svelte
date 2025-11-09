@@ -3,7 +3,7 @@
   export let elem: HTMLElement | null = null
 </script>
 
-<div bind:this={elem} class="wrapper deta-component-wrapper" class:expanded>
+<div bind:this={elem} class="wrapper breeze-component-wrapper" class:expanded>
   <slot></slot>
 </div>
 

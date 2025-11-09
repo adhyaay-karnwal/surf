@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { Button, ResourceLoader } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { Button, ResourceLoader } from '@breeze/ui'
   import BreadcrumbItems from './BreadcrumbItems.svelte'
   import { writable } from 'svelte/store'
   import LocationBar from './LocationBar.svelte'
   import { type Snippet } from 'svelte'
   import NavigationBarGroup from './NavigationBarGroup.svelte'
   import SaveState from './SaveState.svelte'
-  import { isInternalRendererURL, isModKeyPressed } from '@deta/utils'
-  import { Resource, useResourceManager } from '@deta/services/resources'
-  import { useViewManager, ViewType, type WebContentsView } from '@deta/services/views'
+  import { isInternalRendererURL, isModKeyPressed } from '@breeze/utils'
+  import { Resource, useResourceManager } from '@breeze/services/resources'
+  import { useViewManager, ViewType, type WebContentsView } from '@breeze/services/views'
   import DownloadsIndicator from './DownloadsIndicator.svelte'
-  import { useBrowser } from '@deta/services/browser'
+  import { useBrowser } from '@breeze/services/browser'
   import ResourceMenu from './ResourceMenu.svelte'
-  import { ResourceTypes } from '@deta/types'
-  import type { TabItem } from '@deta/services/tabs'
+  import { ResourceTypes } from '@breeze/types'
+  import type { TabItem } from '@breeze/services/tabs'
 
   let {
     view,

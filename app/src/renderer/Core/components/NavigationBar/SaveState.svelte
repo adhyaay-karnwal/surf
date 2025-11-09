@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { ViewType, type WebContentsView } from '@deta/services/views'
-  import { Button, SearchableList, type SearchableItem, SourceCard } from '@deta/ui'
-  import { truncate, useLogScope } from '@deta/utils'
+  import { Icon } from '@breeze/icons'
+  import { ViewType, type WebContentsView } from '@breeze/services/views'
+  import { Button, SearchableList, type SearchableItem, SourceCard } from '@breeze/ui'
+  import { truncate, useLogScope } from '@breeze/utils'
   import OverlayPopover from '../Overlays/OverlayPopover.svelte'
-  import { Notebook, NotebookManagerEvents, useNotebookManager } from '@deta/services/notebooks'
-  import { useResourceManager, type Resource } from '@deta/services/resources'
+  import { Notebook, NotebookManagerEvents, useNotebookManager } from '@breeze/services/notebooks'
+  import { useResourceManager, type Resource } from '@breeze/services/resources'
   import { writable } from 'svelte/store'
-  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@deta/types'
+  import { ResourceTypes, SpaceEntryOrigin, type Fn } from '@breeze/types'
 
   let {
     view
@@ -88,9 +88,9 @@
     }
   })
 
-  async function saveToSurf() {
+  async function saveToBreeze() {
     if (!$isSaved || !resource) {
-      log.debug('Bookmarking page to Surf')
+      log.debug('Bookmarking page to Breeze')
       resource = await view.bookmarkPage()
     }
 
@@ -99,7 +99,7 @@
       return
     }
 
-    log.debug('Resource saved to Surf:', resource.id)
+    log.debug('Resource saved to Breeze:', resource.id)
     // isMenuOpen = false
   }
 
@@ -145,7 +145,7 @@
   {/snippet}
 
   <div class="list">
-    <!-- Save to Surf option -->
+    <!-- Save to Breeze option -->
     <div class="save-section">
       {#if $isSaved}
         {#if resource.url}
@@ -159,15 +159,15 @@
             interactive={false}
           />
         {:else if resource.type !== ResourceTypes.DOCUMENT_SPACE_NOTE}
-          <button class="list-item save-to-surf" disabled>
+          <button class="list-item save-to-breeze" disabled>
             <Icon name="check" size="19px" color="rgb(6, 158, 54)" />
-            <div class="list-item-label">Added to Surf!</div>
+            <div class="list-item-label">Added to Breeze!</div>
           </button>
         {/if}
       {:else}
-        <button class="list-item save-to-surf" onclick={saveToSurf}>
+        <button class="list-item save-to-breeze" onclick={saveToBreeze}>
           <Icon name="save" />
-          <div class="list-item-label">Add to Surf</div>
+          <div class="list-item-label">Add to Breeze</div>
         </button>
       {/if}
     </div>
@@ -260,7 +260,7 @@
         color: light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.6));
       }
 
-      &.save-to-surf {
+      &.save-to-breeze {
         background: light-dark(
           color-mix(in srgb, var(--accent, #3b82f6) 10%, transparent),
           color-mix(in srgb, var(--accent-dark, #82a2ff) 20%, transparent)

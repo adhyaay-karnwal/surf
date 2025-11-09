@@ -1,21 +1,21 @@
 <script lang="ts">
   import { writable } from 'svelte/store'
-  import { Icon } from '@deta/icons'
-  import { useBrowser } from '@deta/services/browser'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { useResourceManager, type Resource } from '@deta/services/resources'
-  import type { TabItem } from '@deta/services/tabs'
+  import { Icon } from '@breeze/icons'
+  import { useBrowser } from '@breeze/services/browser'
+  import { useNotebookManager } from '@breeze/services/notebooks'
+  import { useResourceManager, type Resource } from '@breeze/services/resources'
+  import type { TabItem } from '@breeze/services/tabs'
   import { constructBreadcrumbs } from './breadcrumbs'
-  import { isWebResourceType, ResourceTypes, ViewType, type Option } from '@deta/types'
+  import { isWebResourceType, ResourceTypes, ViewType, type Option } from '@breeze/types'
   import {
     Button,
     closeContextMenu,
     CONTEXT_MENU_KEY,
     openContextMenu,
     type CtxItem
-  } from '@deta/ui'
-  import { conditionalArrayItem, isMac, useLogScope } from '@deta/utils'
-  import type { WebContentsView } from '@deta/services/views'
+  } from '@breeze/ui'
+  import { conditionalArrayItem, isMac, useLogScope } from '@breeze/utils'
+  import type { WebContentsView } from '@breeze/services/views'
 
   let {
     resource,
@@ -69,7 +69,7 @@
       if (targetBreadcrumb) {
         view.webContents.loadURL(targetBreadcrumb.url)
       } else {
-        view.webContents.loadURL('surf://surf/notebook')
+        view.webContents.loadURL('breeze://breeze/notebook')
       }
     } catch (err) {
       log.error('Failed to delete resource', err)
@@ -170,7 +170,7 @@
       {
         type: 'action',
         kind: 'danger',
-        text: 'Delete from Surf',
+        text: 'Delete from Breeze',
         icon: 'trash',
         action: onDeleteResource
       }

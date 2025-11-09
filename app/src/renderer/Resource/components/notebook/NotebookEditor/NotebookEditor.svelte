@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Icon } from '@deta/icons'
-  import { Button, NotebookCover } from '@deta/ui'
+  import { Icon } from '@breeze/icons'
+  import { Button, NotebookCover } from '@breeze/ui'
   import ColorPicker from './ColorPicker.svelte'
-  import { Notebook, type NotebookCoverColor } from '@deta/services/notebooks'
+  import { Notebook, type NotebookCoverColor } from '@breeze/services/notebooks'
 
   let {
     notebook = $bindable(),

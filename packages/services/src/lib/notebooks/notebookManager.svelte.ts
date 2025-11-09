@@ -8,7 +8,7 @@ import {
   EventEmitterBase,
   SearchResourceTags,
   isMainRenderer
-} from '@deta/utils'
+} from '@breeze/utils'
 
 import { useKVTable, type BaseKVItem } from '../kv'
 
@@ -21,7 +21,7 @@ import {
   type Space,
   type Lock,
   type Fn
-} from '@deta/types'
+} from '@breeze/types'
 
 import {
   ResourceNote,
@@ -34,10 +34,10 @@ import type { SpaceBasicData } from '../ipc/events'
 
 import { Notebook } from './notebook.svelte'
 import { NotebookManagerEvents, type NotebookManagerEventHandlers } from './notebook.types'
-import { IconTypes } from '@deta/icons'
+import { IconTypes } from '@breeze/icons'
 import { SvelteMap } from 'svelte/reactivity'
 import type { MessagePortClient, MessagePortPrimary } from '../messagePort'
-import { useViewManager } from '@deta/services/views'
+import { useViewManager } from '@breeze/services/views'
 
 type NotebookSettings = BaseKVItem & {
   title: string
@@ -638,7 +638,7 @@ export class NotebookManager extends EventEmitterBase<NotebookManagerEventHandle
   }
 
   /** Deletes the provided resources from Oasis and gets rid of all references in any notebook */
-  async deleteResourcesFromSurf(resourceIds: string | string[], isUserAction = false) {
+  async deleteResourcesFromBreeze(resourceIds: string | string[], isUserAction = false) {
     resourceIds = Array.isArray(resourceIds) ? resourceIds : [resourceIds]
     this.log.debug('removing resources', resourceIds)
 
@@ -752,7 +752,7 @@ export class NotebookManager extends EventEmitterBase<NotebookManagerEventHandle
     this.log.debug('removing resources from', notebookId ?? 'oasis', resourceIds)
 
     if (!notebookId) {
-      return this.deleteResourcesFromSurf(resourceIds, isUserAction)
+      return this.deleteResourcesFromBreeze(resourceIds, isUserAction)
     }
     return this.removeResourcesFromNotebook(notebookId, resourceIds, isUserAction)
   }

@@ -1,6 +1,6 @@
 <script lang="ts">
   // https://www.electronjs.org/docs/latest/api/web-contents
-  import { useBrowser } from '@deta/services/browser'
+  import { useBrowser } from '@breeze/services/browser'
   import {
     useViewManager,
     ViewManagerEmitterNames,
@@ -8,7 +8,7 @@
     WebContentsEmitterNames,
     WebContentsView,
     WebContentsViewEmitterNames
-  } from '@deta/services/views'
+  } from '@breeze/services/views'
   import {
     clickOutside,
     isInternalRendererURL,
@@ -16,15 +16,15 @@
     truncate,
     useDebounce,
     useLogScope
-  } from '@deta/utils'
+  } from '@breeze/utils'
   import Breadcrumb from './Breadcrumb.svelte'
   import { writable } from 'svelte/store'
-  import { RisoText, RisoTextController } from '@deta/ui'
+  import { RisoText, RisoTextController } from '@breeze/ui'
   import { cubicOut, expoOut } from 'svelte/easing'
   import { Tween } from 'svelte/motion'
   import { onMount, tick } from 'svelte'
   import { SvelteMap } from 'svelte/reactivity'
-  import { type Fn, ViewType } from '@deta/types'
+  import { type Fn, ViewType } from '@breeze/types'
 
   let {
     view,
@@ -56,8 +56,8 @@
     }
 
     if ($viewTypeData.type === ViewType.Notebook || $viewTypeData.type === ViewType.NotebookHome) {
-      if ($viewTitle.startsWith('surf://')) {
-        return $viewTypeData.type === ViewType.NotebookHome ? 'Surf' : 'Notebook'
+      if ($viewTitle.startsWith('breeze://')) {
+        return $viewTypeData.type === ViewType.NotebookHome ? 'Breeze' : 'Notebook'
       }
 
       return truncate($viewTitle, 69)
@@ -69,14 +69,14 @@
           return 'Resource'
         }
 
-        if (isActiveLocationInternalRenderer.href.startsWith('surf://')) {
+        if (isActiveLocationInternalRenderer.href.startsWith('breeze://')) {
           return 'Resource'
         }
 
         return truncate(isActiveLocationInternalRenderer.href, 69)
       }
 
-      if ($viewTitle.startsWith('surf://')) {
+      if ($viewTitle.startsWith('breeze://')) {
         return 'Resource'
       }
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { EXAMPLE_PROMPTS, type ExamplePrompt } from '@deta/services/constants'
-  import { Button } from '@deta/ui'
-  import { Icon } from '@deta/icons'
-  import { useConfig } from '@deta/services'
+  import { EXAMPLE_PROMPTS, type ExamplePrompt } from '@breeze/services/constants'
+  import { Button } from '@breeze/ui'
+  import { Icon } from '@breeze/icons'
+  import { useConfig } from '@breeze/services'
 
   import NotebookSidecar from './NotebookSidecar.svelte'
 

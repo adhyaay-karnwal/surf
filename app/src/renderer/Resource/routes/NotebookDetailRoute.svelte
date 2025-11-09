@@ -3,28 +3,35 @@
     useResourceManager,
     type Resource,
     type ResourceSearchResult
-  } from '@deta/services/resources'
-  import { Button, PageMention, NotebookLoader, Renamable, contextMenu, openDialog } from '@deta/ui'
+  } from '@breeze/services/resources'
+  import {
+    Button,
+    PageMention,
+    NotebookLoader,
+    Renamable,
+    contextMenu,
+    openDialog
+  } from '@breeze/ui'
   import TeletypeEntry from '../../Core/components/Teletype/TeletypeEntry.svelte'
-  import { ResourceLoader, NotebookCover } from '@deta/ui'
-  import type { ChatPrompt, NotebookEntry, Option, ViewLocation } from '@deta/types'
-  import { ResourceTypes, SpaceEntryOrigin } from '@deta/types'
-  import { SearchResourceTags, truncate, useDebounce, useLogScope, wait } from '@deta/utils'
+  import { ResourceLoader, NotebookCover } from '@breeze/ui'
+  import type { ChatPrompt, NotebookEntry, Option, ViewLocation } from '@breeze/types'
+  import { ResourceTypes, SpaceEntryOrigin } from '@breeze/types'
+  import { SearchResourceTags, truncate, useDebounce, useLogScope, wait } from '@breeze/utils'
   import { onMount } from 'svelte'
   import { get, writable } from 'svelte/store'
-  import { type MessagePortClient } from '@deta/services/messagePort'
+  import { type MessagePortClient } from '@breeze/services/messagePort'
   import { handleResourceClick, openResource } from '../handlers/notebookOpenHandlers'
-  import { Icon } from '@deta/icons'
-  import { useNotebookManager, type Notebook } from '@deta/services/notebooks'
+  import { Icon } from '@breeze/icons'
+  import { useNotebookManager, type Notebook } from '@breeze/services/notebooks'
   import { type RouteResult } from '@mateothegreat/svelte5-router'
-  import { useConfig, useTeletypeService } from '@deta/services'
+  import { useConfig, useTeletypeService } from '@breeze/services'
   import NotebookSidebar from '../components/notebook/NotebookSidebar.svelte'
   import NotebookLayout from '../layouts/NotebookLayout.svelte'
   import NotebookEditor from '../components/notebook/NotebookEditor/NotebookEditor.svelte'
   import NotebookContents from '../components/notebook/NotebookContents.svelte'
-  import { provideAI } from '@deta/services/ai'
-  import { MentionItemType } from '@deta/editor'
-  import { BUILT_IN_PAGE_PROMPTS } from '@deta/services/constants'
+  import { provideAI } from '@breeze/services/ai'
+  import { MentionItemType } from '@breeze/editor'
+  import { BUILT_IN_PAGE_PROMPTS } from '@breeze/services/constants'
   import PromptPills from '../components/PromptPills.svelte'
 
   let {

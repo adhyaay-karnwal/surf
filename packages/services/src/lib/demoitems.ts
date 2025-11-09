@@ -1,7 +1,7 @@
-import { useLogScope } from '@deta/utils/io'
-import { isMac, wait } from '@deta/utils'
-import { ResourceTag, SearchResourceTags } from '@deta/utils/formatting'
-import { ResourceTypes } from '@deta/types'
+import { useLogScope } from '@breeze/utils/io'
+import { isMac, wait } from '@breeze/utils'
+import { ResourceTag, SearchResourceTags } from '@breeze/utils/formatting'
+import { ResourceTypes } from '@breeze/types'
 
 import { ResourceNote, useResourceManager } from './resources'
 import { extractAndCreateWebResource } from './mediaImporter'
@@ -161,7 +161,10 @@ export async function createDemoNotes(notebook: Notebook) {
     {
       id: OnboardingNoteWelcome.attributes.id as string,
       title: OnboardingNoteWelcome.attributes.title as string,
-      content: parseNoteContent(OnboardingNoteWelcome, `surf://surf/resource/${manualResource.id}`)
+      content: parseNoteContent(
+        OnboardingNoteWelcome,
+        `breeze://breeze/resource/${manualResource.id}`
+      )
     },
     notebook
   )

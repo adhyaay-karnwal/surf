@@ -8,9 +8,9 @@ import {
   type DetectedResource,
   type WebViewEventSendNames,
   type WebViewSendEvents
-} from '@deta/types'
-import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@deta/utils'
-import { WebParser } from '@deta/web-parser'
+} from '@breeze/types'
+import { codeLanguageToMimeType, markdownToHtml, useLogScope } from '@breeze/utils'
+import { WebParser } from '@breeze/web-parser'
 import { PromptIDs, getPrompt } from './prompts'
 import type { AIService } from './aiClean'
 import {
@@ -18,10 +18,10 @@ import {
   BadRequestError,
   TooManyRequestsError,
   UnauthorizedError
-} from '@deta/backend/types'
-import { type ChatError } from '@deta/types/src/ai.types'
-import { ResourceManager } from '@deta/services/resources'
-import { ResourceTag } from '@deta/utils/formatting'
+} from '@breeze/backend/types'
+import { type ChatError } from '@breeze/types'
+import { ResourceManager } from '@breeze/services/resources'
+import { ResourceTag } from '@breeze/utils/formatting'
 
 const log = useLogScope('AI')
 
@@ -29,17 +29,17 @@ export const DUMMY_CHAT_RESPONSE = `
 <id>{message_id}</id>
 
 <sources>
-	<source>
-		<id>source1</id>
-		<resource_id>resource1</resource_id>
-		<content>hey there</content>
-		<!-- Optional Metadata for the source id -->
-		<metadata>
-			<timestamp>
-				12
-			</timestamp>
-		</metadata>
-	</source>
+    <source>
+        <id>source1</id>
+        <resource_id>resource1</resource_id>
+        <content>hey there</content>
+        <!-- Optional Metadata for the source id -->
+        <metadata>
+            <timestamp>
+                12
+            </timestamp>
+        </metadata>
+    </source>
 </sources>
 
 <answer>
@@ -366,31 +366,31 @@ export const mapCitationsToText = (content: HTMLElement) => {
   let citationsToText = new Map<string, string>()
 
   /*
-			For each citation node, we need to find the text that corresponds to it.
-			We do this by finding the text node that comes before the citation node.
-			We need to make sure we only use the relevant text not the entire text content between the last citation and the current citation.
-			We do this by only taking the text nodes of elements that are directly in front of the citation node.
+            For each citation node, we need to find the text that corresponds to it.
+            We do this by finding the text node that comes before the citation node.
+            We need to make sure we only use the relevant text not the entire text content between the last citation and the current citation.
+            We do this by only taking the text nodes of elements that are directly in front of the citation node.
 
-			Example:
-			<p>First text with a citation <citation>1</citation></p>
-			<p>Second text with a citation <citation>2</citation></p>
-			<p>Third text with no citation</p>
-			<p>Forth <strong>text</strong> with a citation <citation>3</citation></p>
+            Example:
+            <p>First text with a citation <citation>1</citation></p>
+            <p>Second text with a citation <citation>2</citation></p>
+            <p>Third text with no citation</p>
+            <p>Forth <strong>text</strong> with a citation <citation>3</citation></p>
 
-			Parsed mapping:
+            Parsed mapping:
 
-			1: First text with a citation
-			2: Second text with a citation
-			3: Forth text with a citation
-	*/
+            1: First text with a citation
+            2: Second text with a citation
+            3: Forth text with a citation
+    */
 
   let lastText = ''
 
   /*
-			loop through all child nodes to find the citation node
-			take all text nodes that come before the citation within the same parent node and concatenate them
-			if the citation node is inside a styled node like <strong> or <em> we need to take the text node of the styled node
-	*/
+            loop through all child nodes to find the citation node
+            take all text nodes that come before the citation within the same parent node and concatenate them
+            if the citation node is inside a styled node like <strong> or <em> we need to take the text node of the styled node
+    */
 
   const mapCitationsToTextRecursive = (node: Node, citationsToText: Map<string, string>) => {
     if (node.nodeType === Node.ELEMENT_NODE) {
@@ -608,7 +608,7 @@ export const parseChatOutputToHtml = async (output: AIChatMessageParsed) => {
   return html
 }
 
-export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) => {
+export const parseChatOutputToBreezeletCode = async (output: AIChatMessageParsed) => {
   const content = output.content
 
   const completeCodeBlockRegex = /```(?:[\w]*\n)?([\s\S]*?)```/
@@ -623,18 +623,18 @@ export const parseChatOutputToSurfletCode = async (output: AIChatMessageParsed) 
   } else if (openMatch) {
     match = openMatch[1]
   }
-  const surflet = document.createElement('surflet')
+  const breezelet = document.createElement('breezelet')
   const codeElement = document.createElement('code')
   codeElement.textContent = match // this properly escapes the content
 
-  surflet.appendChild(codeElement)
-  return surflet.outerHTML
+  breezelet.appendChild(codeElement)
+  return breezelet.outerHTML
 }
 
 const prepLoadingPhrases = [
   'Analysing your context…',
   'Getting to the essence…',
-  'Surfing the data…',
+  'Breezeing the data…',
   'Unpacking details…',
   'Summoning the goodies…',
   'Charging the knowledge battery…',

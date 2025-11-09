@@ -1,7 +1,7 @@
-import { useTabs } from '@deta/services/tabs'
-import { useViewManager } from '@deta/services/views'
+import { useTabs } from '@breeze/services/tabs'
+import { useViewManager } from '@breeze/services/views'
 import type { PreloadEvents } from './preloadEvents'
-import { useBrowser } from '@deta/services/browser'
+import { useBrowser } from '@breeze/services/browser'
 
 export const setupTabViewEvents = (events: PreloadEvents) => {
   const tabsManager = useTabs()

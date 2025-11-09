@@ -1,13 +1,13 @@
-import { ResourceTagsBuiltInKeys } from '@deta/types'
+import { ResourceTagsBuiltInKeys } from '@breeze/types'
 import {
   conditionalArrayItem,
   getFileKind,
   getFileType,
   truncateURL,
   useLogScope
-} from '@deta/utils'
+} from '@breeze/utils'
 import type { AIService } from './ai'
-import { Provider } from '@deta/types/src/ai.types'
+import { Provider } from '@breeze/types'
 import {
   BROWSER_HISTORY_MENTION,
   BUILT_IN_MENTIONS_BASE,
@@ -15,10 +15,10 @@ import {
   NOTE_MENTION,
   WIKIPEDIA_SEARCH_MENTION
 } from '../constants/chat'
-import { MentionItemType, type MentionItem as MentionItemEditor } from '@deta/editor'
-import { type ResourceManager } from '@deta/services/resources'
-import type { MentionItemsFetcher } from '@deta/editor/extensions/Mention'
-import { SearchResourceTags } from '@deta/utils/formatting'
+import { MentionItemType, type MentionItem as MentionItemEditor } from '@breeze/editor'
+import { type ResourceManager } from '@breeze/services/resources'
+import type { MentionItemsFetcher } from '@breeze/editor/extensions/Mention'
+import { SearchResourceTags } from '@breeze/utils/formatting'
 import { MentionTypes } from '../mentions/mention.types'
 import { useMessagePortClient } from '../messagePort'
 

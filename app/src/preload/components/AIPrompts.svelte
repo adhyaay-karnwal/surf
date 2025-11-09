@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  import { Icon } from '@deta/icons'
-  import { tooltip } from '@deta/utils/dom'
-  import type { WebViewEventTransform } from '@deta/types'
+  import { Icon } from '@breeze/icons'
+  import { tooltip } from '@breeze/utils/dom'
+  import type { WebViewEventTransform } from '@breeze/types'
 
   const dispatch = createEventDispatcher<{ click: WebViewEventTransform['type'] }>()
 

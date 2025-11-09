@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getHostname, truncate } from '@deta/utils'
+  import { getHostname, truncate } from '@breeze/utils'
 
   export let url: string
   export let title: string

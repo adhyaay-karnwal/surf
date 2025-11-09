@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte'
-  import { useNotebookManager, type Notebook, NotebookManagerEvents } from '@deta/services/notebooks'
-  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@deta/types'
-  import { type ResourceSearchResult, useResourceManager } from '@deta/services/resources'
-  import { SearchResourceTags, useCancelableDebounce, useLogScope, useThrottle } from '@deta/utils'
+  import { useNotebookManager, type Notebook, NotebookManagerEvents } from '@breeze/services/notebooks'
+  import { ResourceTagsBuiltInKeys, type Option, type SFFSResourceTag, type SFFSSearchParameters } from '@breeze/types'
+  import { type ResourceSearchResult, useResourceManager } from '@breeze/services/resources'
+  import { SearchResourceTags, useCancelableDebounce, useLogScope, useThrottle } from '@breeze/utils'
 
   interface Search {
     query: string

@@ -14,7 +14,7 @@ import {
 import { provideAI } from '../ai'
 import { createDownloadsManager } from '../downloads.svelte'
 import { createBrowser } from '../browser'
-import { useLogScope } from '@deta/utils'
+import { useLogScope } from '@breeze/utils'
 import { useMessagePortPrimary } from '../messagePort'
 
 export const initServices = () => {

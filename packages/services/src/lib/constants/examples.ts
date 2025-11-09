@@ -1,7 +1,8 @@
-import type { NotebookCustomization } from '@deta/types'
+import type { NotebookCustomization } from '@breeze/types'
+import { BREEZE_SITE_URL } from './branding'
 
 export const onboardingNotebook = {
-  name: 'Intro to Surf',
+  name: 'Intro to Breeze',
   customization: {
     coverColor: [
       ['#FFDFBA', '#FFDFBA'],
@@ -54,12 +55,12 @@ export const onboardingNotebook = {
     ]
   } as NotebookCustomization,
   urls: [
-    'https://deta.surf'
-    // 'https://www.xda-developers.com/deta-surf-promising-new-browser/',
+    BREEZE_SITE_URL
+    // 'https://www.xda-developers.com/breeze-breeze-promising-new-browser/',
     // 'https://www.youtube.com/watch?v=uY2UsSETRaU',
     // 'https://www.youtube.com/watch?v=OpvMnmEPWZM',
-    // 'https://deta.surf/people/efe',
-    // 'https://deta.surf/people/reese',
-    // 'https://productidentity.co/p/surf-the-browser'
+    // `${BREEZE_SITE_URL}/people/efe`,
+    // `${BREEZE_SITE_URL}/people/reese`,
+    // 'https://productidentity.co/p/breeze-the-browser'
   ]
 }

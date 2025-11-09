@@ -199,7 +199,7 @@ fn js_send_note_message(mut cx: FunctionContext) -> JsResult<JsPromise> {
         #[serde(default)]
         pub websearch: bool,
         #[serde(default)]
-        pub surflet: bool,
+        pub breezelet: bool,
     }
 
     let tunnel = cx.argument::<JsBox<WorkerTunnel>>(0)?;
@@ -225,7 +225,7 @@ fn js_send_note_message(mut cx: FunctionContext) -> JsResult<JsPromise> {
             number_documents: opts.limit,
             general: opts.general,
             websearch: opts.websearch,
-            surflet: opts.surflet,
+            breezelet: opts.breezelet,
         }),
         deferred,
     );

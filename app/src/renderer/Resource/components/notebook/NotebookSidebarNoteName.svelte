@@ -1,12 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { useResourceManager, type Resource, getResourceCtxItems } from '@deta/services/resources'
-  import { contextMenu, openDialog, type CtxItem } from '@deta/ui'
-  import { useNotebookManager } from '@deta/services/notebooks'
-  import { truncate } from '@deta/utils'
-  import { type Fn, type OpenTarget, SpaceEntryOrigin } from '@deta/types'
+  import {
+    useResourceManager,
+    type Resource,
+    getResourceCtxItems
+  } from '@breeze/services/resources'
+  import { contextMenu, openDialog, type CtxItem } from '@breeze/ui'
+  import { useNotebookManager } from '@breeze/services/notebooks'
+  import { truncate } from '@breeze/utils'
+  import { type Fn, type OpenTarget, SpaceEntryOrigin } from '@breeze/types'
   import { handleResourceClick, openResource } from '../../handlers/notebookOpenHandlers'
-  import { Icon } from '@deta/icons'
+  import { Icon } from '@breeze/icons'
 
   let {
     resource,
@@ -68,7 +72,7 @@
             })
             if (!confirmed) return
 
-            notebookManager.deleteResourcesFromSurf(resourceId, true)
+            notebookManager.deleteResourcesFromBreeze(resourceId, true)
           },
           onRemove:
             !sourceNotebookId || sourceNotebookId === 'drafts'

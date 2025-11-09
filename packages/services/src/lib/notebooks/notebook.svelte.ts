@@ -7,10 +7,10 @@ import {
   type NotebookEntry,
   type NotebookSpace,
   type SpaceEntrySearchOptions
-} from '@deta/types'
+} from '@breeze/types'
 
-import { useLogScope, blobToSmallImageUrl, isMainRenderer } from '@deta/utils'
-import { getIconString, IconTypes } from '@deta/icons'
+import { useLogScope, blobToSmallImageUrl, isMainRenderer } from '@breeze/utils'
+import { getIconString, IconTypes } from '@breeze/icons'
 
 import { type ResourceManager } from '../resources'
 

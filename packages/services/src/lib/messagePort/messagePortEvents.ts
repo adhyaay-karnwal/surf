@@ -1,4 +1,4 @@
-import { type MentionItem } from '@deta/editor'
+import { type MentionItem } from '@breeze/editor'
 import { createMessagePortService, type MessagePortEvent } from './messagePortService'
 import type {
   CitationClickEvent,
@@ -7,7 +7,7 @@ import type {
   OpenResourceOptions,
   OpenTarget,
   ViewLocation
-} from '@deta/types'
+} from '@breeze/types'
 
 import type {
   WebContentsViewContextManagerActionOutputs,
@@ -35,7 +35,7 @@ export type AIQueryPayload = {
   mentions: MentionItem[]
   tools?: {
     websearch?: boolean
-    surflet?: boolean
+    breezelet?: boolean
   }
 }
 

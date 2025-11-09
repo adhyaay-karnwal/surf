@@ -8,7 +8,7 @@ import { ContextItemNotebook, type ContextService } from '../contextManager'
 import { ContextItemResource } from './resource'
 import { ContextItemSpace } from './space'
 import { ContextItemTypes, ContextItemIconTypes, type ContextItemIcon } from './types'
-import { useDebounce, wait } from '@deta/utils'
+import { useDebounce, wait } from '@breeze/utils'
 import { ViewType } from '../../views'
 
 export class ContextItemActiveTab extends ContextItemBase {

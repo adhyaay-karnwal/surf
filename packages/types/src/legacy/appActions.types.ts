@@ -24,11 +24,11 @@ export type AppAction = {
 }
 
 export enum ViewType {
-  DETAIL = '@deta/detail',
-  RAW = '@deta/raw',
-  FILE = '@deta/file',
-  LIST = '@deta/list',
-  TABLE = '@deta/table'
+  DETAIL = '@breeze/detail',
+  RAW = '@breeze/raw',
+  FILE = '@breeze/file',
+  LIST = '@breeze/list',
+  TABLE = '@breeze/table'
 }
 
 export type BaseView = {
