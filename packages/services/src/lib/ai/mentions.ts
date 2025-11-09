@@ -7,7 +7,7 @@ import {
   useLogScope
 } from '@breeze/utils'
 import type { AIService } from './ai'
-import { Provider } from '@breeze/types/src/ai.types'
+import { Provider } from '@breeze/types'
 import {
   BROWSER_HISTORY_MENTION,
   BUILT_IN_MENTIONS_BASE,

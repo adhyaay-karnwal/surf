@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { BrowserTypeItem } from '@breeze/types'
   import type { ImportStatus } from './ImporterV2.svelte'
-  import { BREEZE_SUPPORT_EMAIL } from '@breeze/services/src/lib/constants/branding'
+  import { BREEZE_SUPPORT_EMAIL } from '@breeze/services/constants'
 
   const supportEmail = BREEZE_SUPPORT_EMAIL
 

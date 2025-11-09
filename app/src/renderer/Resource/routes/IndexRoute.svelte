@@ -23,7 +23,7 @@
     BREEZE_SITE_URL,
     BREEZE_SUPPORT_EMAIL,
     BREEZE_DISCORD_URL
-  } from '@breeze/services/src/lib/constants/branding'
+  } from '@breeze/services/constants'
 
   let { onopensidebar }: { onopensidebar: Fn } = $props()
 

@@ -92,7 +92,7 @@
     SMART_NOTES_SUGGESTIONS_GENERATOR_PROMPT
   } from '@breeze/services/constants'
   import type { MentionAction } from '@breeze/editor/src/lib/extensions/Mention'
-  import { type AITool, ModelTiers, Provider } from '@breeze/types/src/ai.types'
+  import { type AITool, ModelTiers, Provider } from '@breeze/types'
   import { useConfig } from '@breeze/services'
   import { createWikipediaAPI, WebParser } from '@breeze/web-parser'
   import EmbeddedResource from './EmbeddedResource.svelte'

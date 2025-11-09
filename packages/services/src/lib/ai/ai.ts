@@ -18,12 +18,7 @@ import {
   SIMPLE_SUMMARIZER_PROMPT
 } from '../constants/prompts'
 import { type AiSFFSQueryResponse } from '@breeze/types'
-import {
-  BUILT_IN_MODELS,
-  ModelTiers,
-  OPEN_AI_PATH_SUFFIX,
-  type Model
-} from '@breeze/types/src/ai.types'
+import { BUILT_IN_MODELS, ModelTiers, OPEN_AI_PATH_SUFFIX, type Model } from '@breeze/types'
 import { parseAIError } from './helpers'
 import { useTabs, type TabsService } from '../tabs'
 import { AIChat, type ChatCompletionResponse, type ChatPrompt } from './chat'

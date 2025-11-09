@@ -3,7 +3,7 @@ import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
 import { applyCSPToSession } from './csp'
 import { isMac } from '@breeze/utils/system'
-import { SettingsWindowTab } from '@breeze/types/src/window.types'
+import { SettingsWindowTab } from '@breeze/types'
 import { SettingsWindowEntrypoint } from './utils'
 import { BREEZE_DISCORD_URL, BREEZE_SITE_URL } from './branding'
 

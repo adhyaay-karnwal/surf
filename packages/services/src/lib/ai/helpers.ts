@@ -19,7 +19,7 @@ import {
   TooManyRequestsError,
   UnauthorizedError
 } from '@breeze/backend/types'
-import { type ChatError } from '@breeze/types/src/ai.types'
+import { type ChatError } from '@breeze/types'
 import { ResourceManager } from '@breeze/services/resources'
 import { ResourceTag } from '@breeze/utils/formatting'
 
@@ -29,17 +29,17 @@ export const DUMMY_CHAT_RESPONSE = `
 <id>{message_id}</id>
 
 <sources>
-	<source>
-		<id>source1</id>
-		<resource_id>resource1</resource_id>
-		<content>hey there</content>
-		<!-- Optional Metadata for the source id -->
-		<metadata>
-			<timestamp>
-				12
-			</timestamp>
-		</metadata>
-	</source>
+    <source>
+        <id>source1</id>
+        <resource_id>resource1</resource_id>
+        <content>hey there</content>
+        <!-- Optional Metadata for the source id -->
+        <metadata>
+            <timestamp>
+                12
+            </timestamp>
+        </metadata>
+    </source>
 </sources>
 
 <answer>
@@ -366,31 +366,31 @@ export const mapCitationsToText = (content: HTMLElement) => {
   let citationsToText = new Map<string, string>()
 
   /*
-			For each citation node, we need to find the text that corresponds to it.
-			We do this by finding the text node that comes before the citation node.
-			We need to make sure we only use the relevant text not the entire text content between the last citation and the current citation.
-			We do this by only taking the text nodes of elements that are directly in front of the citation node.
+            For each citation node, we need to find the text that corresponds to it.
+            We do this by finding the text node that comes before the citation node.
+            We need to make sure we only use the relevant text not the entire text content between the last citation and the current citation.
+            We do this by only taking the text nodes of elements that are directly in front of the citation node.
 
-			Example:
-			<p>First text with a citation <citation>1</citation></p>
-			<p>Second text with a citation <citation>2</citation></p>
-			<p>Third text with no citation</p>
-			<p>Forth <strong>text</strong> with a citation <citation>3</citation></p>
+            Example:
+            <p>First text with a citation <citation>1</citation></p>
+            <p>Second text with a citation <citation>2</citation></p>
+            <p>Third text with no citation</p>
+            <p>Forth <strong>text</strong> with a citation <citation>3</citation></p>
 
-			Parsed mapping:
+            Parsed mapping:
 
-			1: First text with a citation
-			2: Second text with a citation
-			3: Forth text with a citation
-	*/
+            1: First text with a citation
+            2: Second text with a citation
+            3: Forth text with a citation
+    */
 
   let lastText = ''
 
   /*
-			loop through all child nodes to find the citation node
-			take all text nodes that come before the citation within the same parent node and concatenate them
-			if the citation node is inside a styled node like <strong> or <em> we need to take the text node of the styled node
-	*/
+            loop through all child nodes to find the citation node
+            take all text nodes that come before the citation within the same parent node and concatenate them
+            if the citation node is inside a styled node like <strong> or <em> we need to take the text node of the styled node
+    */
 
   const mapCitationsToTextRecursive = (node: Node, citationsToText: Map<string, string>) => {
     if (node.nodeType === Node.ELEMENT_NODE) {

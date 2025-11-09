@@ -25,7 +25,7 @@
     ProviderLabels,
     ProviderIcons,
     type Model
-  } from '@breeze/types/src/ai.types'
+  } from '@breeze/types'
   import {
     FormField,
     Expandable,

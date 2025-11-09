@@ -1,6 +1,6 @@
 <script lang="ts">
   import { DynamicIcon } from '@breeze/icons'
-  import { BREEZE_SITE_URL } from '@breeze/services/src/lib/constants/branding'
+  import { BREEZE_SITE_URL } from '@breeze/services/constants'
 
   export let space: any
 

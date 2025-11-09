@@ -2,7 +2,7 @@ import { mergeAttributes, Node, nodePasteRule } from '@tiptap/core'
 
 import { getEmbedUrlFromYoutubeUrl, isValidYoutubeUrl, YOUTUBE_REGEX_GLOBAL } from './utils'
 import { parseURL } from '@breeze/utils'
-import { BREEZE_SITE_URL } from '@breeze/services/src/lib/constants/branding'
+import { BREEZE_SITE_URL } from '@breeze/services/constants'
 
 const BREEZE_SITE_HOST = (() => {
   try {

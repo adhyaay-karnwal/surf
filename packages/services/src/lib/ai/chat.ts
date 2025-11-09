@@ -14,7 +14,7 @@ import {
   type AIChatMessageRole,
   type AIChatMessageSource
 } from '@breeze/types'
-import { ChatMode, ModelTiers, Provider, type Model } from '@breeze/types/src/ai.types'
+import { ChatMode, ModelTiers, Provider, type Model } from '@breeze/types'
 import { parseAIError, parseChatResponseSources } from './helpers'
 import {
   PageChatMessageSentEventError,

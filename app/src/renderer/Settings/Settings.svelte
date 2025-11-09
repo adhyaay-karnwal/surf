@@ -17,12 +17,7 @@
   import TeletypeDefaultActionPicker from './components/TeletypeDefaultActionPicker.svelte'
   import AppStylePicker from './components/AppStylePicker.svelte'
   import ModelSettings, { type ModelUpdate } from './components/ModelSettings.svelte'
-  import {
-    BUILT_IN_MODELS,
-    DEFAULT_AI_MODEL,
-    Provider,
-    type Model
-  } from '@breeze/types/src/ai.types'
+  import { BUILT_IN_MODELS, DEFAULT_AI_MODEL, Provider, type Model } from '@breeze/types'
   import { openDialog, prepareContextMenu } from '@breeze/ui'
   import SmartNotesOptions from './components/SmartNotesOptions.svelte'
   import LayoutPicker from '../components/LayoutPicker.svelte'

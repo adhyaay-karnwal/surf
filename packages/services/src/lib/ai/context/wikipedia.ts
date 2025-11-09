@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 import { createWikipediaAPI, WikipediaAPI } from '@breeze/web-parser'
 import { optimisticParseJSON } from '@breeze/utils'
-import { ModelTiers } from '@breeze/types/src/ai.types'
+import { ModelTiers } from '@breeze/types'
 
 import { ContextItemBase } from './base'
 import type { ContextService } from '../contextManager'

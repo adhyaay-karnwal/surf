@@ -2,7 +2,7 @@
   import { derived } from 'svelte/store'
 
   import { useLogScope } from '@breeze/utils/io'
-  import { ProviderIcons, ProviderLabels, RECOMMENDED_AI_MODELS } from '@breeze/types/src/ai.types'
+  import { ProviderIcons, ProviderLabels, RECOMMENDED_AI_MODELS } from '@breeze/types'
 
   import { Dropdown, type DropdownItem } from '@breeze/ui'
   import { useAI } from '@breeze/services/ai'
