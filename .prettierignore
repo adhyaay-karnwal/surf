@@ -7,3 +7,4 @@ tsconfig.*.json
 .svelte-kit
 
 packages/ui/src/lib/components/*
+**/*.rs
