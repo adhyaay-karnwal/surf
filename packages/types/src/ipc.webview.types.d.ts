@@ -213,7 +213,7 @@ export type WebViewSendEvents = {
   }
 }
 export declare enum WebviewAnnotationEventNames {
-  Click = 'deta_annotation_click'
+  Click = 'breeze_annotation_click'
 }
 export type WebviewAnnotationEvents = {
   [WebviewAnnotationEventNames.Click]: WebViewEventAnnotationClick

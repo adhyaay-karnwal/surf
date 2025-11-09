@@ -58,6 +58,6 @@ export var WebViewGestureRequiredEventNames
 })(WebViewGestureRequiredEventNames || (WebViewGestureRequiredEventNames = {}))
 export var WebviewAnnotationEventNames
 ;(function (WebviewAnnotationEventNames) {
-  WebviewAnnotationEventNames['Click'] = 'deta_annotation_click'
+  WebviewAnnotationEventNames['Click'] = 'breeze_annotation_click'
 })(WebviewAnnotationEventNames || (WebviewAnnotationEventNames = {}))
 export const WEBVIEW_MOUSE_CLICK_WINDOW_EVENT = 'webview-mouse-click'
