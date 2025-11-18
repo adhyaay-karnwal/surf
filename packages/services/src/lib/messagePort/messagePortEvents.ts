@@ -35,7 +35,7 @@ export type AIQueryPayload = {
   mentions: MentionItem[]
   tools?: {
     websearch?: boolean
-    surflet?: boolean
+    mistlet?: boolean
   }
 }
 

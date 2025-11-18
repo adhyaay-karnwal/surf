@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-The Deta team takes the security of Surf seriously. If you discover a security vulnerability, please report it responsibly.
+The Deta team takes the security of Mist seriously. If you discover a security vulnerability, please report it responsibly.
 
 ### How to Report
 
@@ -12,7 +12,7 @@ The Deta team takes the security of Surf seriously. If you discover a security v
 2. Click **Report a vulnerability**
 3. Fill out the vulnerability report form with as much detail as possible
 
-Alternatively, if you cannot use GitHub's reporting feature, please email us at: **security@deta.surf**
+Alternatively, if you cannot use GitHub's reporting feature, please email us at: **security@mistbrowser.com**
 
 ### What to Include
 
@@ -45,7 +45,7 @@ The following are outside the scope of our security policy:
 
 ## Bug Bounty Program
 
-We currently **do not** offer a bug bounty program, but we deeply appreciate security reports which help keep Surf secure.
+We currently **do not** offer a bug bounty program, but we deeply appreciate security reports which help keep Mist secure.
 
 ## Public Disclosure Policy
 
@@ -56,7 +56,7 @@ We follow a **coordinated disclosure** approach:
 
 ## Contact
 
-- **Security Email**: security@deta.surf
+- **Security Email**: security@mistbrowser.com
 - **Security Team**: @security (GitHub team mention)
 
 ---

@@ -41,7 +41,7 @@
   export let selectedModelId: Writable<string>
   export let models: Writable<Model[]>
 
-  const AI_MODEL_DOCS = 'https://github.com/deta/surf/blob/main/docs/AI_MODELS.md'
+  const AI_MODEL_DOCS = 'https://github.com/deta/mist/blob/main/docs/AI_MODELS.md'
   const dispatch = createEventDispatcher<{
     'select-model': string
     'update-model': ModelUpdate
@@ -274,7 +274,7 @@
 
       <div class="details-text">
         <p>
-          Your selected model will be used across all Surf features. Surf may switch to more
+          Your selected model will be used across all Mist features. Mist may switch to more
           efficient models from the same provider for certain features.
         </p>
       </div>
@@ -458,7 +458,7 @@
                 <FormField
                   label="Model Label"
                   placeholder="My Custom Model"
-                  infoText="Give your custom model a name so you can identify it within Surf's UI"
+                  infoText="Give your custom model a name so you can identify it within Mist's UI"
                   value={model.label}
                   on:save={(e) => updateModel(model.id, { label: e.detail })}
                 />

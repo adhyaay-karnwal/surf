@@ -14,7 +14,7 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
     return
   }
 
-  const settingsWindowSession = session.fromPartition('persist:surf-app-session')
+  const settingsWindowSession = session.fromPartition('persist:mist-app-session')
 
   settingsWindow = new BrowserWindow({
     width: 1000,
@@ -60,8 +60,8 @@ export function createSettingsWindow(tab?: SettingsWindowTab) {
 
   settingsWindow.webContents.setWindowOpenHandler((details) => {
     const ALLOWED_DOMAINS = [
-      'https://deta.surf',
-      'https://deta.notion.site',
+      'https://mistbrowser.com',
+      'https://guide.mistbrowser.com',
       'https://github.com',
       'https://ollama.com',
       'https://openrouter.ai',

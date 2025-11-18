@@ -1192,12 +1192,12 @@ export class ContextService {
 
   async preparePageTab(tab: TabItem) {
     await tick()
-    const surfUrlMatch = tab.view.urlValue.match(/surf:\/\/resource\/([^\/]+)/)
+    const surfUrlMatch = tab.view.urlValue.match(/mist:\/\/resource\/([^\/]+)/)
     if (surfUrlMatch) {
       const resourceId = surfUrlMatch[1]
       const resource = await this.resourceManager.getResource(resourceId)
       if (resource) {
-        this.log.debug('Resource found for surf url', resourceId)
+        this.log.debug('Resource found for mist url', resourceId)
         return resource
       }
 

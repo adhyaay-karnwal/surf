@@ -59,8 +59,8 @@ export const RESOURCE_FILTERS: FilterItem[] = [
   //   tags: [...filterDocumentTags('prefix')]
   // },
   {
-    id: 'surflets',
-    label: 'Surflets',
+    id: 'mistlets',
+    label: 'Mistlets',
     tags: [...filterGeneratedArtifactsTags()]
   },
   // {

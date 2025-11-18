@@ -115,17 +115,17 @@ export enum ViewType {
   Page = 'page',
   /**
    * A specific notebook
-   * @example surf://surf/notebook/:id
+   * @example mist://mist/notebook/:id
    */
   Notebook = 'notebook',
   /**
    * The notebooks home/root view
-   * @example surf://surf/notebook
+   * @example mist://mist/notebook
    */
   NotebookHome = 'notebook_home',
   /**
    * A specific resource (most likely note)
-   * @example surf://surf/resource/:id
+   * @example mist://mist/resource/:id
    */
   Resource = 'resource',
   /**

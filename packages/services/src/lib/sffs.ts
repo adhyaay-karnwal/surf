@@ -1140,7 +1140,7 @@ export class SFFS {
       inlineImages?: string[]
       general?: boolean
       websearch?: boolean
-      surflet?: boolean
+      mistlet?: boolean
     }
   ): Promise<void> {
     this.log.debug(
@@ -1169,7 +1169,7 @@ export class SFFS {
       limit: opts?.limit ?? 20,
       general: opts?.general,
       websearch: opts?.websearch,
-      surflet: opts?.surflet
+      mistlet: opts?.mistlet
     }
     return this.withErrorHandling(
       this.backend,

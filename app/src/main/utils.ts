@@ -22,7 +22,7 @@ const isDefaultBrowserWindows = async () => {
       { encoding: 'utf-8' }
     ).toString()
 
-    const appProgId = 'ea.browser.deta.surf'
+    const appProgId = 'com.mistbrowser.desktop'
 
     const isHttpDefault = httpProgId.includes(appProgId)
     const isHttpsDefault = httpsProgId.includes(appProgId)
@@ -77,18 +77,18 @@ export const isPathSafe = (basePath: string, filePath: string): boolean => {
 }
 
 export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: boolean): string => {
-  // For Google sign-in pages, we keep the Surf version at the end of the User-Agent
+  // For Google sign-in pages, we keep the Mist version at the end of the User-Agent
   // to avoid "secure browser" warnings. For everything else, we strip out both
-  // Electron and Surf versions.
-  const surfVersion =
+  // Electron and Mist versions.
+  const mistVersion =
     current
       .split(' ')
-      .find((part) => part.startsWith('Surf/'))
-      ?.replace('Surf/', '') || ''
+      .find((part) => part.startsWith('Mist/'))
+      ?.replace('Mist/', '') || ''
 
   let result = current
     .split(' ')
-    .filter((part) => !part.startsWith('Electron/') && !part.startsWith('Surf/'))
+    .filter((part) => !part.startsWith('Electron/') && !part.startsWith('Mist/'))
     .join(' ')
     .replace(
       process.versions.chrome || '',
@@ -100,8 +100,8 @@ export const normalizeElectronUserAgent = (current: string, isGoogleAccounts: bo
         : ''
     )
 
-  if (isGoogleAccounts && surfVersion) {
-    result += ` Surf/${surfVersion}`
+  if (isGoogleAccounts && mistVersion) {
+    result += ` Mist/${mistVersion}`
   }
 
   return result
@@ -170,8 +170,8 @@ export const CoreEntryPoint = (() => {
   }
 })()
 
-export function checkIfSurfProtocolUrl(url: string): boolean {
-  return url.startsWith('surf://') || url.startsWith(ResourceViewerEntryPoint)
+export function checkIfMistProtocolUrl(url: string): boolean {
+  return url.startsWith('mist://') || url.startsWith(ResourceViewerEntryPoint)
 }
 
 export async function checkFileExists(path: string) {

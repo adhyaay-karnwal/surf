@@ -78,7 +78,7 @@ fn js_set_surf_backend_health(mut cx: FunctionContext) -> JsResult<JsPromise> {
 
     let (deferred, promise) = cx.promise();
     tunnel.worker_send_js(
-        WorkerMessage::MiscMessage(MiscMessage::SetSurfBackendHealth(surf_backend_state)),
+        WorkerMessage::MiscMessage(MiscMessage::SetMistBackendHealth(surf_backend_state)),
         deferred,
     );
     Ok(promise)

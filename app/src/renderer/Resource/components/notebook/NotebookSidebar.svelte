@@ -15,7 +15,7 @@
     type OpenTarget,
     SpaceEntryOrigin
   } from '@deta/types'
-  import { NotebookLoader, SurfLoader, SourceCard } from '@deta/ui'
+  import { NotebookLoader, MistLoader, SourceCard } from '@deta/ui'
   import { type Notebook } from '@deta/services/notebooks'
   import { type Resource, getResourceCtxItems } from '@deta/services/resources'
   import {
@@ -251,7 +251,7 @@
     </header>
 
     <MaskedScroll --padding={'0.5rem 0.5rem 0rem 0.5rem'}>
-      <SurfLoader
+      <MistLoader
         excludeWithinSpaces
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
@@ -277,9 +277,9 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
 
-      <SurfLoader
+      <MistLoader
         excludeWithinSpaces
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
         search={{
@@ -331,7 +331,7 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
     </MaskedScroll>
   {:else if !notebookId}
     <header class="px pt">
@@ -347,7 +347,7 @@
     </header>
     <!--<section style="height: 4rem; padding-inline: 1.5rem; padding-block: 1rem;">
       <h1>
-        {query ? 'Search Results' : 'Surf'}
+        {query ? 'Search Results' : 'Mist'}
       </h1>
     </section>-->
     <MaskedScroll --padding={'0.5rem 0.5rem 0rem 0.5rem'}>
@@ -456,7 +456,7 @@
         </NotebookSidebarSection>
       {/if}
 
-      <SurfLoader
+      <MistLoader
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'eq')]}
         search={{
           query,
@@ -484,9 +484,9 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
 
-      <SurfLoader
+      <MistLoader
         tags={[SearchResourceTags.ResourceType(ResourceTypes.DOCUMENT_SPACE_NOTE, 'ne')]}
         search={{
           query,
@@ -537,7 +537,7 @@
             </NotebookSidebarSection>
           {/if}
         {/snippet}
-      </SurfLoader>
+      </MistLoader>
     </MaskedScroll>
   {:else}
     <NotebookLoader

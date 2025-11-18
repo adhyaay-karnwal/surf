@@ -304,7 +304,7 @@ export const openResourceAsFile = async (resourceId: string, basePath: string) =
         cancelId: 1,
         title: 'Open Resource Location',
         message:
-          'Heads up: Please avoid renaming or moving resource files outside of Surf to prevent issues.'
+          'Heads up: Please avoid renaming or moving resource files outside of Mist to prevent issues.'
       })
 
       if (response !== 0) {

@@ -76,7 +76,7 @@ export class CrashHandler {
       if (!webContents.isDestroyed()) {
         switch (response.response) {
           // TODO: send an IPC event to the tabs manager to close the tab with the webContentsId
-          // NOTE: what if webview is a surflet or an embedded webview etc?
+          // NOTE: what if webview is a mistlet or an embedded webview etc?
           case 0:
             webContents.close()
             break
@@ -176,7 +176,7 @@ export class CrashHandler {
           const { response } = await this.showErrorMessage(
             this.mainWindow,
             'Application Error',
-            'Surf encountered a critical error. Would you like to reload the application?',
+            'Mist encountered a critical error. Would you like to reload the application?',
             ['Reload', 'Close App'],
             'error'
           )

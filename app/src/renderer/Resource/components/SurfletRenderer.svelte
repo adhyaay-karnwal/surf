@@ -59,14 +59,14 @@
   let startHeight = 0
   let localTitle = $title
 
-  const log = useLogScope('SurfletRenderer')
+  const log = useLogScope('MistletRenderer')
   const resourceManager = useResourceManager()
 
   const dispatch = createEventDispatcher<{
     'link-removed': void
     'set-preview-image': string
-    'set-surflet-name': string
-    'save-surflet': {
+    'set-mistlet-name': string
+    'save-mistlet': {
       spaceId?: string
     }
   }>()
@@ -104,7 +104,7 @@
   }
 
   $: if (tab && tab.title !== localTitle) {
-    dispatch('set-surflet-name', localTitle)
+    dispatch('set-mistlet-name', localTitle)
   }
 
   $: if ($resource && !silentResource && $saveState === 'idle') {
@@ -255,7 +255,7 @@
   }
 
   const changeResourceName = useDebounce(async (name: string) => {
-    dispatch('set-surflet-name', name)
+    dispatch('set-mistlet-name', name)
   }, 500)
 
   const captureWebviewScreenshot = async (): Promise<string | null> => {
@@ -361,8 +361,8 @@
     }
   }
 
-  const saveSurfletAsNonSilent = async (spaceId?: string) => {
-    dispatch('save-surflet', { spaceId })
+  const saveMistletAsNonSilent = async (spaceId?: string) => {
+    dispatch('save-mistlet', { spaceId })
     saveState.set('saved')
     await saveScreenshot()
   }
@@ -436,11 +436,11 @@
     appContainer.appendChild(webview)
 
     const protocolVersion = $resource?.tags?.find(
-      (tag) => tag.name === ResourceTagsBuiltInKeys.SURFLET_PROTOCOL_VERSION
+      (tag) => tag.name === ResourceTagsBuiltInKeys.MISTLET_PROTOCOL_VERSION
     )?.value
     const suffix = protocolVersion ? `${protocolVersion}.app.local` : 'app.local'
     // @ts-ignore
-    webview.src = `surflet://${$resource?.id}.${suffix}`
+    webview.src = `mistlet://${$resource?.id}.${suffix}`
   }
 
   export const reloadApp = async () => {
@@ -533,9 +533,9 @@
 
     if (resource) {
       const item = drag.item!
-      drag.dataTransfer?.setData(DragTypeNames.SURF_RESOURCE_ID, $resource.id)
-      item.data.setData(DragTypeNames.SURF_RESOURCE, $resource)
-      item.data.setData(DragTypeNames.SURF_RESOURCE_ID, $resource.id)
+      drag.dataTransfer?.setData(DragTypeNames.MIST_RESOURCE_ID, $resource.id)
+      item.data.setData(DragTypeNames.MIST_RESOURCE, $resource)
+      item.data.setData(DragTypeNames.MIST_RESOURCE_ID, $resource.id)
       drag.continue()
     } else {
       drag.abort()
@@ -712,7 +712,7 @@
                   resource={$resource}
                   side="left"
                   className="flex items-center  p-1 rounded-md  transition-colors"
-                  on:save={async (e) => await saveSurfletAsNonSilent(e.detail)}
+                  on:save={async (e) => await saveMistletAsNonSilent(e.detail)}
                 />
               {/if} -->
 

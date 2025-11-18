@@ -68,7 +68,7 @@
             })
             if (!confirmed) return
 
-            notebookManager.deleteResourcesFromSurf(resourceId, true)
+            notebookManager.deleteResourcesFromMist(resourceId, true)
           },
           onRemove:
             !sourceNotebookId || sourceNotebookId === 'drafts'

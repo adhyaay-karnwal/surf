@@ -78,7 +78,7 @@
       }
 
       // Check if this is the tab being dragged
-      const draggedTab = activeDrag.item?.data?.getData(DragTypeNames.SURF_TAB)
+      const draggedTab = activeDrag.item?.data?.getData(DragTypeNames.MIST_TAB)
       if (!draggedTab || draggedTab.id !== tab.id) {
         isCurrentlyInPinZone = false
         return
@@ -118,7 +118,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.MIST_TAB, tab)
       return dragData
     })()
   }}

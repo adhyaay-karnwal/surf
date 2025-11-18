@@ -127,7 +127,7 @@
     id: `tab-${tab.id}`,
     data: (() => {
       const dragData = new DragData()
-      dragData.setData(DragTypeNames.SURF_TAB, tab)
+      dragData.setData(DragTypeNames.MIST_TAB, tab)
       return dragData
     })()
   }}

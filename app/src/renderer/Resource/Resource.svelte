@@ -113,7 +113,7 @@
       : notebookId === 'history'
         ? 'History'
         : !notebookId
-          ? 'Surf'
+          ? 'Mist'
           : 'Notebook'
   )
 

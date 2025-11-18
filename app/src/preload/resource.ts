@@ -183,7 +183,7 @@ const api = {
 
 const { sffs, resources } = initBackend({ num_worker_threads: 4, num_processor_threads: 4 })
 
-IPC_EVENTS_RENDERER.setSurfBackendHealth.on((_, state) => {
+IPC_EVENTS_RENDERER.setMistBackendHealth.on((_, state) => {
   // @ts-ignore
   sffs.js__backend_set_surf_backend_health(state)
 })

@@ -144,7 +144,7 @@ export const getResourcePreview = async (resource: Resource, opts?: PreviewOptio
 
   const annotations = resource.annotations ?? []
   const resourceState = resource.stateValue
-  const userMediaResource = previewImageId ? `surf://surf/resource/${previewImageId}` : null
+  const userMediaResource = previewImageId ? `mist://mist/resource/${previewImageId}` : null
 
   try {
     if (resource instanceof ResourceJSON) {
@@ -404,7 +404,7 @@ export const getResourcePreview = async (resource: Resource, opts?: PreviewOptio
     } else if (resource.type.startsWith('image/')) {
       const hostname = getHostname(canonicalUrl ?? '')
 
-      const image = userMediaResource ?? `surf://surf/resource/${resource.id}?raw`
+      const image = userMediaResource ?? `mist://mist/resource/${resource.id}?raw`
       const imageURL = new URL(image)
 
       if (opts?.quality !== undefined) {
@@ -438,7 +438,7 @@ export const getResourcePreview = async (resource: Resource, opts?: PreviewOptio
         image: userMediaResource ?? undefined,
         url: canonicalUrl ?? parseStringIntoUrl(resource.metadata?.sourceURI ?? '')?.href ?? '',
         source: {
-          text: hostname ? `Generated on ${hostname}` : 'Surflet',
+          text: hostname ? `Generated on ${hostname}` : 'Mistlet',
           imageUrl: undefined,
           icon: 'code-block'
         },

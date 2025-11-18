@@ -1,142 +1,69 @@
 <div align="center">
-  
-![splash](./docs/assets/repo-header.png)
-
-[**Website**](https://deta.surf) - [**Discord**](https://deta.surf/discord)
-
+  <img src="./docs/assets/repo-header.png" alt="Mist Browser" />
+  <br>
+  <a href="https://mistbrowser.com"><strong>Website</strong></a> ·
+  <a href="https://mistbrowser.com/discord"><strong>Discord</strong></a>
 </div>
 
-<br>
+# Mist Browser · Midnight AI Browser for Students
 
-# Deta Surf: Your AI Notebook
+Mist Browser is a local-first, AI-powered browser designed to help students stay in flow. Capture research, keep journals, generate study aids, and remix the web without juggling endless tabs. Mist keeps everything on your device, wraps it in a midnight-lavender theme, and lets you shape the interface to match the way you study.
 
-Deta Surf is an AI notebook that brings all your files and the web directly into your stream of thought.
+## Why Mist Browser?
+- **Student-first workflows** – Save readings, lecture videos, and tabs into *Journals* that stay organized automatically.
+- **AI that cites its sources** – Summaries, explanations, and study prompts stay linked to the original resource for easy review.
+- **Always personal** – Data stays local, formats stay open, and you decide which AI models to connect.
+- **Customizable vibe** – Switch between light & midnight styles, pick your accent palette, and tune Mist to your study routine.
 
-It’s meant for simultaneous research and thinking that minimizes the grunt work: manually searching, opening windows & tabs, scrolling, copying and pasting into a document editor.
+## Highlights
 
-Surf is primarily built in Svelte, TypeScript and Rust, runs on MacOS, Windows & Linux, stores data locally in open formats, and is open source.
+### Journals instead of tabs
+Group web pages, PDFs, lecture slides, and notes into Journals so you can pick up right where you left off. Mist’s sidebar gives you a split-screen “Study Desk” that keeps journal context beside whatever you’re browsing.
 
-![split](./docs/assets/split-note.webp)
+### Smart Notes with context
+Ask questions about any resource, drop citations automatically, and @-mention anything you’ve saved. Mist’s AI assistants ground every answer in your Journals and pull in fresh web research when you need it.
 
-## Motivation
+### Mistlets (interactive study helpers)
+Mist can code lightweight applets—flashcards, visualizers, quick calculators—directly inside your notes. See [Mistlets](./docs/MISTLETS.md) for all the ways to remix your study material.
 
-Most applications are focused on a single task, or a single media type: notes, websites, or PDFs. Real thinking requires juggling media across sources to make connections and synthesize ideas. We want to help people think better, across all their media.
-
-Surf is built to be personal and open, in service of the user. This means local first data, open data formats, open source, and openness with respect to AI models. [Read more](https://deta.surf/motivation).
+### Midnight Mist theme
+The interface leans into deep purples and soft light, inspired by late-night study sessions. Prefer another vibe? Head to **Settings → Appearance** to choose a different accent palette or switch between light and midnight modes.
 
 ## Installation
+Download the latest builds from [mistbrowser.com/downloads](https://mistbrowser.com/downloads).
 
-Checkout the [GitHub releases](https://github.com/deta/surf/releases) for the latest stable version of Surf for MacOS, Windows and Linux.
+On macOS (notarization-free build):
+1. Move the `.dmg` to your `Applications` folder
+2. Run `xattr -cr /Applications/Mist.app`
+3. Launch Mist
 
-You can also download Surf with some managed & additional features (e.g. AI) from the [Deta website](https://deta.surf). That version is subject to different terms.
+## Documentation
+- [Journals & Library](./docs/LIBRARY.md)
+- [Smart Notes](./docs/SMART_NOTES.md)
+- [Mistlets](./docs/MISTLETS.md)
+- [AI Models](./docs/AI_MODELS.md)
+- [Keyboard Shortcuts](./docs/SHORTCUTS.md)
 
-For building from source and local development, see [CONTRIBUTING.md](CONTRIBUTING.md).
+## Development
+Mist Browser runs inside a Turborepo workspace. You’ll need Node.js ≥ 22.18, Yarn 1.x, Rust, and Cargo.
 
-## TL;DR - Things to try
+```sh
+yarn install
+# Run the desktop app and supporting packages in dev mode
+yarn dev
+# Build everything
+yarn build
+# Create platform builds
+yarn build:desktop:mac:arm   # macOS (Apple Silicon)
+yarn build:desktop:win:x64   # Windows (x64)
+```
 
-- _YouTube Notes_: visit a YouTube video and ask a question
-- _PDF Notes_: open a PDF and ask a question
-- _Create an applet_: use the "app generation" tool and ask for an app
-- _Notes that search the web_: use the "web search" tool and ask a question with "search" in it
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full setup instructions, contribution guidelines, and the DCO policy.
 
-## Features
+## Security & Support
+Report vulnerabilities via GitHub’s security tab or email [security@mistbrowser.com](mailto:security@mistbrowser.com).
 
-### Multi-Media Library & Notebooks
-
-![notebooks](./docs/assets/readme/notebook-grid.png)
-
-Store almost any media in a private library on your computer, in an open and transparent format.
-
-- Support for local files, sites & links from the web (YouTube, Tweets & more), or create media directly in Surf.
-- Organize this library into Notebooks.
-- Open and use much of your library offline.
-- Use your library to power Surf’s AI features.
-
-Surf's library is built on a local storage engine called SFFS (Surf Flat File System), which stores data in open and transparent formats.
-
-[Details on the library](/docs/LIBRARY.md).
-
-### Smart Notes
-
-![smart-notes](./docs/assets/readme/smart-notes.png)
-
-Explore and think across your digital stuff without opening up a bunch of windows, clicking, scrolling and copying & pasting into your document (or chatbot).
-
-- `@-mention` and auto-generate from any tab, website or any resource in your [library](./docs/LIBRARY.md).
-- Trigger [web searches](./docs/SMART_NOTES.md#web-search) to do research, and bring the results back in your notes.
-- Integrated [citations](./docs/SMART_NOTES.md#citations) deeplinked to original sources, whether a section on a webpage, a timestamp in a video, or a page in a PDF.
-- Generate interactive applications without writing code using [Surflets](./docs/Surflets.md).
-- Paste in images, tables or data from other applications and have Surf understand and incorporate them.
-- Use rich formating, code blocks, to-do lists and more in your notes.
-
-[Read more](/docs/SMART_NOTES.md).
-
-### Tabs, Split View & Sidebar
-
-![split](./docs/assets/another-split.webp)
-
-Surf is built around tabs, split view and a sidebar for easy navigation.
-
-- Open local notes, files or web pages in tabs.
-- Split view allows you to view and interact with multiple resources side by side.
-- The sidebar provides quick access to your Notebooks & notes.
-
-### Surflets (App Generation)
-
-![surflets](./docs/assets/readme/surflets.png)
-
-Surf can code interactive applets to help you visualize, understand or explore concepts or data that are aided with code.
-
-[Read more](./docs/SURFLETS.md).
-
-### AI
-
-![models.png](./docs/assets/readme/models.png)
-
-[Surf’s notes](./docs/SMART_NOTES.md) and [Surflets](./docs/SURFLETS.md) are powered by large language models of your choice.
-
-- Bring your own key for popular models
-- Add a cloud model
-- Use Local Language Models
-
-[Read more](./docs/AI_MODELS.md).
-
-### Shortcuts
-
-Find the most common shortcuts [here](./docs/SHORTCUTS.md).
-
-## Security
-
-_To report a security concern, please see_ https://github.com/deta/surf/security/policy
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details on contributing to the project and an overview of the codebase.
-
-## Code of Conduct
-
-See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct.
+For general support, reach the team at [hello@mistbrowser.com](mailto:hello@mistbrowser.com) or join the [Mist Discord](https://mistbrowser.com/discord).
 
 ## License
-
-The source code for this project is licensed under the Apache 2.0 license, with the following exceptions:
-
-1. Our patch for the @ghostery/adblocker-electron package is licensed under the Mozilla Public License 2.0 (MPL-2.0), consistent with the upstream project's licensing.
-2. Select files may contain their own specific license headers that override the default license.
-
-Unless otherwise specified in the file or directory, all code defaults to the Apache 2.0 license.
-
-See [LICENSE](LICENSE) for more details about the Apache 2.0 license.
-
-**Note:** The Deta name and logos are trademarks of Deta GmbH and are **not** covered by the Apache 2.0 license.
-
-Deta GmbH is a commercial open source company. Surf is designed to operate as open source software without needing Deta's servers. Deta GmbH also offers a modified version of Surf (which integrates with Deta's servers) and is subject to separate terms and conditions. This version of Surf can be downloaded from the [Deta website](https://deta.surf/).
-
-## Acknowledgements
-
-This project makes use of the following open source packages (not a comprehensive list):
-
-- [Electron](https://www.electronjs.org/)
-- [Tiptap](https://tiptap.dev/)
-- [Svelte](https://svelte.dev/)
-- [Rust](https://www.rust-lang.org/)
+Mist Browser is released under the [ISC License](./LICENSE).

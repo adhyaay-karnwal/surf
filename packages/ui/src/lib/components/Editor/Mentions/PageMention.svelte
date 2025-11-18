@@ -70,7 +70,7 @@
     })
     if (!confirmed) return
 
-    await notebookManager.deleteResourcesFromSurf(resource.id, true)
+    await notebookManager.deleteResourcesFromMist(resource.id, true)
   }
 
   const handleAddToNotebook = (notebookId: string) => {

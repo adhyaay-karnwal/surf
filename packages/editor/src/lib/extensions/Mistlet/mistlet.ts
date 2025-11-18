@@ -2,13 +2,13 @@ import { mergeAttributes, Node } from '@tiptap/core'
 import type { ComponentType, SvelteComponent } from 'svelte'
 import { createClassComponent } from 'svelte/legacy'
 
-export interface SurfletOptions {
+export interface MistletOptions {
   HTMLAttributes: Record<string, any>
   component?: ComponentType<SvelteComponent>
 }
 
-export const Surflet = Node.create<SurfletOptions>({
-  name: 'surflet',
+export const Mistlet = Node.create<MistletOptions>({
+  name: 'mistlet',
   group: 'block',
   code: true,
   selectable: false,
@@ -64,7 +64,7 @@ export const Surflet = Node.create<SurfletOptions>({
         }
       },
       name: {
-        default: 'Surflet',
+        default: 'Mistlet',
         parseHTML: (element) => {
           return element.getAttribute('data-name')
         },
@@ -83,13 +83,13 @@ export const Surflet = Node.create<SurfletOptions>({
   parseHTML() {
     return [
       {
-        tag: 'surflet'
+        tag: 'mistlet'
       }
     ]
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['surflet', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
+    return ['mistlet', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
   },
 
   addNodeView() {
@@ -121,7 +121,7 @@ export const Surflet = Node.create<SurfletOptions>({
             return
           }
           const nodeAtPos = editor.view.state.doc.nodeAt(pos)
-          if (!nodeAtPos || nodeAtPos.type.name !== 'surflet') {
+          if (!nodeAtPos || nodeAtPos.type.name !== 'mistlet') {
             console.warn('Node not found or wrong type at position:', pos)
             return
           }

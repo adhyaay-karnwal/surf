@@ -472,7 +472,7 @@ async function handleDrop(e: DragEvent) {
       dataTransfer: e.dataTransfer
     })
 
-    const resourceId = e.dataTransfer?.getData(DragTypeNames.SURF_RESOURCE_ID)
+    const resourceId = e.dataTransfer?.getData(DragTypeNames.MIST_RESOURCE_ID)
     if (resourceId) {
       const metadata = await getDragMetadata(resourceId)
       if (!metadata) return

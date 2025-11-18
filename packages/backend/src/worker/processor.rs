@@ -208,7 +208,7 @@ pub fn processor_thread_entry_point(
 
 fn create_ocr_engine(app_path: &str) -> Result<OcrEngine, Box<dyn std::error::Error>> {
     // TODO: not have the env var here
-    let ocrs_folder = std::env::var("SURF_OCRS_FOLDER").unwrap_or(
+    let ocrs_folder = std::env::var("MIST_OCRS_FOLDER").unwrap_or(
         std::path::Path::new(app_path)
             .join("resources")
             .join("ocrs")

@@ -1,4 +1,4 @@
-const productName = process.env.PRODUCT_NAME || 'Surf'
+const productName = process.env.PRODUCT_NAME || 'Mist'
 
 const params = {
   buildName: process.env.BUILD_TAG ? `${productName}-${process.env.BUILD_TAG}` : productName,
@@ -8,7 +8,7 @@ const params = {
 
 function electronBuilderConfig() {
   return {
-    appId: 'surf.deta',
+    appId: 'com.mistbrowser.desktop',
     productName: params.buildName,
     directories: {
       buildResources: params.buildResourcesDir || 'build/resources/prod'
@@ -74,7 +74,7 @@ function electronBuilderConfig() {
     },
     linux: {
       target: ['AppImage'],
-      maintainer: 'deta.surf',
+      maintainer: 'Mist Browser Team <hello@mistbrowser.com>',
       artifactName: `${params.buildName}-${params.appVersion}.\${arch}.\${ext}`,
       category: 'WebBrowser'
     },

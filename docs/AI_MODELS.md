@@ -1,18 +1,18 @@
-## AI Models in Surf
+## AI Models in Mist
 
 ---
 
-We believe the use of AI models in Surf should be open.
+We believe the use of AI models in Mist should be open.
 
-We've built a UI to switch between models on every query. We have architected Surf so that you can bring your own key for popular models or add your own custom model (either local or in the cloud).
+We've built a UI to switch between models on every query. We have architected Mist so that you can bring your own key for popular models or add your own custom model (either local or in the cloud).
 
 Once added, your model will show up in the UI.
 
-## Switching Models in Surf
+## Switching Models in Mist
 
 ---
 
-Surf's interface allows you to easily switch between models on the fly and use the one that best fits your needs. Just select it in the switcher.
+Mist's interface allows you to easily switch between models on the fly and use the one that best fits your needs. Just select it in the switcher.
 
 ![byok](./assets/model-picker.webp)
 
@@ -22,19 +22,19 @@ Surf's interface allows you to easily switch between models on the fly and use t
 
 You can enter your own API key by going to Preferences → AI and then selecting one of the built-in providers under “Configure your AI Models”.
 
-![byok](./assets/surf-byok.webp)
+![byok](./assets/mist-byok.webp)
 
 Read [OpenAI’s](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key) help page or visit [Anthropic’s Claud Console](https://console.anthropic.com/settings/keys) for your API keys.
 
-## Adding Your Own Model to Surf
+## Adding Your Own Model to Mist
 
 ---
 
 ![byok](./assets/custom-model.webp)
 
-If you have not yet setup your own AI model, follow the instructions for some [**common providers**](#common-providers) below. Once you have your model running, you can add it to Surf by following these steps:
+If you have not yet setup your own AI model, follow the instructions for some [**common providers**](#common-providers) below. Once you have your model running, you can add it to Mist by following these steps:
 
-1. Open the Surf settings through the app menu or using the shortcut `⌘/ctrl + ,`
+1. Open the Mist settings through the app menu or using the shortcut `⌘/ctrl + ,`
 2. Navigate to the “AI“ tab.
 3. Click on the "Add Model" button under the "Configure your AI Models" section.
 4. Give your model a name and most importantly, provide the URL where your model is hosted and the ID of the model itself.
@@ -43,13 +43,13 @@ The model URL should be the OpenAI compatible chat completions API endpoint wher
 
 See below on what each configuration option means, you can usually find the required information in the documentation of your chosen provider.
 
-Once you have added your model, you can start using it in Surf. Select it from the dropdown at the top of the settings page or from the Chat or Smart Notes editor.
+Once you have added your model, you can start using it in Mist. Select it from the dropdown at the top of the settings page or from the Chat or Smart Notes editor.
 
 ## Configuration Options
 
 ---
 
-Here is a list of the configuration options you can set when adding a new model to Surf:
+Here is a list of the configuration options you can set when adding a new model to Mist:
 
 | **Option**      | **Value**                                                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -79,7 +79,7 @@ To use AI models running locally on your machine we recommend using [Ollama](htt
 
 ### OpenRouter - Hosted
 
-To use models hosted by [OpenRouter](https://openrouter.ai/) first create an account, then generate an API key from their [settings page](https://openrouter.ai/settings/keys). Use the following configuration options to connect it to Surf:
+To use models hosted by [OpenRouter](https://openrouter.ai/) first create an account, then generate an API key from their [settings page](https://openrouter.ai/settings/keys). Use the following configuration options to connect it to Mist:
 
 | **Option**      | **Value**                                                                                                                 |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -99,7 +99,7 @@ As an example here’s how to use a Hugging Face model running on Together AI vi
 1. Sign up to Hugging Face if you haven’t
 2. Generate a [Access Token](https://huggingface.co/settings/tokens) in the Hugging Face settings
 3. Select a model from [Hugging Face’s model page](https://huggingface.co/models?inference_provider=together&sort=trending) that supports Together AI as the Inference Provider and copy its ID (e.g. [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1))
-4. Add a new model in Surf’s AI settings and configure it like below:
+4. Add a new model in Mist’s AI settings and configure it like below:
 
 | **Option**      | **Value**                                                                                                                                                          |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -112,7 +112,7 @@ As an example here’s how to use a Hugging Face model running on Together AI vi
 
 ### Hugging Face (via your own Inference Endpoint) - Hosted
 
-You can also deploy your own [Inference Endpoint](https://endpoints.huggingface.co/) on Hugging Face and use that with Surf. First checkout their [guide on ho to create OpenAI compatible inference endpoint](https://huggingface.co/blog/tgi-messages-api) then add a new model in Surf’s AI settings and configure it like below:
+You can also deploy your own [Inference Endpoint](https://endpoints.huggingface.co/) on Hugging Face and use that with Mist. First checkout their [guide on ho to create OpenAI compatible inference endpoint](https://huggingface.co/blog/tgi-messages-api) then add a new model in Mist’s AI settings and configure it like below:
 
 | **Option**      | **Value**                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -125,12 +125,12 @@ You can also deploy your own [Inference Endpoint](https://endpoints.huggingface.
 
 ### Other Providers
 
-In theory any provider that offers a OpenAI compatible chat completions API should work with Surf. In practice some providers are not fully compatible and can come with their own quirks. The only way to know for sure if a given provider works is by trying it out. Refer to the [Configuration Options](https://www.notion.so/Configuration-Options-199a5244a717800081a7ce12cef7bd93?pvs=21) above on what information is needed.
+In theory any provider that offers a OpenAI compatible chat completions API should work with Mist. In practice some providers are not fully compatible and can come with their own quirks. The only way to know for sure if a given provider works is by trying it out. Refer to the [Configuration Options](https://www.notion.so/Configuration-Options-199a5244a717800081a7ce12cef7bd93?pvs=21) above on what information is needed.
 
-If you do get a provider working please let us know on [**Discord**](https://discord.gg/AKaBGfRXbw) or via [**E-Mail**](mailto:hello@deta.surf) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
+If you do get a provider working please let us know on [**Discord**](https://mistbrowser.com/discord) or via [**E-Mail**](mailto:hello@mistbrowser.com) and we will add it to this list so others can easily set it up as well. If you run into issues let us know as well and we’ll see if we can add support for your provider.
 
 ## Managed AI
 
 ---
 
-You can download a version of Surf with managed AI from the [Deta website](https://deta.surf/).
+You can download a version of Mist with managed AI from [mistbrowser.com](https://mistbrowser.com/).

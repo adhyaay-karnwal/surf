@@ -166,7 +166,7 @@
             {/if}
 
             {#if isGeneratedResource(resource)}
-              <span class="subtitle typo-title-sm" style="opacity: 0.3;">Surflet</span>
+              <span class="subtitle typo-title-sm" style="opacity: 0.3;">Mistlet</span>
             {:else if data.url}
               <span class="subtitle typo-title-sm" style="opacity: 0.3;"
                 >{new URL(data.url)?.host}</span
@@ -182,7 +182,7 @@
             {#if showSaved}
               <div class="saved-info">
                 <Icon name="check" size="17px" color="rgb(6, 158, 54)" />
-                <span class="subtitle typo-title-sm">Added to Surf</span>
+                <span class="subtitle typo-title-sm">Added to Mist</span>
               </div>
             {/if}
           </div>

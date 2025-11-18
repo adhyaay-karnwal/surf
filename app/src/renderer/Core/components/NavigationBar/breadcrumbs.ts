@@ -46,10 +46,10 @@ export async function constructBreadcrumbs(
       log.debug('Final breadcrumbs:', breadcrumbs)
       return breadcrumbs
     } else {
-      // Always start with Surf root
+      // Always start with Mist root
       breadcrumbs.push({
-        title: 'Surf',
-        url: new URL('surf://surf/notebook').toString(),
+        title: 'Mist',
+        url: new URL('mist://mist/notebook').toString(),
         navigationIdx: currentHistory.findIndex(
           (entry) => getViewType(entry.url) === ViewType.NotebookHome
         )
@@ -66,7 +66,7 @@ export async function constructBreadcrumbs(
           if (resource.spaceIdsValue.length === 0) {
             breadcrumbs.push({
               title: 'Drafts',
-              url: new URL('surf://surf/notebook/drafts').toString(),
+              url: new URL('mist://mist/notebook/drafts').toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes('/notebook/drafts')
               )
@@ -76,7 +76,7 @@ export async function constructBreadcrumbs(
             const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
             breadcrumbs.push({
               title: notebookName,
-              url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+              url: new URL(`mist://mist/notebook/${notebookId}`).toString(),
               navigationIdx: currentHistory.findIndex((entry) =>
                 entry.url.includes(`/notebook/${notebookId}`)
               )
@@ -112,7 +112,7 @@ export async function constructBreadcrumbs(
           const notebookName = await getNotebookDisplayName(notebookManager, notebookId)
           breadcrumbs.push({
             title: notebookName,
-            url: new URL(`surf://surf/notebook/${notebookId}`).toString(),
+            url: new URL(`mist://mist/notebook/${notebookId}`).toString(),
             navigationIdx: currentHistory.findIndex((entry) =>
               entry.url.includes(`/notebook/${notebookId}`)
             )
@@ -120,9 +120,9 @@ export async function constructBreadcrumbs(
         } else if (spaceIds.length === 0) {
           breadcrumbs.push({
             title: 'Drafts',
-            url: 'surf://surf/notebook/drafts',
+            url: 'mist://mist/notebook/drafts',
             navigationIdx: currentHistory.findIndex(
-              (entry) => entry.url === 'surf://surf/notebook/drafts'
+              (entry) => entry.url === 'mist://mist/notebook/drafts'
             )
           })
         }
